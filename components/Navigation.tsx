@@ -21,8 +21,8 @@ const Navigation: NextPage<any> = ({ chapters, chapterId, chapterSlug }) => {
             <button className='p-2 bg-link hover:bg-link-hover h-10'>Prev</button>
             <select defaultValue={chapterId} name="" id="selectChapter" className='text-black p-2 h-10 my-1 mx-1  min-w-[300px] max-w-[450px] outline-none'>
                 {
-                    chapters.map((item: any) => (
-                        <option className=' text-black' value={item.id}>{item.name}</option>
+                    chapters.map((item: any, index: any) => (
+                        <option key={index} className=' text-black' value={item.id}>{item.name}</option>
                     ))
                 }
             </select>

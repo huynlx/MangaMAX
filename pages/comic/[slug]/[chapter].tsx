@@ -11,7 +11,7 @@ const Chapter: NextPage<any> = ({ chapter, chapterId, chapterSlug }) => {
         <div className='flex  flex-col max-w-[50vw] items-center mx-auto'>
             <Navigation chapters={chapter.chapters} chapterId={chapterId} />
             {
-                chapter.images.map((image: string | undefined) => <img src={image} />)
+                chapter.images.map((image: string | undefined, index: any) => <img key={index} src={image} />)
             }
         </div>
     );
