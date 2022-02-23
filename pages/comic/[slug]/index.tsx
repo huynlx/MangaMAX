@@ -1,4 +1,4 @@
-import { GetServerSideProps, NextPage } from 'next';
+import { GetServerSideProps, GetStaticProps, NextPage } from 'next';
 import Link from 'next/link';
 import React from 'react';
 import { getComicInfo } from '../../../shared/api/comic';
@@ -46,7 +46,7 @@ const Comic: NextPage<ComicProps> = ({ info, slug }) => {
 };
 
 
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps = async ({ params }) => {
     try {
         const data = await getComicInfo(params?.slug as string);
 
@@ -55,6 +55,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
                 slug: params?.slug,
                 info: data,
             },
+            revalidate: 120
         };
     } catch (error) {
         console.log(error);
