@@ -45,16 +45,25 @@ const Navigation: NextPage<any> = ({ chapters, chapterId, comicSlug }) => {
 
 
     return (
-        <div>
-            <button disabled={selectedIndex === chapters.length - 1} onClick={prevChapter} className='p-2 bg-link hover:bg-link-hover h-10'>Prev</button>
-            <select onChange={(e) => selectChapter(e.target.value)} value={chapters[selectedIndex].chap} name="" id="selectChapter" className='text-black p-2 h-10 my-1 mx-1  min-w-[300px] max-w-[450px] outline-none'>
+        <div className='flex items-center gap-1 w-full justify-center'>
+            <button disabled={selectedIndex === chapters.length - 1} onClick={prevChapter} className='p-2 bg-link hover:bg-link-hover w-10 h-10 text-white disabled:opacity-50'>
+                <i className="fas fa-chevron-left"></i>
+            </button>
+            <select
+                onChange={(e) => selectChapter(e.target.value)}
+                value={chapters[selectedIndex].chap}
+                id="selectChapter"
+                className='text-black p-2 h-10 my-1 min-w-[200px] max-w-[350px] outline-none'
+            >
                 {
                     chapters.map((item: any, index: any) => (
                         <option key={index} className=' text-black' value={item.chap}>{item.name}</option>
                     ))
                 }
             </select>
-            <button disabled={selectedIndex < 1} onClick={nextChapter} className='p-2 bg-link hover:bg-link-hover h-10'>Next</button>
+            <button disabled={selectedIndex < 1} onClick={nextChapter} className='p-2 bg-link hover:bg-link-hover w-10 h-10 text-white disabled:opacity-50'>
+                <i className="fas fa-chevron-right"></i>
+            </button>
         </div>
     );
 };

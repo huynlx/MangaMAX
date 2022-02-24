@@ -8,24 +8,34 @@ const Comic: NextPage<ComicProps> = ({ info, slug }) => {
     console.log(info);
 
     return (
-        <div className='px-[5vw] h-[92.5vh] py-10 flex'>
-            <div className='w-[60vw] pr-10'>
-                <div className='flex mb-2 gap-3'>
-                    <img className='h-[300px] w-[200px] object-cover mr-3' src={info.cover} alt="" />
+        <div className='px-[5vw] lg:h-[92.5vh] py-10 flex flex-col lg:flex-row'>
+            <div className='lg:w-[60vw] lg:pr-10'>
+                <div className='flex mb-2 gap-3 flex-col sm:flex-row'>
+                    <img className='h-[300px] w-[200px] object-cover mx-auto md:mx-0' src={info.cover} alt="" />
                     <div className='info gap-2 flex flex-col'>
                         <h1 className=' font-bold text-2xl'>{info.title}</h1>
                         <p>Tác giả: {info.author}</p>
                         <p>Trạng thái: {info.status}</p>
                         <p>Thể loại: {info.genres.join(", ")}</p>
                         <div>
-                            <button className=' bg-link p-2 mr-2 rounded-sm hover:bg-link-hover transition duration-300'>Đọc từ đầu</button>
-                            <button className=' bg-link p-2 rounded-sm hover:bg-link-hover  transition duration-300'>Đọc mới nhất</button>
+                            <Link href={{
+                                pathname: `/comic/${slug}/${info.chapters.slice(-1)[0].chap}`,
+                                query: { id: info.chapters.slice(-1)[0].id },
+                            }}>
+                                <a className=' bg-link p-2 mr-2 rounded-sm hover:bg-link-hover transition duration-300'>Đọc từ đầu</a>
+                            </Link>
+                            <Link href={{
+                                pathname: `/comic/${slug}/${info.chapters[0].chap}`,
+                                query: { id: info.chapters[0].id },
+                            }}>
+                                <a className=' bg-link p-2 rounded-sm hover:bg-link-hover  transition duration-300'>Đọc mới nhất</a>
+                            </Link>
                         </div>
                     </div>
                 </div>
                 <p className=' break-words text-justify'>{info.desc}</p>
             </div>
-            <div className='chapters w-[40vw] max-h-[100vh] overflow-auto pr-3'>
+            <div className='chapters lg:w-[40vw] max-h-[100vh] overflow-auto pr-3 mt-2'>
                 <ul>
                     {
                         info.chapters.map((item) => (
@@ -34,7 +44,11 @@ const Comic: NextPage<ComicProps> = ({ info, slug }) => {
                                 query: { id: item.id }
                             }}>
                                 <a>
-                                    <li>{item.name}<span className=' float-right'>{item.updateAt}</span></li>
+                                    <li className='flex justify-between'>
+                                        <span className='hover:text-link transition duration-150'>{item.name}</span>
+                                        <span className=' text-gray-400'>{item.updateAt}</span>
+                                        <span className=' text-gray-400'>{item.view}</span>
+                                    </li>
                                 </a>
                             </Link>
                         ))

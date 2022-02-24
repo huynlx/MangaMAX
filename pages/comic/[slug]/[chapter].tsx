@@ -9,13 +9,13 @@ const Chapter: NextPage<any> = ({ chapter, chapterId, comicSlug }) => {
     console.log(chapter);
 
     return (
-        <div className='flex  flex-col max-w-[50vw] items-center mx-auto'>
+        <div className='flex  flex-col items-center mx-auto'>
             <p className="text-2xl">
                 <Link href={`/comic/${comicSlug}`}>
                     <a className="text-link">{chapter.title}</a>
                 </Link>
 
-                <span> {chapter.chapterCurrent}</span>
+                <span className='w-full'> {chapter.chapterCurrent}</span>
             </p>
             <Navigation chapters={chapter.chapters} chapterId={chapterId} comicSlug={comicSlug} />
             {

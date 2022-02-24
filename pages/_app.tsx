@@ -7,6 +7,8 @@ import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 import Router from "next/router";
 import Navbar from '../components/Navbar'
+import Head from 'next/head'
+import Document from 'next/document'
 
 NProgress.configure({
   showSpinner: true,
@@ -22,6 +24,14 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
+        <Head>
+          <title>Nát Truyện</title>
+          <link rel="shortcut icon" href="/logo.png" />
+          <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+          />
+        </Head>
         <Navbar />
         <Component {...pageProps} />
       </Hydrate>
