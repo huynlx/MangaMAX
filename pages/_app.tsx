@@ -8,7 +8,6 @@ import "nprogress/nprogress.css";
 import Router from "next/router";
 import Navbar from '../components/Navbar'
 import Head from 'next/head'
-import Document from 'next/document'
 
 NProgress.configure({
   showSpinner: true,
