@@ -4,11 +4,7 @@ import { useRouter } from 'next/router';
 import { useCallback, useEffect } from 'react';
 
 const Navigation: NextPage<any> = ({ chapters, chapterId, comicSlug }) => {
-    console.log(chapters);
-
     const selectedIndex = chapters.indexOf(chapters.find((chap: { id: any; }) => chap.id === chapterId));
-    console.log(selectedIndex);
-
     const router = useRouter();
     const prevChapter = useCallback(() => {
         router.push({
