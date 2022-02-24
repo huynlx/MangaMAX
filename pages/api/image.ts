@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import axios from "axios";
+import { API_URL } from "../../shared/constants";
 
 const proxy = async (req: NextApiRequest, res: NextApiResponse) => {
   const url = (req.query.url as string).startsWith("//")
@@ -9,7 +10,7 @@ const proxy = async (req: NextApiRequest, res: NextApiResponse) => {
   const response: any = await axios.get(url, {
     responseType: "stream",
     headers: {
-      referer: "nettruyen",
+      referer: API_URL,
     },
   });
 

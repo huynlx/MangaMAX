@@ -30,11 +30,23 @@ const Navigation: NextPage<any> = ({ chapters, chapterId, comicSlug }) => {
             },
         });
     }
+    useEffect(() => {
+        const handler = (e: KeyboardEvent) => {
+            if (e.keyCode === 37) {
+                prevChapter();
+            } else if (e.keyCode === 39) {
+                nextChapter();
+            }
+        };
+        window.addEventListener("keyup", handler);
+
+        return () => window.removeEventListener("keyup", handler);
+    }, [prevChapter, nextChapter]);
 
 
     return (
         <div>
-            <button onClick={prevChapter} className='p-2 bg-link hover:bg-link-hover h-10'>Prev</button>
+            <button disabled={selectedIndex === chapters.length - 1} onClick={prevChapter} className='p-2 bg-link hover:bg-link-hover h-10'>Prev</button>
             <select onChange={(e) => selectChapter(e.target.value)} value={chapters[selectedIndex].chap} name="" id="selectChapter" className='text-black p-2 h-10 my-1 mx-1  min-w-[300px] max-w-[450px] outline-none'>
                 {
                     chapters.map((item: any, index: any) => (
@@ -42,7 +54,7 @@ const Navigation: NextPage<any> = ({ chapters, chapterId, comicSlug }) => {
                     ))
                 }
             </select>
-            <button onClick={nextChapter} className='p-2 bg-link hover:bg-link-hover h-10'>Next</button>
+            <button disabled={selectedIndex < 1} onClick={nextChapter} className='p-2 bg-link hover:bg-link-hover h-10'>Next</button>
         </div>
     );
 };

@@ -12,3 +12,7 @@ html,body{
   @apply bg-primary text-gray-300;
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.borderText{
+  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+}

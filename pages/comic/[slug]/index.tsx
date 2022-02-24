@@ -8,7 +8,7 @@ const Comic: NextPage<ComicProps> = ({ info, slug }) => {
     console.log(info);
 
     return (
-        <div className='px-[5vw] h-[100vh] py-10 flex'>
+        <div className='px-[5vw] h-[92.5vh] py-10 flex'>
             <div className='w-[60vw] pr-10'>
                 <div className='flex mb-2 gap-3'>
                     <img className='h-[300px] w-[200px] object-cover mr-3' src={info.cover} alt="" />

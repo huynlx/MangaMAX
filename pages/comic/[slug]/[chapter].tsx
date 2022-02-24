@@ -3,16 +3,25 @@ import React from 'react';
 import { getChapter } from '../../../shared/api/chapter';
 import Image from 'next/image';
 import Navigation from '../../../components/Navigation';
+import Link from 'next/link';
 
 const Chapter: NextPage<any> = ({ chapter, chapterId, comicSlug }) => {
     console.log(chapter);
 
     return (
         <div className='flex  flex-col max-w-[50vw] items-center mx-auto'>
+            <p className="text-2xl">
+                <Link href={`/comic/${comicSlug}`}>
+                    <a className="text-link">{chapter.title}</a>
+                </Link>
+
+                <span> {chapter.chapterCurrent}</span>
+            </p>
             <Navigation chapters={chapter.chapters} chapterId={chapterId} comicSlug={comicSlug} />
             {
                 chapter.images.map((image: string | undefined, index: any) => <img key={index} src={image} />)
             }
+            <Navigation chapters={chapter.chapters} chapterId={chapterId} comicSlug={comicSlug} />
         </div>
     );
 };
