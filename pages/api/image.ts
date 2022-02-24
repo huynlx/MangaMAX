@@ -1,29 +1,19 @@
-import { API_URL } from "../../shared/constants";
-import { NextApiHandler } from "next";
+import type { NextApiRequest, NextApiResponse } from "next";
 import axios from "axios";
 
-const handler: NextApiHandler = (req, res) => {
-    try {
-      if (!req.query.url) return res.status(400).send("URL must not be empty");
-      const url = (req.query.url as string).startsWith("//")
-        ? (req.query.url as string).replace("//", "http://")
-        : (req.query.url as string);
-      axios
-        .get(url, {
-          responseType: "arraybuffer",
-          headers: {
-            referer: API_URL,
-          },
-        })
-        .then(({ data, headers: { "content-type": contentType } }) => {
-          res.status(200).send(data);
-          // .setHeader("cache-control", "max-age=99999")
-          // .setHeader("content-type", contentType)
-        });
-    } catch (error) {
-      res.json(error);
-      res.status(405).end();
-    }
+const proxy = async (req: NextApiRequest, res: NextApiResponse) => {
+  const url = (req.query.url as string).startsWith("//")
+    ? (req.query.url as string).replace("//", "http://")
+    : (req.query.url as string);
+
+  const response: any = await axios.get(url, {
+    responseType: "stream",
+    headers: {
+      referer: "nettruyen",
+    },
+  });
+
+  response.data.pipe(res);
 };
 
-export default handler;
+export default proxy;

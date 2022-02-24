@@ -6,6 +6,7 @@ import React from 'react'
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 import Router from "next/router";
+import Navbar from '../components/Navbar'
 
 NProgress.configure({
   showSpinner: true,
@@ -21,6 +22,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
+        <Navbar />
         <Component {...pageProps} />
       </Hydrate>
     </QueryClientProvider >
