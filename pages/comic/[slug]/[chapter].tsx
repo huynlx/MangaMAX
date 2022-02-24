@@ -6,7 +6,6 @@ import Navigation from '../../../components/Navigation';
 import Link from 'next/link';
 
 const Chapter: NextPage<any> = ({ chapter, chapterId, comicSlug }) => {
-    console.log(chapter);
 
     return (
         <div className='flex  flex-col items-center mx-auto'>
@@ -14,8 +13,8 @@ const Chapter: NextPage<any> = ({ chapter, chapterId, comicSlug }) => {
                 <Link href={`/comic/${comicSlug}`}>
                     <a className="text-link">{chapter.title}</a>
                 </Link>
-
-                <span className='w-full'> {chapter.chapterCurrent}</span>
+                <span className='w-full'> {chapter.chapterCurrent} <small>{chapter.updateAt}</small></span>
+                
             </p>
             <Navigation chapters={chapter.chapters} chapterId={chapterId} comicSlug={comicSlug} />
             {

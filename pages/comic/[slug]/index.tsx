@@ -5,7 +5,6 @@ import { getComicInfo } from '../../../shared/api/comic';
 import { ComicProps } from '../../../shared/types';
 
 const Comic: NextPage<ComicProps> = ({ info, slug }) => {
-    console.log(info);
 
     return (
         <div className='px-[5vw] lg:h-[92.5vh] py-10 flex flex-col lg:flex-row'>
@@ -43,12 +42,10 @@ const Comic: NextPage<ComicProps> = ({ info, slug }) => {
                                 pathname: `/comic/${slug}/${item.chap}`,
                                 query: { id: item.id }
                             }}>
-                                <a>
-                                    <li className='flex justify-between'>
-                                        <span className='hover:text-link transition duration-150'>{item.name}</span>
-                                        <span className=' text-gray-400'>{item.updateAt}</span>
-                                        <span className=' text-gray-400'>{item.view}</span>
-                                    </li>
+                                <a className='flex justify-between visited:text-link visited:hover:text-link-hover'>
+                                    <span className='hover:text-link transition duration-150'>{item.name}</span>
+                                    <span className=' text-gray-400'>{item.updateAt}</span>
+                                    <span className=' text-gray-400'>{item.view}</span>
                                 </a>
                             </Link>
                         ))

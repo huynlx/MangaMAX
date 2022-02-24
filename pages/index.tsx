@@ -8,7 +8,6 @@ import styles from '../styles/Home.module.css'
 
 
 const Home: NextPage<any> = ({ data }) => {
-  // console.log(data);
 
   return (
     <div>
