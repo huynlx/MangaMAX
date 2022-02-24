@@ -15,18 +15,18 @@ const Navigation: NextPage<any> = ({ chapters, chapterId, comicSlug }) => {
             pathname: `/comic/${comicSlug}/${chapters[selectedIndex + 1].chap}`,
             query: { id: chapters[selectedIndex + 1].id }
         })
-    }, [])
+    }, [comicSlug, chapters, selectedIndex, router])
     const nextChapter = useCallback(() => {
         router.push({
             pathname: `/comic/${comicSlug}/${chapters[selectedIndex - 1].chap}`,
             query: { id: chapters[selectedIndex - 1].id }
         })
-    }, [])
+    }, [comicSlug, chapters, selectedIndex, router])
     const selectChapter = (chapterSlug: string) => {
         router.push({
             pathname: `/comic/${comicSlug}/${chapterSlug}`,
             query: {
-                id: chapters.find((chap: { id: any; }) => chap.id === chapterId)?.id,
+                id: chapters.find((chap: { chap: any; }) => chap.chap === chapterSlug)?.id,
             },
         });
     }
