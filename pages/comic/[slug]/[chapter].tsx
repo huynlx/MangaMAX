@@ -4,12 +4,12 @@ import { getChapter } from '../../../shared/api/chapter';
 import Image from 'next/image';
 import Navigation from '../../../components/Navigation';
 
-const Chapter: NextPage<any> = ({ chapter, chapterId, chapterSlug }) => {
+const Chapter: NextPage<any> = ({ chapter, chapterId, comicSlug }) => {
     console.log(chapter);
 
     return (
         <div className='flex  flex-col max-w-[50vw] items-center mx-auto'>
-            <Navigation chapters={chapter.chapters} chapterId={chapterId} />
+            <Navigation chapters={chapter.chapters} chapterId={chapterId} comicSlug={comicSlug} />
             {
                 chapter.images.map((image: string | undefined, index: any) => <img key={index} src={image} />)
             }
@@ -24,7 +24,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params, query }) 
             props: {
                 chapter,
                 chapterId: query.id,
-                chapterSlug: params?.slug
+                comicSlug: params?.slug
             }
         }
     } catch (error) {

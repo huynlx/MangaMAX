@@ -46,7 +46,7 @@ const Comic: NextPage<ComicProps> = ({ info, slug }) => {
 };
 
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     try {
         const data = await getComicInfo(params?.slug as string);
 
@@ -54,8 +54,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
             props: {
                 slug: params?.slug,
                 info: data,
-            },
-            revalidate: 120
+            }
         };
     } catch (error) {
         console.log(error);

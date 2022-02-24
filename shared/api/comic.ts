@@ -1,9 +1,10 @@
 import { parse } from "node-html-parser";
 import axios from "../axios"
 
-export const getComicInfo = async (comicId: string): Promise<any> => {
-    const html = (await axios.get(`truyen-tranh/${comicId}`)).data;
+export const getComicInfo = async (comicSLug: string): Promise<any> => {
+    const html = (await axios.get(`truyen-tranh/${comicSLug}`)).data;
     const dom = parse(html);
+    
 
     return {
         title: dom.querySelector('#item-detail .title-detail')?.innerText,

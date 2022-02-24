@@ -9,7 +9,9 @@ export const getChapter = async (comicSLug: any, chapterSLug: any, chapterId: an
     const html = await Promise.all(links.map(async (link) => (await axios.get(link)).data));
     const dom = parse(html[0]);
     const dom2 = parse(html[1])
-
+    if (!dom.querySelector(".txt-primary a")?.innerText) {
+        throw new Error("Wrong Hash");
+    }
     return {
         title: dom.querySelector(".txt-primary a")?.innerText,
         chapterCurrent: dom.querySelector(".txt-primary span")?.innerText,
