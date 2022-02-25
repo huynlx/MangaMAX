@@ -8,10 +8,10 @@ import styles from '../styles/Home.module.css'
 import Grid from '../components/Grid'
 
 
-const Home: NextPage<any> = ({ data }) => {
+const Home: NextPage<any> = ({ data, page }) => {
 
   return (
-    <Grid data={data} />
+    <Grid data={data} page={page} />
   )
 }
 
@@ -21,6 +21,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     return {
       props: {
         data,
+        page: +query.page!
       },
     };
   } catch (error) {

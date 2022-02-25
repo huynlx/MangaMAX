@@ -17,7 +17,7 @@ const Comic: NextPage<ComicProps> = ({ info, slug }) => {
         <div className='px-[5vw] lg:h-[92.5vh] py-10 flex flex-col lg:flex-row'>
             <div className='lg:w-[60vw] lg:pr-10'>
                 <div className='flex mb-2 gap-3 flex-col sm:flex-row'>
-                    <img className='h-[300px] w-[200px] object-cover mx-auto md:mx-0' src={info.cover} alt="" />
+                    <img className='h-[300px] w-[200px] object-cover mx-auto sm:mx-0' src={info.cover} alt="" />
                     <div className='info gap-2 flex flex-col'>
                         <h1 className=' font-bold text-2xl'>{info.title}</h1>
                         <p>Tác giả: {info.author}</p>
@@ -41,7 +41,8 @@ const Comic: NextPage<ComicProps> = ({ info, slug }) => {
                 </div>
                 <p className=' break-words text-justify'>{info.desc}</p>
             </div>
-            <div className='chapters lg:w-[40vw] max-h-[100vh] overflow-auto pr-3 mt-2'>
+            <p className='lg:hidden font-bold text-xl mt-2'>Chapters</p>
+            <div className='chapters lg:w-[40vw] max-h-[100vh] overflow-auto pr-3'>
                 <ul>
                     {
                         info.chapters.map((item) => (

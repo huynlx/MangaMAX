@@ -2,7 +2,7 @@ import Link from 'next/link';
 import React, { Fragment, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
-const Grid = ({ data, keyword }: any) => {
+const Grid = ({ data, keyword, page }: any) => {
     const router = useRouter();
     const [posts, setPosts] = useState<any[]>([]);
 
@@ -19,7 +19,11 @@ const Grid = ({ data, keyword }: any) => {
         } else {
             setPosts(data)
         }
-    }, [data])
+    }, [page])
+
+    useEffect(() => {
+        setPosts(data)
+    }, [keyword])
 
 
     const handleScroll = () => {

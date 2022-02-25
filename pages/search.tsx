@@ -3,9 +3,9 @@ import React from 'react';
 import Grid from '../components/Grid';
 import getSearch from '../shared/api/search';
 
-const search = ({ data, keyword }: any) => {
+const search = ({ data, keyword, page }: any) => {
     return (
-        <Grid data={data} keyword={keyword} />
+        <Grid data={data} keyword={keyword} page={page} />
     );
 };
 
@@ -15,7 +15,8 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
         return {
             props: {
                 data,
-                keyword: query.keyword as string
+                keyword: query.keyword as string,
+                page: +query.page!
             },
         };
     } catch (error) {
