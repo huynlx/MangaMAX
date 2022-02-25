@@ -11,9 +11,7 @@ import Grid from '../components/Grid'
 const Home: NextPage<any> = ({ data }) => {
 
   return (
-    <div>
-      <Grid data={data} />
-    </div>
+    <Grid data={data} />
   )
 }
 

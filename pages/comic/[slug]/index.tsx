@@ -50,9 +50,9 @@ const Comic: NextPage<ComicProps> = ({ info, slug }) => {
                                 query: { id: item.id }
                             }}>
                                 <a className='flex justify-between visited:text-link visited:hover:text-link-hover'>
-                                    <span className='hover:text-link transition duration-150 w-7/12 text-left'>{item.name}</span>
+                                    <span className='hover:text-link transition duration-150 w-8/12 text-left'>{item.name}</span>
                                     <span className=' text-gray-400 w-1/4  text-center italic'>{item.updateAt}</span>
-                                    <span className=' text-gray-400 w-1/6 text-right italic'>{item.view}</span>
+                                    <span className=' text-gray-400 w-1/12 text-sm text-right italic'>{item.view}</span>
                                 </a>
                             </Link>
                         ))
