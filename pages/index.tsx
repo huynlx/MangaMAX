@@ -17,14 +17,14 @@ const Home: NextPage<any> = ({ data }) => {
   )
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+
   try {
-    const data = await getHome();
+    const data = await getHome(+query.page!);
     return {
       props: {
         data,
       },
-      revalidate: 120
     };
   } catch (error) {
     console.log(error);
