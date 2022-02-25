@@ -31,11 +31,13 @@ const getHome = async (page: number = 1): Promise<any> => {
         }));
 
         const hasNextPage = (+page) !== (+(dom.querySelector('ul.pagination > li.PagerSSCCells:last-child')?.innerText!))
+        const currentPage = (+dom.querySelector("ul.pagination > li.active > a")?.innerText!);
 
         return {
             name: Object.keys(sections)[index],
             items,
-            hasNextPage
+            hasNextPage,
+            currentPage
         };
     });
 
