@@ -9,6 +9,7 @@ import Router from "next/router";
 import Navbar from '../components/Navbar'
 import Head from 'next/head'
 
+
 NProgress.configure({
   showSpinner: true,
   trickleSpeed: 200,
@@ -26,10 +27,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Head>
           <title>Nát Truyện</title>
           <link rel="shortcut icon" href="/logo.png" />
-          <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-          />
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
         </Head>
         <Navbar />
         <Component {...pageProps} />

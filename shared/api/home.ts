@@ -1,16 +1,16 @@
 import axios from "../axios";
 import { parse } from "node-html-parser";
 
-const getHome = async (): Promise<any> => {
+const getHome = async (page: number = 1): Promise<any> => {
     const sections = {
-        "Truyện mới cập nhật": " "
+        "Truyện mới cập nhật": `?page=${page}`
     }
 
-    const sources = await Promise.all(
+    const htmls = await Promise.all(
         Object.entries(sections).map(([_, value]) => value).map(async (url) => (await axios.get(url)).data)
     )
 
-    const data = sources.map((source, index) => {
+    const data = htmls.map((source, index) => {
         const dom = parse(source);
 
         const items = dom.querySelectorAll(".ModuleContent .items .item").map((item) => ({
@@ -27,12 +27,15 @@ const getHome = async (): Promise<any> => {
                 .slice(-1)[0]
                 .split("-")
                 .slice(0, -1)
-                .join("-"),
+                .join("-")
         }));
+
+        const hasNextPage = (+page) !== (+(dom.querySelector('ul.pagination > li.PagerSSCCells:last-child')?.innerText!))
 
         return {
             name: Object.keys(sections)[index],
             items,
+            hasNextPage
         };
     });
 

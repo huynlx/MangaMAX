@@ -1,10 +1,17 @@
 import { GetServerSideProps, GetStaticProps, NextPage } from 'next';
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { getComicInfo } from '../../../shared/api/comic';
 import { ComicProps } from '../../../shared/types';
+import useSWR from 'swr';
 
 const Comic: NextPage<ComicProps> = ({ info, slug }) => {
+    // const { data, error } = useSWR('/api/profile-data', async() => {
+    //    await getComicInfo(params?.slug as string);
+    // })
+
+    // if (error) return <div>Failed to load</div>
+    // if (!data) return <div>Loading...</div>
 
     return (
         <div className='px-[5vw] lg:h-[92.5vh] py-10 flex flex-col lg:flex-row'>
@@ -43,9 +50,9 @@ const Comic: NextPage<ComicProps> = ({ info, slug }) => {
                                 query: { id: item.id }
                             }}>
                                 <a className='flex justify-between visited:text-link visited:hover:text-link-hover'>
-                                    <span className='hover:text-link transition duration-150'>{item.name}</span>
-                                    <span className=' text-gray-400'>{item.updateAt}</span>
-                                    <span className=' text-gray-400'>{item.view}</span>
+                                    <span className='hover:text-link transition duration-150 w-7/12 text-left'>{item.name}</span>
+                                    <span className=' text-gray-400 w-1/4  text-center italic'>{item.updateAt}</span>
+                                    <span className=' text-gray-400 w-1/6 text-right italic'>{item.view}</span>
                                 </a>
                             </Link>
                         ))
