@@ -9,6 +9,7 @@ const Navbar = () => {
     const [inputValue, setInputValue] = useState("");
 
     const router = useRouter();
+    const { pathname } = router;
 
     const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -26,7 +27,7 @@ const Navbar = () => {
         <div className={`${isActive ? 'h-28' : 'h-14'} md:h-14 bg-nav flex flex-col md:flex-row justify-around md:justify-between items-stretch md:items-center px-[5vw]`}>
             <div className='flex items-center justify-between'>
                 <Link href="/">
-                    <a className="flex items-center justify-start gap-3">
+                    <a className={`flex items-center justify-start gap-3 ${pathname == '/' && 'pointer-events-none'}`}>
                         <img src="/favicon.ico" className="w-7 h-7" alt="icon" />
                         <h1 className="text-2xl font-bold">
                             <span className="text-link font-bold borderText">Nát</span>Truyen
