@@ -29,11 +29,13 @@ const Grid = ({ data }: any) => {
         )
 
         if (lastUserLoaded) {
+
             const lastUserLoadedOffset =
                 lastUserLoaded.offsetTop + lastUserLoaded.clientHeight
             const pageOffset = window.pageYOffset + window.innerHeight
             // Detects when user scrolls down till the last user
-            if (pageOffset > lastUserLoadedOffset) {
+            console.log(pageOffset - lastUserLoadedOffset);
+            if (pageOffset - lastUserLoadedOffset > -500) {
                 // Stops loading
                 if (data[0].hasNextPage) {
                     // Trigger fetch
@@ -79,7 +81,7 @@ const Grid = ({ data }: any) => {
                                     </Link>
                                 ))
                             }
-                        </div>                      
+                        </div>
                     </Fragment>
                 ))
             }

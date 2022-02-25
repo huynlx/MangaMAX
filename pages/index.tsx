@@ -2,7 +2,7 @@ import type { GetServerSideProps, GetStaticProps, NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
 import getHome from '../shared/api/home'
 import styles from '../styles/Home.module.css'
 import Grid from '../components/Grid'
@@ -18,7 +18,6 @@ const Home: NextPage<any> = ({ data }) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-
   try {
     const data = await getHome(+query.page!);
     return {
