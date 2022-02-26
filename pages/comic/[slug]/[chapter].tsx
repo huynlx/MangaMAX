@@ -1,7 +1,6 @@
 import { GetServerSideProps, NextPage } from 'next';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback } from 'react';
 import { getChapter } from '../../../shared/api/chapter';
-import Image from 'next/image';
 import Navigation from '../../../components/Navigation';
 import Link from 'next/link';
 import { useRouter } from 'next/router';

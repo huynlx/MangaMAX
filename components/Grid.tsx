@@ -2,8 +2,9 @@ import Link from 'next/link';
 import React, { Fragment, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { ImSpinner8 } from 'react-icons/im';
+import { NextPage } from 'next';
 
-const Grid = ({ data, keyword, page }: any) => {
+const Grid: NextPage<any> = ({ data, keyword, page }: any) => {
     const router = useRouter();
     const [posts, setPosts] = useState<any[]>([]);
 

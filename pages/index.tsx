@@ -1,10 +1,5 @@
-import type { GetServerSideProps, GetStaticProps, NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
-import Link from 'next/link'
-import { Fragment, useState } from 'react'
+import type { GetServerSideProps, NextPage } from 'next'
 import getHome from '../shared/api/home'
-import styles from '../styles/Home.module.css'
 import Grid from '../components/Grid'
 
 

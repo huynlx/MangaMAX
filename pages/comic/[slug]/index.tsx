@@ -1,9 +1,9 @@
-import { GetServerSideProps, GetStaticProps, NextPage } from 'next';
+import { GetServerSideProps, NextPage } from 'next';
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { getComicInfo } from '../../../shared/api/comic';
 import { ComicProps } from '../../../shared/types';
-import useSWR from 'swr';
+import { RiSortDesc } from 'react-icons/ri';
 
 const Comic: NextPage<ComicProps> = ({ info, slug }) => {
     // const { data, error } = useSWR('/api/profile-data', async() => {
@@ -12,6 +12,14 @@ const Comic: NextPage<ComicProps> = ({ info, slug }) => {
 
     // if (error) return <div>Failed to load</div>
     // if (!data) return <div>Loading...</div>
+
+    const [dt, setDt] = useState<any>(info);
+    const handleSort = () => {
+        setDt({
+            ...dt,
+            chapters: dt.chapters.slice().reverse()
+        });
+    }
 
     return (
         <div className='px-[5vw] lg:h-[92.5vh] py-10 flex flex-col lg:flex-row'>
@@ -44,8 +52,12 @@ const Comic: NextPage<ComicProps> = ({ info, slug }) => {
             <p className='lg:hidden font-bold text-xl my-2'>Chapters</p>
             <div className='chapters lg:w-[40vw] max-h-[100vh] overflow-auto pr-3 border-gray-700 border lg:border-0'>
                 <ul>
+                    <div className='px-3 py-1 hidden lg:block sticky bg-primary top-0 text-xl font-bold'>
+                        <h1 className='inline'>Chapters</h1>
+                        <RiSortDesc title='Sort' onClick={() => handleSort()} className='float-right font-bold hover:brightness-75' size={25} />
+                    </div>
                     {
-                        info.chapters.map((item) => (
+                        dt.chapters.map((item: any) => (
                             <Link key={item.id} href={{
                                 pathname: `/comic/${slug}/${item.chap}`,
                                 query: { id: item.id }

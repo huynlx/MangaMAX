@@ -1,10 +1,12 @@
+import { NextPage } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { FormEvent } from 'react';
 import { useState } from 'react';
+import SideBar from './SideBar';
 
-const Navbar = () => {
+const Navbar: NextPage<any> = () => {
     const [isActive, setIsActive] = useState(false);
     const [inputValue, setInputValue] = useState("");
 
@@ -34,6 +36,7 @@ const Navbar = () => {
                         </h1>
                     </a>
                 </Link>
+                <SideBar className='block md:hidden' id='sidenav1' />
                 <button className="md:hidden block">
                     <i
                         onClick={() => setIsActive((prev) => !prev)}
@@ -41,6 +44,7 @@ const Navbar = () => {
                     ></i>
                 </button>
             </div>
+            <SideBar className='hidden md:block' id='sidenav2' />
             <form
                 className={`${isActive ? 'flex' : 'hidden'} md:flex`}
                 onSubmit={handleFormSubmit}
