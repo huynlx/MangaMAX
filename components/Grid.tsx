@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import React, { Fragment, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import { ImSpinner8 } from 'react-icons/im';
 
 const Grid = ({ data, keyword, page }: any) => {
     const router = useRouter();
@@ -67,7 +68,7 @@ const Grid = ({ data, keyword, page }: any) => {
                 posts.map((section: any) => (
                     <Fragment key={section.name}>
                         <h1 className='text-2xl font-semibold my-5'>{section.nameAlt}</h1>
-                        <div className={`grid gap-2 comic-list ${data[0].hasNextPage ? 'mb-28' : 'mb-10'}`} style={{
+                        <div className={`grid gap-2 comic-list mb-28`} style={{
                             gridTemplateColumns: "repeat(auto-fill, minmax(150px, 1fr))",
                             gridAutoRows: "1fr",
                         }}>
@@ -86,10 +87,11 @@ const Grid = ({ data, keyword, page }: any) => {
                                 ))
                             }
                         </div>
+                        {data[0].hasNextPage && <ImSpinner8 size={30} className='mb-28 animate-spin mx-auto' />}
                     </Fragment>
                 ))
             }
-            {!data[0].hasNextPage && <p className='w-full text-center mb-10 font-bold text-xl'>End</p>}
+            {!data[0].hasNextPage && <p className='w-full text-center mb-28 font-bold text-xl'>End</p>}
         </main>
     );
 };

@@ -78,7 +78,7 @@ const Navigation: NextPage<any> = ({ chapters, chapterId, comicSlug }) => {
                 onChange={(e) => selectChapter(e.target.value)}
                 value={chapters[selectedIndex].chap}
                 id="selectChapter"
-                className='text-black p-2 h-10 my-1 min-w-[200px] max-w-[350px] outline-none'
+                className='text-black p-2 h-10 my-1 min-w-[100px] md:min-w-[200px] max-w-[350px] outline-none'
             >
                 {
                     chapters.map((item: any, index: any) => (

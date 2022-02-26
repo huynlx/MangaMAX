@@ -16,14 +16,14 @@ const Comic: NextPage<ComicProps> = ({ info, slug }) => {
     return (
         <div className='px-[5vw] lg:h-[92.5vh] py-10 flex flex-col lg:flex-row'>
             <div className='lg:w-[60vw] lg:pr-10'>
-                <div className='flex mb-2 gap-3 flex-col sm:flex-row'>
+                <div className='flex mb-2 gap-4 flex-col sm:flex-row'>
                     <img className='h-[300px] w-[200px] object-cover mx-auto sm:mx-0' src={info.cover} alt="" />
                     <div className='info gap-2 flex flex-col'>
                         <h1 className=' font-bold text-2xl'>{info.title}</h1>
                         <p>Tác giả: {info.author}</p>
                         <p>Trạng thái: {info.status}</p>
                         <p>Thể loại: {info.genres.join(", ")}</p>
-                        <div>
+                        <div className='my-2'>
                             <Link href={{
                                 pathname: `/comic/${slug}/${info.chapters.slice(-1)[0].chap}`,
                                 query: { id: info.chapters.slice(-1)[0].id },
@@ -41,8 +41,8 @@ const Comic: NextPage<ComicProps> = ({ info, slug }) => {
                 </div>
                 <p className=' break-words text-justify'>{info.desc}</p>
             </div>
-            <p className='lg:hidden font-bold text-xl mt-2'>Chapters</p>
-            <div className='chapters lg:w-[40vw] max-h-[100vh] overflow-auto pr-3'>
+            <p className='lg:hidden font-bold text-xl my-2'>Chapters</p>
+            <div className='chapters lg:w-[40vw] max-h-[100vh] overflow-auto pr-3 border-gray-700 border lg:border-0'>
                 <ul>
                     {
                         info.chapters.map((item) => (
@@ -50,10 +50,10 @@ const Comic: NextPage<ComicProps> = ({ info, slug }) => {
                                 pathname: `/comic/${slug}/${item.chap}`,
                                 query: { id: item.id }
                             }}>
-                                <a className='flex justify-between visited:text-link visited:hover:text-link-hover'>
-                                    <span className='hover:text-link transition duration-150 w-8/12 text-left'>{item.name}</span>
-                                    <span className=' text-gray-400 w-1/4  text-center italic'>{item.updateAt}</span>
-                                    <span className=' text-gray-400 w-1/12 text-sm text-right italic'>{item.view}</span>
+                                <a className='border-gray-700 px-3 py-1 lg:border-0 border-b flex justify-between hover:text-link visited:text-link visited:hover:text-link-hover'>
+                                    <span className='transition duration-150 w-auto sm:w-8/12 text-left'>{item.name}</span>
+                                    <span className=' text-gray-400 w-auto sm:w-1/4 text-right sm:text-center italic'>{item.updateAt}</span>
+                                    <span className=' text-gray-400 w-1/12 text-sm text-right italic hidden sm:block'>{item.view}</span>
                                 </a>
                             </Link>
                         ))

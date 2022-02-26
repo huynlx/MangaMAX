@@ -1,11 +1,20 @@
 import { GetServerSideProps, NextPage } from 'next';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { getChapter } from '../../../shared/api/chapter';
 import Image from 'next/image';
 import Navigation from '../../../components/Navigation';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 const Chapter: NextPage<any> = ({ chapter, chapterId, comicSlug }) => {
+    const router = useRouter();
+    const selectedIndex = chapter.chapters.indexOf(chapter.chapters.find((chap: { id: any; }) => chap.id === chapterId));
+    const nextChapter = useCallback(() => {
+        router.push({
+            pathname: `/comic/${comicSlug}/${chapter.chapters[selectedIndex - 1].chap}`,
+            query: { id: chapter.chapters[selectedIndex - 1].id }
+        })
+    }, [comicSlug, chapter.chapters, selectedIndex, router])
 
     return (
         <div className='flex  flex-col items-center mx-auto'>
@@ -22,7 +31,12 @@ const Chapter: NextPage<any> = ({ chapter, chapterId, comicSlug }) => {
                     chapter.images.map((image: string | undefined, index: any) => <img className='mx-auto w-full object-cover h-auto' key={index} src={image} />)
                 }
             </div>
-            <Navigation chapters={chapter.chapters} chapterId={chapterId} comicSlug={comicSlug} />
+            {/* <Navigation chapters={chapter.chapters} chapterId={chapterId} comicSlug={comicSlug} /> */}
+            <div className={`w-full h-60 p-8 ${selectedIndex < 1 && 'hidden'}`}>
+                <button onClick={nextChapter} className="w-full h-full border-2 border-dashed border-gray-600 text-gray-600 hover:border-white hover:text-white transition duration-300 flex items-center justify-center">
+                    <p className="text-2xl">Chapter tiếp theo</p>
+                </button>
+            </div>
         </div>
     );
 };
