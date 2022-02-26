@@ -36,21 +36,21 @@ const Comic: NextPage<ComicProps> = ({ info, slug }) => {
                                 pathname: `/comic/${slug}/${info.chapters.slice(-1)[0].chap}`,
                                 query: { id: info.chapters.slice(-1)[0].id },
                             }}>
-                                <a className=' bg-link p-2 mr-2 rounded-sm hover:bg-link-hover transition duration-300'>Đọc từ đầu</a>
+                                <a className='text-white bg-link p-2 mr-2 rounded-sm hover:bg-link-hover transition duration-300'>Đọc từ đầu</a>
                             </Link>
                             <Link href={{
                                 pathname: `/comic/${slug}/${info.chapters[0].chap}`,
                                 query: { id: info.chapters[0].id },
                             }}>
-                                <a className=' bg-link p-2 rounded-sm hover:bg-link-hover  transition duration-300'>Đọc mới nhất</a>
+                                <a className='text-white bg-link p-2 rounded-sm hover:bg-link-hover  transition duration-300'>Đọc mới nhất</a>
                             </Link>
                         </div>
                     </div>
                 </div>
                 <p className=' break-words text-justify'>{info.desc}</p>
             </div>
-            <p className='lg:hidden font-bold text-xl my-2'>Chapters</p>
-            <div className='chapters lg:w-[40vw] max-h-[100vh] overflow-auto pr-3 border-gray-700 border lg:border-0'>
+            <p className='lg:hidden font-bold text-xl my-2 flex justify-between items-center'>Chapters <span><RiSortDesc onClick={() => handleSort()} /></span></p>
+            <div className='chapters lg:w-[40vw] max-h-[100vh] overflow-auto border-gray-700 border lg:border-0'>
                 <ul>
                     <div className='px-3 py-1 hidden lg:block sticky bg-primary top-0 text-xl font-bold'>
                         <h1 className='inline'>Chapters</h1>
