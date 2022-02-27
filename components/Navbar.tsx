@@ -48,7 +48,7 @@ const Navbar: NextPage<any> = () => {
                     ></i>
                 </button>
             </div>
-            <h1 className='font-bold text-2xl top-2/4 absolute left-2/4 transform -translate-x-2/4 -translate-y-2/4'>{select.name}</h1>
+            <h1 className='hidden lg:block font-bold text-2xl top-2/4 absolute left-2/4 transform -translate-x-2/4 -translate-y-2/4'>{select.name}</h1>
             <SideBar className='hidden md:block' id='sidenav2' />
             <form
                 className={`${isActive ? 'flex' : 'hidden'} md:flex`}
