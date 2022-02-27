@@ -1,9 +1,10 @@
 import { GetServerSideProps, NextPage } from 'next';
 import Link from 'next/link';
 import React, { useState } from 'react';
-import { getComicInfo } from '../../../shared/api/comic';
+import { getComicInfo } from '../../../shared/nettruyen/comic';
 import { ComicProps } from '../../../shared/types';
 import { RiSortDesc } from 'react-icons/ri';
+import { useSelector } from 'react-redux'
 
 const Comic: NextPage<ComicProps> = ({ info, slug }) => {
     // const { data, error } = useSWR('/api/profile-data', async() => {
@@ -12,6 +13,10 @@ const Comic: NextPage<ComicProps> = ({ info, slug }) => {
 
     // if (error) return <div>Failed to load</div>
     // if (!data) return <div>Loading...</div>
+    const select=useSelector(state=>state);
+    console.log(select);
+    
+
 
     const [dt, setDt] = useState<any>(info);
     const handleSort = () => {

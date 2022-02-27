@@ -5,13 +5,17 @@ import React from 'react';
 import { FormEvent } from 'react';
 import { useState } from 'react';
 import SideBar from './SideBar';
+import { useSelector } from 'react-redux';
 
 const Navbar: NextPage<any> = () => {
     const [isActive, setIsActive] = useState(false);
     const [inputValue, setInputValue] = useState("");
+    const select: any = useSelector(state => state);
 
     const router = useRouter();
     const { pathname } = router;
+    const asPath = router.asPath.split('?')[1] ? `/?${router.asPath.split('?')[1]}` : "/";
+
 
     const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -26,13 +30,13 @@ const Navbar: NextPage<any> = () => {
     };
 
     return (
-        <div className={`${isActive ? 'h-28' : 'h-14'} md:h-14 bg-nav flex flex-col md:flex-row justify-around md:justify-between items-stretch md:items-center px-[5vw]`}>
+        <div className={`${isActive ? 'h-28' : 'h-14'} md:h-14 bg-nav flex flex-col md:flex-row justify-around md:justify-between items-stretch md:items-center px-[5vw] sticky top-0 z-10`}>
             <div className='flex items-center justify-between'>
-                <Link href="/">
+                <Link href={"/"}>
                     <a className={`flex items-center justify-start gap-3 ${pathname == '/' && 'pointer-events-none'}`}>
                         <img src="/favicon.ico" className="w-7 h-7" alt="icon" />
                         <h1 className="text-2xl font-bold">
-                            <span className="text-link font-bold borderText">Nát</span>Truyen
+                            <span className="text-link font-bold borderText">Manga</span>MAX
                         </h1>
                     </a>
                 </Link>
@@ -44,6 +48,7 @@ const Navbar: NextPage<any> = () => {
                     ></i>
                 </button>
             </div>
+            <h1 className='font-bold text-2xl top-2/4 absolute left-2/4 transform -translate-x-2/4 -translate-y-2/4'>{select.name}</h1>
             <SideBar className='hidden md:block' id='sidenav2' />
             <form
                 className={`${isActive ? 'flex' : 'hidden'} md:flex`}

@@ -3,20 +3,26 @@ import React, { Fragment, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { ImSpinner8 } from 'react-icons/im';
 import { NextPage } from 'next';
+import { useSelector } from 'react-redux'
 
 const Grid: NextPage<any> = ({ data, keyword, page }: any) => {
     const router = useRouter();
     const [posts, setPosts] = useState<any[]>([]);
+    const source = useSelector((state: any) => state.source);
 
     useEffect(() => {
-        if (posts.length > 0) {
+        setPosts(data)  
+    }, [source])
+
+    useEffect(() => {
+        if (posts.length > 0 && !router.query.source) {
             const post = posts.map((item: any) => ({
                 ...item,
                 items: [
                     ...item.items,
                     ...data[0].items
                 ]
-            }))
+            }))    
             setPosts(post)
         } else {
             setPosts(data)

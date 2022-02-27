@@ -1,6 +1,6 @@
 import { GetServerSideProps, NextPage } from 'next';
 import React, { useCallback } from 'react';
-import { getChapter } from '../../../shared/api/chapter';
+import { getChapter } from '../../../shared/nettruyen/chapter';
 import Navigation from '../../../components/Navigation';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -33,7 +33,7 @@ const Chapter: NextPage<any> = ({ chapter, chapterId, comicSlug }) => {
             {/* <Navigation chapters={chapter.chapters} chapterId={chapterId} comicSlug={comicSlug} /> */}
             <div className={`w-full h-60 p-8 ${selectedIndex < 1 && 'hidden'}`}>
                 <button onClick={nextChapter} className="w-full h-full border-2 border-dashed border-gray-600 text-gray-600 hover:border-white hover:text-white transition duration-300 flex items-center justify-center">
-                    <p className="text-2xl">Chapter tiếp theo</p>
+                    <p className="text-2xl flex gap-3 items-center">Chapter tiếp theo <i className="fas fa-arrow-right" style={{ marginTop: '3px' }} aria-hidden="true"></i></p>
                 </button>
             </div>
         </div>

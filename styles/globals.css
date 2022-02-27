@@ -34,7 +34,8 @@ html,body{
   background: #555; 
 }
 
-input{
+/* Disable rounded corners on input fields using Safari (iPhone & iPad) */
+input{ 
   -webkit-appearance: none;
   -webkit-border-radius: 0;
 }

@@ -1,7 +1,7 @@
 import { GetServerSideProps } from 'next';
 import React from 'react';
 import Grid from '../components/Grid';
-import getSearch from '../shared/api/search';
+import getSearch from '../shared/nettruyen/search';
 
 const search = ({ data, keyword, page }: any) => {
     return (

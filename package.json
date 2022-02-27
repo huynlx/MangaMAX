@@ -1,7 +1,8 @@
 {
-  "name": "nettruyen",
+  "name": "mangamax",
   "version": "0.1.0",
   "private": true,
+  "author": "huynhzip3",
   "scripts": {
     "dev": "next dev -p 8080",
     "build": "next build",
@@ -9,15 +10,20 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.7.2",
     "@types/nprogress": "^0.2.0",
     "axios": "^0.26.0",
     "next": "12.1.0",
+    "next-redux-wrapper": "^7.0.5",
     "node-html-parser": "^5.2.0",
     "nprogress": "^0.2.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-icons": "^4.3.1",
     "react-infinite-scroll-component": "^6.1.0",
+    "react-redux": "^7.2.6",
+    "redux": "^4.1.2",
+    "redux-persist": "^6.0.0",
     "swr": "^1.2.2"
   },
   "devDependencies": {
