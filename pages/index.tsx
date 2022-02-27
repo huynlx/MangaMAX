@@ -27,6 +27,8 @@ export const getServerSideProps = wrapper.getServerSideProps(
         break;
     }
 
+    axios.defaults.baseURL = store.getState().url;
+
     try {
       const data = await getHome(+query.page!, query.type);
       return {
