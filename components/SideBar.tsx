@@ -2,12 +2,14 @@ import { NextPage } from 'next';
 import Link from 'next/link';
 import React, { useRef } from 'react';
 import { useOnClickOutside } from '../shared/useOnClickOutside';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Router, { useRouter } from 'next/router'
 
 const SideBar: NextPage<any> = ({ className, id }) => {
     const ref = useRef(null);
-    const dispatch = useDispatch();
+    const select: any = useSelector(state => state);
+    console.log(select);
+    
 
     function openNav() {
         document.getElementById(id)!.style.width = "250px";
@@ -30,19 +32,19 @@ const SideBar: NextPage<any> = ({ className, id }) => {
                     pathname: '/',
                     query: { source: 'nettruyen' }
                 }}>
-                    <a className='text-center'>NetTruyen</a>
+                    <a className={`text-center ${select.source == 'nettruyen' && '!text-white !text-3xl'}`}>NetTruyen</a>
                 </Link>
                 <Link href={{
                     pathname: '/',
                     query: { source: 'nhattruyen' }
                 }}>
-                    <a className='text-center'>NhatTruyen</a>
+                    <a className={`text-center ${select.source == 'nhattruyen' && '!text-white !text-3xl'}`}>NhatTruyen</a>
                 </Link>
                 <Link href={{
                     pathname: '/',
                     query: { source: 'hentaivn' }
                 }}>
-                    <a className='text-center'>HentaiVN</a>
+                    <a className={`text-center ${select.source == 'hentaivn' && '!text-white !text-3xl'}`}>HentaiVN</a>
                 </Link>
             </div>
             <span style={{ fontSize: '30px', cursor: 'pointer' }} onClick={() => openNav()}><i className="fa-solid fa-compass"></i></span>
