@@ -30,7 +30,7 @@ const Navbar: NextPage<any> = () => {
     };
 
     return (
-        <div className={`${isActive ? 'h-28' : 'h-14'} md:h-14 bg-nav flex flex-col md:flex-row justify-around md:justify-between items-stretch md:items-center px-[5vw] sticky top-0 z-10`}>
+        <div className={`${isActive ? 'h-28' : 'h-14'} md:h-14 bg-nav flex flex-col md:flex-row justify-around md:justify-between items-stretch md:items-center px-[5vw] ${!router.pathname.includes('chap') ? 'sticky top-0 z-10' : 'relative'}`}>
             <div className='flex items-center justify-between'>
                 <Link href={"/"}>
                     <a className={`flex items-center justify-start gap-3 ${pathname == '/' && 'pointer-events-none'}`}>
