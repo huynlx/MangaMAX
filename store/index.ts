@@ -5,7 +5,8 @@ import { createWrapper, Context, HYDRATE } from 'next-redux-wrapper';
 var defaultState = {
     source: 'nettruyen',
     name: 'NetTruyen',
-    url: 'http://nettruyengo.com/'
+    url: 'http://nettruyengo.com/',
+    type: 'latest'
 }
 // create your reducer
 const reducer = (state: any = defaultState, action: AnyAction) => {
@@ -18,7 +19,7 @@ const reducer = (state: any = defaultState, action: AnyAction) => {
             return nextState;
         case 'SOURCE':
             defaultState = { ...defaultState, ...action.payload }
-            
+
             return { ...state, ...action.payload };
         default:
             return state;

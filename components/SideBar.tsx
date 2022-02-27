@@ -38,6 +38,12 @@ const SideBar: NextPage<any> = ({ className, id }) => {
                 }}>
                     <a className='text-center'>NhatTruyen</a>
                 </Link>
+                <Link href={{
+                    pathname: '/',
+                    query: { source: 'hentaivn' }
+                }}>
+                    <a className='text-center'>HentaiVN</a>
+                </Link>
             </div>
             <span style={{ fontSize: '30px', cursor: 'pointer' }} onClick={() => openNav()}><i className="fa-solid fa-compass"></i></span>
         </div >

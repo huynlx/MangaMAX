@@ -3,16 +3,19 @@ import React, { Fragment, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { ImSpinner8 } from 'react-icons/im';
 import { NextPage } from 'next';
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 const Grid: NextPage<any> = ({ data, keyword, page }: any) => {
     const router = useRouter();
     const [posts, setPosts] = useState<any[]>([]);
-    const source = useSelector((state: any) => state.source);
+    const { source, type } = useSelector((state: any) => state);
+    const dispatch = useDispatch();
+    const select: any = useSelector(state => state);
+
 
     useEffect(() => {
-        setPosts(data)  
-    }, [source])
+        setPosts(data)
+    }, [source, type])
 
     useEffect(() => {
         if (posts.length > 0 && !router.query.source) {
@@ -22,7 +25,7 @@ const Grid: NextPage<any> = ({ data, keyword, page }: any) => {
                     ...item.items,
                     ...data[0].items
                 ]
-            }))    
+            }))
             setPosts(post)
         } else {
             setPosts(data)
@@ -74,7 +77,31 @@ const Grid: NextPage<any> = ({ data, keyword, page }: any) => {
                 posts.length > 0 &&
                 posts.map((section: any) => (
                     <Fragment key={section.name}>
-                        <h1 className='text-2xl font-semibold my-5'>{section.nameAlt}</h1>
+                        {/* <h1 className='text-2xl font-semibold my-5'>{section.nameAlt}</h1> */}
+                        <div className='picker flex gap-5 items-center my-5'>
+                            <h1
+                                className={`font-semibold ${select.type === 'latest' ? 'text-white text-2xl' : 'text-xl brightness-75'}`}
+                                onClick={() => {
+                                    router.push({
+                                        pathname: '/',
+                                        query: { type: 'latest', source: select.source }
+                                    })
+                                }}
+                            >
+                                Latest
+                            </h1>
+                            <h1
+                                className={`font-semibold ${select.type === 'browse' ? 'text-white text-2xl' : 'text-xl brightness-75'}`}
+                                onClick={() => {
+                                    router.push({
+                                        pathname: '/',
+                                        query: { type: 'browse', source: select.source }
+                                    })
+                                }}
+                            >
+                                Browse
+                            </h1>
+                        </div>
                         <div className={`grid gap-2 comic-list mb-28`} style={{
                             gridTemplateColumns: "repeat(auto-fill, minmax(150px, 1fr))",
                             gridAutoRows: "1fr",
@@ -99,7 +126,7 @@ const Grid: NextPage<any> = ({ data, keyword, page }: any) => {
                 ))
             }
             {!data[0].hasNextPage && <p className='w-full text-center mb-28 font-bold text-xl'>End</p>}
-        </main>
+        </main >
     );
 };
 

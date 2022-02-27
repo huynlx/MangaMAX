@@ -1,5 +1,5 @@
 import type { NextPage } from 'next'
-import getHome from '../shared/nettruyen/home'
+import getHome from '../shared/api/home'
 import Grid from '../components/Grid'
 import { wrapper } from '../store'
 import axios from '../shared/axios';
@@ -15,19 +15,20 @@ const Home: NextPage<any> = ({ data, page }) => {
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async ({ req, res, query }) => {
     console.log('2. Page.getServerSideProps uses the store to dispatch things');
+
     switch (query.source) {
       case "nhattruyen":
-        store.dispatch({ type: 'SOURCE', payload: { source: 'nhattruyen', name: 'NhatTruyen', url: 'http://nhattruyenvip.com/' } })
-        axios.defaults.baseURL = store.getState().url
+        store.dispatch({ type: 'SOURCE', payload: { type: query.type ?? 'latest', source: 'nhattruyen', name: 'NhatTruyen', url: 'http://nhattruyenvip.com/' } })
         break;
       case "nettruyen":
-        store.dispatch({ type: 'SOURCE', payload: { source: 'nettruyen', name: 'NetTruyen', url: 'http://nettruyengo.com/' } })
-        axios.defaults.baseURL = store.getState().url
+        store.dispatch({ type: 'SOURCE', payload: { type: query.type ?? 'latest', source: 'nettruyen', name: 'NetTruyen', url: 'http://nettruyengo.com/' } })
+        break;
+      default:
         break;
     }
 
     try {
-      const data = await getHome(+query.page!, query.source);
+      const data = await getHome(+query.page!, query.type);
       return {
         props: {
           data,

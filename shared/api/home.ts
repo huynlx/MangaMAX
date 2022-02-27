@@ -1,9 +1,12 @@
 import axios from "../axios";
 import { parse } from "node-html-parser";
+import { store } from "../../store";
 
-const getSearch = async (keyword: string, page: number = 1): Promise<any> => {
+const getHome = async (page: number = 1, type: any): Promise<any> => {
+    const state = store.getState();
+
     const sections = {
-        "Tìm truyện tranh": `tim-truyen?keyword=${keyword}&page=${page ? page : 1}`
+        "Truyện": state.type === 'browse' ? `hot?page=${page}` : `?page=${page}`
     }
 
     const htmls = await Promise.all(
@@ -31,18 +34,11 @@ const getSearch = async (keyword: string, page: number = 1): Promise<any> => {
             updateAt: item.querySelector(".chapter i")?.innerText,
         }));
 
-        const pages = dom.querySelectorAll('ul.pagination > li > a').map((item: any) => {
-            const p = item.innerText.trim();
-            if (isNaN(p)) return false
-            return p;
-        });
-        const maxPage = Math.max(...pages);
-        const hasNextPage = !isFinite(maxPage) ? false : (+page ? page : 1) !== maxPage;
+        const hasNextPage = (+page) !== (+(dom.querySelector('ul.pagination > li.PagerSSCCells:last-child')?.innerText!))
         const currentPage = (+dom.querySelector("ul.pagination > li.active > a")?.innerText!);
 
         return {
             name: Object.keys(sections)[index],
-            nameAlt: 'Search results',
             items,
             hasNextPage,
             currentPage
@@ -53,4 +49,4 @@ const getSearch = async (keyword: string, page: number = 1): Promise<any> => {
 
 };
 
-export default getSearch;
+export default getHome;

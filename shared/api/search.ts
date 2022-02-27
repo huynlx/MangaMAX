@@ -3,7 +3,7 @@ import { parse } from "node-html-parser";
 
 const getSearch = async (keyword: string, page: number = 1): Promise<any> => {
     const sections = {
-        "Tìm truyện tranh": `tim-truyen?keyword=${keyword}&page=${page ? page : 1}`
+        "Tìm truyện tranh": `tim-truyen?keyword=${encodeURIComponent(keyword)}&page=${page ? page : 1}`
     }
 
     const htmls = await Promise.all(

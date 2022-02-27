@@ -1,6 +1,6 @@
 import { GetServerSideProps, NextPage } from 'next';
 import React, { useCallback } from 'react';
-import { getChapter } from '../../../shared/nettruyen/chapter';
+import { getChapter } from '../../../shared/api/chapter';
 import Navigation from '../../../components/Navigation';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
