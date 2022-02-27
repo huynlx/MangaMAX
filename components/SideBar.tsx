@@ -23,7 +23,7 @@ const SideBar: NextPage<any> = ({ className, id }) => {
     return (
         <div
             ref={ref}
-            className={'hover:text-link transition duration-300 ml-auto pr-3 ' + className}
+            className={'ml-auto pr-3 ' + className}
             title='Source'
         >
             <div id={id} className="sidenav">
@@ -47,7 +47,7 @@ const SideBar: NextPage<any> = ({ className, id }) => {
                     <a className={`text-center ${select.source == 'hentaivn' && '!text-white !text-3xl'}`}>HentaiVN</a>
                 </Link>
             </div>
-            <span style={{ fontSize: '30px', cursor: 'pointer' }} onClick={() => openNav()}><i className="fa-solid fa-compass"></i></span>
+            <span className='hover:text-link transition duration-300' style={{ fontSize: '30px', cursor: 'pointer' }} onClick={() => openNav()}><i className="fa-solid fa-compass"></i></span>
         </div >
 
     );

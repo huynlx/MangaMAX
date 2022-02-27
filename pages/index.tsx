@@ -23,6 +23,9 @@ export const getServerSideProps = wrapper.getServerSideProps(
       case "nettruyen":
         store.dispatch({ type: 'SOURCE', payload: { type: query.type ?? 'latest', source: 'nettruyen', name: 'NetTruyen', url: 'http://nettruyengo.com/' } })
         break;
+      case "hentaivn": //ko dùng axios được
+        store.dispatch({ type: 'SOURCE', payload: { type: query.type ?? 'latest', source: 'hentaivn', name: 'HentaiVN', url: 'https://hentaivn.moe/' } })
+        break;
       default:
         break;
     }
@@ -30,7 +33,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
     axios.defaults.baseURL = store.getState().url;
 
     try {
-      const data = await getHome(+query.page!, query.type);
+      const data = await getHome(+query.page!);
       return {
         props: {
           data,
@@ -38,7 +41,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
         },
       };
     } catch (error) {
-      console.log(error);
+      console.log('loi cmnr');
       return {
         notFound: true,
       };

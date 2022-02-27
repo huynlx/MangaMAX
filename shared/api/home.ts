@@ -2,7 +2,7 @@ import axios from "../axios";
 import { parse } from "node-html-parser";
 import { store } from "../../store";
 
-const getHome = async (page: number = 1, type: any): Promise<any> => {
+const getHome = async (page: number = 1): Promise<any> => {
     const state = store.getState();
 
     const sections = {
