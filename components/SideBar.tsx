@@ -8,7 +8,7 @@ import Router, { useRouter } from 'next/router'
 const SideBar: NextPage<any> = ({ className, id }) => {
     const ref = useRef(null);
     const select: any = useSelector(state => state);
-    console.log(select);
+    // console.log(select);
     
 
     function openNav() {
@@ -42,9 +42,9 @@ const SideBar: NextPage<any> = ({ className, id }) => {
                 </Link>
                 <Link href={{
                     pathname: '/',
-                    query: { source: 'hentaivn' }
+                    query: { source: 'lxhentai' }
                 }}>
-                    <a className={`text-center ${select.source == 'hentaivn' && '!text-white !text-3xl'}`}>HentaiVN</a>
+                    <a className={`text-center ${select.source == 'lxhentai' && '!text-white !text-3xl'}`}>HentaiLXX</a>
                 </Link>
             </div>
             <span className='hover:text-link transition duration-300' style={{ fontSize: '30px', cursor: 'pointer' }} onClick={() => openNav()}><i className="fa-solid fa-compass"></i></span>

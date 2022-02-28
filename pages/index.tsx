@@ -6,6 +6,7 @@ import axios from '../shared/axios';
 
 
 const Home: NextPage<any> = ({ data, page }) => {
+  console.log(data);
 
   return (
     <Grid data={data} page={page} />
@@ -23,8 +24,8 @@ export const getServerSideProps = wrapper.getServerSideProps(
       case "nettruyen":
         store.dispatch({ type: 'SOURCE', payload: { type: query.type ?? 'latest', source: 'nettruyen', name: 'NetTruyen', url: 'http://nettruyengo.com/' } })
         break;
-      case "hentaivn": //ko dùng axios được
-        store.dispatch({ type: 'SOURCE', payload: { type: query.type ?? 'latest', source: 'hentaivn', name: 'HentaiVN', url: 'https://hentaivn.moe/' } })
+      case "lxhentai": //ko dùng axios được
+        store.dispatch({ type: 'SOURCE', payload: { type: query.type ?? 'latest', source: 'lxhentai', name: 'HentaiLXX', url: 'https://lxhentai.com/' } })
         break;
       default:
         break;
@@ -33,7 +34,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
     axios.defaults.baseURL = store.getState().url;
 
     try {
-      const data = await getHome(+query.page!);
+      const data = await getHome(query.page ? +query.page! : 1);
       return {
         props: {
           data,

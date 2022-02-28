@@ -12,7 +12,6 @@ import { wrapper } from '../store';
 // import { persistStore } from 'redux-persist'
 
 const MyApp = ({ Component, pageProps }) => {
-
   // Router event handler
   useEffect(() => {
     NProgress.configure({
@@ -21,9 +20,11 @@ const MyApp = ({ Component, pageProps }) => {
       minimum: 0.2,
       trickleRate: 0.2
     });
+
     Router.events.on('routeChangeStart', NProgress.start);
     Router.events.on('routeChangeComplete', NProgress.done);
     Router.events.on("routeChangeError", NProgress.done);
+
     return () => {
       Router.events.off('routeChangeStart', NProgress.start);
       Router.events.off('routeChangeComplete', NProgress.done);
