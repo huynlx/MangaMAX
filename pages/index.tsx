@@ -42,7 +42,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
         },
       };
     } catch (error) {
-      console.log('loi cmnr');
+      console.log(error);
       return {
         notFound: true,
       };

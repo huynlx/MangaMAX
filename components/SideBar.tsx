@@ -40,12 +40,12 @@ const SideBar: NextPage<any> = ({ className, id }) => {
                 }}>
                     <a className={`text-center ${select.source == 'nhattruyen' && '!text-white !text-3xl'}`}>NhatTruyen</a>
                 </Link>
-                <Link href={{
+                {/* <Link href={{
                     pathname: '/',
                     query: { source: 'lxhentai' }
                 }}>
                     <a className={`text-center ${select.source == 'lxhentai' && '!text-white !text-3xl'}`}>HentaiLXX</a>
-                </Link>
+                </Link> */}
             </div>
             <span className='hover:text-link transition duration-300' style={{ fontSize: '30px', cursor: 'pointer' }} onClick={() => openNav()}><i className="fa-solid fa-compass"></i></span>
         </div >

@@ -46,7 +46,8 @@ const getHome = async (page: number = 1): Promise<any> => {
                 }
                 const lastPage = Math.max(...pages);
                 const hasNextPage = (+page) !== lastPage;
-                const currentPage =Number(dom.querySelector('li.active a.page-link')?.childNodes[0].textContent.trim());
+                const currentPage = Number(dom.querySelector('li.active a.page-link')?.childNodes[0].textContent.trim());
+                console.log(currentPage);
 
                 return {
                     name: Object.keys(sections)[index],
