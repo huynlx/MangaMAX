@@ -29,7 +29,7 @@ const getHome = async (page: number = 1): Promise<any> => {
                     cover: state.url + image,
                     chapter: item.querySelector(".newestChapter a")?.innerText,
                     slug: getQueryParams('id', item.getElementsByTagName('a')[1].getAttribute('href')!),
-                    updateAt: '...',
+                    updateAt: null,
                     id: getQueryParams('id', item.getElementsByTagName('a')[1].getAttribute('href')!)
                 }
             });

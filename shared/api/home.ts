@@ -2,6 +2,7 @@ import { store } from "../../store";
 import nettruyen from '../nettruyen/home';
 import lxhentai from '../lxhentai/home';
 import truyen48 from '../truyen48/home';
+import truyentranhlh from '../truyentranhlh/home';
 
 const getHome = async (page: number = 1): Promise<any> => {
     const state = store.getState();
@@ -14,7 +15,9 @@ const getHome = async (page: number = 1): Promise<any> => {
         case '3':
             return lxhentai(page); //lxhentai
         case '4':
-            return truyen48(page); //lxhentai
+            return truyen48(page); //truyen48
+        case '5':
+            return truyentranhlh(page); //truyentranhlh
     }
 };
 

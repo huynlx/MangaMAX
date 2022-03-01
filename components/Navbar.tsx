@@ -35,7 +35,7 @@ const Navbar: NextPage<any> = () => {
             <div className='flex items-center justify-between'>
                 <Link href={`/?source=${select.source}&type=${select.type}`}>
                     <a className={`flex items-center justify-start gap-3 ${pathname == '/' && 'pointer-events-none'}`}>
-                        <img src="/favicon.ico" className="w-7 h-7" alt="icon" />
+                        <img src="/favicon.ico" className="w-9 h-8" alt="icon" />
                         <h1 className="text-2xl font-bold">
                             <span className="text-link font-bold borderText">Manga</span>MAX
                         </h1>

@@ -15,7 +15,7 @@ export const SOURCES = [
     },
     {
         source: '3',
-        name: 'Server 3 (18+)',
+        name: 'Server 3',
         url: 'https://lxhentai.com/',
         type: 'latest'
     },
@@ -23,6 +23,12 @@ export const SOURCES = [
         source: '4',
         name: 'Server 4',
         url: 'http://truyen48.com/',
+        type: 'latest'
+    },
+    {
+        source: '5',
+        name: 'Server 5',
+        url: 'https://truyentranhlh.net/',
         type: 'latest'
     }
 ]

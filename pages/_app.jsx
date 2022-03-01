@@ -13,8 +13,8 @@ import { useSelector } from 'react-redux';
 // import { persistStore } from 'redux-persist'
 
 const MyApp = ({ Component, pageProps, initialData }) => {
-  const select = useSelector(state => state);
-  console.log('CLIENT', select);
+  // const select = useSelector(state => state);
+  // console.log('CLIENT', select);
   // console.log(initialData);
 
   // Router event handler
