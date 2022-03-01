@@ -29,7 +29,7 @@ const SideBar: NextPage<any> = ({ className, id }) => {
                 <div><a className="closebtn" onClick={() => closeNav()}>×</a></div>
                 {
                     SOURCES.map(item => (
-                        <div onClick={() => {
+                        <div key={item.source} onClick={() => {
                             Router.push({
                                 pathname: '/',
                                 query: { source: item.source }
