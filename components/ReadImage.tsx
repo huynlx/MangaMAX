@@ -25,7 +25,7 @@ const ReadImage: NextPage<any> = ({ src, opacity, ...props }) => {
                 onError={() => {
                     setLoaded(true);
                 }}
-                className={props.className + (loaded ? ' transition-opacity duration-300 h-auto' : ' h-0')}
+                className={props.className + (loaded ? ' transition-opacity h-auto' : ' h-0')}
                 style={{ opacity: loaded ? opacity : 0 }}
             />
         </>

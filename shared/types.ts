@@ -16,3 +16,10 @@ export interface ComicProps {
         }[]
     }
 }
+
+export interface SourceProps {
+    source: string | number,
+    name: string,
+    url: string,
+    type: string
+}
