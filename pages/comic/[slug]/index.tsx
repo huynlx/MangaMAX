@@ -32,7 +32,7 @@ const Comic: NextPage<ComicProps> = ({ info, slug }) => {
         <div className='px-[5vw] lg:h-[92.5vh] py-10 flex flex-col lg:flex-row'>
             <div className='lg:w-[60vw] lg:pr-10'>
                 <div className='flex mb-2 gap-4 flex-col sm:flex-row'>
-                    <img className='h-[300px] w-[200px] object-cover mx-auto sm:mx-0' src={info.cover} alt="" />
+                    <img className='h-[300px] w-[200px] min-w-[200px] object-cover mx-auto sm:mx-0' src={info.cover} alt="" />
                     <div className='info gap-2 flex flex-col'>
                         <h1 className=' font-bold text-2xl'>{info.title}</h1>
                         <p>Tác giả: {info.author}</p>

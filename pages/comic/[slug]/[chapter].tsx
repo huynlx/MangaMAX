@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import { wrapper } from '../../../store';
 import { handleSource } from '../../../store/action';
 import { useSelector } from 'react-redux';
+import ReadImage from '../../../components/ReadImage';
 
 const Chapter: NextPage<any> = ({ chapter, chapterId, comicSlug }) => {
     const select: any = useSelector(state => state);
@@ -29,9 +30,9 @@ const Chapter: NextPage<any> = ({ chapter, chapterId, comicSlug }) => {
 
             </p>
             <Navigation chapters={chapter.chapters} chapterId={chapterId} comicSlug={comicSlug} select={select} />
-            <div className='min-h-[100vh] w-full md:max-w-[75vw] lg:md:max-w-[50vw]'>
+            <div className='min-h-[100vh] w-full'>
                 {
-                    chapter.images.map((image: string | undefined, index: any) => <img className='mx-auto w-full object-cover h-auto' key={index} src={image} />)
+                    chapter.images.map((image: string | undefined, index: any) => <ReadImage className='mx-auto object-cover min-w-[50vw]' key={index} src={image} />)
                 }
             </div>
             {/* <Navigation chapters={chapter.chapters} chapterId={chapterId} comicSlug={comicSlug} /> */}

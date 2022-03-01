@@ -49,7 +49,6 @@ const Grid: NextPage<any> = ({ data, keyword, page }: any) => {
             const pageOffset = window.pageYOffset + window.innerHeight
             // Detects when user scrolls down till the last user
             if (pageOffset - lastUserLoadedOffset > -800) {
-                // Stops loading
                 if (data[0].hasNextPage) {
                     // Trigger fetch
                     router.push({
