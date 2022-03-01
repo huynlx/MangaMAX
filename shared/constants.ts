@@ -30,6 +30,12 @@ export const SOURCES = [
         name: 'Server 5',
         url: 'https://truyentranhlh.net/',
         type: 'latest'
+    },
+    {
+        source: '6',
+        name: 'Server 6',
+        url: 'https://blogtruyen.vn/',
+        type: 'latest'
     }
 ]
 

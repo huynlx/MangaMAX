@@ -23,6 +23,9 @@ export const handleSource = (source: any, type: any, store: any) => (dispatch: a
         case "5":
             dispatch({ type: handleSourceTypes.SOURCE, payload: { type: type ?? "latest", source: '5', name: 'Server 5', url: 'https://truyentranhlh.net/' } })
             break;
+        case "6":
+            dispatch({ type: handleSourceTypes.SOURCE, payload: { type: type ?? "latest", source: '6', name: 'Server 6', url: 'https://blogtruyen.vn/' } })
+            break;
         default:
             break;
     }
