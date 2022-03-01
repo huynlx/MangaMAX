@@ -25,6 +25,7 @@ const Navbar: NextPage<any> = () => {
                 pathname: "/search",
                 query: {
                     keyword: inputValue.trim(),
+                    source: select.source
                 },
             });
     };

@@ -8,10 +8,15 @@ import Router from "next/router";
 import Navbar from '../components/Navbar'
 import Head from 'next/head';
 import { wrapper } from '../store';
+import { useSelector } from 'react-redux';
 // import { PersistGate } from 'redux-persist/integration/react'
 // import { persistStore } from 'redux-persist'
 
-const MyApp = ({ Component, pageProps }) => {
+const MyApp = ({ Component, pageProps, initialData }) => {
+  const select = useSelector(state => state);
+  console.log('CLIENT', select);
+  // console.log(initialData);
+
   // Router event handler
   useEffect(() => {
     NProgress.configure({
@@ -48,5 +53,21 @@ const MyApp = ({ Component, pageProps }) => {
     </>
   )
 }
+
+// MyApp.getInitialProps = async ({ Component, ctx }) => {
+//   const footerData = { cc: 'cc' };
+//   let pageProps = {};
+//   console.log(ctx.query);
+//   if (Component.getInitialProps) {
+//     pageProps = await Component.getInitialProps(ctx);
+//   }
+//   return { pageProps, footerData };
+// };
+
+MyApp.getInitialProps = async ({ store }) => {
+  // console.log(store);
+  const initialData = { data: 'test' }
+  return { initialData }
+};
 
 export default wrapper.withRedux(MyApp);

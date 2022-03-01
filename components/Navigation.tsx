@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { useCallback, useEffect } from 'react';
 import Link from 'next/link';
 
-const Navigation: NextPage<any> = ({ chapters, chapterId, comicSlug }) => {
+const Navigation: NextPage<any> = ({ chapters, chapterId, comicSlug, select }) => {
     let oldScrollY = 0;
     const [direction, setDirection] = useState('up');
     const selectedIndex = chapters.indexOf(chapters.find((chap: { id: any; }) => chap.id === chapterId));
@@ -13,13 +13,13 @@ const Navigation: NextPage<any> = ({ chapters, chapterId, comicSlug }) => {
     const prevChapter = useCallback(() => {
         router.push({
             pathname: `/comic/${comicSlug}/${chapters[selectedIndex + 1].chap}`,
-            query: { id: chapters[selectedIndex + 1].id }
+            query: { id: chapters[selectedIndex + 1].id, source: select.source }
         })
     }, [comicSlug, chapters, selectedIndex, router])
     const nextChapter = useCallback(() => {
         router.push({
             pathname: `/comic/${comicSlug}/${chapters[selectedIndex - 1].chap}`,
-            query: { id: chapters[selectedIndex - 1].id }
+            query: { id: chapters[selectedIndex - 1].id, source: select.source }
         })
     }, [comicSlug, chapters, selectedIndex, router])
     const selectChapter = (chapterSlug: string) => {
@@ -27,6 +27,7 @@ const Navigation: NextPage<any> = ({ chapters, chapterId, comicSlug }) => {
             pathname: `/comic/${comicSlug}/${chapterSlug}`,
             query: {
                 id: chapters.find((chap: { chap: any; }) => chap.chap === chapterSlug)?.id,
+                source: select.source
             },
         });
     }
@@ -61,12 +62,12 @@ const Navigation: NextPage<any> = ({ chapters, chapterId, comicSlug }) => {
 
     return (
         <div className={`flex items-center gap-1 w-full justify-center bg-primary ${direction === 'up' && 'sticky top-0'}`}>
-            <Link href='/'>
+            <Link href={`/?source=${select.source}`}>
                 <a className='mr-2'>
                     <i className="fas fa-home text-2xl"></i>
                 </a>
             </Link>
-            <Link href={`/comic/${router.query.slug}`}>
+            <Link href={`/comic/${router.query.slug}?source=${select.source}`}>
                 <a className='mr-2'>
                     <i className="fas fa-list text-3xl"></i>
                 </a>

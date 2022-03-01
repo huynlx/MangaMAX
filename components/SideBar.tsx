@@ -12,10 +12,10 @@ const SideBar: NextPage<any> = ({ className, id }) => {
     
 
     function openNav() {
-        document.getElementById(id)!.style.width = "250px";
+        document.getElementById(id)!.style.left = "0";
     }
     function closeNav() {
-        document.getElementById(id)!.style.width = "0";
+        document.getElementById(id)!.style.left = "-250px";
     }
 
     useOnClickOutside(ref, () => closeNav());
@@ -30,22 +30,22 @@ const SideBar: NextPage<any> = ({ className, id }) => {
                 <Link href="javascript:void(0)"><a className="closebtn" onClick={() => closeNav()}>×</a></Link>
                 <Link href={{
                     pathname: '/',
-                    query: { source: 'nettruyen' }
+                    query: { source: '1' }
                 }}>
-                    <a className={`text-center ${select.source == 'nettruyen' && '!text-white !text-3xl'}`}>NetTruyen</a>
+                    <a className={`text-center ${select.source == '1' && '!text-white !text-3xl'}`}>Server 1</a>
                 </Link>
                 <Link href={{
                     pathname: '/',
-                    query: { source: 'nhattruyen' }
+                    query: { source: '2' }
                 }}>
-                    <a className={`text-center ${select.source == 'nhattruyen' && '!text-white !text-3xl'}`}>NhatTruyen</a>
+                    <a className={`text-center ${select.source == '2' && '!text-white !text-3xl'}`}>Server 2</a>
                 </Link>
-                {/* <Link href={{
+                <Link href={{
                     pathname: '/',
-                    query: { source: 'lxhentai' }
+                    query: { source: '3' }
                 }}>
-                    <a className={`text-center ${select.source == 'lxhentai' && '!text-white !text-3xl'}`}>HentaiLXX</a>
-                </Link> */}
+                    <a className={`text-center ${select.source == '3' && '!text-white !text-3xl'}`}>Server 3 (18+)</a>
+                </Link>
             </div>
             <span className='hover:text-link transition duration-300' style={{ fontSize: '30px', cursor: 'pointer' }} onClick={() => openNav()}><i className="fa-solid fa-compass"></i></span>
         </div >

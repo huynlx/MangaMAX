@@ -12,13 +12,12 @@ const Grid: NextPage<any> = ({ data, keyword, page }: any) => {
     const dispatch = useDispatch();
     const select: any = useSelector(state => state);
 
-
     useEffect(() => {
         setPosts(data)
     }, [source, type])
 
     useEffect(() => {
-        if (posts.length > 0 && !router.query.source) {
+        if (page) {
             const post = posts.map((item: any) => ({
                 ...item,
                 items: [
@@ -55,7 +54,7 @@ const Grid: NextPage<any> = ({ data, keyword, page }: any) => {
                     // Trigger fetch
                     router.push({
                         pathname: router.pathname,
-                        query: keyword ? { page: data[0].currentPage + 1, keyword: keyword } : { page: data[0].currentPage + 1 }
+                        query: keyword ? { page: data[0].currentPage + 1, keyword: keyword, source: select.source } : { page: data[0].currentPage + 1, source: select.source, type: select.type }
                     }, undefined, { scroll: false })
                 }
             }
@@ -108,7 +107,7 @@ const Grid: NextPage<any> = ({ data, keyword, page }: any) => {
                         }}>
                             {
                                 section.items.map((item: any, index: number) => (
-                                    <Link href={`/comic/${item.slug}`} key={index}>
+                                    <Link href={`/comic/${item.slug}?source=${select.source}`} key={index}>
                                         <a className='flex flex-col items-stretch comic'>
                                             <div className='w-full h-0 pb-[150%] relative flex-grow'>
                                                 <img src={item.cover} alt="cover" className='absolute top-0 left-0 w-full h-full object-cover' />
