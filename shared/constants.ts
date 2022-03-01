@@ -18,6 +18,12 @@ export const SOURCES = [
         name: 'Server 3 (18+)',
         url: 'https://lxhentai.com/',
         type: 'latest'
+    },
+    {
+        source: '4',
+        name: 'Server 4',
+        url: 'http://truyen48.com/',
+        type: 'latest'
     }
 ]
 
