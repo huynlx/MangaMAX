@@ -110,7 +110,7 @@ const Grid: NextPage<any> = ({ data, keyword, page }: any) => {
                                     <Link href={`/comic/${item.slug}?source=${select.source}`} key={index}>
                                         <a className='flex flex-col items-stretch comic'>
                                             <div className='w-full h-0 pb-[150%] relative flex-grow bg-gray-400'>
-                                                <ReadImage className='absolute top-0 left-0 w-full h-full object-cover duration-200' key={index} src={item.cover} className2='h-[16rem]' />
+                                                <ReadImage className='absolute top-0 left-0 w-full h-full object-cover duration-200' key={index} src={item.cover} className2='!h-[16rem]' />
                                                 {/* <img src={item.cover} alt="cover" className='absolute top-0 left-0 w-full h-full object-cover' /> */}
                                                 {
                                                     item.updateAt && <small className='p-2 py-1 rounded-full absolute bg-nav text-white opacity-90 top-1 left-1'>{item.updateAt}</small>
