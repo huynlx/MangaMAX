@@ -7,6 +7,7 @@
 html,body{
   @apply bg-primary text-gray-300;
   font-family: Arial, Helvetica, sans-serif;
+  overflow-x:hidden;
 }
 
 .borderText{
