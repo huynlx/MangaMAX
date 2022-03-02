@@ -36,7 +36,7 @@ export const getComicInfo = async (comicSLug: string): Promise<any> => {
     let status = dom.querySelectorAll(".status")[0].innerText.indexOf("Đang") != -1 ? 'Đang tiến hành' : "Đã hoàn thành";
     let desc = dom.querySelectorAll("#book_detail")[0].innerText === '' ? dom.querySelectorAll("#book_more")[0].innerText : dom.querySelectorAll("#book_detail")[0].innerText;
     let image = state.url + dom.querySelectorAll(".book_avatar img")[0].getAttribute("src");
-    let creator = dom.querySelector(".profile a")?.innerText || 'Unknown';
+    let creator = dom.querySelector(".profile a")?.innerText || 'Đang cập nhật';
     let title = dom.querySelector('.name')?.innerText
 
     return {
