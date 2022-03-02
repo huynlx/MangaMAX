@@ -1,9 +1,6 @@
 import instance from "../axios";
-import { parse } from "node-html-parser";
 import { store } from "../../store";
-import decodeHTMLEntity from "../decodeHTML";
 import { decrypt_data } from "./decrypt";
-import { loadPlugin } from "immer/dist/internal";
 import { titleCase } from "./titleCase";
 
 const getHome = async (page: number = 1): Promise<any> => {
