@@ -13,6 +13,7 @@
     "@reduxjs/toolkit": "^1.7.2",
     "@types/nprogress": "^0.2.0",
     "axios": "^0.26.0",
+    "crypto-js": "^4.1.1",
     "entities": "^3.0.1",
     "next": "12.1.0",
     "next-redux-wrapper": "^7.0.5",

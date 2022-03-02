@@ -29,9 +29,7 @@ const getHome = async (page: number = 1): Promise<any> => {
                     ?.getAttribute("href")
                     ?.split("/")
                     .slice(-1)[0]
-                    .split("-")
-                    .slice(0, -1)
-                    .join("-"),
+                ,
                 updateAt: item.querySelector(".chapter i")?.innerText,
             }));
 

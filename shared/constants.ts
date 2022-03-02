@@ -36,6 +36,12 @@ export const SOURCES = [
         name: 'Server 6',
         url: 'https://blogtruyen.vn/',
         type: 'latest'
+    },
+    {
+        source: '7',
+        name: 'Server 7',
+        url: 'https://cmangaka.com/',
+        type: 'latest'
     }
 ]
 

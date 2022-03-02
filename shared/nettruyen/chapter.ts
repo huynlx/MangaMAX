@@ -2,8 +2,10 @@ import { parse } from "node-html-parser";
 import axios from "../axios";
 
 export const getChapter = async (comicSLug: any, chapterSLug: any, chapterId: any): Promise<any> => {
+    const handleSlug = comicSLug.split("-").slice(0, -1).join("-");
+
     const links = [
-        `truyen-tranh/${comicSLug}/${chapterSLug}/${chapterId}`,
+        `truyen-tranh/${handleSlug}/${chapterSLug}/${chapterId}`,
         `truyen-tranh/${comicSLug}`
     ];
     const html = await Promise.all(links.map(async (link) => (await axios.get(link)).data));

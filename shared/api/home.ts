@@ -4,6 +4,7 @@ import lxhentai from '../lxhentai/home';
 import truyen48 from '../truyen48/home';
 import truyentranhlh from '../truyentranhlh/home';
 import blogtruyen from '../blogtruyen/home';
+import cmanga from '../cmanga/home';
 
 const getHome = async (page: number = 1): Promise<any> => {
     const state = store.getState();
@@ -21,6 +22,8 @@ const getHome = async (page: number = 1): Promise<any> => {
             return truyentranhlh(page); //truyentranhlh
         case '6':
             return blogtruyen(page); //blogtruyen
+        case '7':
+            return cmanga(page); //cmanga
     }
 };
 

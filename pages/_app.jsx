@@ -21,9 +21,9 @@ const MyApp = ({ Component, pageProps, initialData }) => {
   useEffect(() => {
     NProgress.configure({
       showSpinner: false,
-      trickleSpeed: 200,
-      minimum: 0.2,
-      trickleRate: 0.1
+      trickleSpeed: 100,
+      minimum: 0.1,
+      trickleRate: 0.03
     });
 
     Router.events.on('routeChangeStart', NProgress.start);
