@@ -48,8 +48,10 @@ const Grid: NextPage<any> = ({ data, keyword, page }: any) => {
             const lastUserLoadedOffset =
                 lastUserLoaded.offsetTop + lastUserLoaded.clientHeight
             const pageOffset = window.pageYOffset + window.innerHeight
+            console.log(pageOffset - lastUserLoadedOffset);
+
             // Detects when user scrolls down till the last user
-            if (pageOffset - lastUserLoadedOffset > -800) {
+            if (pageOffset - lastUserLoadedOffset >= -900) {
                 if (data[0].hasNextPage) {
                     // Trigger fetch
                     router.push({
@@ -108,16 +110,17 @@ const Grid: NextPage<any> = ({ data, keyword, page }: any) => {
                             {
                                 section.items.map((item: any, index: number) => (
                                     <Link href={`/comic/${item.slug}?source=${select.source}`} key={index}>
-                                        <a className='flex flex-col items-stretch comic'>
+                                        <a className='flex flex-col items-stretch comic border overflow-hidden border-transparent rounded-lg'>
                                             <div className='w-full h-0 pb-[150%] relative flex-grow bg-gray-400'>
                                                 <ReadImage className='absolute top-0 left-0 w-full h-full object-cover duration-200' key={index} src={item.cover} className2='!h-[16rem]' />
-                                                {/* <img src={item.cover} alt="cover" className='absolute top-0 left-0 w-full h-full object-cover' /> */}
                                                 {
                                                     item.updateAt && <small className='p-2 py-1 rounded-full absolute bg-nav text-white opacity-90 top-1 left-1'>{item.updateAt}</small>
                                                 }
                                             </div>
-                                            <h1 className=' max-w-full whitespace-nowrap overflow-ellipsis overflow-hidden text-center flex-shrink-0'>{item.title}</h1>
-                                            <p className='max-w-full whitespace-nowrap overflow-ellipsis overflow-hidden  text-center flex-shrink-0'>{item.chapter}</p>
+                                            <div className='root p-2 bg-gray-700 text-white'>
+                                                <h1 className=' max-w-full whitespace-nowrap overflow-ellipsis overflow-hidden text-center flex-shrink-0'>{item.title}</h1>
+                                                <p className='max-w-full whitespace-nowrap overflow-ellipsis overflow-hidden  text-center flex-shrink-0'>{item.chapter}</p>
+                                            </div>
                                         </a>
                                     </Link>
                                 ))
