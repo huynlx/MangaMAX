@@ -24,7 +24,7 @@ const getHome = async (page: number = 1): Promise<any> => {
 
             listItems.push({
                 title: titleCase(item.name),
-                cover: 'https://cmangatop.com/assets/tmp/book/avatar/' + item.avatar + '.jpg',
+                cover: state.url + 'assets/tmp/book/avatar/' + item.avatar + '.jpg',
                 chapter: 'Chapter ' + item.last_chapter,
                 slug: item.url + '-' + item.id_book,
                 updateAt: item.last_update,
