@@ -7,6 +7,15 @@ const ReadImage: NextPage<any> = ({ src, opacity, ...props }) => {
 
     useEffect(() => {
         setLoaded(false);
+        const loadImage = (image: any) => {
+            return new Promise((resolve, reject) => {
+                const loadImg = new Image();
+                loadImg.src = image;
+                loadImg.onload = () => resolve(image);
+                loadImg.onerror = (err) => reject(err); //call catch()
+            });
+        };
+        loadImage(src).then(() => setLoaded(true)).catch((err) => console.log(err));
     }, [src])
 
     return (
@@ -19,9 +28,6 @@ const ReadImage: NextPage<any> = ({ src, opacity, ...props }) => {
             <img
                 alt="Đọc truyện tại MangaMAX"
                 src={src}
-                onLoad={() => {
-                    setLoaded(true);
-                }}
                 onError={() => {
                     setLoaded(true);
                 }}

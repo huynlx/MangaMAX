@@ -23,7 +23,7 @@ const MyApp = ({ Component, pageProps, initialData }) => {
       showSpinner: false,
       trickleSpeed: 200, //ms
       minimum: 0.1,
-      trickleRate: 0.1
+      trickleRate: 0.05
     });
 
     Router.events.on('routeChangeStart', NProgress.start);

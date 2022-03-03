@@ -16,7 +16,7 @@ export let defaultState = {
     url: 'http://nettruyengo.com/',
     type: 'latest'
 }
-// create your reducer
+// reducer
 const reducer = (state: any = defaultState, action: AnyAction) => {
     switch (action.type) {
         case HYDRATE:
