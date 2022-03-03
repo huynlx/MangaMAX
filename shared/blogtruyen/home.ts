@@ -4,7 +4,7 @@ import { store } from "../../store";
 import decodeHTMLEntity from "../decodeHTML";
 
 const getHome = async (page: number = 1): Promise<any> => {
-    const state = store.getState();
+    const state = store.getState().reducer;
 
     const handleSource = () => {
         if (state.type === 'browse') {

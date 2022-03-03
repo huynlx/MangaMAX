@@ -3,9 +3,9 @@ import nettruyen from '../nettruyen/search';
 import lxhentai from '../lxhentai/search';
 
 const getSearch = async (keyword: string, page: number = 1): Promise<any> => {
-    const state = store.getState();
+    const {reducer} = store.getState();
 
-    switch (state.source) {
+    switch (reducer.source) {
         case '1':
             return nettruyen(keyword, page); //nettruyen
         case '2':

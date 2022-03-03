@@ -2,13 +2,15 @@ import type { NextPage } from 'next'
 import getHome from '../shared/api/home'
 import Grid from '../components/Grid'
 import { wrapper } from '../store'
-import { handleSource } from '../store/action';
-import { useEffect, useState } from 'react';
+import { handleSource, windowResize } from '../store/action';
+import { useEffect } from 'react';
 import { WINDOW_RESIZE_DEBOUNCE, WINDOW_SIZE } from '../shared/constants';
+import { useSelector, useDispatch } from 'react-redux';
 
 
 const Home: NextPage<any> = ({ data, page }) => {
-  const [windowSize, setWindowSize] = useState(0);
+  const { windowSize } = useSelector((state: any) => state.reducer2);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     let timeout: any = null;
@@ -18,36 +20,36 @@ const Home: NextPage<any> = ({ data, page }) => {
         innerWidth < WINDOW_SIZE.mobile &&
         windowSize !== WINDOW_SIZE.mobile
       ) {
-        setWindowSize(WINDOW_SIZE.mobile);
+        dispatch(windowResize(WINDOW_SIZE.mobile))
       } else if (
         innerWidth >= WINDOW_SIZE.mobile &&
         innerWidth < WINDOW_SIZE.phablet &&
         windowSize !== WINDOW_SIZE.phablet
       ) {
-        setWindowSize(WINDOW_SIZE.phablet);
+        dispatch(windowResize(WINDOW_SIZE.phablet))
       } else if (
         innerWidth >= WINDOW_SIZE.phablet &&
         innerWidth < WINDOW_SIZE.tablet &&
         windowSize !== WINDOW_SIZE.tablet
       ) {
-        setWindowSize(WINDOW_SIZE.tablet);
+        dispatch(windowResize(WINDOW_SIZE.tablet))
       } else if (
         innerWidth >= WINDOW_SIZE.tablet &&
         innerWidth < WINDOW_SIZE.laptop &&
         windowSize !== WINDOW_SIZE.laptop
       ) {
-        setWindowSize(WINDOW_SIZE.laptop);
+        dispatch(windowResize(WINDOW_SIZE.laptop))
       } else if (
         innerWidth >= WINDOW_SIZE.laptop &&
         innerWidth < WINDOW_SIZE.desktop &&
         windowSize !== WINDOW_SIZE.desktop
       ) {
-        setWindowSize(WINDOW_SIZE.desktop);
+        dispatch(windowResize(WINDOW_SIZE.desktop))
       } else if (
         innerWidth >= WINDOW_SIZE.desktop &&
         windowSize !== WINDOW_SIZE.all
       ) {
-        setWindowSize(WINDOW_SIZE.all);
+        dispatch(windowResize(WINDOW_SIZE.all))
       }
     };
     const onWidthResize = () => {
@@ -81,7 +83,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
         },
       };
     } catch (error) {
-      // console.log(error);
+      console.log('lỗi server home');
       return {
         notFound: true,
       };

@@ -4,8 +4,9 @@ import { getChapter as cmanga } from "../cmanga/chapter";
 import { store } from "../../store";
 
 export const getChapter = async (comicSLug: any, chapterSLug: any, chapterId: any): Promise<any> => {
-    const state = store.getState();
-    switch (state.source) {
+    const {reducer} = store.getState();
+
+    switch (reducer.source) {
         case '1':
             return nettruyen(comicSLug, chapterSLug, chapterId); //nettruyen
         case '2':

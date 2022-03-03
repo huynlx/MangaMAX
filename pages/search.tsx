@@ -25,7 +25,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
                 },
             };
         } catch (error) {
-            console.log(error);
+            console.log('lỗi server search');
             return {
                 notFound: true,
             };

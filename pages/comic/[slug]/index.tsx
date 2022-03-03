@@ -15,7 +15,7 @@ const Comic: NextPage<ComicProps> = ({ info, slug }) => {
 
     // if (error) return <div>Failed to load</div>
     // if (!data) return <div>Loading...</div>
-    const select: any = useSelector(state => state);
+    const select: any = useSelector((state:any) => state.reducer);
     // console.log(select);
 
 
@@ -97,7 +97,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
                 }
             };
         } catch (error) {
-            // console.log(error);
+            console.log('lỗi server comic');
             return {
                 notFound: true,
             };

@@ -4,9 +4,9 @@ import { getComicInfo as lxhentai } from "../lxhentai/comic";
 import { getComicInfo as cmanga } from "../cmanga/comic";
 
 export const getComicInfo = async (comicSLug: string): Promise<any> => {
-    const state = store.getState();
+    const {reducer} = store.getState();
 
-    switch (state.source) {
+    switch (reducer.source) {
         case '1':
             return nettruyen(comicSLug); //nettruyen
         case '2':

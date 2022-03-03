@@ -4,7 +4,7 @@ import { decrypt_data } from "./decrypt";
 import { titleCase } from "./titleCase";
 
 const getHome = async (page: number = 1): Promise<any> => {
-    const state = store.getState();
+    const state = store.getState().reducer;
 
     const handleSource = () => {
         if (state.type === 'browse') {

@@ -8,7 +8,7 @@ import { SOURCES } from '../shared/constants';
 
 const SideBar: NextPage<any> = ({ className, id }) => {
     const ref = useRef(null);
-    const select: any = useSelector(state => state);
+    const select: any = useSelector((state:any) => state.reducer);
 
     function openNav() {
         document.getElementById(id)!.style.left = "0";

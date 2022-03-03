@@ -11,9 +11,9 @@ const Grid: NextPage<any> = ({ data, keyword, page, windowSize }: any) => {
     const router = useRouter();
     const [posts, setPosts] = useState<any[]>([]);
     const [content, setContent] = useState(setData(8, data[0].items))
-    const { source, type } = useSelector((state: any) => state);
+    const { source, type } = useSelector((state: any) => state.reducer);
     const [cols, setCols] = useState(setCol(windowSize));
-    const select: any = useSelector(state => state);
+    const select: any = useSelector((state: any) => state.reducer);
 
     useEffect(() => {
         if (cols !== setCol(windowSize)) {
@@ -119,10 +119,10 @@ const Grid: NextPage<any> = ({ data, keyword, page, windowSize }: any) => {
                                 colRendered.map((item: any, index: any) => (
                                     <Link href={`/comic/${item.slug}?source=${select.source}`} key={index}>
                                         <a className='flex flex-col items-stretch comic border overflow-hidden border-transparent rounded-xl'>
-                                            <div className='w-full h-0 pb-[150%] relative flex-grow bg-gray-400'>
+                                            <div className='w-full h-0 pb-[155%] relative flex-grow bg-gray-400'>
                                                 <ReadImage className='absolute top-0 left-0 w-full h-full object-cover duration-300' key={index} src={item.cover} className2='!h-[16rem]' />
                                                 {
-                                                    item.updateAt && <small className='px-2 md:py-1 rounded-full absolute bg-nav font-semibold text-white opacity-80 bottom-1 left-1'>{item.updateAt}</small>
+                                                    item.updateAt && <small className='px-2 md:py-1 rounded-full absolute bg-nav md:font-semibold text-white opacity-80 bottom-1 left-1'>{item.updateAt}</small>
                                                 }
                                             </div>
                                             <div className='root p-2 bg-gray-700 text-white'>

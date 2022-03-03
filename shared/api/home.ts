@@ -7,9 +7,9 @@ import blogtruyen from '../blogtruyen/home';
 import cmanga from '../cmanga/home';
 
 const getHome = async (page: number = 1): Promise<any> => {
-    const state = store.getState();
+    const {reducer} = store.getState();
 
-    switch (state.source) {
+    switch (reducer.source) {
         case '1':
             return nettruyen(page); //nettruyen
         case '2':

@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux';
 import ReadImage from '../../../components/ReadImage';
 
 const Chapter: NextPage<any> = ({ chapter, chapterId, comicSlug }) => {
-    const select: any = useSelector(state => state);
+    const select: any = useSelector((state:any) => state.reducer);
     const router = useRouter();
     const selectedIndex = chapter.chapters.indexOf(chapter.chapters.find((chap: { id: any; }) => chap.id === chapterId));
     const nextChapter = useCallback(() => {
@@ -59,7 +59,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
                 }
             }
         } catch (error) {
-            console.log(error);
+            console.log('lỗi server chapter');
             return {
                 notFound: true
             }

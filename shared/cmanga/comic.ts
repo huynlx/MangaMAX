@@ -5,7 +5,7 @@ import { titleCase } from "./titleCase";
 import { store } from "../../store";
 
 export const getComicInfo = async (comicSLug: string): Promise<any> => {
-    const state = store.getState();
+    const state = store.getState().reducer;
 
     const html = (await axios.get(`${comicSLug}`)).data;
     const book_id = html.match(/book_id.+"(.+)"/)[1];

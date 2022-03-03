@@ -5,7 +5,7 @@ import decodeHTMLEntity from "../decodeHTML";
 import getQueryParams from "../useGetQueryParams";
 
 const getHome = async (page: number = 1): Promise<any> => {
-    const state = store.getState();
+    const state = store.getState().reducer;
 
     const handleSource = () => {
         if (state.type === 'browse') {

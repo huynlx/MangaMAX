@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux';
 const Navbar: NextPage<any> = () => {
     const [isActive, setIsActive] = useState(false);
     const [inputValue, setInputValue] = useState("");
-    const select: any = useSelector(state => state);
+    const select: any = useSelector((state:any) => state.reducer);
 
     const router = useRouter();
     const { pathname } = router;
