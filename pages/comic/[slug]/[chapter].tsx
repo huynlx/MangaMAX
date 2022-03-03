@@ -32,7 +32,7 @@ const Chapter: NextPage<any> = ({ chapter, chapterId, comicSlug }) => {
             <Navigation chapters={chapter.chapters} chapterId={chapterId} comicSlug={comicSlug} select={select} />
             <div className='min-h-[100vh] w-full'>
                 {
-                    chapter.images.map((image: string | undefined, index: any) => <ReadImage className='mx-auto object-cover w-full h-auto lg:min-w-[50vw] lg:max-w-[60vw]' key={index} src={image} />)
+                    chapter.images.map((image: string | undefined, index: any) => <ReadImage className='mx-auto object-cover w-full h-auto lg:min-w-[50vw] lg:max-w-[55vw]' key={index} src={image} />)
                 }
             </div>
             {/* <Navigation chapters={chapter.chapters} chapterId={chapterId} comicSlug={comicSlug} /> */}

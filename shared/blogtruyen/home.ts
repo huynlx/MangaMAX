@@ -25,7 +25,7 @@ const getHome = async (page: number = 1): Promise<any> => {
                     chapter: item.querySelector("span:nth-child(2)")?.innerText + ' chương' ?? '',
                     slug: item
                         .querySelector("a")
-                        ?.getAttribute("href"),
+                        ?.getAttribute("href")?.substr(1),
                     updateAt: null,
                 }));
 
@@ -56,7 +56,7 @@ const getHome = async (page: number = 1): Promise<any> => {
                     chapter: item.querySelector("div:nth-child(2) > div:nth-child(4) > span:nth-child(1)")?.innerText ?? '',
                     slug: item
                         .querySelector("div:nth-child(1) > a")
-                        ?.getAttribute("href"),
+                        ?.getAttribute("href")?.substr(1),
                     updateAt: item.querySelector(".publishedDate")?.childNodes[2].textContent,
                 }));
 

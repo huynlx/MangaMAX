@@ -1,20 +1,32 @@
 import Link from 'next/link';
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { ImSpinner8 } from 'react-icons/im';
 import { NextPage } from 'next';
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import ReadImage from './ReadImage';
+import { setData } from '../shared/useSetData';
+import { setCol } from '../shared/useSetData';
 
-const Grid: NextPage<any> = ({ data, keyword, page }: any) => {
+const Grid: NextPage<any> = ({ data, keyword, page, windowSize }: any) => {
     const router = useRouter();
     const [posts, setPosts] = useState<any[]>([]);
+    const [content, setContent] = useState(setData(8, data[0].items))
     const { source, type } = useSelector((state: any) => state);
-    const dispatch = useDispatch();
+    const [cols, setCols] = useState(setCol(windowSize));
     const select: any = useSelector(state => state);
+
+    console.log(windowSize);
+    console.log(cols);
+
+    useEffect(() => {
+        if (cols !== setCol(windowSize)) {
+            setCols(setCol(windowSize));
+        }
+    }, [windowSize])
 
     useEffect(() => {
         setPosts(data)
+        setContent(setData(cols, data[0].items))
     }, [source, type])
 
     useEffect(() => {
@@ -27,13 +39,16 @@ const Grid: NextPage<any> = ({ data, keyword, page }: any) => {
                 ]
             }))
             setPosts(post)
+            setContent(setData(cols, post[0].items))
         } else {
             setPosts(data)
+            setContent(setData(cols, data[0].items))
         }
-    }, [page])
+    }, [page, cols])
 
     useEffect(() => {
         setPosts(data)
+        setContent(setData(cols, data[0].items))
     }, [keyword])
 
 
@@ -48,7 +63,6 @@ const Grid: NextPage<any> = ({ data, keyword, page }: any) => {
             const lastUserLoadedOffset =
                 lastUserLoaded.offsetTop + lastUserLoaded.clientHeight
             const pageOffset = window.pageYOffset + window.innerHeight
-            console.log(pageOffset - lastUserLoadedOffset);
 
             // Detects when user scrolls down till the last user
             if (pageOffset - lastUserLoadedOffset >= -900) {
@@ -72,66 +86,63 @@ const Grid: NextPage<any> = ({ data, keyword, page }: any) => {
     })
 
     return (
-
         <main className='main px-[5vw]'>
-            {
-                posts.length > 0 &&
-                posts.map((section: any) => (
-                    <Fragment key={section.name}>
-                        {/* <h1 className='text-2xl font-semibold my-5'>{section.nameAlt}</h1> */}
-                        <div className='picker flex gap-5 items-center my-5'>
-                            <h1
-                                className={`font-semibold ${select.type === 'latest' ? 'text-white text-2xl' : 'text-xl brightness-75'}`}
-                                onClick={() => {
-                                    router.push({
-                                        pathname: '/',
-                                        query: { type: 'latest', source: select.source }
-                                    })
-                                }}
-                            >
-                                Latest
-                            </h1>
-                            <h1
-                                className={`font-semibold ${select.type === 'browse' ? 'text-white text-2xl' : 'text-xl brightness-75'}`}
-                                onClick={() => {
-                                    router.push({
-                                        pathname: '/',
-                                        query: { type: 'browse', source: select.source }
-                                    })
-                                }}
-                            >
-                                Browse
-                            </h1>
-                        </div>
-                        <div className={`grid gap-2 comic-list mb-28`} style={{
-                            gridTemplateColumns: "repeat(auto-fill, minmax(150px, 1fr))",
-                            gridAutoRows: "1fr",
-                        }}>
+            <div className='picker flex gap-5 items-center my-5'>
+                <h1
+                    className={`font-semibold ${select.type === 'latest' ? 'text-white text-2xl' : 'text-xl brightness-75'}`}
+                    onClick={() => {
+                        router.push({
+                            pathname: '/',
+                            query: { type: 'latest', source: select.source }
+                        })
+                    }}
+                >
+                    Latest
+                </h1>
+                <h1
+                    className={`font-semibold ${select.type === 'browse' ? 'text-white text-2xl' : 'text-xl brightness-75'}`}
+                    onClick={() => {
+                        router.push({
+                            pathname: '/',
+                            query: { type: 'browse', source: select.source }
+                        })
+                    }}
+                >
+                    Browse
+                </h1>
+            </div>
+            <div className={`grid gap-2 comic-list mb-28`} style={{
+                gridTemplateColumns: `repeat(${cols}, minmax(100px, 1fr))`,
+                gridAutoRows: "1fr",
+            }}>
+                {
+                    content.map((colRendered: any, index: number) => (
+                        <div className='col flex flex-col gap-2' key={index}>
                             {
-                                section.items.map((item: any, index: number) => (
+                                colRendered.map((item: any, index: any) => (
                                     <Link href={`/comic/${item.slug}?source=${select.source}`} key={index}>
-                                        <a className='flex flex-col items-stretch comic border overflow-hidden border-transparent rounded-lg'>
+                                        <a className='flex flex-col items-stretch comic border overflow-hidden border-transparent rounded-xl'>
                                             <div className='w-full h-0 pb-[150%] relative flex-grow bg-gray-400'>
-                                                <ReadImage className='absolute top-0 left-0 w-full h-full object-cover duration-200' key={index} src={item.cover} className2='!h-[16rem]' />
+                                                <ReadImage className='absolute top-0 left-0 w-full h-full object-cover duration-300' key={index} src={item.cover} className2='!h-[16rem]' />
                                                 {
                                                     item.updateAt && <small className='p-2 py-1 rounded-full absolute bg-nav text-white opacity-90 top-1 left-1'>{item.updateAt}</small>
                                                 }
                                             </div>
                                             <div className='root p-2 bg-gray-700 text-white'>
-                                                <h1 className=' max-w-full whitespace-nowrap overflow-ellipsis overflow-hidden text-center flex-shrink-0'>{item.title}</h1>
-                                                <p className='max-w-full whitespace-nowrap overflow-ellipsis overflow-hidden  text-center flex-shrink-0'>{item.chapter}</p>
+                                                <h1 className=' max-w-full text-center flex-shrink-0 text-base'>{item.title}</h1>
+                                                {/* <p className='max-w-full whitespace-nowrap overflow-ellipsis overflow-hidden text-center flex-shrink-0'>{item.chapter}</p> */}
                                             </div>
                                         </a>
                                     </Link>
                                 ))
                             }
                         </div>
-                        {data[0].hasNextPage && <ImSpinner8 size={30} className='mb-28 animate-spin mx-auto' />}
-                    </Fragment>
-                ))
-            }
-            {!data[0].hasNextPage && <p className='w-full text-center mb-28 font-bold text-xl'>End</p>}
-        </main >
+
+                    ))
+                }
+            </div>
+            {/* {!data[0].hasNextPage && <p className='w-full text-center mb-28 font-bold text-xl'>End</p>} */}
+        </main>
     );
 };
 

@@ -21,7 +21,7 @@ const MyApp = ({ Component, pageProps, initialData }) => {
   useEffect(() => {
     NProgress.configure({
       showSpinner: false,
-      trickleSpeed: 200, //ms
+      trickleSpeed: 100, //ms
       minimum: 0.1,
       trickleRate: 0.05
     });

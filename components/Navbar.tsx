@@ -52,7 +52,7 @@ const Navbar: NextPage<any> = () => {
             <h1 className='hidden lg:block font-bold text-2xl top-2/4 absolute left-2/4 transform -translate-x-2/4 -translate-y-2/4'>{select.name}</h1>
             <SideBar className='hidden md:block' id='sidenav2' />
             <form
-                className={`${isActive ? 'flex' : 'hidden'} md:flex`}
+                className={`${isActive ? 'flex' : 'hidden'} md:flex border rounded-full overflow-hidden`}
                 onSubmit={handleFormSubmit}
             >
                 <button type='submit' className="flex-shrink-0 flex justify-center items-center h-8 w-8 bg-white hover:bg-[#DEDFE0]">

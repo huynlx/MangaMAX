@@ -45,7 +45,16 @@ export const SOURCES = [
     }
 ]
 
+export const WINDOW_SIZE = {
+    mobile: 320,
+    phablet: 480,
+    tablet: 768,
+    laptop: 992,
+    desktop: 1200,
+    all: 0
+};
 
+export const WINDOW_RESIZE_DEBOUNCE = 400;
 
 
 

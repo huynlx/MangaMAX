@@ -12,10 +12,10 @@ const ReadImage: NextPage<any> = ({ src, opacity, ...props }) => {
                 const loadImg = new Image();
                 loadImg.src = image;
                 loadImg.onload = () => resolve(image);
-                loadImg.onerror = (err) => reject(err); //call catch()
+                loadImg.onerror = (err) => reject(err);
             });
         };
-        loadImage(src).then(() => setLoaded(true)).catch((err) => console.log(err));
+        loadImage(src).then(() => setLoaded(true)).catch((err) => setLoaded(true));
     }, [src])
 
     return (
@@ -28,9 +28,6 @@ const ReadImage: NextPage<any> = ({ src, opacity, ...props }) => {
             <img
                 alt="Đọc truyện tại MangaMAX"
                 src={src}
-                onError={() => {
-                    setLoaded(true);
-                }}
                 className={props.className + (loaded ? ' transition-opacity' : ' h-0')}
                 style={{ opacity: loaded ? opacity : 0 }}
             />
