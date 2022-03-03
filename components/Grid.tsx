@@ -15,9 +15,6 @@ const Grid: NextPage<any> = ({ data, keyword, page, windowSize }: any) => {
     const [cols, setCols] = useState(setCol(windowSize));
     const select: any = useSelector(state => state);
 
-    console.log(windowSize);
-    console.log(cols);
-
     useEffect(() => {
         if (cols !== setCol(windowSize)) {
             setCols(setCol(windowSize));
@@ -86,7 +83,7 @@ const Grid: NextPage<any> = ({ data, keyword, page, windowSize }: any) => {
     })
 
     return (
-        <main className='main px-[5vw]'>
+        <main className='main px-[2vw] md:px-[5vw]'>
             <div className='picker flex gap-5 items-center my-5'>
                 <h1
                     className={`font-semibold ${select.type === 'latest' ? 'text-white text-2xl' : 'text-xl brightness-75'}`}
@@ -125,11 +122,11 @@ const Grid: NextPage<any> = ({ data, keyword, page, windowSize }: any) => {
                                             <div className='w-full h-0 pb-[150%] relative flex-grow bg-gray-400'>
                                                 <ReadImage className='absolute top-0 left-0 w-full h-full object-cover duration-300' key={index} src={item.cover} className2='!h-[16rem]' />
                                                 {
-                                                    item.updateAt && <small className='p-2 py-1 rounded-full absolute bg-nav text-white opacity-90 top-1 left-1'>{item.updateAt}</small>
+                                                    item.updateAt && <small className='px-2 md:py-1 rounded-full absolute bg-nav font-semibold text-white opacity-80 bottom-1 left-1'>{item.updateAt}</small>
                                                 }
                                             </div>
                                             <div className='root p-2 bg-gray-700 text-white'>
-                                                <h1 className=' max-w-full text-center flex-shrink-0 text-base'>{item.title}</h1>
+                                                <h1 className=' max-w-full text-center flex-shrink-0 text-sm sm:text-base'>{item.title}</h1>
                                                 {/* <p className='max-w-full whitespace-nowrap overflow-ellipsis overflow-hidden text-center flex-shrink-0'>{item.chapter}</p> */}
                                             </div>
                                         </a>
