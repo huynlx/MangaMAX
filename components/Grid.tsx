@@ -7,11 +7,12 @@ import ReadImage from './ReadImage';
 import { setData } from '../shared/useSetData';
 import { setCol } from '../shared/useSetData';
 
-const Grid: NextPage<any> = ({ data, keyword, page, windowSize }: any) => {
+const Grid: NextPage<any> = ({ data, keyword, page }: any) => {
     const router = useRouter();
     const [posts, setPosts] = useState<any[]>([]);
     const [content, setContent] = useState(setData(8, data[0].items))
     const { source, type } = useSelector((state: any) => state.reducer);
+    const { windowSize } = useSelector((state: any) => state.reducer2);
     const [cols, setCols] = useState(setCol(windowSize));
     const select: any = useSelector((state: any) => state.reducer);
 
