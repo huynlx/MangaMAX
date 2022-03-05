@@ -37,7 +37,7 @@ const Grid: NextPage<any> = ({ data, keyword, page }: any) => {
                 ]
             }))
             setPosts(post)
-            setContent(setData(cols, post[0].items))
+            post.length !== 0 && setContent(setData(cols, post[0].items))
         } else {
             setPosts(data)
             setContent(setData(cols, data[0].items))
@@ -77,6 +77,7 @@ const Grid: NextPage<any> = ({ data, keyword, page }: any) => {
 
     // Listen to scroll positions for loading more data on scroll
     useEffect(() => {
+        // Listen for scroll events
         window.addEventListener("scroll", handleScroll)
         return () => {
             window.removeEventListener("scroll", handleScroll)

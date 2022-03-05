@@ -15,7 +15,7 @@ const Comic: NextPage<ComicProps> = ({ info, slug }) => {
 
     // if (error) return <div>Failed to load</div>
     // if (!data) return <div>Loading...</div>
-    const select: any = useSelector((state:any) => state.reducer);
+    const select: any = useSelector((state: any) => state.reducer);
     // console.log(select);
 
 
@@ -38,20 +38,22 @@ const Comic: NextPage<ComicProps> = ({ info, slug }) => {
                         <p>Tác giả: {info.author}</p>
                         <p>Trạng thái: {info.status}</p>
                         <p>Thể loại: {info.genres.join(", ")}</p>
-                        <div className='my-2'>
-                            <Link href={{
-                                pathname: `/comic/${slug}/${info.chapters.slice(-1)[0].chap}`,
-                                query: { id: info.chapters.slice(-1)[0].id, source: select.source },
-                            }}>
-                                <a className='text-white bg-link p-2 mr-2 rounded-sm hover:bg-link-hover transition duration-300'>Đọc từ đầu</a>
-                            </Link>
-                            <Link href={{
-                                pathname: `/comic/${slug}/${info.chapters[0].chap}`,
-                                query: { id: info.chapters[0].id, source: select.source },
-                            }}>
-                                <a className='text-white bg-link p-2 rounded-sm hover:bg-link-hover  transition duration-300'>Đọc mới nhất</a>
-                            </Link>
-                        </div>
+                        {
+                            info.chapters.length > 0 && <div className='my-2'>
+                                <Link href={{
+                                    pathname: `/comic/${slug}/${info.chapters.slice(-1)[0].chap}`,
+                                    query: { id: info.chapters.slice(-1)[0].id, source: select.source },
+                                }}>
+                                    <a className='text-white bg-link p-2 mr-2 rounded-sm hover:bg-link-hover transition duration-300'>Đọc từ đầu</a>
+                                </Link>
+                                <Link href={{
+                                    pathname: `/comic/${slug}/${info.chapters[0].chap}`,
+                                    query: { id: info.chapters[0].id, source: select.source },
+                                }}>
+                                    <a className='text-white bg-link p-2 rounded-sm hover:bg-link-hover  transition duration-300'>Đọc mới nhất</a>
+                                </Link>
+                            </div>
+                        }
                     </div>
                 </div>
                 <p className=' break-words text-justify'>{info.desc}</p>
