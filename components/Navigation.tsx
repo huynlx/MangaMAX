@@ -61,7 +61,7 @@ const Navigation: NextPage<any> = ({ chapters, chapterId, comicSlug, select }) =
     }, []);
 
     return (
-        <div className={`overflow-x-hidden flex items-center gap-1 w-full justify-center bg-primary ${direction === 'up' && 'sticky top-0'}`}>
+        <div className={`z-10 overflow-x-hidden flex items-center gap-1 w-full justify-center bg-primary ${direction === 'up' && 'sticky top-0'}`}>
             <Link href={`/?source=${select.source}`}>
                 <a className='mr-2'>
                     <i className="fas fa-home text-2xl"></i>
