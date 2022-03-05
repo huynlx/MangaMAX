@@ -21,7 +21,7 @@ export let defaultState = {
 const reducer = (state: any = defaultState, action: AnyAction) => {
     switch (action.type) {
         case HYDRATE:
-            const clientState = { ...state }; //dispatch ở client, nếu ko thì luôn là defaultState
+            const clientState = { ...state }; //state sau khi dispatch ở client, nếu ko thì luôn là defaultState
             const serverState = { ...action.payload.reducer }; //action.payload => previous state => khi vào ssr thì phải dispatch thì mới có (dispatch ở server), còn nếu ko dispatch thì nó cũng lại là defaultState
             
             const nextState = { ...clientState, ...serverState }; //state server ghi đè state client

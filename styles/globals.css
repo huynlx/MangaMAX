@@ -4,12 +4,13 @@
   box-sizing: border-box;
 }
 
-html,body{
+html,
+body {
   @apply bg-primary text-gray-300;
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.borderText{
+.borderText {
   text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
 }
 
@@ -20,22 +21,22 @@ html,body{
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: transparent; 
+  background: transparent;
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888; 
+  background: #888;
   border-radius: 5px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555; 
+  background: #555;
 }
 
 /* Disable rounded corners on input fields using Safari (iPhone & iPad) */
-input{ 
+input {
   -webkit-appearance: none;
   -webkit-border-radius: 0;
 }
