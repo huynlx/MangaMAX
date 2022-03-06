@@ -57,7 +57,7 @@ const Comic: NextPage<ComicProps> = ({ info, slug }) => {
                 <p className=' break-words text-justify'>{info.desc}</p>
                 {
                     info.genres.map((item) => (
-                        <p className='inline-block border-[1.6px] mr-2 px-4 py-[2px] rounded-full mt-2'>{item}</p>
+                        <p key={item} className='inline-block border-[1.6px] mr-2 px-4 py-[2px] rounded-full mt-2'>{item}</p>
                     ))
                 }
             </div>
