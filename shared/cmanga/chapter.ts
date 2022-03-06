@@ -9,7 +9,7 @@ export const getChapter = async (comicSLug: any, chapterSLug: any, chapterId: an
     ];
     const html = await Promise.all(links.map(async (link) => (await axios.get(link)).data));
     const chapter = JSON.parse(decrypt_data(html[0]))[0];
-    const chapter_content = JSON.parse(JSON.parse(decrypt_data(html[0]))[0].content);
+    const chapter_content = JSON.parse(chapter.content);
     var pages = [];
     for (const img of chapter_content) {
         // pages.push(img);

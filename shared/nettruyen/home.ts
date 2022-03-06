@@ -17,21 +17,26 @@ const getHome = async (page: number = 1): Promise<any> => {
         return htmls.map((source, index) => {
             const dom = parse(source);
 
-            const items = dom.querySelectorAll(".ModuleContent .items .item").map((item) => ({
-                title: item.querySelector(".jtip")?.innerText,
-                cover: item
-                    .querySelector("img")
-                    ?.getAttribute("data-original")
-                    ?.replace("//", "http://"),
-                chapter: item.querySelector(".chapter a")?.innerText,
-                slug: item
-                    .querySelector("a")
-                    ?.getAttribute("href")
-                    ?.split("/")
-                    .slice(-1)[0]
-                ,
-                updateAt: item.querySelector(".chapter i")?.innerText,
-            }));
+            const items = dom.querySelectorAll(".ModuleContent .items .item").map((item) => {
+
+                return ({
+                    title: item.querySelector(".jtip")?.innerText,
+                    cover: item
+                        .querySelector("img")
+                        ?.getAttribute("data-original")
+                        ?.replace("//", "http://"),
+                    chapter: item.querySelector(".chapter a")?.innerText,
+                    slug: item
+                        .querySelector("a")
+                        ?.getAttribute("href")
+                        ?.split("/")
+                        .slice(-1)[0],
+                    updateAt: item.querySelector(".chapter i")?.innerText,
+                    status: item.querySelectorAll('.message_main p')
+                        .find(el => el.querySelector("label")?.innerText.includes("Tình trạng:"))
+                        ?.childNodes[2].textContent.includes("Đang") ? 'ONGOING' : 'COMPLETED'
+                });
+            });
 
             const hasNextPage = (+page) !== (+(dom.querySelector('ul.pagination > li.PagerSSCCells:last-child')?.innerText!))
             const currentPage = (+dom.querySelector("ul.pagination > li.active > a")?.innerText!);

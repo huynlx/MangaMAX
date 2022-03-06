@@ -50,7 +50,7 @@ const Navbar: NextPage<any> = ({ scroll }) => {
                 </button>
             </div>
             {
-                scroll && <h1 className='hidden lg:block font-bold text-2xl top-2/4 absolute left-2/4 transform -translate-x-2/4 -translate-y-2/4'>{titleCase(select.type)}</h1>
+                (scroll && pathname == '/') && <h1 className='hidden lg:block font-bold text-2xl top-2/4 absolute left-2/4 transform -translate-x-2/4 -translate-y-2/4'>{titleCase(select.type)}</h1>
             }
             <SideBar className='hidden md:block' id='sidenav2' />
             <form

@@ -42,6 +42,12 @@ export const SOURCES = [
         name: 'Server 7',
         url: 'https://cmangaka.com/',
         type: 'latest'
+    },
+    {
+        source: '8',
+        name: 'Server 8',
+        url: 'https://mangapk.com/',
+        type: 'latest'
     }
 ]
 

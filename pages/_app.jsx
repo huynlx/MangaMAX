@@ -99,12 +99,10 @@ const MyApp = ({ Component, pageProps, initialData }) => {
 
       if (scrolled > 0) { //scroll => true
         if (!scroll) {
-          console.log('set scroll true');
           setScroll(true);
         }
       } else { //scroll => false
         if (scroll) {
-          console.log('set scroll false');
           setScroll(false);
         }
       }

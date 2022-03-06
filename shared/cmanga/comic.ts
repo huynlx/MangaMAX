@@ -3,6 +3,7 @@ import axios from "../axios";
 import { decrypt_data } from "./decrypt";
 import { titleCase } from "./titleCase";
 import { store } from "../../store";
+import decodeHTMLEntity from "../decodeHTML";
 
 export const getComicInfo = async (comicSLug: string): Promise<any> => {
     const state = store.getState().reducer;
@@ -13,6 +14,7 @@ export const getComicInfo = async (comicSLug: string): Promise<any> => {
     const hmtl3 = (await axios.get(`api/book_detail?opt1=${book_id}`)).data;
 
     const json = JSON.parse(decrypt_data(html2));
+    const detail = JSON.parse(decrypt_data(hmtl3))[0];
 
     const dom = parse(html);
 
@@ -32,11 +34,11 @@ export const getComicInfo = async (comicSLug: string): Promise<any> => {
         });
     }
 
-    let tags = JSON.parse(decrypt_data(hmtl3))[0].tags.split(",").slice(1, -1).map((item: any) => titleCase(item));
-    let status = dom.querySelectorAll(".status")[0].innerText.indexOf("Đang") != -1 ? 'Đang tiến hành' : "Đã hoàn thành";
+    let tags = detail.tags.split(",").slice(1, -1).map((item: any) => titleCase(item));
+    let status = detail.status;
     let desc = dom.querySelectorAll("#book_detail")[0].innerText === '' ? dom.querySelectorAll("#book_more")[0].innerText : dom.querySelectorAll("#book_detail")[0].innerText;
     let image = state.url + dom.querySelectorAll(".book_avatar img")[0].getAttribute("src");
-    let creator = dom.querySelector(".profile a")?.innerText || 'Đang cập nhật';
+    let creator = dom.querySelector(".profile a")?.innerText || 'Updating';
     let title = dom.querySelector('.name')?.innerText
 
     return {
@@ -45,7 +47,7 @@ export const getComicInfo = async (comicSLug: string): Promise<any> => {
         author: creator,
         status: status,
         genres: tags,
-        desc: desc,
+        desc: decodeHTMLEntity(desc),
         chapters: chapters
     }
 }

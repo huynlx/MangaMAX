@@ -22,7 +22,7 @@ const SideBar: NextPage<any> = ({ className, id }) => {
     return (
         <div
             ref={ref}
-            className={'ml-auto pr-3 ' + className}
+            className={'z-20 ml-auto pr-3 ' + className}
             title='Source'
         >
             <div id={id} className="sidenav">

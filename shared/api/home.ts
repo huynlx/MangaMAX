@@ -7,7 +7,7 @@ import blogtruyen from '../blogtruyen/home';
 import cmanga from '../cmanga/home';
 
 const getHome = async (page: number = 1): Promise<any> => {
-    const {reducer} = store.getState();
+    const { reducer } = store.getState();
 
     switch (reducer.source) {
         case '1':
@@ -24,6 +24,8 @@ const getHome = async (page: number = 1): Promise<any> => {
             return blogtruyen(page); //blogtruyen
         case '7':
             return cmanga(page); //cmanga
+        case '8':
+            return cmanga(page); //mangapk
     }
 };
 

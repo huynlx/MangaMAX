@@ -26,6 +26,9 @@ const getSearch = async (keyword: string, page: number = 1): Promise<any> => {
                 ?.split("/")
                 .slice(-1)[0],
             updateAt: item.querySelector(".chapter i")?.innerText,
+            status: item.querySelectorAll('.message_main p')
+                .find(el => el.querySelector("label")?.innerText.includes("Tình trạng:"))
+                ?.childNodes[2].textContent.includes("Đang") ? 'ONGOING' : 'COMPLETED'
         }));
 
         const pages = dom.querySelectorAll('ul.pagination > li > a').map((item: any) => {

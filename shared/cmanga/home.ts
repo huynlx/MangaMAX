@@ -8,6 +8,7 @@ const getHome = async (page: number = 1): Promise<any> => {
 
     const handleSource = () => {
         if (state.type === 'browse') {
+            if (state.source === '8') return `api/list_item?page=${page}&limit=40&sort=new&type=all&tag=&child=off&status=completed&num_chapter=0`
             return `api/list_item?page=${page}&limit=40&sort=new&type=all&tag=Truy%E1%BB%87n%20si%C3%AAu%20hay&child=off&status=all&num_chapter=0`
         } else {
             return `api/list_item?page=${page}&limit=40&sort=new&type=all&tag=&child=off&status=all&num_chapter=0`
@@ -27,7 +28,7 @@ const getHome = async (page: number = 1): Promise<any> => {
                 cover: state.url + 'assets/tmp/book/avatar/' + item.avatar + '.jpg',
                 chapter: 'Chapter ' + item.last_chapter,
                 slug: item.url + '-' + item.id_book,
-                updateAt: item.last_update,
+                updateAt: item.last_update
             });
         };
 

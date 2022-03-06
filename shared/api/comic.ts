@@ -4,7 +4,7 @@ import { getComicInfo as lxhentai } from "../lxhentai/comic";
 import { getComicInfo as cmanga } from "../cmanga/comic";
 
 export const getComicInfo = async (comicSLug: string): Promise<any> => {
-    const {reducer} = store.getState();
+    const { reducer } = store.getState();
 
     switch (reducer.source) {
         case '1':
@@ -15,6 +15,8 @@ export const getComicInfo = async (comicSLug: string): Promise<any> => {
             return lxhentai(comicSLug); //lxhentai
         case '7':
             return cmanga(comicSLug); //cmanga
+        case '8':
+            return cmanga(comicSLug); //mangapk
     }
 }
 
