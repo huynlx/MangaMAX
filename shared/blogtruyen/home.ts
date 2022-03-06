@@ -56,7 +56,7 @@ const getHome = async (page: number = 1): Promise<any> => {
                     chapter: item.querySelector("div:nth-child(2) > div:nth-child(4) > span:nth-child(1)")?.innerText ?? '',
                     slug: item
                         .querySelector("div:nth-child(1) > a")
-                        ?.getAttribute("href")?.substr(1),
+                        ?.getAttribute("href")?.substr(1).replace('/', '-'),
                     updateAt: item.querySelector(".publishedDate")?.childNodes[2].textContent,
                 }));
 
