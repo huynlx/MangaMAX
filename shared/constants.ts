@@ -48,6 +48,12 @@ export const SOURCES = [
         name: 'Server 8',
         url: 'https://mangapk.com/',
         type: 'latest'
+    },
+    {
+        source: '9',
+        name: 'Server 9',
+        url: 'https://hentaicube.net/',
+        type: 'latest'
     }
 ]
 

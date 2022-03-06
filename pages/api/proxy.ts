@@ -1,14 +1,15 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import axios from "axios";
-import { API_URL } from "../../shared/constants";
+import { SOURCES } from "../../shared/constants";
 
 const proxy = async (req: NextApiRequest, res: NextApiResponse) => {
   const url = req.query.url as string;
+  const source = SOURCES.find(item => item.source == req.query.source)
 
   const response: any = await axios.get(url, {
     responseType: "stream",
     headers: {
-      referer: API_URL,
+      referer: source?.url!,
     },
   });
 
@@ -16,3 +17,4 @@ const proxy = async (req: NextApiRequest, res: NextApiResponse) => {
 };
 
 export default proxy;
+

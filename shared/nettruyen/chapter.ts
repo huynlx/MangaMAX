@@ -1,8 +1,10 @@
 import { parse } from "node-html-parser";
 import axios from "../axios";
+import { store } from "../../store";
 
 export const getChapter = async (comicSLug: any, chapterSLug: any, chapterId: any): Promise<any> => {
     const handleSlug = comicSLug.split("-").slice(0, -1).join("-");
+    const state = store.getState().reducer;
 
     const links = [
         `truyen-tranh/${handleSlug}/${chapterSLug}/${chapterId}`,
@@ -23,7 +25,7 @@ export const getChapter = async (comicSLug: any, chapterSLug: any, chapterId: an
             url = url.startsWith("//")
                 ? url.replace("//", "http://")
                 : url;
-            return `/api/proxy?url=${encodeURIComponent(url)}`
+            return `/api/proxy?url=${encodeURI(url)}&source=${state.source}`
         }),
         chapters: dom2.querySelectorAll("#nt_listchapter ul li:not(.heading)").map((chapter: any) => ({
             name: chapter.querySelector('.chapter').innerText.trim(),

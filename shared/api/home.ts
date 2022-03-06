@@ -5,6 +5,7 @@ import truyen48 from '../truyen48/home';
 import truyentranhlh from '../truyentranhlh/home';
 import blogtruyen from '../blogtruyen/home';
 import cmanga from '../cmanga/home';
+import hentaicube from '../hentaicube/home';
 
 const getHome = async (page: number = 1): Promise<any> => {
     const { reducer } = store.getState();
@@ -26,6 +27,8 @@ const getHome = async (page: number = 1): Promise<any> => {
             return cmanga(page); //cmanga
         case '8':
             return cmanga(page); //mangapk
+        case '9':
+            return hentaicube(page); //hentaicube
     }
 };
 
