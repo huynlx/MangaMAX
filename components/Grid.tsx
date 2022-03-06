@@ -124,7 +124,8 @@ const Grid: NextPage<any> = ({ data, keyword, page }: any) => {
                                             <div className='w-full h-0 pb-[155%] relative flex-grow bg-gray-400'>
                                                 <ReadImage className='absolute top-0 left-0 w-full h-full object-cover duration-300' key={index} src={item.cover} className2='!h-[16rem]' />
                                                 {
-                                                    item.updateAt && <small className='px-2 md:py-1 rounded-full absolute bg-nav md:font-semibold text-white opacity-80 bottom-1 left-1'>{item.updateAt}</small>
+                                                    item.updateAt &&
+                                                    <small className='px-2 md:py-1 rounded-full absolute bg-nav md:font-semibold text-white opacity-80 bottom-1 left-1 whitespace-nowrap text-ellipsis overflow-hidden w-[80%] 2xl:w-[auto]'>{item.updateAt}</small>
                                                 }
                                             </div>
                                             <div className='root p-2 bg-gray-700 text-white'>

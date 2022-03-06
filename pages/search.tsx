@@ -17,6 +17,14 @@ export const getServerSideProps = wrapper.getServerSideProps(
 
         try {
             const data = await getSearch(query.keyword as string, +query.page!);
+
+            if (data.status >= 400) {
+                return {
+                    props: {
+                        statusCode: data.status
+                    }
+                }
+            }
             return {
                 props: {
                     data,

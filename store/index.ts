@@ -67,5 +67,5 @@ const makeStore = () => {
 };
 
 // export an assembled wrapper
-export const wrapper = createWrapper<Store<any>>(makeStore, { debug: true });
+export const wrapper = createWrapper<Store<any>>(makeStore, { debug: false });
 export { store }

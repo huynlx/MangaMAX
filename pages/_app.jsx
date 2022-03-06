@@ -121,6 +121,7 @@ const MyApp = ({ Component, pageProps, initialData }) => {
 MyApp.getInitialProps = async ({ store }) => {
   // console.log(store);
   const initialData = { data: 'test' }
+
   return { initialData }
 };
 

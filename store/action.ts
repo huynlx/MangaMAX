@@ -6,7 +6,7 @@ export const handleTypes = {
 }
 
 export const handleSource = (source: any, type: any, store: any) => (dispatch: any) => {
-    console.log('2. Page.getServerSideProps uses the store to dispatch things');
+    // console.log('2. Page.getServerSideProps uses the store to dispatch things');
 
     switch (source) {
         case "1":

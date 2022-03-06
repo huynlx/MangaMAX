@@ -17,16 +17,25 @@ export const getServerSideProps = wrapper.getServerSideProps(
 
     try {
       const data = await getHome(query.page ? +query.page! : 1);
+
+      if (data.status >= 400) {
+        return {
+          props: {
+            statusCode: data.status
+          }
+        }
+      }
       return {
         props: {
           data,
-          page: +query.page!
+          page: +query.page!,
+          statusCode: 200
         },
       };
     } catch (error) {
       console.log('lỗi server home');
       return {
-        notFound: true,
+        notFound: true //404
       };
     }
   }
