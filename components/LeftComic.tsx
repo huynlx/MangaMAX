@@ -1,12 +1,18 @@
 import { NextPage } from 'next';
 import Link from 'next/link';
 import React from 'react';
+import ReadImage from './ReadImage';
 
 const LeftComic: NextPage<any> = ({ info, select, slug }) => {
     return (
         <div className='lg:w-[60vw] lg:pr-10 max-h-[none] lg:max-h-[100vh] overflow-auto'>
             <div className='flex mb-2 gap-4 flex-col sm:flex-row'>
-                <img className='h-[300px] w-[200px] min-w-[200px] object-cover mx-auto sm:mx-0 rounded-lg' src={info.cover} alt="" />
+                <ReadImage
+                    className='h-[300px] w-[200px] min-w-[200px] object-cover mx-auto sm:mx-0 rounded-lg duration-[0ms]'
+                    src={info.cover}
+                    alt=""
+                    className2='bg-gray-400 rounded-lg !h-[300px]'
+                />
                 <div className='info gap-2 flex flex-col'>
                     <h1 className=' font-bold text-2xl'>{info.title}</h1>
                     <p>Author: {info.author}</p>

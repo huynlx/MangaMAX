@@ -8,7 +8,7 @@ const getSearch = async (keyword: string, page: number = 1): Promise<any> => {
     const state = store.getState().reducer;
 
     const sections = {
-        "Tìm truyện tranh": `story/search.php?key=${encodeURIComponent(keyword)}&p=${page ? page : 1}`
+        "Tìm truyện tranh": `story/search.php?key=${encodeURI(keyword)}&p=${page ? page : 1}`
     }
 
     const htmls = await Promise.all(

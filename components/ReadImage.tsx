@@ -19,7 +19,7 @@ const ReadImage: NextPage<any> = ({ src, opacity, ...props }) => {
     }, [src])
 
     return (
-        <>
+        <div className={props.className3}>
             {
                 !loaded && <div className={"flex items-center justify-center w-full h-[22rem] text-gray-500 " + props.className2}>
                     <BsFillImageFill className="w-9 h-9 animate-pulse" />
@@ -31,7 +31,7 @@ const ReadImage: NextPage<any> = ({ src, opacity, ...props }) => {
                 className={props.className + (loaded ? ' transition-opacity' : ' h-0')}
                 style={{ opacity: loaded ? opacity : 0 }}
             />
-        </>
+        </div>
     );
 };
 
