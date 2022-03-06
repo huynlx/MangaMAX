@@ -29,13 +29,13 @@ const Comic: NextPage<ComicProps> = ({ info, slug }) => {
     return (
         <div className='px-[5vw] lg:h-[92.5vh] py-10 flex flex-col lg:flex-row'>
             <div className='lg:w-[60vw] lg:pr-10'>
-                <div className='flex mb-2 gap-4 flex-col sm:flex-row'>
+                <div className='flex mb-3 gap-4 flex-col sm:flex-row'>
                     <img className='h-[300px] w-[200px] min-w-[200px] object-cover mx-auto sm:mx-0 rounded-lg' src={info.cover} alt="" />
                     <div className='info gap-2 flex flex-col'>
                         <h1 className=' font-bold text-2xl'>{info.title}</h1>
                         <p>Tác giả: {info.author}</p>
                         <p>Trạng thái: {info.status}</p>
-                        <p>Thể loại: {info.genres.join(", ")}</p>
+                        {/* <p>Thể loại: {info.genres.join(", ")}</p> */}
                         {
                             info.chapters.length > 0 && <div className='my-2'>
                                 <Link href={{
@@ -54,6 +54,11 @@ const Comic: NextPage<ComicProps> = ({ info, slug }) => {
                         }
                     </div>
                 </div>
+                {
+                    info.genres.map((item) => (
+                        <p className='inline-block border-[1.6px] mr-2 px-4 py-[2px] rounded-full mb-2'>{item}</p>
+                    ))
+                }
                 <p className=' break-words text-justify'>{info.desc}</p>
             </div>
             <p className='lg:hidden font-bold text-xl my-2 flex justify-between items-center'>Chapters <span><RiSortDesc onClick={() => handleSort()} /></span></p>
