@@ -6,16 +6,16 @@ import { FormEvent } from 'react';
 import { useState } from 'react';
 import SideBar from './SideBar';
 import { useSelector } from 'react-redux';
+import { titleCase } from '../shared/cmanga/titleCase';
 
-const Navbar: NextPage<any> = () => {
+const Navbar: NextPage<any> = ({ scroll }) => {
     const [isActive, setIsActive] = useState(false);
     const [inputValue, setInputValue] = useState("");
-    const select: any = useSelector((state:any) => state.reducer);
+    const select: any = useSelector((state: any) => state.reducer);
 
     const router = useRouter();
     const { pathname } = router;
     const asPath = router.asPath.split('?')[1] ? `/?${router.asPath.split('?')[1]}` : "/";
-
 
     const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -49,7 +49,9 @@ const Navbar: NextPage<any> = () => {
                     ></i>
                 </button>
             </div>
-            <h1 className='hidden lg:block font-bold text-2xl top-2/4 absolute left-2/4 transform -translate-x-2/4 -translate-y-2/4'>{select.name}</h1>
+            {
+                scroll && <h1 className='hidden lg:block font-bold text-2xl top-2/4 absolute left-2/4 transform -translate-x-2/4 -translate-y-2/4'>{titleCase(select.type)}</h1>
+            }
             <SideBar className='hidden md:block' id='sidenav2' />
             <form
                 className={`${isActive ? 'flex' : 'hidden'} md:flex border rounded-full overflow-hidden`}

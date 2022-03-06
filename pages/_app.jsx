@@ -1,7 +1,7 @@
 import '../styles/globals.css'
 import '../styles/sidebar.css'
 import "tailwindcss/tailwind.css"
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import "../styles/nprogress.css";
 import Navbar from '../components/Navbar'
 import Head from 'next/head';
@@ -16,6 +16,7 @@ import Router from 'next/router';
 
 const MyApp = ({ Component, pageProps, initialData }) => {
   const { windowSize } = useSelector((state) => state.reducer2);
+  const [scroll, setScroll] = useState(false);
   const dispatch = useDispatch();
 
   //handle router loading
@@ -89,7 +90,31 @@ const MyApp = ({ Component, pageProps, initialData }) => {
     return () => {
       window.removeEventListener('resize', onWidthResize);
     };
-  }, [windowSize])
+  }, [windowSize]) //=> add windowSize để cập nhật giá trị của windowSize trong useEffect()
+
+  //watch scroll
+  useEffect(() => {
+    const listenToScroll = () => {
+      const scrolled = window.pageYOffset; //scroll position
+
+      if (scrolled > 0) { //scroll => true
+        if (!scroll) {
+          console.log('set scroll true');
+          setScroll(true);
+        }
+      } else { //scroll => false
+        if (scroll) {
+          console.log('set scroll false');
+          setScroll(false);
+        }
+      }
+    }
+
+    window.addEventListener('scroll', listenToScroll);
+    return () => {
+      window.removeEventListener('scroll', listenToScroll);
+    }
+  }, [scroll]) //=> add scroll để cập nhật giá trị của scroll trong useEffect()
 
   // let persistor = persistStore(wrapper);
 
@@ -101,7 +126,7 @@ const MyApp = ({ Component, pageProps, initialData }) => {
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
       </Head>
       {/* <PersistGate loading={<p className='w-full text-center'>Loading Source</p>} persistor={persistor}> */}
-      <Navbar />
+      <Navbar scroll={scroll} />
       <Component {...pageProps} />
       {/* </PersistGate> */}
     </>

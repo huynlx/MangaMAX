@@ -29,12 +29,12 @@ const Comic: NextPage<ComicProps> = ({ info, slug }) => {
     return (
         <div className='px-[5vw] lg:h-[92.5vh] py-10 flex flex-col lg:flex-row'>
             <div className='lg:w-[60vw] lg:pr-10'>
-                <div className='flex mb-3 gap-4 flex-col sm:flex-row'>
+                <div className='flex mb-2 gap-4 flex-col sm:flex-row'>
                     <img className='h-[300px] w-[200px] min-w-[200px] object-cover mx-auto sm:mx-0 rounded-lg' src={info.cover} alt="" />
                     <div className='info gap-2 flex flex-col'>
                         <h1 className=' font-bold text-2xl'>{info.title}</h1>
-                        <p>Tác giả: {info.author}</p>
-                        <p>Trạng thái: {info.status}</p>
+                        <p>Author: {info.author}</p>
+                        <p>Status: {info.status}</p>
                         {/* <p>Thể loại: {info.genres.join(", ")}</p> */}
                         {
                             info.chapters.length > 0 && <div className='my-2'>
@@ -42,27 +42,27 @@ const Comic: NextPage<ComicProps> = ({ info, slug }) => {
                                     pathname: `/comic/${slug}/${info.chapters.slice(-1)[0].chap}`,
                                     query: { id: info.chapters.slice(-1)[0].id, source: select.source },
                                 }}>
-                                    <a className='text-white bg-link p-2 mr-2 rounded-sm hover:bg-link-hover transition duration-300'>Đọc từ đầu</a>
+                                    <a className='text-white bg-link p-2 mr-2 rounded-[4px] hover:bg-link-hover transition duration-300'>Start reading</a>
                                 </Link>
                                 <Link href={{
                                     pathname: `/comic/${slug}/${info.chapters[0].chap}`,
                                     query: { id: info.chapters[0].id, source: select.source },
                                 }}>
-                                    <a className='text-white bg-link p-2 rounded-sm hover:bg-link-hover  transition duration-300'>Đọc mới nhất</a>
+                                    <a className='text-white bg-link p-2 rounded-[4px] hover:bg-link-hover  transition duration-300'>Read Last</a>
                                 </Link>
                             </div>
                         }
                     </div>
                 </div>
+                <p className=' break-words text-justify'>{info.desc}</p>
                 {
                     info.genres.map((item) => (
-                        <p className='inline-block border-[1.6px] mr-2 px-4 py-[2px] rounded-full mb-2'>{item}</p>
+                        <p className='inline-block border-[1.6px] mr-2 px-4 py-[2px] rounded-full mt-2'>{item}</p>
                     ))
                 }
-                <p className=' break-words text-justify'>{info.desc}</p>
             </div>
             <p className='lg:hidden font-bold text-xl my-2 flex justify-between items-center'>Chapters <span><RiSortDesc onClick={() => handleSort()} /></span></p>
-            <div className='chapters lg:w-[40vw] max-h-[100vh] overflow-auto border-gray-700 border lg:border-0'>
+            <div className='chapters lg:w-[40%] max-h-[100vh] overflow-auto border-gray-700 border lg:border-0'>
                 <ul>
                     <div className='px-3 py-1 hidden lg:block sticky bg-primary top-0 text-xl font-bold'>
                         <h1 className='inline'>Chapters</h1>
@@ -75,9 +75,9 @@ const Comic: NextPage<ComicProps> = ({ info, slug }) => {
                                 query: { id: item.id, source: select.source }
                             }}>
                                 <a className='border-gray-700 px-3 py-1 lg:border-0 border-b flex justify-between hover:text-link visited:text-link visited:hover:text-link-hover'>
-                                    <span className='transition duration-150 w-auto sm:w-8/12 text-left'>{item.name}</span>
-                                    <span className=' text-gray-400 w-auto sm:w-1/4 text-right sm:text-center italic'>{item.updateAt}</span>
-                                    <span className=' text-gray-400 w-1/12 text-sm text-right italic hidden sm:block self-center'>{item.view}</span>
+                                    <span className='transition duration-150 w-auto sm:w-7/12 text-left'>{item.name}</span>
+                                    <span className='text-gray-400 w-auto sm:w-1/4 text-right sm:text-center italic'>{item.updateAt}</span>
+                                    <span className='text-gray-400 w-2/12 text-sm text-right italic hidden sm:block self-start leading-[1.88]'>{item.view}</span>
                                 </a>
                             </Link>
                         ))
