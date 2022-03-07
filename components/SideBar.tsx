@@ -8,7 +8,7 @@ import { SOURCES } from '../shared/constants';
 
 const SideBar: NextPage<any> = ({ className, id }) => {
     const ref = useRef(null);
-    const select: any = useSelector((state:any) => state.reducer);
+    const select: any = useSelector((state: any) => state.reducer);
 
     function openNav() {
         document.getElementById(id)!.style.left = "0";
@@ -33,7 +33,7 @@ const SideBar: NextPage<any> = ({ className, id }) => {
                             Router.push({
                                 pathname: '/',
                                 query: { source: item.source }
-                            })
+                            }, '/')
                         }}>
                             <a className={`text-center ${select.source == item.source && '!text-white !text-3xl'}`}>{item.name}</a>
                         </div>

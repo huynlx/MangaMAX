@@ -67,13 +67,13 @@ const Grid: NextPage<GridProps> = ({ data, keyword, page }) => {
             const pageOffset = window.pageYOffset + window.innerHeight
 
             // Detects when user scrolls down till the last user
-            if (pageOffset > lastUserLoadedOffset) {
+            if (pageOffset - lastUserLoadedOffset > -300) {
                 if (data[0].hasNextPage) {
                     // Trigger fetch
                     router.push({
                         pathname: router.pathname,
                         query: keyword ? { page: data[0].currentPage + 1, keyword: keyword, source: select.source } : { page: data[0].currentPage + 1, source: select.source, type: select.type }
-                    }, undefined, { scroll: false })
+                    }, router.pathname + (keyword ? `/${keyword}` : ``), { scroll: false })
                 }
             }
         }
@@ -100,7 +100,7 @@ const Grid: NextPage<GridProps> = ({ data, keyword, page }) => {
                         router.push({
                             pathname: '/',
                             query: { type: 'latest', source: select.source }
-                        })
+                        }, '/')
                     }}
                 >
                     Latest
@@ -111,14 +111,14 @@ const Grid: NextPage<GridProps> = ({ data, keyword, page }) => {
                         router.push({
                             pathname: '/',
                             query: { type: 'browse', source: select.source }
-                        })
+                        }, '/')
                     }}
                 >
                     Browse
                 </h1>
             </div>
             <div className={`grid gap-2 comic-list mb-28`} style={{
-                gridTemplateColumns: `repeat(${cols}, minmax(100px, 1fr))`,
+                gridTemplateColumns: `repeat(${cols}, minmax(100px, 1fr))`, //=> try to use media query for set cols repeat at next time
                 gridAutoRows: "1fr",
             }}>
                 {
@@ -126,7 +126,7 @@ const Grid: NextPage<GridProps> = ({ data, keyword, page }) => {
                         <div className='col flex flex-col gap-2' key={index}>
                             {
                                 colRendered.map((item: any, index: any) => (
-                                    <Link href={`/comic/${item.slug}?source=${select.source}`} key={index}>
+                                    <Link as={`/comic/${item.slug}`} href={`/comic/${item.slug}?source=${select.source}`} key={index}>
                                         <a className='flex flex-col items-stretch comic border overflow-hidden border-transparent rounded-xl'>
                                             <div className='w-full h-0 pb-[155%] relative flex-grow bg-gray-400'>
                                                 <ReadImage

@@ -77,7 +77,7 @@ const MyApp = ({ Component, pageProps, initialData }) => {
     const listenToScroll = () => {
       const scrolled = window.pageYOffset; //scroll position
 
-      if (scrolled > 0) { //scroll => true
+      if (scrolled > 50) { //scroll => true
         if (!scroll) {
           setScroll(true);
         }

@@ -20,13 +20,13 @@ const LeftComic: NextPage<any> = ({ info, select, slug }) => {
                     {/* <p>Thể loại: {info.genres.join(", ")}</p> */}
                     {
                         info.chapters.length > 0 && <div className='my-2'>
-                            <Link href={{
+                            <Link as={`/comic/${slug}/${info.chapters.slice(-1)[0].chap}`} href={{
                                 pathname: `/comic/${slug}/${info.chapters.slice(-1)[0].chap}`,
                                 query: { id: info.chapters.slice(-1)[0].id, source: select.source },
                             }}>
                                 <a className='text-white bg-link p-2 mr-2 rounded-[4px] hover:bg-link-hover transition duration-300'>Start reading</a>
                             </Link>
-                            <Link href={{
+                            <Link as={`/comic/${slug}/${info.chapters[0].chap}`} href={{
                                 pathname: `/comic/${slug}/${info.chapters[0].chap}`,
                                 query: { id: info.chapters[0].id, source: select.source },
                             }}>
