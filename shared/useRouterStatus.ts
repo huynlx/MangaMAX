@@ -14,20 +14,21 @@ export default function useRouterStatus() {
             setIsLoading(false);
             setIsError(false);
         };
-        const error = (error: any) => {
-            setIsLoading(false);
-            setIsError(true);
-            setError(error);
-        };
+        // const error = (error: any) => {
+        //     console.log('error');
+        //     setIsLoading(false);
+        //     setIsError(true);
+        //     setError(error);
+        // };
 
         Router.events.on('routeChangeStart', start);
         Router.events.on('routeChangeComplete', complete);
-        Router.events.on('routeChangeError', error);
+        // Router.events.on('routeChangeError', error);
 
         return () => {
             Router.events.off('routeChangeStart', start);
             Router.events.off('routeChangeComplete', complete);
-            Router.events.off('routeChangeError', error);
+            // Router.events.off('routeChangeError', error);
         };
     }, []);
 

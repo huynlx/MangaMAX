@@ -1,5 +1,5 @@
 import { NextPage } from 'next';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getComicInfo } from '../../../shared/api/comic';
 import { ComicProps } from '../../../shared/types';
 import { RiSortDesc } from 'react-icons/ri';
@@ -10,6 +10,7 @@ import RightComic from '../../../components/RightComic';
 import LeftComic from '../../../components/LeftComic';
 import { FaChevronLeft } from 'react-icons/fa';
 import { useRouter } from 'next/router';
+import { removeLoadingBar, useLoadingBar } from '../../../shared/useLoadingBar';
 
 const Comic: NextPage<ComicProps> = ({ info, slug }) => {
     // const { data, error } = useSWR('/api/profile-data', async() => {
@@ -30,6 +31,11 @@ const Comic: NextPage<ComicProps> = ({ info, slug }) => {
             chapters: dt.chapters.slice().reverse()
         });
     }
+
+    useEffect(() => {
+        useLoadingBar();
+        return () => removeLoadingBar();
+    }, [])
 
     return (
         <div className='px-[5vw] lg:h-[92.5vh] py-10 flex flex-col lg:flex-row relative'>

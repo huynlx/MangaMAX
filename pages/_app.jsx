@@ -3,14 +3,13 @@ import '../styles/sidebar.css'
 import "tailwindcss/tailwind.css"
 import React, { useEffect, useState } from 'react'
 import "../styles/nprogress.css";
+import '../styles/loading.css';
 import Navbar from '../components/Navbar'
 import Head from 'next/head';
 import { wrapper } from '../store';
 import { useSelector, useDispatch } from 'react-redux';
 import { WINDOW_RESIZE_DEBOUNCE, WINDOW_SIZE } from '../shared/constants';
 import { windowResize } from '../store/action';
-import NProgress from "nprogress";
-import Router from 'next/router';
 // import { PersistGate } from 'redux-persist/integration/react'
 // import { persistStore } from 'redux-persist'
 
@@ -18,25 +17,6 @@ const MyApp = ({ Component, pageProps, initialData }) => {
   const { windowSize } = useSelector((state) => state.reducer2);
   const [scroll, setScroll] = useState(false);
   const dispatch = useDispatch();
-
-  //handle router loading
-  useEffect(() => {
-    NProgress.configure({
-      showSpinner: true,
-      trickleSpeed: 100, //ms
-      minimum: 0.1,
-      trickleRate: 0.05
-    });
-
-    Router.events.on('routeChangeStart', NProgress.start);
-    Router.events.on('routeChangeComplete', NProgress.done);
-    Router.events.on("routeChangeError", NProgress.done);
-    return () => {
-      Router.events.off('routeChangeStart', NProgress.start);
-      Router.events.off('routeChangeComplete', NProgress.done);
-      Router.events.off("routeChangeError", NProgress.done);
-    }
-  }, [])
 
   //watch resize
   useEffect(() => {

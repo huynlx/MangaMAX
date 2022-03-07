@@ -7,9 +7,12 @@ import ReadImage from './ReadImage';
 import { setData } from '../shared/useSetData';
 import { setCol } from '../shared/useSetData';
 import { GridProps } from '../shared/types';
+import Loader from '../components/Loader';
+import useRouterStatus from '../shared/useRouterStatus';
 
 const Grid: NextPage<GridProps> = ({ data, keyword, page }) => {
     const router = useRouter();
+    const { isLoading } = useRouterStatus();
     const [posts, setPosts] = useState<any[]>([]);
     const [content, setContent] = useState(setData(8, data[0].items))
     const { source, type } = useSelector((state: any) => state.reducer);
@@ -64,7 +67,7 @@ const Grid: NextPage<GridProps> = ({ data, keyword, page }) => {
             const pageOffset = window.pageYOffset + window.innerHeight
 
             // Detects when user scrolls down till the last user
-            if (pageOffset - lastUserLoadedOffset >= -900) {
+            if (pageOffset > lastUserLoadedOffset) {
                 if (data[0].hasNextPage) {
                     // Trigger fetch
                     router.push({
@@ -87,6 +90,9 @@ const Grid: NextPage<GridProps> = ({ data, keyword, page }) => {
 
     return (
         <main className='main px-[2vw] md:px-[5vw]'>
+            {
+                isLoading && <Loader />
+            }
             <div className='picker flex gap-5 items-center my-5'>
                 <h1
                     className={`font-semibold ${select.type === 'latest' ? 'text-white text-2xl' : 'text-xl brightness-75'}`}
