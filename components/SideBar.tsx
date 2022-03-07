@@ -1,9 +1,8 @@
 import { NextPage } from 'next';
-import Link from 'next/link';
 import React, { useRef } from 'react';
 import { useOnClickOutside } from '../shared/useOnClickOutside';
-import { useDispatch, useSelector } from 'react-redux';
-import Router, { useRouter } from 'next/router'
+import {  useSelector } from 'react-redux';
+import Router from 'next/router'
 import { SOURCES } from '../shared/constants';
 
 const SideBar: NextPage<any> = ({ className, id }) => {
@@ -40,7 +39,7 @@ const SideBar: NextPage<any> = ({ className, id }) => {
                     ))
                 }
             </div>
-            <span className='hover:text-link transition duration-300' style={{ fontSize: '30px', cursor: 'pointer' }} onClick={() => openNav()}><i className="fa-solid fa-compass"></i></span>
+            <span className='hover:text-white transition duration-300' style={{ fontSize: '30px', cursor: 'pointer' }} onClick={() => openNav()}><i className="fa-solid fa-compass"></i></span>
         </div >
 
     );

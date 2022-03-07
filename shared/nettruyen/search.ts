@@ -13,23 +13,28 @@ const getSearch = async (keyword: string, page: number = 1): Promise<any> => {
     const data = htmls.map((source, index) => {
         const dom = parse(source);
 
-        const items = dom.querySelectorAll(".ModuleContent .items .item").map((item) => ({
-            title: item.querySelector(".jtip")?.innerText,
-            cover: item
-                .querySelector("img")
-                ?.getAttribute("data-original")
-                ?.replace("//", "http://"),
-            chapter: item.querySelector(".chapter a")?.innerText,
-            slug: item
-                .querySelector("a")
-                ?.getAttribute("href")
-                ?.split("/")
-                .slice(-1)[0],
-            updateAt: item.querySelector(".chapter i")?.innerText,
-            status: item.querySelectorAll('.message_main p')
-                .find(el => el.querySelector("label")?.innerText.includes("Tình trạng:"))
-                ?.childNodes[2].textContent.includes("Đang") ? 'ONGOING' : 'COMPLETED'
-        }));
+        const items = dom.querySelectorAll(".ModuleContent .items .item").map((item) => {
+            let elStatus = item.querySelectorAll('.message_main p')
+                .find(el => el.querySelector("label")?.innerText.includes("Tình trạng:"));
+            let status = elStatus?.childNodes[2] ?
+                elStatus?.childNodes[2]?.textContent.includes("Đang") ? 'ONGOING' : 'COMPLETED' : 'ONGOING'
+
+            return ({
+                title: item.querySelector(".jtip")?.innerText,
+                cover: item
+                    .querySelector("img")
+                    ?.getAttribute("data-original")
+                    ?.replace("//", "http://"),
+                chapter: item.querySelector(".chapter a")?.innerText,
+                slug: item
+                    .querySelector("a")
+                    ?.getAttribute("href")
+                    ?.split("/")
+                    .slice(-1)[0],
+                updateAt: item.querySelector(".chapter i")?.innerText,
+                status: status
+            });
+        });
 
         const pages = dom.querySelectorAll('ul.pagination > li > a').map((item: any) => {
             const p = item.innerText.trim();

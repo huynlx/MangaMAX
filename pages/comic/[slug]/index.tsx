@@ -38,8 +38,8 @@ const Comic: NextPage<ComicProps> = ({ info, slug }) => {
     }, [])
 
     return (
-        <div className='px-[5vw] lg:h-[92.5vh] py-10 flex flex-col lg:flex-row relative'>
-            <h1 onClick={() => navigate.push(`/?source=${select.source}&type=${select.type}`)} title='Go Back' className='absolute top-[4px] text-2xl font-bold -ml-[0.3rem]'><FaChevronLeft className='inline mb-[0.3rem]' /> Back</h1>
+        <div className='px-[5vw] lg:h-[92.5vh] pt-10 pb-3 flex flex-col lg:flex-row relative'>
+            <h1 onClick={() => navigate.push(`/?source=${select.source}&type=${select.type}`)} title='Go Back' className='absolute top-[4px] text-2xl font-bold -ml-[0.3rem] hover:text-white'><FaChevronLeft className='inline mb-[0.3rem]' /> Back</h1>
             {/* Left Side */}
             <LeftComic info={info} select={select} slug={slug} />
             {/* Right Side */}

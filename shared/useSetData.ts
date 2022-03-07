@@ -2,17 +2,17 @@ import { WINDOW_SIZE } from "./constants";
 
 export const setCol = (windowSize: any) => {
     switch (windowSize) {
-        case WINDOW_SIZE.all:
+        case WINDOW_SIZE.all: //min-width: 1200px
             return 8;
-        case WINDOW_SIZE.desktop:
+        case WINDOW_SIZE.desktop: //min-width: 992px
             return 7;
-        case WINDOW_SIZE.laptop:
+        case WINDOW_SIZE.laptop: //min-width: 768px
             return 5;
-        case WINDOW_SIZE.tablet:
+        case WINDOW_SIZE.tablet: //min-width: 480px
             return 4;
-        case WINDOW_SIZE.phablet:
+        case WINDOW_SIZE.phablet: //min-width: 320px
             return 3;
-        case WINDOW_SIZE.mobile:
+        case WINDOW_SIZE.mobile: //max-width: 320px
             return 2;
         default:
             return 1;

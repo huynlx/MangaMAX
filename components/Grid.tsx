@@ -67,7 +67,7 @@ const Grid: NextPage<GridProps> = ({ data, keyword, page }) => {
             const pageOffset = window.pageYOffset + window.innerHeight
 
             // Detects when user scrolls down till the last user
-            if (pageOffset - lastUserLoadedOffset > -300) {
+            if (pageOffset - lastUserLoadedOffset > 0) {
                 if (data[0].hasNextPage) {
                     // Trigger fetch
                     router.push({
@@ -117,10 +117,7 @@ const Grid: NextPage<GridProps> = ({ data, keyword, page }) => {
                     Browse
                 </h1>
             </div>
-            <div className={`grid gap-2 comic-list mb-28`} style={{
-                // gridTemplateColumns: `repeat(${cols}, minmax(100px, 1fr))`, //=> try to use media query for set cols repeat at next time
-                // gridAutoRows: "1fr",
-            }}>
+            <div className={`grid gap-2 comic-list mb-28`}>
                 {
                     content.map((colRendered: any, index: number) => (
                         <div className='col flex flex-col gap-2' key={index}>
@@ -137,11 +134,11 @@ const Grid: NextPage<GridProps> = ({ data, keyword, page }) => {
                                                 />
                                                 {
                                                     item.status &&
-                                                    <small className='px-2 md:py-1 rounded-full absolute bg-green-400 md:font-semibold text-white opacity-[0.85] top-1 left-1 whitespace-nowrap text-ellipsis overflow-hidden max-w-[80%] 2xl:w-[auto]'>{item.status}</small>
+                                                    <small className='px-2 md:py-1 rounded-full absolute bg-green-400/[.7] md:font-semibold text-white top-1 left-1 whitespace-nowrap text-ellipsis overflow-hidden max-w-[80%] 2xl:w-[auto]'>{item.status}</small>
                                                 }
                                                 {
                                                     item.updateAt &&
-                                                    <small className='lg:leading-[1.1] px-2 md:py-1 rounded-full absolute bg-nav md:font-semibold text-white opacity-80 bottom-1 left-1 whitespace-nowrap text-ellipsis overflow-hidden max-w-[80%] 2xl:w-[auto]'>{item.updateAt}</small>
+                                                    <small className='lg:leading-[1.1] px-2 md:py-1 rounded-full absolute bg-nav/[.7] md:font-semibold text-white bottom-1 left-1 whitespace-nowrap text-ellipsis overflow-hidden max-w-[80%] 2xl:w-[auto]'>{item.updateAt}</small>
                                                 }
                                             </div>
                                             <div className='root p-2 bg-gray-700 text-white'>

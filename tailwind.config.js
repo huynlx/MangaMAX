@@ -12,7 +12,7 @@ module.exports = {
       colors: {
         primary: "#181A1B",
         nav: "#202224",
-        link: "#0D6EFD",
+        link: "#248FFF",
         "link-hover": "#085ED7",
       },
     },

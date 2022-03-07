@@ -36,7 +36,7 @@ const Navbar: NextPage<{ scroll: boolean }> = ({ scroll }) => {
                 <Link as={`/`} href={`/?source=${select.source}&type=${select.type}`}>
                     <a className={`flex items-center justify-start gap-3 ${pathname == '/' && 'pointer-events-none'}`}>
                         <img src="/favicon.ico" className="w-9 h-8" alt="icon" />
-                        <h1 className="text-2xl font-bold">
+                        <h1 className="text-2xl font-bold text-white">
                             <span className="text-link font-bold borderText">Manga</span>MAX
                         </h1>
                     </a>
@@ -54,15 +54,15 @@ const Navbar: NextPage<{ scroll: boolean }> = ({ scroll }) => {
             }
             <SideBar className='hidden md:block' id='sidenav2' />
             <form
-                className={`${isActive ? 'flex' : 'hidden'} md:flex border rounded-full overflow-hidden`}
+                className={`${isActive ? 'flex' : 'hidden'} md:flex border-gray-300 rounded-full overflow-hidden`}
                 onSubmit={handleFormSubmit}
             >
-                <button type='submit' className="flex-shrink-0 flex justify-center items-center h-8 w-8 bg-white hover:bg-[#DEDFE0]">
+                <button type='submit' className="bg-gray-300 flex-shrink-0 flex justify-center items-center h-8 w-8 hover:bg-white">
                     <i className="fas fa-search text-black text-lg"></i>
                 </button>
                 <input
                     type="text"
-                    className="h-8 px-3 flex-grow text-black outline-none"
+                    className="bg-gray-300 h-8 px-3 flex-grow text-black outline-none"
                     placeholder="Search..."
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
