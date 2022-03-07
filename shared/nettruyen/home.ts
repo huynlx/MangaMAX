@@ -18,6 +18,10 @@ const getHome = async (page: number = 1): Promise<any> => {
             const dom = parse(source);
 
             const items = dom.querySelectorAll(".ModuleContent .items .item").map((item) => {
+                let elStatus = item.querySelectorAll('.message_main p')
+                    .find(el => el.querySelector("label")?.innerText.includes("Tình trạng:"));
+                let status = elStatus?.childNodes[2] ?
+                    elStatus?.childNodes[2]?.textContent.includes("Đang") ? 'ONGOING' : 'COMPLETED' : 'ONGOING'
 
                 return ({
                     title: item.querySelector(".jtip")?.innerText,
@@ -32,13 +36,18 @@ const getHome = async (page: number = 1): Promise<any> => {
                         ?.split("/")
                         .slice(-1)[0],
                     updateAt: item.querySelector(".chapter i")?.innerText,
-                    status: item.querySelectorAll('.message_main p')
-                        .find(el => el.querySelector("label")?.innerText.includes("Tình trạng:"))
-                        ?.childNodes[2].textContent.includes("Đang") ? 'ONGOING' : 'COMPLETED'
+                    status: status
                 });
             });
 
-            const hasNextPage = (+page) !== (+(dom.querySelector('ul.pagination > li.PagerSSCCells:last-child')?.innerText!))
+            const pages = [];
+            for (const page of [...dom.querySelectorAll("ul.pagination > li")]) {
+                const p = Number(page.querySelector('a')?.innerText.trim());
+                if (isNaN(p)) continue;
+                pages.push(p);
+            }
+            const lastPage = Math.max(...pages);
+            const hasNextPage = (+page) !== lastPage;
             const currentPage = (+dom.querySelector("ul.pagination > li.active > a")?.innerText!);
 
             return {

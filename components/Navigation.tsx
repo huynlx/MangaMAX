@@ -3,11 +3,12 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect } from 'react';
 import Link from 'next/link';
+import { NavigationProps } from '../shared/types';
 
-const Navigation: NextPage<any> = ({ chapters, chapterId, comicSlug, select }) => {
+const Navigation: NextPage<NavigationProps> = ({ chapters, chapterId, comicSlug, select }) => {
     let oldScrollY = 0;
     const [direction, setDirection] = useState('up');
-    const selectedIndex = chapters.indexOf(chapters.find((chap: { id: any; }) => chap.id === chapterId));
+    const selectedIndex = chapters.indexOf(chapters.find((chap) => chap.id === chapterId)!);
     const router = useRouter();
 
     const prevChapter = useCallback(() => {

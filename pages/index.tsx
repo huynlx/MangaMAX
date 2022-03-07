@@ -3,8 +3,9 @@ import getHome from '../shared/api/home'
 import Grid from '../components/Grid'
 import { wrapper } from '../store'
 import { handleSource } from '../store/action';
+import { GridProps } from '../shared/types';
 
-const Home: NextPage<any> = ({ data, page }) => {
+const Home: NextPage<GridProps> = ({ data, page }) => {
 
   return (
     <Grid data={data} page={page} />
@@ -33,7 +34,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
         },
       };
     } catch (error) {
-      console.log('lỗi server home');
+      console.log(error);
       return {
         notFound: true //404
       };

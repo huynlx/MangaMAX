@@ -59,7 +59,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
                 }
             }
         } catch (error) {
-            console.log('lỗi server chapter');
+            console.log(error);
             return {
                 notFound: true
             }

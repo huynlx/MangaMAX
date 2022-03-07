@@ -64,7 +64,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
                 }
             };
         } catch (error) {
-            console.log('lỗi server comic');
+            console.log(error);
             return {
                 notFound: true
             };

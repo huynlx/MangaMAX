@@ -1,6 +1,7 @@
 import instance from "../axios";
 import { parse } from "node-html-parser";
 import { store } from "../../store";
+import decodeHTMLEntity from "../decodeHTML";
 
 const getHome = async (page: number = 1): Promise<any> => {
     const state = store.getState().reducer;
@@ -9,7 +10,7 @@ const getHome = async (page: number = 1): Promise<any> => {
         if (state.type === 'browse') {
             return `page/${page}/?s&post_type=wp-manga&m_orderby=views`
         } else {
-            return `page/${page}/?s&post_type=wp-manga&m_orderby=new-manga`
+            return `page/${page}/?s&post_type=wp-manga&m_orderby=latest`
         }
     }
 
@@ -21,12 +22,12 @@ const getHome = async (page: number = 1): Promise<any> => {
                 const url = item.querySelector(".c-image-hover > a > img")?.getAttribute("data-src")
                     ?? item.querySelector(".c-image-hover > a > img")?.getAttribute("src");
                 return ({
-                    title: item.querySelector(".post-title > h3 > a")?.innerText,
+                    title: decodeHTMLEntity(item.querySelector(".post-title > h3 > a")?.innerText!),
                     cover: `/api/proxy?url=${encodeURI(url as string)}&source=${state.source}`,
                     chapter: item.querySelector(".chapter > a")?.innerText,
                     slug: item
                         .querySelector(".c-image-hover > a")
-                        ?.getAttribute("href"),
+                        ?.getAttribute("href")?.split('/').slice(4, -1)[0],
                     updateAt: item.querySelector(".post-on")?.innerText.trim()
                 });
             });

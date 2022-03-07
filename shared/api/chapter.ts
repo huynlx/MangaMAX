@@ -1,6 +1,7 @@
 import { getChapter as nettruyen } from "../nettruyen/chapter";
 import { getChapter as lxhentai } from "../lxhentai/chapter";
 import { getChapter as cmanga } from "../cmanga/chapter";
+import { getChapter as hentaicube } from "../hentaicube/chapter";
 import { store } from "../../store";
 
 export const getChapter = async (comicSLug: any, chapterSLug: any, chapterId: any): Promise<any> => {
@@ -17,5 +18,7 @@ export const getChapter = async (comicSLug: any, chapterSLug: any, chapterId: an
             return cmanga(comicSLug, chapterSLug, chapterId); //cmanga
         case '8':
             return cmanga(comicSLug, chapterSLug, chapterId); //mangapk
+        case '9':
+            return hentaicube(comicSLug, chapterSLug, chapterId); //hentaicube
     }
 }

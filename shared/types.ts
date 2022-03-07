@@ -1,3 +1,11 @@
+export interface ChaptersProps {
+    name: string,
+    updateAt: string,
+    view: string,
+    id: string,
+    chap: string,
+}
+
 export interface ComicProps {
     slug: string,
     info: {
@@ -7,13 +15,7 @@ export interface ComicProps {
         status: string,
         genres: string[],
         desc: string,
-        chapters: {
-            name: string,
-            updateAt: string,
-            view: string,
-            id: string,
-            chap: string,
-        }[]
+        chapters: ChaptersProps[]
     }
 }
 
@@ -22,4 +24,28 @@ export interface SourceProps {
     name: string,
     url: string,
     type: string
+}
+
+export interface NavigationProps {
+    chapters: ChaptersProps[],
+    chapterId: string,
+    comicSlug: string,
+    select: any
+}
+
+export interface GridProps {
+    data: {
+        name: string,
+        items: {
+            title: string,
+            cover: string,
+            slug: string[],
+            updateAt: string,
+            chapter: string
+        }[],
+        hasNextPage: boolean,
+        currentPage: number
+    }[],
+    keyword?: string,
+    page?: number
 }

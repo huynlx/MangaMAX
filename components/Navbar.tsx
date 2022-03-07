@@ -8,7 +8,7 @@ import SideBar from './SideBar';
 import { useSelector } from 'react-redux';
 import { titleCase } from '../shared/cmanga/titleCase';
 
-const Navbar: NextPage<any> = ({ scroll }) => {
+const Navbar: NextPage<{ scroll: boolean }> = ({ scroll }) => {
     const [isActive, setIsActive] = useState(false);
     const [inputValue, setInputValue] = useState("");
     const select: any = useSelector((state: any) => state.reducer);

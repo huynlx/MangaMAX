@@ -6,8 +6,9 @@ import { useSelector } from 'react-redux'
 import ReadImage from './ReadImage';
 import { setData } from '../shared/useSetData';
 import { setCol } from '../shared/useSetData';
+import { GridProps } from '../shared/types';
 
-const Grid: NextPage<any> = ({ data, keyword, page }: any) => {
+const Grid: NextPage<GridProps> = ({ data, keyword, page }) => {
     const router = useRouter();
     const [posts, setPosts] = useState<any[]>([]);
     const [content, setContent] = useState(setData(8, data[0].items))

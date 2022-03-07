@@ -28,7 +28,7 @@ const ReadImage: NextPage<any> = ({ src, opacity, ...props }) => {
             <img
                 alt="Đọc truyện tại MangaMAX"
                 src={src}
-                className={props.className + (loaded ? ' transition-opacity' : ' h-0')}
+                className={props.className + (loaded ? ' transition-opacity' : ' !h-0')}
                 style={{ opacity: loaded ? opacity : 0 }}
             />
         </div>
