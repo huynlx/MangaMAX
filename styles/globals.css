@@ -40,3 +40,38 @@ input {
   -webkit-appearance: none;
   -webkit-border-radius: 0;
 }
+
+.comic-list {
+  grid-template-columns: repeat(2, minmax(100px, 1fr));
+  grid-auto-rows: 1fr;
+}
+
+@media only screen and (min-width: 320px) {
+  .comic-list {
+    grid-template-columns: repeat(3, minmax(100px, 1fr));
+  }
+}
+
+@media only screen and (min-width: 480px) {
+  .comic-list {
+    grid-template-columns: repeat(4, minmax(100px, 1fr));
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .comic-list {
+    grid-template-columns: repeat(5, minmax(100px, 1fr));
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .comic-list {
+    grid-template-columns: repeat(7, minmax(100px, 1fr));
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .comic-list {
+    grid-template-columns: repeat(8, minmax(100px, 1fr));
+  }
+}

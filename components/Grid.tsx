@@ -118,8 +118,8 @@ const Grid: NextPage<GridProps> = ({ data, keyword, page }) => {
                 </h1>
             </div>
             <div className={`grid gap-2 comic-list mb-28`} style={{
-                gridTemplateColumns: `repeat(${cols}, minmax(100px, 1fr))`, //=> try to use media query for set cols repeat at next time
-                gridAutoRows: "1fr",
+                // gridTemplateColumns: `repeat(${cols}, minmax(100px, 1fr))`, //=> try to use media query for set cols repeat at next time
+                // gridAutoRows: "1fr",
             }}>
                 {
                     content.map((colRendered: any, index: number) => (
