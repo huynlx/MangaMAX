@@ -10,7 +10,7 @@ import RightComic from '../../../components/RightComic';
 import LeftComic from '../../../components/LeftComic';
 import { FaChevronLeft } from 'react-icons/fa';
 import { useRouter } from 'next/router';
-import { removeLoadingBar, useLoadingBar } from '../../../shared/useLoadingBar';
+import { removeLoadingBar, callLoadingBar } from '../../../shared/callLoadingBar';
 
 const Comic: NextPage<ComicProps> = ({ info, slug }) => {
     // const { data, error } = useSWR('/api/profile-data', async() => {
@@ -33,7 +33,7 @@ const Comic: NextPage<ComicProps> = ({ info, slug }) => {
     }
 
     useEffect(() => {
-        useLoadingBar();
+        callLoadingBar();
         return () => removeLoadingBar();
     }, [])
 

@@ -8,7 +8,7 @@ import { wrapper } from '../../../store';
 import { handleSource } from '../../../store/action';
 import { useSelector } from 'react-redux';
 import ReadImage from '../../../components/ReadImage';
-import { removeLoadingBar, useLoadingBar } from '../../../shared/useLoadingBar';
+import { removeLoadingBar, callLoadingBar } from '../../../shared/callLoadingBar';
 
 const Chapter: NextPage<any> = ({ chapter, chapterId, comicSlug }) => {
     const select: any = useSelector((state: any) => state.reducer);
@@ -22,7 +22,7 @@ const Chapter: NextPage<any> = ({ chapter, chapterId, comicSlug }) => {
     }, [comicSlug, chapter.chapters, selectedIndex, router])
 
     useEffect(() => {
-        useLoadingBar();
+        callLoadingBar();
         return () => removeLoadingBar();
     }, [])
 

@@ -1,7 +1,6 @@
-import { NextPage } from 'next';
-import React, { memo } from 'react';
+import React from 'react';
 
-const Loader: NextPage = memo(() => (
+const Loader = () => (
     <div className={`loading z-30 p-5 rounded-md bg-nav opacity-[0.95]`}>
         <div className="lds-spinner">
             <div></div>
@@ -18,6 +17,6 @@ const Loader: NextPage = memo(() => (
             <div></div>
         </div>
     </div>
-));
+);
 
 export default Loader;
