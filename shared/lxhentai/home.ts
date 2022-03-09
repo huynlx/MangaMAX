@@ -1,14 +1,11 @@
 import instance from "../axios";
 import { parse } from "node-html-parser";
-import { store } from "../../store";
 import decodeHTMLEntity from "../decodeHTML";
 import getQueryParams from "../useGetQueryParams";
 
-const getHome = async (page: number = 1): Promise<any> => {
-    const state = store.getState().reducer;
-
+const getHome = async (page: number = 1, type: string, source: string, url: string): Promise<any> => {
     const handleSource = () => {
-        if (state.type === 'browse') {
+        if (type === 'browse') {
             return `story/index.php?p=${page}&hot`
         } else {
             return `story/index.php?p=${page}`
@@ -26,7 +23,7 @@ const getHome = async (page: number = 1): Promise<any> => {
 
                 return {
                     title: decodeHTMLEntity(item.childNodes[3].innerText),
-                    cover: state.url + image,
+                    cover: url + image,
                     chapter: item.querySelector(".newestChapter a")?.innerText,
                     slug: getQueryParams('id', item.getElementsByTagName('a')[1].getAttribute('href')!),
                     updateAt: null,

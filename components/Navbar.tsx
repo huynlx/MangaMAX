@@ -15,7 +15,6 @@ const Navbar: NextPage<{ scroll: boolean }> = ({ scroll }) => {
 
     const router = useRouter();
     const { pathname } = router;
-    const asPath = router.asPath.split('?')[1] ? `/?${router.asPath.split('?')[1]}` : "/";
 
     const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();

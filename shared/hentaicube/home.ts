@@ -1,13 +1,11 @@
 import instance from "../axios";
 import { parse } from "node-html-parser";
-import { store } from "../../store";
 import decodeHTMLEntity from "../decodeHTML";
 
-const getHome = async (page: number = 1): Promise<any> => {
-    const state = store.getState().reducer;
+const getHome = async (page: number = 1, type: string, source: string, url: string): Promise<any> => {
 
     const handleSource = () => {
-        if (state.type === 'browse') {
+        if (type === 'browse') {
             return `page/${page}/?s&post_type=wp-manga&m_orderby=views`
         } else {
             return `page/${page}/?s&post_type=wp-manga&m_orderby=latest`
@@ -15,15 +13,15 @@ const getHome = async (page: number = 1): Promise<any> => {
     }
 
     const handleData = () => {
-        return htmls.map((source, index) => {
-            const dom = parse(source);
+        return htmls.map((html, index) => {
+            const dom = parse(html);
 
             const items = dom.querySelectorAll(".tab-content-wrap .c-tabs-item__content").map((item) => {
                 const url = item.querySelector(".c-image-hover > a > img")?.getAttribute("data-src")
                     ?? item.querySelector(".c-image-hover > a > img")?.getAttribute("src");
                 return ({
                     title: decodeHTMLEntity(item.querySelector(".post-title > h3 > a")?.innerText!),
-                    cover: `/api/proxy?url=${encodeURI(url as string)}&source=${state.source}`,
+                    cover: `/api/proxy?url=${encodeURI(url as string)}&source=${source}`,
                     chapter: item.querySelector(".chapter > a")?.innerText,
                     slug: item
                         .querySelector(".c-image-hover > a")

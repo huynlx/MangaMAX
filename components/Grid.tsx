@@ -1,6 +1,4 @@
-import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
 import { NextPage } from 'next';
 import { useDispatch, useSelector } from 'react-redux'
 import { setData } from '../shared/useSetData';
@@ -18,10 +16,6 @@ const Grid: NextPage = () => {
     const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } = useFetchHome({ source: select.source, type: select.type });
     const list = data?.pages.map((list) => list.items).flat(); //gộp các mảng page thành 1 mảng data
     const content = setData(cols, list ? list : []);
-    const router = useRouter();
-
-    console.log(select);
-
     const dispatch = useDispatch();
 
 

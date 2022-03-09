@@ -1,4 +1,3 @@
-import { store } from "../../store";
 import nettruyen from '../nettruyen/home';
 import lxhentai from '../lxhentai/home';
 import truyen48 from '../truyen48/home';
@@ -7,28 +6,26 @@ import blogtruyen from '../blogtruyen/home';
 import cmanga from '../cmanga/home';
 import hentaicube from '../hentaicube/home';
 
-const getHome = async (page: number = 1): Promise<any> => {
-    const { reducer } = store.getState();
-
-    switch (reducer.source) {
+const getHome = async (page: number = 1, source: string, type: string, url: string): Promise<any> => {
+    switch (source) {
         case '1':
-            return nettruyen(page); //nettruyen
+            return nettruyen(page, type); //nettruyen
         case '2':
-            return nettruyen(page); //nhattruyen
+            return nettruyen(page, type); //nhattruyen
         case '3':
-            return lxhentai(page); //lxhentai
+            return lxhentai(page, type, source, url); //lxhentai
         case '4':
-            return truyen48(page); //truyen48
+            return truyen48(page, type, source, url); //truyen48
         case '5':
-            return truyentranhlh(page); //truyentranhlh
+            return truyentranhlh(page, type, source, url); //truyentranhlh
         case '6':
-            return blogtruyen(page); //blogtruyen
+            return blogtruyen(page, type, source, url); //blogtruyen
         case '7':
-            return cmanga(page); //cmanga
+            return cmanga(page, type, source, url); //cmanga
         case '8':
-            return cmanga(page); //mangapk
+            return cmanga(page, type, source, url); //mangapk
         case '9':
-            return hentaicube(page); //hentaicube
+            return hentaicube(page, type, source, url); //hentaicube
     }
 };
 

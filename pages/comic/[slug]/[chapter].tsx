@@ -1,5 +1,5 @@
 import { NextPage } from 'next';
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback } from 'react';
 import { getChapter } from '../../../shared/api/chapter';
 import Navigation from '../../../components/Navigation';
 import Link from 'next/link';
@@ -8,7 +8,6 @@ import { wrapper } from '../../../store';
 import { handleSource } from '../../../store/action';
 import { useSelector } from 'react-redux';
 import ReadImage from '../../../components/ReadImage';
-import { removeLoadingBar, callLoadingBar } from '../../../shared/callLoadingBar';
 
 const Chapter: NextPage<any> = ({ chapter, chapterId, comicSlug }) => {
     const select: any = useSelector((state: any) => state.reducer);
@@ -24,7 +23,7 @@ const Chapter: NextPage<any> = ({ chapter, chapterId, comicSlug }) => {
     return (
         <div className='flex  flex-col items-center mx-auto'>
             <p className="text-2xl px-[5vw]">
-                <Link  href={`/comic/${comicSlug}?source=${select.source}`}>
+                <Link href={`/comic/${comicSlug}?source=${select.source}`}>
                     <a className="text-link">{chapter.title}</a>
                 </Link>
                 <span className='w-full'> {chapter.chapterCurrent} <small>{chapter.updateAt}</small></span>

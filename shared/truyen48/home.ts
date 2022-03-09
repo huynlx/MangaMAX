@@ -1,12 +1,10 @@
 import instance from "../axios";
 import { parse } from "node-html-parser";
-import { store } from "../../store";
 
-const getHome = async (page: number = 1): Promise<any> => {
-    const state = store.getState().reducer;
+const getHome = async (page: number = 1, type: string, source: string, url: string): Promise<any> => {
 
     const handleSource = () => {
-        if (state.type === 'browse') {
+        if (type === 'browse') {
             return `truyen-yeu-thich/trang-${page}.html`
         } else {
             return `truyen-moi-cap-nhat/trang-${page}.html`

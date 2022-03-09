@@ -1,5 +1,5 @@
 import { NextPage } from 'next';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { getComicInfo } from '../../../shared/api/comic';
 import { ComicProps } from '../../../shared/types';
 import { RiSortDesc } from 'react-icons/ri';

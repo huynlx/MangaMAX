@@ -1,13 +1,11 @@
 import instance from "../axios";
 import { parse } from "node-html-parser";
-import { store } from "../../store";
 import decodeHTMLEntity from "../decodeHTML";
 
-const getHome = async (page: number = 1): Promise<any> => {
-    const state = store.getState().reducer;
+const getHome = async (page: number = 1, type: string, source: string, url: string): Promise<any> => {
 
     const handleSource = () => {
-        if (state.type === 'browse') {
+        if (type === 'browse') {
             return `ajax/Search/AjaxLoadListManga?key=tatca&orderBy=3&p=${page}`
         } else {
             return `thumb-${page}`
@@ -15,7 +13,7 @@ const getHome = async (page: number = 1): Promise<any> => {
     }
 
     const handleData = () => {
-        if (state.type === 'browse') { //browse
+        if (type === 'browse') { //browse
             return htmls.map((source, index) => {
                 const dom = parse(source);
 
