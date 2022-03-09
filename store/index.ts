@@ -23,7 +23,7 @@ const reducer = (state: any = defaultState, action: AnyAction) => {
         case HYDRATE:
             const clientState = { ...state }; //state sau khi dispatch ở client, nếu ko thì luôn là defaultState
             const serverState = { ...action.payload.reducer }; //action.payload => previous state => khi vào ssr thì phải dispatch thì mới có (dispatch ở server), còn nếu ko dispatch thì nó cũng lại là defaultState
-            
+
             const nextState = { ...clientState, ...serverState }; //state server ghi đè state client
 
             return nextState; //đây là state đồng bộ cho cả server và client (là initialState nằm trong response của request) (dispatch ở server thì mới đồng bộ đc còn dispatch ở client thì đéo)
@@ -54,9 +54,29 @@ const reducer2 = (state = defaultState2, action: AnyAction) => {
     }
 }
 
+const defaultState3 = {
+    scrollPosition: 0,
+    indexChapters: true //true:index or false:list
+}
+
+const reducer3 = (state = defaultState3, action: AnyAction) => {
+    switch (action.type) {
+        case HYDRATE:
+
+            return { ...state }
+        case "SCROLL_POSITION":
+
+            return { ...state, ...action.payload }
+        default:
+
+            return state
+    }
+}
+
 var rootReducer = combineReducers({
     reducer,
-    reducer2
+    reducer2,
+    reducer3
 });
 
 // create a makeStore function

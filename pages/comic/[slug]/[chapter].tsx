@@ -16,14 +16,14 @@ const Chapter: NextPage<any> = ({ chapter, chapterId, comicSlug }) => {
     const nextChapter = useCallback(() => {
         router.push({
             pathname: `/comic/${comicSlug}/${chapter.chapters[selectedIndex - 1].chap}`,
-            query: { id: chapter.chapters[selectedIndex - 1].id, source: select.source }
+            query: { id: chapter.chapters[selectedIndex - 1].id, source: select.source, type: select.type }
         })
     }, [comicSlug, chapter.chapters, selectedIndex, router])
 
     return (
         <div className='flex  flex-col items-center mx-auto'>
             <p className="text-2xl px-[5vw]">
-                <Link href={`/comic/${comicSlug}?source=${select.source}`}>
+                <Link href={`/comic/${comicSlug}?source=${select.source}&type=${select.type}`}>
                     <a className="text-link">{chapter.title}</a>
                 </Link>
                 <span className='w-full'> {chapter.chapterCurrent} <small>{chapter.updateAt}</small></span>

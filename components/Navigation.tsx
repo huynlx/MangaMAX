@@ -14,13 +14,21 @@ const Navigation: NextPage<NavigationProps> = ({ chapters, chapterId, comicSlug,
     const prevChapter = useCallback(() => {
         router.push({
             pathname: `/comic/${comicSlug}/${chapters[selectedIndex + 1].chap}`,
-            query: { id: chapters[selectedIndex + 1].id, source: select.source }
+            query: {
+                id: chapters[selectedIndex + 1].id,
+                source: select.source,
+                type: select.type
+            }
         })
     }, [comicSlug, chapters, selectedIndex, router])
     const nextChapter = useCallback(() => {
         router.push({
             pathname: `/comic/${comicSlug}/${chapters[selectedIndex - 1].chap}`,
-            query: { id: chapters[selectedIndex - 1].id, source: select.source }
+            query: {
+                id: chapters[selectedIndex - 1].id,
+                source: select.source,
+                type: select.type
+            }
         })
     }, [comicSlug, chapters, selectedIndex, router])
     const selectChapter = (chapterSlug: string) => {
@@ -28,7 +36,8 @@ const Navigation: NextPage<NavigationProps> = ({ chapters, chapterId, comicSlug,
             pathname: `/comic/${comicSlug}/${chapterSlug}`,
             query: {
                 id: chapters.find((chap: { chap: any; }) => chap.chap === chapterSlug)?.id,
-                source: select.source
+                source: select.source,
+                type: select.type
             },
         });
     }
@@ -63,12 +72,12 @@ const Navigation: NextPage<NavigationProps> = ({ chapters, chapterId, comicSlug,
 
     return (
         <div className={`z-10 overflow-x-hidden flex items-center gap-1 w-full justify-center bg-primary ${direction === 'up' && 'sticky top-0'}`}>
-            <Link  href={`/?source=${select.source}`}>
+            <Link href={`/?source=${select.source}&type=${select.type}`}>
                 <a className='mr-2'>
                     <i className="fas fa-home text-2xl"></i>
                 </a>
             </Link>
-            <Link  href={`/comic/${router.query.slug}?source=${select.source}`}>
+            <Link href={`/comic/${router.query.slug}?source=${select.source}&type=${select.type}`}>
                 <a className='mr-2'>
                     <i className="fas fa-list text-3xl"></i>
                 </a>

@@ -10,10 +10,10 @@ export const handleSource = (source: any, type: any, store?: any) => (dispatch: 
 
     switch (source) {
         case "1":
-            dispatch({ type: handleTypes.SOURCE, payload: { type: type ?? "latest", source: '1', name: 'Server 1', url: 'http://nettruyengo.com/' } })
+            dispatch({ type: handleTypes.SOURCE, payload: { type: type ?? "latest", source: '1', name: 'Server 1', url: 'http://www.nettruyenmoi.com/' } })
             break;
         case "2":
-            dispatch({ type: handleTypes.SOURCE, payload: { type: type ?? "latest", source: '2', name: 'Server 2', url: 'http://nhattruyenvip.com/' } })
+            dispatch({ type: handleTypes.SOURCE, payload: { type: type ?? "latest", source: '2', name: 'Server 2', url: 'http://nhattruyengo.com/' } })
             break;
         case "3":
             dispatch({ type: handleTypes.SOURCE, payload: { type: type ?? "latest", source: '3', name: 'Server 3', url: 'https://lxhentai.com/' } })

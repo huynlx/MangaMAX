@@ -17,7 +17,7 @@ const Grid: NextPage = () => {
     const list = data?.pages.map((list) => list.items).flat(); //gộp các mảng page thành 1 mảng data
     const content = setData(cols, list ? list : []);
     const dispatch = useDispatch();
-
+    const { reducer3 } = useSelector((state: any) => state);
 
     useEffect(() => {
         if (cols !== setCol(windowSize)) {
@@ -31,6 +31,23 @@ const Grid: NextPage = () => {
         onLoadMore: fetchNextPage,
         rootMargin: "0px 0px 100px 0px",
     });
+
+    useEffect(() => {
+        const handleClick = () => {
+            const position = window.pageYOffset;
+            dispatch({ type: 'SCROLL_POSITION', payload: { scrollPosition: position } })
+        };
+
+        window.addEventListener('click', handleClick, { passive: true });
+
+        return () => {
+            window.removeEventListener('click', handleClick);
+        };
+    }, []);
+
+    useEffect(() => {
+        window.scrollTo(0, reducer3.scrollPosition);
+    }, [])
 
     return (
         <main className='main px-[2vw] md:px-[5vw] pb-[5rem]'>
