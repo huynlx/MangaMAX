@@ -121,6 +121,7 @@ const MyApp = ({ Component, pageProps, initialData }) => {
         <title>MangaMAX</title>
         <link rel="shortcut icon" href="/favicon.ico" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"></meta>
       </Head>
       {/* <PersistGate loading={<p className='w-full text-center'>Loading Source</p>} persistor={persistor}> */}
       <QueryClientProvider client={queryClient}>
