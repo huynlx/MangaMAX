@@ -21,13 +21,13 @@ const LeftComic: NextPage<any> = ({ info, select, slug }) => {
                     {/* <p>Thể loại: {info.genres.join(", ")}</p> */}
                     {
                         info.chapters.length > 0 && <div className='my-2'>
-                            <Link as={`/comic/${slug}/${info.chapters.slice(-1)[0].chap}`} href={{
+                            <Link href={{
                                 pathname: `/comic/${slug}/${info.chapters.slice(-1)[0].chap}`,
                                 query: { id: info.chapters.slice(-1)[0].id, source: select.source },
                             }}>
                                 <a className='text-white bg-link pr-2 py-2 pl-4 rounded-full hover:bg-link-hover text-2xl font-bold transition duration-300'>READ<FaChevronRight className='inline mb-[0.3rem]' /></a>
                             </Link>
-                            {/* <Link as={`/comic/${slug}/${info.chapters[0].chap}`} href={{
+                            {/* <Link href={{
                                 pathname: `/comic/${slug}/${info.chapters[0].chap}`,
                                 query: { id: info.chapters[0].id, source: select.source },
                             }}>

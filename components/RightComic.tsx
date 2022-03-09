@@ -13,7 +13,7 @@ const RightComic: NextPage<any> = ({ dt, handleSort, slug, select }) => {
                 </div>
                 {
                     dt.chapters.map((item: any) => (
-                        <Link as={`/comic/${slug}/${item.chap}`} key={item.id} href={{
+                        <Link  key={item.id} href={{
                             pathname: `/comic/${slug}/${item.chap}`,
                             query: { id: item.id, source: select.source }
                         }}>

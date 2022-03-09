@@ -47,5 +47,6 @@ export interface GridProps {
         currentPage: number
     }[],
     keyword?: string,
-    page?: number
+    size: number,
+    setSize: (value: number) => void
 }

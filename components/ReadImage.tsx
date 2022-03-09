@@ -30,6 +30,7 @@ const ReadImage: NextPage<any> = ({ src, opacity, ...props }) => {
                 src={src}
                 className={props.className + (loaded ? ' transition-opacity' : ' !h-0')}
                 style={{ opacity: loaded ? opacity : 0 }}
+                loading='lazy'
             />
         </div>
     );

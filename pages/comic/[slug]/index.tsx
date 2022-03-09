@@ -10,20 +10,10 @@ import RightComic from '../../../components/RightComic';
 import LeftComic from '../../../components/LeftComic';
 import { FaChevronLeft } from 'react-icons/fa';
 import { useRouter } from 'next/router';
-import { removeLoadingBar, callLoadingBar } from '../../../shared/callLoadingBar';
 
 const Comic: NextPage<ComicProps> = ({ info, slug }) => {
-    // const { data, error } = useSWR('/api/profile-data', async() => {
-    //    await getComicInfo(params?.slug as string);
-    // })
-
-    // if (error) return <div>Failed to load</div>
-    // if (!data) return <div>Loading...</div>
     const select: any = useSelector((state: any) => state.reducer);
     const navigate = useRouter();
-
-    // console.log(select);
-
     const [dt, setDt] = useState<any>(info);
     const handleSort = () => {
         setDt({
@@ -31,11 +21,6 @@ const Comic: NextPage<ComicProps> = ({ info, slug }) => {
             chapters: dt.chapters.slice().reverse()
         });
     }
-
-    useEffect(() => {
-        callLoadingBar();
-        return () => removeLoadingBar();
-    }, [])
 
     return (
         <div className='px-[5vw] lg:h-[92.5vh] pt-10 pb-3 flex flex-col lg:flex-row relative'>

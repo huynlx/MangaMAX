@@ -10,8 +10,21 @@ import { wrapper } from '../store';
 import { useSelector, useDispatch } from 'react-redux';
 import { WINDOW_RESIZE_DEBOUNCE, WINDOW_SIZE } from '../shared/constants';
 import { windowResize } from '../store/action';
+import { QueryClient, QueryClientProvider } from "react-query";
+import { removeLoadingBar, callLoadingBar } from '../shared/callLoadingBar';
 // import { PersistGate } from 'redux-persist/integration/react'
 // import { persistStore } from 'redux-persist'
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      refetchOnMount: false,
+      refetchOnReconnect: false,
+      retry: 1,
+    },
+  },
+});
 
 const MyApp = ({ Component, pageProps, initialData }) => {
   const { windowSize } = useSelector((state) => state.reducer2);
@@ -96,6 +109,12 @@ const MyApp = ({ Component, pageProps, initialData }) => {
 
   // let persistor = persistStore(wrapper);
 
+  //handle router loading
+  useEffect(() => {
+    callLoadingBar();
+    return () => removeLoadingBar();
+  }, [])
+
   return (
     <>
       <Head>
@@ -104,9 +123,12 @@ const MyApp = ({ Component, pageProps, initialData }) => {
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
       </Head>
       {/* <PersistGate loading={<p className='w-full text-center'>Loading Source</p>} persistor={persistor}> */}
-      <Navbar scroll={scroll} />
-      <Component {...pageProps} />
+      <QueryClientProvider client={queryClient}>
+        <Navbar scroll={scroll} />
+        <Component {...pageProps} />
+      </QueryClientProvider>
       {/* </PersistGate> */}
+
     </>
   )
 }

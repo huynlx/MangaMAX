@@ -1,16 +1,16 @@
-export const API_URL = "http://nettruyengo.com/";
+export const API_URL = "http://www.nettruyenmoi.com/";
 
 export const SOURCES = [
     {
         source: '1',
         name: 'Server 1',
-        url: 'http://nettruyengo.com/',
+        url: 'http://www.nettruyenmoi.com/',
         type: 'latest'
     },
     {
         source: '2',
         name: 'Server 2',
-        url: 'http://nhattruyenvip.com/',
+        url: 'http://nhattruyengo.com/',
         type: 'latest'
     },
     {

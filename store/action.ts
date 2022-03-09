@@ -5,8 +5,8 @@ export const handleTypes = {
     WINDOW_RESIZE: 'WINDOW_RESIZE'
 }
 
-export const handleSource = (source: any, type: any, store: any) => (dispatch: any) => {
-    // console.log('2. Page.getServerSideProps uses the store to dispatch things');
+export const handleSource = (source: any, type: any, store?: any) => (dispatch: any) => {
+    console.log('2. Page.getServerSideProps uses the store to dispatch things');
 
     switch (source) {
         case "1":
@@ -39,7 +39,9 @@ export const handleSource = (source: any, type: any, store: any) => (dispatch: a
         default:
             break;
     }
-    axios.defaults.baseURL = store.getState().reducer.url;
+    if (store) { //page home ko vào đc đây vì ko có ssr truyền store
+        axios.defaults.baseURL = store.getState().reducer.url;
+    }
 }
 
 
