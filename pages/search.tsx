@@ -7,7 +7,7 @@ import { handleSource } from '../store/action';
 const search = ({ data, keyword, page }: any) => {
 
     return (
-        <Grid data={data} keyword={keyword} page={page} />
+        <Grid />
     );
 };
 
