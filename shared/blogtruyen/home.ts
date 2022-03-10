@@ -27,7 +27,7 @@ const getHome = async (page: number = 1, type: string, source: string, url: stri
                     updateAt: null,
                 }));
 
-                const pages = [];
+                const pages: number[] = [];
                 for (const page of [...dom.querySelectorAll(".paging a")]) {
                     const p = Number(page?.innerText.trim());
                     if (isNaN(p)) continue;
@@ -58,7 +58,7 @@ const getHome = async (page: number = 1, type: string, source: string, url: stri
                     updateAt: item.querySelector(".publishedDate")?.childNodes[2].textContent,
                 }));
 
-                const pages = [];
+                const pages: number[] = [];
                 for (const page of [...dom.querySelectorAll("ul.pagination > li a")]) {
                     const p = Number(page?.innerText.trim());
                     if (isNaN(p)) continue;
