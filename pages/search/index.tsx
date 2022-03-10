@@ -3,7 +3,7 @@ import React, { memo } from 'react';
 import Grid from '../../components/Grid';
 import { useRouter } from 'next/router';
 
-const search: NextPage = () => {
+const Search: NextPage = () => {
     const router = useRouter();
     const { keyword } = router.query;
     
@@ -12,4 +12,4 @@ const search: NextPage = () => {
     );
 };
 
-export default memo(search);
+export default memo(Search);
