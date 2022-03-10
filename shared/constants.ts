@@ -40,7 +40,7 @@ export const SOURCES = [
     {
         source: '7',
         name: 'Server 7',
-        url: 'https://cmangaka.com/',
+        url: 'https://cmanganew.com/',
         type: 'latest'
     },
     {

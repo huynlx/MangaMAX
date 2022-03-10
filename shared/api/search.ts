@@ -11,13 +11,13 @@ const getSearch = async (page: number = 1, source: string, url: string, keyword:
         case '2':
             return nettruyen(keyword, page); //nhattruyen
         case '3':
-            return lxhentai(keyword, page); //lxhentai
+            return lxhentai(keyword, page, url); //lxhentai
         case '7':
-            return cmanga(keyword, page); //cmanga
+            return cmanga(keyword, page, url); //cmanga
         case '8':
-            return cmanga(keyword, page); //mangapk
+            return cmanga(keyword, page, url); //mangapk
         case '9':
-            return hentaicube(keyword, page); //hentaicube
+            return hentaicube(keyword, page, source); //hentaicube
     }
 };
 

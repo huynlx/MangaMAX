@@ -38,7 +38,6 @@ body {
 /* Disable rounded corners on input fields using Safari (iPhone & iPad) */
 input {
   -webkit-appearance: none;
-  -webkit-border-radius: 0;
 }
 
 .comic-list {

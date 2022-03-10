@@ -1,11 +1,9 @@
 import axios from "../axios";
 import { parse } from "node-html-parser";
-import { store } from "../../store";
 import getQueryParams from "../useGetQueryParams";
 import decodeHTMLEntity from "../decodeHTML";
 
-const getSearch = async (keyword: string, page: number = 1): Promise<any> => {
-    const state = store.getState().reducer;
+const getSearch = async (keyword: string, page: number = 1, url: string): Promise<any> => {
 
     const sections = {
         "Tìm truyện tranh": `story/search.php?key=${encodeURI(keyword)}&p=${page ? page : 1}`
@@ -25,7 +23,7 @@ const getSearch = async (keyword: string, page: number = 1): Promise<any> => {
 
             return {
                 title: decodeHTMLEntity(item.childNodes[3].innerText),
-                cover: state.url + image,
+                cover: url + image,
                 chapter: item.querySelector(".newestChapter a")?.innerText,
                 slug: getQueryParams('id', item.getElementsByTagName('a')[1].getAttribute('href')!),
                 updateAt: null,

@@ -6,7 +6,7 @@ export const handleTypes = {
 }
 
 export const handleSource = (source: any, type: any, store?: any) => (dispatch: any) => {
-    console.log('2. Page.getServerSideProps uses the store to dispatch things');
+    // console.log('2. Page.getServerSideProps uses the store to dispatch things');
 
     switch (source) {
         case "1":
@@ -28,7 +28,7 @@ export const handleSource = (source: any, type: any, store?: any) => (dispatch: 
             dispatch({ type: handleTypes.SOURCE, payload: { type: type ?? "latest", source: '6', name: 'Server 6', url: 'https://blogtruyen.vn/' } })
             break;
         case "7":
-            dispatch({ type: handleTypes.SOURCE, payload: { type: type ?? "latest", source: '7', name: 'Server 7', url: 'https://cmangaka.com/' } })
+            dispatch({ type: handleTypes.SOURCE, payload: { type: type ?? "latest", source: '7', name: 'Server 7', url: 'https://cmanganew.com/' } })
             break;
         case "8":
             dispatch({ type: handleTypes.SOURCE, payload: { type: type ?? "latest", source: '8', name: 'Server 8', url: 'https://mangapk.com/' } })

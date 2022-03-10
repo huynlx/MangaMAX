@@ -9,7 +9,7 @@ interface LinkCheckProps {
 const LinkCheck = ({ select, reducer3, children }: PropsWithChildren<LinkCheckProps>) => {
     if (select.type === 'search') {
         return (
-            <Link href={`/search/?source=${select.source}&type=${select.type}&keyword=${encodeURI(reducer3.keyword)}`}>
+            <Link href={`/search/?source=${select.source}&type=${select.type}&keyword=${reducer3.keyword?.replace(/ /g, '+')}`}>
                 {children}
             </Link>
         );

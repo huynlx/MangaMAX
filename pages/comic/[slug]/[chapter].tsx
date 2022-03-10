@@ -20,7 +20,7 @@ const Chapter: NextPage<any> = ({ chapter, chapterId, comicSlug }) => {
             pathname: `/comic/${comicSlug}/${chapter.chapters[selectedIndex - 1].chap}`,
             query: { id: chapter.chapters[selectedIndex - 1].id, source: select.source, type: select.type }
         })
-    }, [comicSlug, chapter.chapters, selectedIndex, router])
+    }, [comicSlug, chapter.chapters, selectedIndex, router, select.source, select.type])
 
     return (
         <>

@@ -83,7 +83,7 @@ const MyApp = ({ Component, pageProps, initialData }) => {
     return () => {
       window.removeEventListener('resize', onWidthResize);
     };
-  }, [windowSize]) //=> add windowSize để cập nhật giá trị của windowSize trong useEffect()
+  }, [windowSize, dispatch]) //=> add windowSize để cập nhật giá trị của windowSize trong useEffect()
 
   //watch scroll
   useEffect(() => {
@@ -120,7 +120,6 @@ const MyApp = ({ Component, pageProps, initialData }) => {
       <Head>
         <title>MangaMAX</title>
         <link rel="shortcut icon" href="/favicon.ico" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
         <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests"></meta>
       </Head>
       {/* <PersistGate loading={<p className='w-full text-center'>Loading Source</p>} persistor={persistor}> */}

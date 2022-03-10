@@ -20,7 +20,7 @@ const Navbar: NextPage<{ scroll: boolean }> = ({ scroll }) => {
 
     const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        dispatch({ type: 'SCROLL_POSITION', payload: { keyword: inputValue.trim() } })
+        dispatch({ type: 'SCROLL_POSITION', payload: { keyword: inputValue.trim(), scrollPosition: 0 } });
         if (inputValue.trim())
             router.push({
                 pathname: "/search",

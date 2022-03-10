@@ -1,7 +1,7 @@
 import React from 'react';
-import Grid from '../components/Grid';
-import { wrapper } from '../store';
-import { handleSource } from '../store/action';
+import Grid from '../../components/Grid';
+import { wrapper } from '../../store';
+import { handleSource } from '../../store/action';
 
 const search = ({ keyword }: any) => {
 

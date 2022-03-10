@@ -1,7 +1,7 @@
 import { NextPage } from 'next';
 import React, { useRef } from 'react';
 import { useOnClickOutside } from '../shared/useOnClickOutside';
-import {  useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Router from 'next/router'
 import { SOURCES } from '../shared/constants';
 import { handleSource } from '../store/action';
@@ -9,7 +9,7 @@ import { handleSource } from '../store/action';
 const SideBar: NextPage<any> = ({ className, id }) => {
     const ref = useRef(null);
     const select: any = useSelector((state: any) => state.reducer);
-    const dispatch=useDispatch();
+    const dispatch = useDispatch();
 
     function openNav() {
         document.getElementById(id)!.style.left = "0";
@@ -32,6 +32,7 @@ const SideBar: NextPage<any> = ({ className, id }) => {
                     SOURCES.map(item => (
                         <div key={item.source} onClick={() => {
                             dispatch(handleSource(item.source, 'latest'));
+                            dispatch({ type: 'SCROLL_POSITION', payload: { scrollPosition: 0 } });
                             Router.push('/');
                         }}>
                             <a className={`text-center ${select.source == item.source && '!text-white !text-3xl'}`}>{item.name}</a>

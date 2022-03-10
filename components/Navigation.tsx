@@ -21,7 +21,7 @@ const Navigation: NextPage<NavigationProps> = ({ chapters, chapterId, comicSlug,
                 type: select.type
             }
         })
-    }, [comicSlug, chapters, selectedIndex, router])
+    }, [comicSlug, chapters, selectedIndex, router, select.source, select.type])
     const nextChapter = useCallback(() => {
         router.push({
             pathname: `/comic/${comicSlug}/${chapters[selectedIndex - 1].chap}`,
@@ -31,7 +31,7 @@ const Navigation: NextPage<NavigationProps> = ({ chapters, chapterId, comicSlug,
                 type: select.type
             }
         })
-    }, [comicSlug, chapters, selectedIndex, router])
+    }, [comicSlug, chapters, selectedIndex, router, select.source, select.type])
     const selectChapter = (chapterSlug: string) => {
         router.push({
             pathname: `/comic/${comicSlug}/${chapterSlug}`,
@@ -69,7 +69,7 @@ const Navigation: NextPage<NavigationProps> = ({ chapters, chapterId, comicSlug,
         return () => {
             window.removeEventListener('scroll', controlDirection);
         };
-    }, []);
+    }, [controlDirection]);
 
     return (
         <div className={`z-10 overflow-x-hidden flex items-center gap-1 w-full justify-center bg-primary ${direction === 'up' && 'sticky top-0'}`}>

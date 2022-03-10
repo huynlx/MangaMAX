@@ -12,7 +12,7 @@ import { handleSource } from '../store/action';
 import { IoArrowBack } from 'react-icons/io5';
 import Router from 'next/router';
 
-const Grid: NextPage<{ keyword: string }> = ({ keyword }) => {
+const Grid: NextPage<{ keyword?: string }> = ({ keyword }) => {
     const { windowSize } = useSelector((state: any) => state.reducer2);
     const [cols, setCols] = useState(8);
     const select: any = useSelector((state: any) => state.reducer);
@@ -27,7 +27,7 @@ const Grid: NextPage<{ keyword: string }> = ({ keyword }) => {
         if (cols !== setCol(windowSize)) {
             setCols(setCol(windowSize));
         }
-    }, [windowSize])
+    }, [windowSize, cols])
 
     const [sentryRef] = useInfiniteScroll({
         loading: isFetchingNextPage,
@@ -47,11 +47,11 @@ const Grid: NextPage<{ keyword: string }> = ({ keyword }) => {
         return () => {
             window.removeEventListener('click', handleClick);
         };
-    }, []);
+    }, [dispatch]);
 
     useEffect(() => {
         window.scrollTo(0, reducer3.scrollPosition);
-    }, [])
+    }, [reducer3.scrollPosition])
 
     return (
         <main className='main px-[2vw] lg:px-[5vw] pb-[5rem]'>
@@ -64,7 +64,7 @@ const Grid: NextPage<{ keyword: string }> = ({ keyword }) => {
                         className={`w-full font-semibold ${select.type === 'search' ? 'text-white text-2xl' : 'text-xl brightness-75'}`}
                     >
                         Search
-                        <span onClick={() => { dispatch(handleSource(select.source, 'latest')); Router.push(`/`); }} className='float-right flex text-gray-300 hover:text-white transition gap-1'><IoArrowBack size={30} /> Back to main</span>
+                        <span onClick={() => { dispatch(handleSource(select.source, 'latest')); Router.push(`/`); }} className='float-right flex text-gray-300 hover:text-white transition gap-1 font-normal'><IoArrowBack size={30} /> Back</span>
                     </h1>
                 }
                 {

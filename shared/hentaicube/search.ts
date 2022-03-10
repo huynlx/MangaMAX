@@ -1,11 +1,8 @@
 import axios from "../axios";
 import { parse } from "node-html-parser";
-import { store } from "../../store";
 import decodeHTMLEntity from "../decodeHTML";
 
-const getSearch = async (keyword: string, page: number = 1): Promise<any> => {
-    const state = store.getState().reducer;
-
+const getSearch = async (keyword: string, page: number = 1, source: string): Promise<any> => {
     const sections = {
         "Tìm truyện tranh": `page/${page ? page : 1}/?s=${encodeURI(keyword)}&post_type=wp-manga`
     }
@@ -14,8 +11,8 @@ const getSearch = async (keyword: string, page: number = 1): Promise<any> => {
         Object.entries(sections).map(([_, value]) => value).map(async (url) => (await axios.get(url)).data)
     )
 
-    const data = htmls.map((source, index) => {
-        const dom = parse(source);
+    const data = htmls.map((html, index) => {
+        const dom = parse(html);
 
         const items = dom.querySelectorAll(".tab-content-wrap .c-tabs-item > .row.c-tabs-item__content").map((item) => {
             const url = item
@@ -24,7 +21,7 @@ const getSearch = async (keyword: string, page: number = 1): Promise<any> => {
 
             return ({
                 title: decodeHTMLEntity(item.querySelector(".post-title > h3 > a")?.innerText!),
-                cover: `/api/proxy?url=${encodeURI(url as string)}&source=${state.source}`,
+                cover: `/api/proxy?url=${encodeURI(url as string)}&source=${source}`,
                 chapter: item.querySelector(".chapter > a")?.innerText,
                 slug: item
                     .querySelector(".c-image-hover > a")
@@ -35,7 +32,7 @@ const getSearch = async (keyword: string, page: number = 1): Promise<any> => {
 
         const pages = [];
         for (const page of [...dom.querySelectorAll(".wp-pagenavi a")]) {
-            const p = Number(page.querySelector('a')?.innerText.trim());
+            const p = Number(page?.innerText.trim());
             if (isNaN(p)) continue;
             pages.push(p);
         }
