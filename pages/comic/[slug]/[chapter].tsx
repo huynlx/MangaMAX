@@ -19,7 +19,7 @@ const Chapter: NextPage<any> = ({ chapter, chapterId, comicSlug }) => {
         router.push({
             pathname: `/comic/${comicSlug}/${chapter.chapters[selectedIndex - 1].chap}`,
             query: { id: chapter.chapters[selectedIndex - 1].id, source: select.source, type: select.type }
-        })
+        }, `/comic/${comicSlug}/${chapter.chapters[selectedIndex - 1].chap}`)
     }, [comicSlug, chapter.chapters, selectedIndex, router, select.source, select.type])
 
     return (
@@ -29,7 +29,7 @@ const Chapter: NextPage<any> = ({ chapter, chapterId, comicSlug }) => {
             </Head>
             <div className='flex  flex-col items-center mx-auto'>
                 <p className="text-2xl px-[5vw]">
-                    <Link href={`/comic/${comicSlug}?source=${select.source}&type=${select.type}`}>
+                    <Link as={`/comic/${comicSlug}`} href={`/comic/${comicSlug}?source=${select.source}&type=${select.type}`}>
                         <a className="text-link">{chapter.title}</a>
                     </Link>
                     <span className='w-full'> {chapter.chapterCurrent} <small>{chapter.updateAt}</small></span>

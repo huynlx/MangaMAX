@@ -1,9 +1,10 @@
-import React from 'react';
+import { NextPage } from 'next';
+import React, { memo } from 'react';
 import Grid from '../../components/Grid';
 import { wrapper } from '../../store';
 import { handleSource } from '../../store/action';
 
-const search = ({ keyword }: any) => {
+const search: NextPage<{ keyword: string }> = ({ keyword }) => {
 
     return (
         <Grid keyword={keyword} />
@@ -22,4 +23,4 @@ export const getServerSideProps = wrapper.getServerSideProps(
     }
 )
 
-export default search;
+export default memo(search);

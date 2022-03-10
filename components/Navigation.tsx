@@ -20,7 +20,7 @@ const Navigation: NextPage<NavigationProps> = ({ chapters, chapterId, comicSlug,
                 source: select.source,
                 type: select.type
             }
-        })
+        }, `/comic/${comicSlug}/${chapters[selectedIndex + 1].chap}`)
     }, [comicSlug, chapters, selectedIndex, router, select.source, select.type])
     const nextChapter = useCallback(() => {
         router.push({
@@ -30,7 +30,7 @@ const Navigation: NextPage<NavigationProps> = ({ chapters, chapterId, comicSlug,
                 source: select.source,
                 type: select.type
             }
-        })
+        }, `/comic/${comicSlug}/${chapters[selectedIndex - 1].chap}`)
     }, [comicSlug, chapters, selectedIndex, router, select.source, select.type])
     const selectChapter = (chapterSlug: string) => {
         router.push({
@@ -40,7 +40,7 @@ const Navigation: NextPage<NavigationProps> = ({ chapters, chapterId, comicSlug,
                 source: select.source,
                 type: select.type
             },
-        });
+        }, `/comic/${comicSlug}/${chapterSlug}`);
     }
     useEffect(() => {
         const handler = (e: KeyboardEvent) => {
@@ -69,7 +69,7 @@ const Navigation: NextPage<NavigationProps> = ({ chapters, chapterId, comicSlug,
         return () => {
             window.removeEventListener('scroll', controlDirection);
         };
-    }, [controlDirection]);
+    }, []);
 
     return (
         <div className={`z-10 overflow-x-hidden flex items-center gap-1 w-full justify-center bg-primary ${direction === 'up' && 'sticky top-0'}`}>
@@ -78,7 +78,7 @@ const Navigation: NextPage<NavigationProps> = ({ chapters, chapterId, comicSlug,
                     <i className="fas fa-home text-2xl"></i>
                 </a>
             </LinkCheck>
-            <Link href={`/comic/${router.query.slug}?source=${select.source}&type=${select.type}`}>
+            <Link as={`/comic/${router.query.slug}`} href={`/comic/${router.query.slug}?source=${select.source}&type=${select.type}`}>
                 <a className='mr-2'>
                     <i className="fas fa-list text-3xl"></i>
                 </a>

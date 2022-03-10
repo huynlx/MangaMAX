@@ -20,6 +20,7 @@ const Navbar: NextPage<{ scroll: boolean }> = ({ scroll }) => {
 
     const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        document.getElementById('keyword')?.blur();
         dispatch({ type: 'SCROLL_POSITION', payload: { keyword: inputValue.trim(), scrollPosition: 0 } });
         if (inputValue.trim())
             router.push({
@@ -29,7 +30,8 @@ const Navbar: NextPage<{ scroll: boolean }> = ({ scroll }) => {
                     source: select.source,
                     type: 'search'
                 },
-            });
+            }, `/search/${inputValue.trim()}`);
+        // setInputValue(''); //reset form
     };
 
     return (
@@ -52,12 +54,13 @@ const Navbar: NextPage<{ scroll: boolean }> = ({ scroll }) => {
                 </button>
             </div>
             {
-                (scroll && pathname == '/') && <h1 className='hidden lg:block font-bold text-2xl top-2/4 absolute left-2/4 transform -translate-x-2/4 -translate-y-2/4'>{titleCase(select.type)}</h1>
+                (scroll && (pathname == '/' || pathname == '/search')) && <h1 className='hidden lg:block font-bold text-2xl top-2/4 absolute left-2/4 transform -translate-x-2/4 -translate-y-2/4'>{titleCase(select.type)}</h1>
             }
             <SideBar className='hidden md:block' id='sidenav2' />
             <form
                 className={`${isActive ? 'flex' : 'hidden'} md:flex border-gray-300 rounded-full overflow-hidden`}
                 onSubmit={handleFormSubmit}
+                id='myForm'
             >
                 <button type='submit' className="bg-gray-300 flex-shrink-0 flex justify-center items-center h-8 w-8 hover:bg-white">
                     <i className="fas fa-search text-black text-lg"></i>
@@ -65,6 +68,7 @@ const Navbar: NextPage<{ scroll: boolean }> = ({ scroll }) => {
                 <input
                     type="text"
                     className="bg-gray-300 h-8 px-3 flex-grow text-black outline-none"
+                    id='keyword'
                     placeholder="Search..."
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}

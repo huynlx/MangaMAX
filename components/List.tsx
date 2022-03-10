@@ -3,7 +3,7 @@ import React from 'react';
 
 const List = ({ select, slug, dt }: any) => {
     return dt.chapters.map((item: any) => (
-        <Link key={item.id} href={{
+        <Link as={`/comic/${slug}/${item.chap}`} key={item.id} href={{
             pathname: `/comic/${slug}/${item.chap}`,
             query: {
                 id: item.id,

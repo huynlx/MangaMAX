@@ -12,6 +12,7 @@ import { FaChevronLeft } from 'react-icons/fa';
 import { useRouter } from 'next/router';
 import { titleCase } from '../../../shared/cmanga/titleCase';
 import Head from 'next/head';
+import LinkCheck from '../../../components/LinkCheck';
 
 const Comic: NextPage<ComicProps> = ({ info, slug }) => {
     const select: any = useSelector((state: any) => state.reducer);
@@ -31,12 +32,13 @@ const Comic: NextPage<ComicProps> = ({ info, slug }) => {
                 <title>{info.title}</title>
             </Head>
             <div className='px-[2vw] lg:px-[5vw] lg:h-[92.5vh] pt-10 pb-3 flex flex-col lg:flex-row relative lg:max-h-[100vh] overflow-hidden gap-3'>
-                <h1
-                    onClick={() => navigate.push(select.type === 'search' ? `/search/?source=${select.source}&type=${select.type}&keyword=${reducer3.keyword?.replace(/ /g, '+')}` : `/?source=${select.source}&type=${select.type}`)}
-                    title='Go Back'
-                    className='absolute top-[4px] text-2xl font-bold -ml-[0.3rem] hover:text-white'>
-                    <FaChevronLeft className='inline mb-[0.3rem]' /> {titleCase(select.type)}
-                </h1>
+                <LinkCheck select={select} reducer3={reducer3}>
+                    <h1
+                        title='Go Back'
+                        className='absolute top-[4px] text-2xl font-bold -ml-[0.3rem] hover:text-white'>
+                        <FaChevronLeft className='inline mb-[0.3rem]' /> {titleCase(select.type)}
+                    </h1>
+                </LinkCheck>
                 {/* Left Side */}
                 <LeftComic
                     info={info}

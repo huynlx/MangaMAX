@@ -6,7 +6,7 @@ const Index = ({ dt, slug, select }: any) => {
         <div className='flex flex-wrap gap-2'>
             {
                 dt.chapters.map((item: any, index: number) => (
-                    <Link key={item.id} href={{
+                    <Link key={item.id} as={`/comic/${slug}/${item.chap}`} href={{
                         pathname: `/comic/${slug}/${item.chap}`,
                         query: { id: item.id, source: select.source, type: select.type }
                     }}>

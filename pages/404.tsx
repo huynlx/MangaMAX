@@ -18,7 +18,7 @@ const Page404: NextPage = () => {
                     <li className='list-disc leading-[2]'>Thay đổi server khác.</li>
                 </ul>
             </div>
-            <Link href={`/?source=${select.source}&type=${select.type}`} passHref>
+            <Link as={`/`} href={`/?source=${select.source}&type=${select.type}`} passHref>
                 <p className='text-center text-lg p-3 px-9 w-fit mx-[auto] border-2 duration-300 hover:border-link hover:text-primary rounded-full hover:bg-link'>Go to Home</p>
             </Link>
         </div>
