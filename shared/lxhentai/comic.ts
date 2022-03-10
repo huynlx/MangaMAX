@@ -21,7 +21,8 @@ export const getComicInfo = async (comicSLug: string): Promise<any> => {
             updateAt: chapter.childNodes[3].textContent,
             view: chapter.childNodes[5].textContent,
             id: getQueryParams('id', chapter.querySelector('div.col-5 a')?.getAttribute('href')!),
-            chap: 'chapter-' + index[i],
+            chap: 'chapter-' + (index[i] + 1),
+            nameIndex: index[i] + 1
         }))
     }
 }

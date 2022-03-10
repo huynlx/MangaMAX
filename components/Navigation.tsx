@@ -4,8 +4,9 @@ import { useRouter } from 'next/router';
 import { useCallback, useEffect } from 'react';
 import Link from 'next/link';
 import { NavigationProps } from '../shared/types';
+import LinkCheck from './LinkCheck';
 
-const Navigation: NextPage<NavigationProps> = ({ chapters, chapterId, comicSlug, select }) => {
+const Navigation: NextPage<NavigationProps> = ({ chapters, chapterId, comicSlug, select, select2 }) => {
     let oldScrollY = 0;
     const [direction, setDirection] = useState('up');
     const selectedIndex = chapters.indexOf(chapters.find((chap) => chap.id === chapterId)!);
@@ -72,11 +73,11 @@ const Navigation: NextPage<NavigationProps> = ({ chapters, chapterId, comicSlug,
 
     return (
         <div className={`z-10 overflow-x-hidden flex items-center gap-1 w-full justify-center bg-primary ${direction === 'up' && 'sticky top-0'}`}>
-            <Link href={`/?source=${select.source}&type=${select.type}`}>
+            <LinkCheck select={select} reducer3={select2}>
                 <a className='mr-2'>
                     <i className="fas fa-home text-2xl"></i>
                 </a>
-            </Link>
+            </LinkCheck>
             <Link href={`/comic/${router.query.slug}?source=${select.source}&type=${select.type}`}>
                 <a className='mr-2'>
                     <i className="fas fa-list text-3xl"></i>
@@ -85,7 +86,9 @@ const Navigation: NextPage<NavigationProps> = ({ chapters, chapterId, comicSlug,
             <button disabled={selectedIndex === chapters.length - 1} onClick={prevChapter} className='p-2 bg-link hover:bg-link-hover w-10 h-10 text-white disabled:opacity-50'>
                 <i className="fas fa-chevron-left"></i>
             </button>
+            <label className='hidden' htmlFor="selectChapter"></label>
             <select
+                name='selectChapter'
                 onChange={(e) => selectChapter(e.target.value)}
                 value={chapters[selectedIndex].chap}
                 id="selectChapter"

@@ -4,7 +4,7 @@ import axios from "../axios"
 export const getComicInfo = async (comicSLug: string): Promise<any> => {
     const html = (await axios.get(`truyen-tranh/${comicSLug}`)).data;
     const dom = parse(html);
-    const index = dom.querySelectorAll("#nt_listchapter ul li:not(.heading)").map((item, index) => index + 1).reverse();
+    const index = dom.querySelectorAll("#nt_listchapter ul li:not(.heading)").map((item, index) => index).reverse();
 
     return {
         title: dom.querySelector('#item-detail .title-detail')?.innerText,
@@ -23,7 +23,7 @@ export const getComicInfo = async (comicSLug: string): Promise<any> => {
                 ?.getAttribute("href")
                 ?.split("/")
                 .slice(-2)[0],
-            nameIndex: index[i]
+            nameIndex: index[i] + 1
         }))
     }
 }

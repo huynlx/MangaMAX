@@ -30,7 +30,8 @@ export interface NavigationProps {
     chapters: ChaptersProps[],
     chapterId: string,
     comicSlug: string,
-    select: any
+    select: any,
+    select2: any
 }
 
 export interface GridProps {

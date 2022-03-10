@@ -21,7 +21,7 @@ export const getChapter = async (comicSLug: any, chapterSLug: any, chapterId: an
         chapters: dom.querySelectorAll("#selectChapter:first-child option").map((option, i) => ({
             name: option.innerText,
             id: option.getAttribute("value"),
-            chap: "chapter-" + index[i]
+            chap: "chapter-" + (index[i] + 1)
         }))
     }
 }

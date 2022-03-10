@@ -19,18 +19,20 @@ export const getComicInfo = async (comicSLug: string): Promise<any> => {
     const dom = parse(html);
 
     const chapters = [];
-    for (const obj of json) {
-        const time = obj.last_update.split(' ');
+    const index = json.map((item: any, index: any) => index).reverse();
+    for (const i in json) {
+        const time = json[i].last_update.split(' ');
         const d = time[0].split('-');
         const t = time[1].split(':');
         const d2 = d[1] + '/' + d[2] + '/' + d[0];
         const t2 = t[0] + ":" + t[1];
         chapters.push({
-            name: titleCase(obj.chapter_name),
+            name: titleCase(json[i].chapter_name),
             updateAt: time[0],
-            view: obj.total_view,
-            id: obj.id_chapter,
-            chap: 'chapter-' + parseFloat(obj.chapter_num),
+            view: json[i].total_view,
+            id: json[i].id_chapter,
+            chap: 'chapter-' + parseFloat(json[i].chapter_num),
+            nameIndex: index[i] + 1
         });
     }
 

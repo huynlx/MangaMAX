@@ -10,10 +10,11 @@ module.exports = {
         'header': "url('/bg.jpg')",
       },
       colors: {
-        primary: "#181A1B",
+        primary: "rgb(17 24 39)",
         nav: "#202224",
         link: "#248FFF",
         "link-hover": "#085ED7",
+        chapter: "#112E40"
       },
     },
   },

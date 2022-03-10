@@ -7,13 +7,17 @@ import Loader from '../components/Loader';
 import ColumnRender from './ColumnRender';
 import useInfiniteScroll from "react-infinite-scroll-hook";
 import useFetchHome from '../hooks/useFetchHome';
+import useFetchSearch from '../hooks/useFetchSearch';
 import { handleSource } from '../store/action';
+import { IoArrowBack } from 'react-icons/io5';
+import Router from 'next/router';
 
-const Grid: NextPage = () => {
+const Grid: NextPage<{ keyword: string }> = ({ keyword }) => {
     const { windowSize } = useSelector((state: any) => state.reducer2);
     const [cols, setCols] = useState(8);
     const select: any = useSelector((state: any) => state.reducer);
-    const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } = useFetchHome({ source: select.source, type: select.type });
+    const fetch = keyword ? useFetchSearch : useFetchHome;
+    const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } = fetch({ source: select.source, type: select.type, keyword: keyword });
     const list = data?.pages.map((list) => list.items).flat(); //gộp các mảng page thành 1 mảng data
     const content = setData(cols, list ? list : []);
     const dispatch = useDispatch();
@@ -55,22 +59,36 @@ const Grid: NextPage = () => {
                 (isLoading || isFetchingNextPage) && <Loader />
             }
             <div className='picker flex gap-5 items-center my-5'>
-                <h1
-                    className={`font-semibold ${select.type === 'latest' ? 'text-white text-2xl' : 'text-xl brightness-75'}`}
-                    onClick={() => {
-                        dispatch(handleSource(select.source, 'latest'))
-                    }}
-                >
-                    Latest
-                </h1>
-                <h1
-                    className={`font-semibold ${select.type === 'browse' ? 'text-white text-2xl' : 'text-xl brightness-75'}`}
-                    onClick={() => {
-                        dispatch(handleSource(select.source, 'browse'))
-                    }}
-                >
-                    Browse
-                </h1>
+                {
+                    keyword && <h1
+                        className={`w-full font-semibold ${select.type === 'search' ? 'text-white text-2xl' : 'text-xl brightness-75'}`}
+                    >
+                        Search
+                        <span onClick={() => { dispatch(handleSource(select.source, 'latest')); Router.push(`/`); }} className='float-right flex text-gray-300 hover:text-white transition gap-1'><IoArrowBack size={30} /> Back to main</span>
+                    </h1>
+                }
+                {
+                    !keyword && (
+                        <>
+                            <h1
+                                className={`font-semibold ${select.type === 'latest' ? 'text-white text-2xl' : 'text-xl brightness-75'}`}
+                                onClick={() => {
+                                    dispatch(handleSource(select.source, 'latest'))
+                                }}
+                            >
+                                Latest
+                            </h1>
+                            <h1
+                                className={`font-semibold ${select.type === 'browse' ? 'text-white text-2xl' : 'text-xl brightness-75'}`}
+                                onClick={() => {
+                                    dispatch(handleSource(select.source, 'browse'))
+                                }}
+                            >
+                                Browse
+                            </h1>
+                        </>
+                    )
+                }
             </div>
             <div className={`grid gap-2 comic-list`}>
                 {

@@ -51,6 +51,7 @@ export const getComicInfo = async (comicSLug: string): Promise<any> => {
             view: 'N/A',
             id: index[i].toString(),
             chap: chapter.querySelectorAll('a')[0].getAttribute('href')?.split('/').slice(5, -1)[0],
+            nameIndex: index[i] + 1
         }))
     }
 }
