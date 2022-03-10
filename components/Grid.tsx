@@ -29,7 +29,7 @@ const Grid: NextPage = () => {
         loading: isFetchingNextPage,
         hasNextPage: !!hasNextPage,
         onLoadMore: fetchNextPage,
-        rootMargin: "0px 0px 100px 0px",
+        rootMargin: "0px 0px 200px 0px",
     });
 
     useEffect(() => {
@@ -50,7 +50,7 @@ const Grid: NextPage = () => {
     }, [])
 
     return (
-        <main className='main px-[2vw] md:px-[5vw] pb-[5rem]'>
+        <main className='main px-[2vw] lg:px-[5vw] pb-[5rem]'>
             {
                 (isLoading || isFetchingNextPage) && <Loader />
             }
@@ -85,7 +85,7 @@ const Grid: NextPage = () => {
                     ))
                 }
             </div>
-            <div ref={sentryRef} className='flex justify-center pt-5'></div>
+            <div ref={sentryRef} />
         </main>
     );
 };

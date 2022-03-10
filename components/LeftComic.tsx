@@ -11,7 +11,7 @@ const LeftComic: NextPage<any> = ({ info, select, slug }) => (
                 className='h-[315px] w-[200px] min-w-[200px] object-cover mx-auto sm:mx-0 rounded-lg duration-[0ms]'
                 src={info.cover}
                 alt=""
-                className2='bg-gray-400 rounded-lg !h-[300px]' />
+                className2='bg-gray-400 rounded-lg !h-[315px]' />
             <div className='info gap-2 flex flex-col'>
                 <h1 className=' font-bold text-3xl text-white'>{info.title}</h1>
                 <p className='text-white text-lg font-semibold'>Author: <span className='text-gray-300'>{info.author}</span></p>
@@ -33,9 +33,10 @@ const LeftComic: NextPage<any> = ({ info, select, slug }) => (
                 </div>}
             </div>
         </div>
+        <h1 className='text-2xl text-white font-bold border-l-[5px] border-red-400 pl-2 mb-3'>Summary</h1>
         <p className=' break-words text-justify text-white'>{info.desc}</p>
-        {info.genres.map((item: any) => (
-            <p key={item} className='inline-block bg-gray-700 mr-2 px-4 py-[5px] rounded-full mt-2 lg:mt-4 text-white'>{item}</p>
+        {info.genres.map((item: any, index: number) => (
+            <p key={index} className='inline-block bg-gray-700 mr-2 px-4 py-[5px] rounded-full mt-2 lg:mt-4 text-white'>{item}</p>
         ))}
     </div>
 );

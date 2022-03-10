@@ -25,7 +25,7 @@ const Comic: NextPage<ComicProps> = ({ info, slug }) => {
 
 
     return (
-        <div className='px-[5vw] lg:h-[92.5vh] pt-10 pb-3 flex flex-col lg:flex-row relative'>
+        <div className='px-[2vw] lg:px-[5vw] lg:h-[92.5vh] pt-10 pb-3 flex flex-col lg:flex-row relative lg:max-h-[100vh] overflow-hidden'>
             <h1
                 onClick={() => navigate.push(`/?source=${select.source}&type=${select.type}`)}
                 title='Go Back'

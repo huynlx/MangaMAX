@@ -14,14 +14,14 @@ const RightComic: NextPage<any> = ({ dt, handleSort, slug, select }) => {
     }
 
     return (
-        <div className='chapters lg:w-[40%] max-h-[100vh] overflow-auto'>
-            <ul>
-                <div className='pl-1 pr-3 py-1 hidden lg:block sticky bg-primary top-0 text-white text-xl font-bold'>
-                    <h1 className='inline text-2xl'>Chapters</h1>
-                    <RiSortDesc title='Sort' onClick={() => handleSort()} className=' mx-2 float-right font-bold hover:brightness-75' size={30} />
-                    <div className='float-right border h-[31px] bg-white'></div>
-                    <CgDisplayGrid onClick={() => handleChapter()} className='float-right font-bold hover:brightness-75 mx-2' size={30} />
-                </div>
+        <div className='chapters lg:w-[40%]'>
+            <div className='py-1 hidden lg:block sticky bg-primary top-0 text-white text-xl font-bold'>
+                <h1 className='inline text-2xl border-l-[5px] border-red-400 ml-1 pl-2'>Chapters</h1>
+                <RiSortDesc title='Sort' onClick={() => handleSort()} className=' mx-2 float-right font-bold hover:brightness-75' size={30} />
+                <div className='float-right border h-[31px] bg-white'></div>
+                <CgDisplayGrid title='List | Index' onClick={() => handleChapter()} className='float-right font-bold hover:brightness-75 mx-2' size={30} />
+            </div>
+            <ul className='overflow-y-scroll max-h-[80vh] -mr-[6px]'>
                 {
                     reducer3.indexChapters ? (
                         <Index
