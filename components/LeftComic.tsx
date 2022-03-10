@@ -35,11 +35,13 @@ const LeftComic: NextPage<any> = ({ info, select, slug }) => (
         </div>
         <h1 className='text-2xl text-white font-bold border-l-[5px] border-red-400 pl-2 mb-3'>Summary</h1>
         <p className=' break-words text-justify text-white'>{info.desc}</p>
-        {
-            info.genres.map((item: any, index: number) => (
-                <p key={index} className='inline-block bg-gray-700 mr-2 px-4 py-[5px] rounded-full mt-2 lg:mt-4 text-white'>{item}</p>
-            ))
-        }
+        <div className='mt-4'>
+            {
+                info.genres.map((item: any, index: number) => (
+                    <p key={index} className='inline-block bg-gray-700 mr-2 px-4 py-[5px] rounded-full mb-2 text-white'>{item}</p>
+                ))
+            }
+        </div>
     </div >
 );
 

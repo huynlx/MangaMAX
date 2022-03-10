@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { NextPage } from 'next';
 import { useDispatch, useSelector } from 'react-redux'
 import { setData } from '../shared/useSetData';
@@ -18,8 +18,11 @@ const Grid: NextPage<{ keyword?: string }> = ({ keyword }) => {
     const select: any = useSelector((state: any) => state.reducer);
     const fetch = keyword ? useFetchSearch : useFetchHome;
     const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } = fetch({ source: select.source, type: select.type, keyword: keyword });
-    const list = data?.pages.map((list) => list.items).flat(); //gộp các mảng page thành 1 mảng data
-    const content = setData(cols, list ? list : []);
+
+    const list = useMemo(() => data?.pages.map((list) => list.items).flat(), [data]); //gộp nhiều mảng page thành 1 mảng duy nhất
+
+    const content = useMemo(() => setData(cols, list ? list : []), [cols, list]);
+
     const dispatch = useDispatch();
     const { reducer3 } = useSelector((state: any) => state);
 
@@ -33,7 +36,7 @@ const Grid: NextPage<{ keyword?: string }> = ({ keyword }) => {
         loading: isFetchingNextPage,
         hasNextPage: !!hasNextPage,
         onLoadMore: fetchNextPage,
-        rootMargin: "0px 0px 200px 0px",
+        rootMargin: "0px 0px 400px 0px",
     });
 
     useEffect(() => {
@@ -54,57 +57,59 @@ const Grid: NextPage<{ keyword?: string }> = ({ keyword }) => {
     }, [reducer3.scrollPosition])
 
     return (
-        <main className='main px-[2vw] lg:px-[5vw] pb-[5rem]'>
-            {
-                (isLoading || isFetchingNextPage) && <Loader />
-            }
-            <div className='picker flex gap-5 items-center my-5'>
+        <>
+            <main className='main px-[2vw] lg:px-[5vw] pb-[5rem]'>
                 {
-                    keyword && <h1
-                        className={`w-full font-semibold ${select.type === 'search' ? 'text-white text-2xl' : 'text-xl brightness-75'}`}
-                    >
-                        Search
-                        <span onClick={() => { dispatch(handleSource(select.source, 'latest')); Router.push(`/`); }} className='float-right flex text-gray-300 hover:text-white transition gap-1 font-normal'><IoArrowBack size={30} /> Back</span>
-                    </h1>
+                    (isLoading || isFetchingNextPage) && <Loader />
                 }
-                {
-                    !keyword && (
-                        <>
-                            <h1
-                                className={`font-semibold ${select.type === 'latest' ? 'text-white text-2xl' : 'text-xl brightness-75'}`}
-                                onClick={() => {
-                                    dispatch(handleSource(select.source, 'latest'))
-                                }}
-                            >
-                                Latest
-                            </h1>
-                            <h1
-                                className={`font-semibold ${select.type === 'browse' ? 'text-white text-2xl' : 'text-xl brightness-75'}`}
-                                onClick={() => {
-                                    dispatch(handleSource(select.source, 'browse'))
-                                }}
-                            >
-                                Browse
-                            </h1>
-                        </>
-                    )
-                }
-            </div>
-            <div className={`grid gap-2 comic-list`}>
-                {
-                    content.map((colRendered: any, key: number) => (
-                        <ColumnRender
-                            colRendered={colRendered}
-                            key={key}
-                            keyProp={key}
-                            content={content}
-                            select={select}
-                        />
-                    ))
-                }
-            </div>
+                <div className='picker flex gap-5 items-center my-5'>
+                    {
+                        keyword && <h1
+                            className={`w-full font-semibold ${select.type === 'search' ? 'text-white text-2xl' : 'text-xl brightness-75'}`}
+                        >
+                            Search
+                            <span onClick={() => { dispatch(handleSource(select.source, 'latest')); Router.push(`/`); }} className='float-right flex text-gray-300 hover:text-white transition gap-1 font-normal'><IoArrowBack size={30} /> Back</span>
+                        </h1>
+                    }
+                    {
+                        !keyword && (
+                            <>
+                                <h1
+                                    className={`font-semibold ${select.type === 'latest' ? 'text-white text-2xl' : 'text-xl brightness-75'}`}
+                                    onClick={() => {
+                                        dispatch(handleSource(select.source, 'latest'))
+                                    }}
+                                >
+                                    Latest
+                                </h1>
+                                <h1
+                                    className={`font-semibold ${select.type === 'browse' ? 'text-white text-2xl' : 'text-xl brightness-75'}`}
+                                    onClick={() => {
+                                        dispatch(handleSource(select.source, 'browse'))
+                                    }}
+                                >
+                                    Browse
+                                </h1>
+                            </>
+                        )
+                    }
+                </div>
+                <div className={`grid gap-2 comic-list`}>
+                    {
+                        content.map((colRendered: any, key: number) => (
+                            <ColumnRender
+                                colRendered={colRendered}
+                                key={key}
+                                keyProp={key}
+                                content={content}
+                                select={select}
+                            />
+                        ))
+                    }
+                </div>
+            </main>
             <div ref={sentryRef} />
-        </main>
+        </>
     );
 };
 

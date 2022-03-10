@@ -26,10 +26,15 @@ const queryClient = new QueryClient({
   },
 });
 
-const MyApp = ({ Component, pageProps, initialData }) => {
+const MyApp = ({ Component, pageProps }) => {
   const { windowSize } = useSelector((state) => state.reducer2);
   const [scroll, setScroll] = useState(false);
   const dispatch = useDispatch();
+  const select = useSelector(state => state.reducer);
+
+  useEffect(() => {
+    queryClient.clear(); //change source to clear all cache
+  }, [select.source]);
 
   //watch resize
   useEffect(() => {
@@ -143,11 +148,11 @@ const MyApp = ({ Component, pageProps, initialData }) => {
 //   return { pageProps, footerData };
 // };
 
-MyApp.getInitialProps = async ({ store }) => {
-  // console.log(store);
-  const initialData = { data: 'test' }
+// MyApp.getInitialProps = async ({ store }) => {
+//   // console.log(store);
+//   const initialData = { data: 'test' }
 
-  return { initialData }
-};
+//   return { initialData }
+// };
 
 export default wrapper.withRedux(MyApp);

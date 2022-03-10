@@ -1,26 +1,15 @@
 import { NextPage } from 'next';
 import React, { memo } from 'react';
 import Grid from '../../components/Grid';
-import { wrapper } from '../../store';
-import { handleSource } from '../../store/action';
+import { useRouter } from 'next/router';
 
-const search: NextPage<{ keyword: string }> = ({ keyword }) => {
-
+const search: NextPage = () => {
+    const router = useRouter();
+    const { keyword } = router.query;
+    
     return (
-        <Grid keyword={keyword} />
+        <Grid keyword={keyword as string} />
     );
 };
-
-export const getServerSideProps = wrapper.getServerSideProps(
-    (store) => async ({ query }) => {
-        store.dispatch<any>(handleSource(query.source, query.type, store))
-        return {
-            props: {
-                keyword: query.keyword as string,
-                page: +query.page!
-            },
-        };
-    }
-)
 
 export default memo(search);

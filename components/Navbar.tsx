@@ -7,6 +7,7 @@ import SideBar from './SideBar';
 import { useDispatch, useSelector } from 'react-redux';
 import { titleCase } from '../shared/cmanga/titleCase';
 import LinkCheck from './LinkCheck';
+import { handleSource } from '../store/action';
 
 const Navbar: NextPage<{ scroll: boolean }> = ({ scroll }) => {
     const [isActive, setIsActive] = useState(false);
@@ -22,6 +23,7 @@ const Navbar: NextPage<{ scroll: boolean }> = ({ scroll }) => {
         e.preventDefault();
         document.getElementById('keyword')?.blur();
         dispatch({ type: 'SCROLL_POSITION', payload: { keyword: inputValue.trim(), scrollPosition: 0 } });
+        dispatch(handleSource(select.source, 'search'));
         if (inputValue.trim())
             router.push({
                 pathname: "/search",
@@ -30,7 +32,7 @@ const Navbar: NextPage<{ scroll: boolean }> = ({ scroll }) => {
                     source: select.source,
                     type: 'search'
                 },
-            }, `/search/${inputValue.trim()}`);
+            }, `/search/${inputValue.trim().replace(/ /g, '+')}`);
         // setInputValue(''); //reset form
     };
 

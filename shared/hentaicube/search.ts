@@ -37,7 +37,7 @@ const getSearch = async (keyword: string, page: number = 1, source: string): Pro
             pages.push(p);
         }
         const lastPage = Math.max(...pages);
-        const hasNextPage = (+page) !== lastPage;
+        const hasNextPage = pages.length > 0 ? (+page) !== lastPage : false;
         const currentPage = Number(dom.querySelector('.wp-pagenavi > span.current')?.innerText.trim());
 
         return {
