@@ -1,4 +1,3 @@
-import { NextPage } from 'next';
 import React, { useState } from 'react';
 import { ComicProps } from 'shared/types';
 import { RiSortDesc } from 'react-icons/ri';
@@ -10,7 +9,7 @@ import { titleCase } from 'shared/cmanga/titleCase';
 import Head from 'next/head';
 import LinkCheck from 'components/LinkCheck';
 
-const Info: NextPage<ComicProps> = ({ info, slug }) => {
+const Info = ({ info, slug }: ComicProps) => {
     const select: any = useSelector((state: any) => state.reducer);
     const { reducer3 }: any = useSelector((state: any) => state);
     const [dt, setDt] = useState<any>(info);

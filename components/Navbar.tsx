@@ -1,4 +1,3 @@
-import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { FormEvent } from 'react';
@@ -9,7 +8,7 @@ import { titleCase } from '../shared/cmanga/titleCase';
 import LinkCheck from './LinkCheck';
 import { handleSource } from '../store/action';
 
-const Navbar: NextPage<{ scroll: boolean }> = ({ scroll }) => {
+const Navbar = ({ scroll }: { scroll: boolean }) => {
     const [isActive, setIsActive] = useState(false);
     const [inputValue, setInputValue] = useState("");
     const select: any = useSelector((state: any) => state.reducer);

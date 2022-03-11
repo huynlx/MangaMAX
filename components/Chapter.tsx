@@ -1,4 +1,3 @@
-import { NextPage } from 'next';
 import React, { useCallback } from 'react';
 import Link from 'next/link';
 import Navigation from 'components/Navigation';
@@ -7,7 +6,7 @@ import { useSelector } from 'react-redux';
 import ReadImage from 'components/ReadImage';
 import Head from 'next/head';
 
-const ChapterComponent: NextPage<any> = ({ chapter, chapterId, comicSlug }) => {
+const ChapterComponent = ({ chapter, chapterId, comicSlug }: any) => {
     const select: any = useSelector((state: any) => state.reducer);
     const select2: any = useSelector((state: any) => state.reducer3);
     const router = useRouter();

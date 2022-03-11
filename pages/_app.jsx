@@ -33,7 +33,7 @@ const MyApp = ({ Component, pageProps }) => {
   const select = useSelector(state => state.reducer);
 
   // useEffect(() => {
-    // console.log(queryClient.getQueryCache());
+  // console.log(queryClient.getQueryCache());
   //   queryClient.clear(); //change source to clear all cache => bị fetch api 2 lần
   // }, [select.source, select.type]);
 

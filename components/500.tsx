@@ -1,6 +1,4 @@
-import { NextPage } from "next";
-
-const Component500: NextPage = () => {
+const Component500 = () => {
     return <h1>500 - Server error occurred</h1>
 }
 

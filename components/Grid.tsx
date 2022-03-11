@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { NextPage } from 'next';
 import { useDispatch, useSelector } from 'react-redux'
 import { setData } from '../shared/useSetData';
 import { setCol } from '../shared/useSetData';
@@ -10,8 +9,9 @@ import useFetchSearch from '../hooks/useFetchSearch';
 import { handleSource } from '../store/action';
 import { IoArrowBack } from 'react-icons/io5';
 import Router from 'next/router';
+import LoadMore from './LoadMore';
 
-const Grid: NextPage<{ keyword?: string }> = ({ keyword }) => {
+const Grid = ({ keyword }: { keyword?: string }) => {
     const { windowSize } = useSelector((state: any) => state.reducer2);
     const [cols, setCols] = useState(8);
     const select: any = useSelector((state: any) => state.reducer);
@@ -19,16 +19,15 @@ const Grid: NextPage<{ keyword?: string }> = ({ keyword }) => {
     const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } = fetch({ source: select.source, type: select.type, keyword: keyword });
     const [page, setPage] = useState(1);
     const [first, setFirst] = useState(true);
-
-    useEffect(() => {        
-        !first && fetchNextPage();
-        setFirst(false);
-    }, [page])
-
     const list = useMemo(() => data?.pages.map((list) => list.items).flat(), [data]); //gộp nhiều mảng page thành 1 mảng duy nhất
     const content = useMemo(() => setData(cols, list ? list : []), [cols, list]);
     const dispatch = useDispatch();
     const { reducer3 } = useSelector((state: any) => state);
+
+    useEffect(() => {
+        !first && fetchNextPage();
+        setFirst(false);
+    }, [page])
 
     useEffect(() => {
         if (cols !== setCol(windowSize)) {
@@ -81,7 +80,7 @@ const Grid: NextPage<{ keyword?: string }> = ({ keyword }) => {
     }, [data])
 
     return (
-        <main className='main px-[2vw] lg:px-[5vw]'>
+        <main className='main px-[2vw] lg:px-[5vw] mb-28'>
             {
                 isLoading && <Loader />
             }
@@ -120,7 +119,7 @@ const Grid: NextPage<{ keyword?: string }> = ({ keyword }) => {
                     )
                 }
             </div>
-            <div className={`grid gap-2 comic-list mb-28`}>
+            <div className={`grid gap-2 comic-list mb-10`}>
                 {
                     content.map((colRendered: any, key: number) => {
                         return (
@@ -133,6 +132,9 @@ const Grid: NextPage<{ keyword?: string }> = ({ keyword }) => {
                     })
                 }
             </div>
+            {
+                hasNextPage && <LoadMore />
+            }
         </main>
     );
 };

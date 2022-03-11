@@ -1,10 +1,9 @@
-import { NextPage } from 'next';
 import Link from 'next/link';
 import React from 'react';
 import { FaChevronRight } from 'react-icons/fa';
 import ReadImage from './ReadImage';
 
-const LeftComic: NextPage<any> = ({ info, select, slug }) => (
+const LeftComic = ({ info, select, slug }: any) => (
     <div className='lg:w-[59vw] lg:pr-10 max-h-[none] lg:max-h-[100vh] overflow-auto'>
         <div className='flex mb-4 gap-5 flex-col sm:flex-row'>
             <ReadImage

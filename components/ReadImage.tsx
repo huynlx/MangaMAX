@@ -1,8 +1,7 @@
-import { NextPage } from 'next';
 import React, { useEffect, useState } from 'react';
 import { BsFillImageFill } from "react-icons/bs";
 
-const ReadImage: NextPage<any> = ({ src, opacity, ...props }) => {
+const ReadImage = ({ src, opacity, ...props }: any) => {
     const [loaded, setLoaded] = useState(false);
 
     useEffect(() => {

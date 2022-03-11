@@ -1,4 +1,3 @@
-import { NextPage } from 'next';
 import React, { useRef } from 'react';
 import { useOnClickOutside } from '../shared/useOnClickOutside';
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,7 +5,7 @@ import Router from 'next/router'
 import { SOURCES } from '../shared/constants';
 import { handleSource } from '../store/action';
 
-const SideBar: NextPage<any> = ({ className, id }) => {
+const SideBar = ({ className, id }: any) => {
     const ref = useRef(null);
     const select: any = useSelector((state: any) => state.reducer);
     const dispatch = useDispatch();

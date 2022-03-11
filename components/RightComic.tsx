@@ -1,4 +1,3 @@
-import { NextPage } from 'next';
 import React from 'react';
 import { RiSortDesc } from 'react-icons/ri';
 import { CgDisplayGrid } from 'react-icons/cg';
@@ -7,7 +6,7 @@ import Index from './Index';
 import dynamic from 'next/dynamic';
 const List = dynamic(() => import('./List'));
 
-const RightComic: NextPage<any> = ({ dt, handleSort, slug, select }) => {
+const RightComic = ({ dt, handleSort, slug, select }: any) => {
     const { reducer3 } = useSelector((state: any) => state);
     const dispatch = useDispatch();
     const handleChapter = () => {
