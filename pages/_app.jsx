@@ -32,9 +32,10 @@ const MyApp = ({ Component, pageProps }) => {
   const dispatch = useDispatch();
   const select = useSelector(state => state.reducer);
 
-  useEffect(() => {
-    queryClient.clear(); //change source to clear all cache
-  }, [select.source]);
+  // useEffect(() => {
+    // console.log(queryClient.getQueryCache());
+  //   queryClient.clear(); //change source to clear all cache => bị fetch api 2 lần
+  // }, [select.source, select.type]);
 
   //watch resize
   useEffect(() => {
@@ -94,7 +95,6 @@ const MyApp = ({ Component, pageProps }) => {
   useEffect(() => {
     const listenToScroll = () => {
       const scrolled = window.pageYOffset; //scroll position
-
       if (scrolled > 50) { //scroll => true
         if (!scroll) {
           setScroll(true);

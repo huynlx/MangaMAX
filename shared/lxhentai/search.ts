@@ -2,6 +2,7 @@ import axios from "../axios";
 import { parse } from "node-html-parser";
 import getQueryParams from "../useGetQueryParams";
 import decodeHTMLEntity from "../decodeHTML";
+import { generateRandomColor } from "../getRandomColor";
 
 const getSearch = async (keyword: string, page: number = 1, url: string): Promise<any> => {
 
@@ -27,7 +28,7 @@ const getSearch = async (keyword: string, page: number = 1, url: string): Promis
                 chapter: item.querySelector(".newestChapter a")?.innerText,
                 slug: getQueryParams('id', item.getElementsByTagName('a')[1].getAttribute('href')!),
                 updateAt: null,
-                id: getQueryParams('id', item.getElementsByTagName('a')[1].getAttribute('href')!)
+                id: getQueryParams('id', item.getElementsByTagName('a')[1].getAttribute('href')!),
             }
         });
 

@@ -5,7 +5,6 @@ import { setData } from '../shared/useSetData';
 import { setCol } from '../shared/useSetData';
 import Loader from '../components/Loader';
 import ColumnRender from './ColumnRender';
-import useInfiniteScroll from "react-infinite-scroll-hook";
 import useFetchHome from '../hooks/useFetchHome';
 import useFetchSearch from '../hooks/useFetchSearch';
 import { handleSource } from '../store/action';
@@ -18,11 +17,16 @@ const Grid: NextPage<{ keyword?: string }> = ({ keyword }) => {
     const select: any = useSelector((state: any) => state.reducer);
     const fetch = keyword ? useFetchSearch : useFetchHome;
     const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } = fetch({ source: select.source, type: select.type, keyword: keyword });
+    const [page, setPage] = useState(1);
+    const [first, setFirst] = useState(true);
+
+    useEffect(() => {        
+        !first && fetchNextPage();
+        setFirst(false);
+    }, [page])
 
     const list = useMemo(() => data?.pages.map((list) => list.items).flat(), [data]); //gộp nhiều mảng page thành 1 mảng duy nhất
-
     const content = useMemo(() => setData(cols, list ? list : []), [cols, list]);
-
     const dispatch = useDispatch();
     const { reducer3 } = useSelector((state: any) => state);
 
@@ -30,16 +34,11 @@ const Grid: NextPage<{ keyword?: string }> = ({ keyword }) => {
         if (cols !== setCol(windowSize)) {
             setCols(setCol(windowSize));
         }
-    }, [windowSize, cols])
-
-    const [sentryRef] = useInfiniteScroll({
-        loading: isFetchingNextPage,
-        hasNextPage: !!hasNextPage,
-        onLoadMore: fetchNextPage,
-        rootMargin: "0px 0px 400px 0px",
-    });
+    }, [windowSize])
 
     useEffect(() => {
+        window.scrollTo(0, reducer3.scrollPosition);
+
         const handleClick = () => {
             const position = window.pageYOffset;
             dispatch({ type: 'SCROLL_POSITION', payload: { scrollPosition: position } })
@@ -50,66 +49,91 @@ const Grid: NextPage<{ keyword?: string }> = ({ keyword }) => {
         return () => {
             window.removeEventListener('click', handleClick);
         };
-    }, [dispatch]);
+    }, []);
 
+    // Listen to scroll positions for loading more data on scroll
     useEffect(() => {
-        window.scrollTo(0, reducer3.scrollPosition);
-    }, [reducer3.scrollPosition])
+        const handleScroll = () => {
+            // To get page offset of last comic
+            const lastComicLoaded = document.querySelector<HTMLElement>(
+                ".comic-list .comic:last-child"
+            )
+
+            if (lastComicLoaded) {
+                const lastComicLoadedOffset = lastComicLoaded.offsetTop + lastComicLoaded.clientHeight
+                const pageOffset = window.pageYOffset + window.innerHeight
+
+                // Detects when user scrolls down till the last comic
+                if (pageOffset - lastComicLoadedOffset > -300) {
+                    if (hasNextPage) {
+                        // Trigger fetch
+                        setPage(data?.pages.slice(-1)[0].currentPage + 1);
+                    }
+                }
+            }
+        }
+
+        // Listen for scroll events
+        window.addEventListener("scroll", handleScroll)
+        return () => {
+            window.removeEventListener("scroll", handleScroll)
+        }
+    }, [data])
 
     return (
-        <>
-            <main className='main px-[2vw] lg:px-[5vw] pb-[5rem]'>
+        <main className='main px-[2vw] lg:px-[5vw]'>
+            {
+                isLoading && <Loader />
+            }
+            {
+                isFetchingNextPage && <Loader className='md:hidden' />
+            }
+            <div className='picker flex gap-5 items-center my-5'>
                 {
-                    (isLoading || isFetchingNextPage) && <Loader />
+                    keyword && <h1
+                        className={`w-full font-semibold ${select.type === 'search' ? 'text-white text-2xl' : 'text-xl brightness-75'}`}
+                    >
+                        Search
+                        <span onClick={() => { dispatch(handleSource(select.source, 'latest')); Router.push(`/`); }} className='float-right flex text-gray-300 hover:text-white transition gap-1 font-normal'><IoArrowBack size={30} /> Back</span>
+                    </h1>
                 }
-                <div className='picker flex gap-5 items-center my-5'>
-                    {
-                        keyword && <h1
-                            className={`w-full font-semibold ${select.type === 'search' ? 'text-white text-2xl' : 'text-xl brightness-75'}`}
-                        >
-                            Search
-                            <span onClick={() => { dispatch(handleSource(select.source, 'latest')); Router.push(`/`); }} className='float-right flex text-gray-300 hover:text-white transition gap-1 font-normal'><IoArrowBack size={30} /> Back</span>
-                        </h1>
-                    }
-                    {
-                        !keyword && (
-                            <>
-                                <h1
-                                    className={`font-semibold ${select.type === 'latest' ? 'text-white text-2xl' : 'text-xl brightness-75'}`}
-                                    onClick={() => {
-                                        dispatch(handleSource(select.source, 'latest'))
-                                    }}
-                                >
-                                    Latest
-                                </h1>
-                                <h1
-                                    className={`font-semibold ${select.type === 'browse' ? 'text-white text-2xl' : 'text-xl brightness-75'}`}
-                                    onClick={() => {
-                                        dispatch(handleSource(select.source, 'browse'))
-                                    }}
-                                >
-                                    Browse
-                                </h1>
-                            </>
-                        )
-                    }
-                </div>
-                <div className={`grid gap-2 comic-list`}>
-                    {
-                        content.map((colRendered: any, key: number) => (
+                {
+                    !keyword && (
+                        <>
+                            <h1
+                                className={`font-semibold ${select.type === 'latest' ? 'text-white text-2xl' : 'text-xl brightness-75'}`}
+                                onClick={() => {
+                                    dispatch(handleSource(select.source, 'latest'))
+                                }}
+                            >
+                                Latest
+                            </h1>
+                            <h1
+                                className={`font-semibold ${select.type === 'browse' ? 'text-white text-2xl' : 'text-xl brightness-75'}`}
+                                onClick={() => {
+                                    dispatch(handleSource(select.source, 'browse'))
+                                }}
+                            >
+                                Browse
+                            </h1>
+                        </>
+                    )
+                }
+            </div>
+            <div className={`grid gap-2 comic-list mb-28`}>
+                {
+                    content.map((colRendered: any, key: number) => {
+                        return (
                             <ColumnRender
                                 colRendered={colRendered}
                                 key={key}
-                                keyProp={key}
-                                content={content}
                                 select={select}
                             />
-                        ))
-                    }
-                </div>
-            </main>
-            <div ref={sentryRef} />
-        </>
+                        );
+                    })
+                }
+            </div>
+        </main>
     );
 };
 

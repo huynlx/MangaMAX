@@ -1,5 +1,6 @@
 import instance from "../axios";
 import { parse } from "node-html-parser";
+import { generateRandomColor } from "../getRandomColor";
 
 const getHome = async (page: number = 1, type: string): Promise<any> => {
 
@@ -19,14 +20,15 @@ const getHome = async (page: number = 1, type: string): Promise<any> => {
                 let elStatus = item.querySelectorAll('.message_main p')
                     .find(el => el.querySelector("label")?.innerText.includes("Tình trạng:"));
                 let status = elStatus?.childNodes[2] ?
-                    elStatus?.childNodes[2]?.textContent.includes("Đang") ? 'ONGOING' : 'COMPLETED' : 'ONGOING'
+                    elStatus?.childNodes[2]?.textContent.includes("Đang") ? 'ONGOING' : 'COMPLETED' : 'ONGOING';
+                let cover = item
+                    .querySelector("img")
+                    ?.getAttribute("data-original")
+                    ?.replace("//", "http://");
 
                 return ({
                     title: item.querySelector(".jtip")?.innerText,
-                    cover: item
-                        .querySelector("img")
-                        ?.getAttribute("data-original")
-                        ?.replace("//", "http://"),
+                    cover: cover,
                     chapter: item.querySelector(".chapter a")?.innerText,
                     slug: item
                         .querySelector("a")
@@ -34,7 +36,7 @@ const getHome = async (page: number = 1, type: string): Promise<any> => {
                         ?.split("/")
                         .slice(-1)[0],
                     updateAt: item.querySelector(".chapter i")?.innerText,
-                    status: status
+                    status: status,
                 });
             });
 

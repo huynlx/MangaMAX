@@ -5,10 +5,10 @@ const useFetchHome = (props: any) => {
     const fetchList = ({ pageParam = 1 }) => getHome({ ...props, page: pageParam });
 
     return useInfiniteQuery(["home", props], fetchList, { //props trên này là props truyền vào
-        getNextPageParam: (props) => { //props dưới này là dữ liệu trả về
-            return !props.hasNextPage
+        getNextPageParam: ({ hasNextPage, currentPage }) => { //props dưới này là dữ liệu trả về
+            return !hasNextPage
                 ? null
-                : Number(props.currentPage) + 1;
+                : Number(currentPage) + 1;
         },
     });
 };

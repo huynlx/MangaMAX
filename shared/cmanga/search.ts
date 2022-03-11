@@ -1,4 +1,5 @@
 import axios from "../axios";
+import { generateRandomColor } from "../getRandomColor";
 import { titleCase } from "./titleCase";
 
 const getSearch = async (keyword: string, page: number = 1, url: string): Promise<any> => {

@@ -10,7 +10,7 @@ module.exports = {
         'header': "url('/bg.jpg')",
       },
       colors: {
-        primary: "rgb(17 24 39)",
+        primary: "#181A1B",
         nav: "#202224",
         link: "#248FFF",
         "link-hover": "#085ED7",

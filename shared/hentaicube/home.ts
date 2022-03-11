@@ -1,6 +1,7 @@
 import instance from "../axios";
 import { parse } from "node-html-parser";
 import decodeHTMLEntity from "../decodeHTML";
+import { generateRandomColor } from "../getRandomColor";
 
 const getHome = async (page: number = 1, type: string, source: string, url: string): Promise<any> => {
 
@@ -26,7 +27,7 @@ const getHome = async (page: number = 1, type: string, source: string, url: stri
                     slug: item
                         .querySelector(".c-image-hover > a")
                         ?.getAttribute("href")?.split('/').slice(4, -1)[0],
-                    updateAt: item.querySelector(".post-on")?.innerText.trim()
+                    updateAt: item.querySelector(".post-on")?.innerText.trim(),
                 });
             });
 

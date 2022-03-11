@@ -2,6 +2,7 @@ import instance from "../axios";
 import { parse } from "node-html-parser";
 import decodeHTMLEntity from "../decodeHTML";
 import getQueryParams from "../useGetQueryParams";
+import { generateRandomColor } from "../getRandomColor";
 
 const getHome = async (page: number = 1, type: string, source: string, url: string): Promise<any> => {
     const handleSource = () => {
@@ -27,7 +28,7 @@ const getHome = async (page: number = 1, type: string, source: string, url: stri
                     chapter: item.querySelector(".newestChapter a")?.innerText,
                     slug: getQueryParams('id', item.getElementsByTagName('a')[1].getAttribute('href')!),
                     updateAt: null,
-                    id: getQueryParams('id', item.getElementsByTagName('a')[1].getAttribute('href')!)
+                    id: getQueryParams('id', item.getElementsByTagName('a')[1].getAttribute('href')!),
                 }
             });
 

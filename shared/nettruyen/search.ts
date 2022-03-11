@@ -1,5 +1,6 @@
 import axios from "../axios";
 import { parse } from "node-html-parser";
+import { generateRandomColor } from "../getRandomColor";
 
 const getSearch = async (keyword: string, page: number = 1): Promise<any> => {
     const sections = {
@@ -32,7 +33,7 @@ const getSearch = async (keyword: string, page: number = 1): Promise<any> => {
                     ?.split("/")
                     .slice(-1)[0],
                 updateAt: item.querySelector(".chapter i")?.innerText,
-                status: status
+                status: status,
             });
         });
 

@@ -14,7 +14,7 @@ const bindMiddleware = (middleware: any) => {
 export let defaultState = {
     source: '1',
     name: 'Server 1',
-    url: 'http://nettruyengo.com/',
+    url: 'http://www.nettruyenmoi.com/',
     type: 'latest'
 }
 // reducer

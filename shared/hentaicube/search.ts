@@ -1,6 +1,7 @@
 import axios from "../axios";
 import { parse } from "node-html-parser";
 import decodeHTMLEntity from "../decodeHTML";
+import { generateRandomColor } from "../getRandomColor";
 
 const getSearch = async (keyword: string, page: number = 1, source: string): Promise<any> => {
     const sections = {
@@ -26,7 +27,7 @@ const getSearch = async (keyword: string, page: number = 1, source: string): Pro
                 slug: item
                     .querySelector(".c-image-hover > a")
                     ?.getAttribute("href")?.split('/').slice(4, -1)[0],
-                updateAt: item.querySelector(".post-on .font-meta")?.innerText.trim()
+                updateAt: item.querySelector(".post-on .font-meta")?.innerText.trim(),
             });
         });
 

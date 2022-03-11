@@ -25,7 +25,7 @@ const getHome = async (page: number = 1, type: string, source: string, url: stri
                 cover: url + 'assets/tmp/book/avatar/' + item.avatar + '.jpg',
                 chapter: 'Chapter ' + item.last_chapter,
                 slug: item.url + '-' + item.id_book,
-                updateAt: item.last_update
+                updateAt: item.last_update,
             });
         };
 
