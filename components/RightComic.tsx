@@ -3,8 +3,9 @@ import React from 'react';
 import { RiSortDesc } from 'react-icons/ri';
 import { CgDisplayGrid } from 'react-icons/cg';
 import { useDispatch, useSelector } from 'react-redux';
-import List from './List';
 import Index from './Index';
+import dynamic from 'next/dynamic';
+const List = dynamic(() => import('./List'));
 
 const RightComic: NextPage<any> = ({ dt, handleSort, slug, select }) => {
     const { reducer3 } = useSelector((state: any) => state);

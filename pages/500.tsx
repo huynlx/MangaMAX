@@ -1,5 +1,5 @@
-const Page500=()=> {
-    return <h1>500 - Server error occurred</h1>
-}
+import dynamic from "next/dynamic";
+
+const Page500 = dynamic(() => import("../components/500"));
 
 export default Page500;
