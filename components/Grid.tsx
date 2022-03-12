@@ -66,7 +66,10 @@ const Grid = ({ keyword }: { keyword?: string }) => {
                 if (pageOffset - lastComicLoadedOffset > -300) {
                     if (hasNextPage) {
                         // Trigger fetch
-                        setPage(data?.pages.slice(-1)[0].currentPage + 1);
+                        let nextPage = data?.pages.slice(-1)[0].currentPage + 1;
+                        if (page !== nextPage) {
+                            setPage(nextPage);
+                        }
                     }
                 }
             }
@@ -77,7 +80,7 @@ const Grid = ({ keyword }: { keyword?: string }) => {
         return () => {
             window.removeEventListener("scroll", handleScroll)
         }
-    }, [data])
+    }, [data, page])
 
     return (
         <main className='main px-[2vw] lg:px-[5vw] mb-28'>
@@ -90,7 +93,7 @@ const Grid = ({ keyword }: { keyword?: string }) => {
             <div className='picker flex gap-5 items-center my-5'>
                 {
                     keyword && <h1
-                        className={`w-full font-semibold ${select.type === 'search' ? 'text-white text-2xl' : 'text-xl brightness-75'}`}
+                        className={`w-full font-semibold text-white text-2xl`}
                     >
                         Search
                         <span onClick={() => { dispatch(handleSource(select.source, 'latest')); Router.push(`/`); }} className='float-right flex text-gray-300 hover:text-white transition gap-1 font-normal'><IoArrowBack size={30} /> Back</span>

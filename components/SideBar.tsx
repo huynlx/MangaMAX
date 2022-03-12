@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Router from 'next/router'
 import { SOURCES } from '../shared/constants';
 import { handleSource } from '../store/action';
+import { FaCompass } from 'react-icons/fa';
 
 const SideBar = ({ className, id }: any) => {
     const ref = useRef(null);
@@ -39,7 +40,7 @@ const SideBar = ({ className, id }: any) => {
                     ))
                 }
             </div>
-            <span className='hover:text-white transition duration-300' style={{ fontSize: '30px', cursor: 'pointer' }} onClick={() => openNav()}><i className="fa-solid fa-compass"></i></span>
+            <span className='hover:text-white transition duration-300' style={{ fontSize: '30px', cursor: 'pointer' }} onClick={() => openNav()}><FaCompass /></span>
         </div >
 
     );

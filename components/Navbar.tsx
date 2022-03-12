@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { titleCase } from '../shared/cmanga/titleCase';
 import LinkCheck from './LinkCheck';
 import { handleSource } from '../store/action';
+import { GrClose } from 'react-icons/gr';
+import { FaSearch } from 'react-icons/fa';
 
 const Navbar = ({ scroll }: { scroll: boolean }) => {
     const [isActive, setIsActive] = useState(false);
@@ -20,10 +22,10 @@ const Navbar = ({ scroll }: { scroll: boolean }) => {
 
     const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        document.getElementById('keyword')?.blur();
-        dispatch({ type: 'SCROLL_POSITION', payload: { keyword: inputValue.trim(), scrollPosition: 0 } });
-        dispatch(handleSource(select.source, 'search'));
-        if (inputValue.trim())
+        if (inputValue.trim()) {
+            dispatch(handleSource(select.source, 'search'));
+            dispatch({ type: 'SCROLL_POSITION', payload: { keyword: inputValue.trim(), scrollPosition: 0 } });
+            document.getElementById('keyword')?.blur();
             router.push({
                 pathname: "/search",
                 query: {
@@ -32,7 +34,8 @@ const Navbar = ({ scroll }: { scroll: boolean }) => {
                     type: 'search'
                 },
             }, `/search/${inputValue.trim().replace(/ /g, '+')}`);
-        // setInputValue(''); //reset form
+            // setInputValue(''); //reset form
+        }
     };
 
     return (
@@ -47,11 +50,10 @@ const Navbar = ({ scroll }: { scroll: boolean }) => {
                     </a>
                 </LinkCheck>
                 <SideBar className='block md:hidden' id='sidenav1' />
-                <button className="md:hidden block">
-                    <i
-                        onClick={() => setIsActive((prev) => !prev)}
-                        className={`fas ${isActive ? "fa-times" : "fa-search"} text-white text-2xl`}
-                    ></i>
+                <button className="md:hidden block" onClick={() => setIsActive((prev) => !prev)}>
+                    {
+                        isActive ? <GrClose className='invert' size={25} /> : <FaSearch size={25} />
+                    }
                 </button>
             </div>
             {
@@ -64,7 +66,7 @@ const Navbar = ({ scroll }: { scroll: boolean }) => {
                 id='myForm'
             >
                 <button type='submit' className="bg-gray-300 flex-shrink-0 flex justify-center items-center h-8 w-8 hover:bg-white">
-                    <i className="fas fa-search text-black text-lg"></i>
+                    <FaSearch className='text-black' />
                 </button>
                 <input
                     type="text"
@@ -73,6 +75,7 @@ const Navbar = ({ scroll }: { scroll: boolean }) => {
                     placeholder="Search..."
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
+                    autoComplete='disabled'
                 />
             </form>
         </div>
