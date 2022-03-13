@@ -45,7 +45,7 @@ export const getComicInfo = async (comicSLug: string): Promise<any> => {
 
     return {
         title: title,
-        cover: image,
+        cover: `/_next/image?url=${image}&w=230&q=75`,
         author: creator,
         status: status,
         genres: tags,

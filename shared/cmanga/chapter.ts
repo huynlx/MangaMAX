@@ -12,8 +12,8 @@ export const getChapter = async (comicSLug: any, chapterSLug: any, chapterId: an
     const chapter_content = JSON.parse(chapter.content);
     var pages = [];
     for (const img of chapter_content) {
-        // pages.push(img);
-        pages.push(img.replace('.net', '.com').replace('?v=1&', '?v=9999&')); //1,01,11,21,31,41,...
+        const image = img.replace('.net', '.com').replace('?v=1&', '?v=9999&');
+        pages.push(image); //1,01,11,21,31,41,...
     }
 
     const book_id = html[1].match(/book_id.+"(.+)"/)[1];

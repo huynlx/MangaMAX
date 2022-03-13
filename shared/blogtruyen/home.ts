@@ -17,15 +17,19 @@ const getHome = async (page: number = 1, type: string, source: string, url: stri
             return htmls.map((source, index) => {
                 const dom = parse(source);
 
-                const items = dom.querySelectorAll(".list p:not(:first-child)").map((item) => ({
-                    title: decodeHTMLEntity(item.querySelector("a")?.innerText!),
-                    cover: item.nextElementSibling.querySelector("img")?.getAttribute("src")?.replace('150x', '300x300'),
-                    chapter: item.querySelector("span:nth-child(2)")?.innerText + ' chương' ?? '',
-                    slug: item
-                        .querySelector("a")
-                        ?.getAttribute("href")?.substr(1),
-                    updateAt: null,
-                }));
+                const items = dom.querySelectorAll(".list p:not(:first-child)").map((item) => {
+                    const cover = item.nextElementSibling.querySelector("img")?.getAttribute("src")?.replace('150x', '300x300');
+
+                    return ({
+                        title: decodeHTMLEntity(item.querySelector("a")?.innerText!),
+                        cover: `/_next/image?url=${cover}&w=230&q=75`,
+                        chapter: item.querySelector("span:nth-child(2)")?.innerText + ' chương' ?? '',
+                        slug: item
+                            .querySelector("a")
+                            ?.getAttribute("href")?.substr(1),
+                        updateAt: null,
+                    });
+                });
 
                 const pages: number[] = [];
                 for (const page of [...dom.querySelectorAll(".paging a")]) {
@@ -48,15 +52,19 @@ const getHome = async (page: number = 1, type: string, source: string, url: stri
             return htmls.map((source, index) => {
                 const dom = parse(source);
 
-                const items = dom.querySelectorAll(".list-mainpage .storyitem .row").map((item) => ({
-                    title: decodeHTMLEntity(item.querySelector("h3.title > a")?.innerText!),
-                    cover: item.querySelector("div:nth-child(1) > a > img")?.getAttribute("src"),
-                    chapter: item.querySelector("div:nth-child(2) > div:nth-child(4) > span:nth-child(1)")?.innerText ?? '',
-                    slug: item
-                        .querySelector("div:nth-child(1) > a")
-                        ?.getAttribute("href")?.substr(1).replace('/', '-'),
-                    updateAt: item.querySelector(".publishedDate")?.childNodes[2].textContent,
-                }));
+                const items = dom.querySelectorAll(".list-mainpage .storyitem .row").map((item) => {
+                    const cover = item.querySelector("div:nth-child(1) > a > img")?.getAttribute("src");
+
+                    return ({
+                        title: decodeHTMLEntity(item.querySelector("h3.title > a")?.innerText!),
+                        cover: `/_next/image?url=${cover}&w=230&q=75`,
+                        chapter: item.querySelector("div:nth-child(2) > div:nth-child(4) > span:nth-child(1)")?.innerText ?? '',
+                        slug: item
+                            .querySelector("div:nth-child(1) > a")
+                            ?.getAttribute("href")?.substr(1).replace('/', '-'),
+                        updateAt: item.querySelector(".publishedDate")?.childNodes[2].textContent,
+                    });
+                });
 
                 const pages: number[] = [];
                 for (const page of [...dom.querySelectorAll("ul.pagination > li a")]) {

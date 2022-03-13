@@ -5,13 +5,13 @@ import getQueryParams from "../useGetQueryParams";
 
 export const getComicInfo = async (comicSLug: string): Promise<any> => {
     const html = (await axios.get(`story/view.php?id=${comicSLug}`)).data;
-
     const dom = parse(html);
+    const cover = 'https://lxhentai.com' + dom.querySelector('.col-md-8 > .row > .col-md-4 > img')?.getAttribute('src');
     const index = dom.querySelectorAll('#listChuong > ul > .row:not(:first-child) > div.col-5').map((item, index) => index).reverse();
 
     return {
         title: decodeHTMLEntity(dom.querySelector('h1.title-detail')?.innerText.trim()!),
-        cover: 'https://lxhentai.com' + dom.querySelector('.col-md-8 > .row > .col-md-4 > img')?.getAttribute('src'),
+        cover: `/_next/image?url=${cover}&w=230&q=75`,
         author: dom.querySelector('.col-md-8 .row.mt-2 a[href*=tacgia]')?.innerText,
         status: dom.querySelectorAll('.col-md-8 .row.mt-2 .col-8')[1].innerText,
         genres: dom.querySelectorAll('.col-md-8 .row.mt-2 .col-8')[2].querySelectorAll('a').map(genre => genre.innerText),

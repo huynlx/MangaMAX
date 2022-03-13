@@ -1,6 +1,5 @@
 import instance from "../axios";
 import { parse } from "node-html-parser";
-import { generateRandomColor } from "../getRandomColor";
 
 const getHome = async (page: number = 1, type: string): Promise<any> => {
 
@@ -28,7 +27,7 @@ const getHome = async (page: number = 1, type: string): Promise<any> => {
 
                 return ({
                     title: item.querySelector(".jtip")?.innerText,
-                    cover: cover,
+                    cover: `/_next/image?url=${cover}&w=230&q=75`,
                     chapter: item.querySelector(".chapter a")?.innerText,
                     slug: item
                         .querySelector("a")

@@ -19,10 +19,11 @@ const getHome = async (page: number = 1, type: string, source: string, url: stri
         for (var i of Object.keys(json)) {
             var item = json[i];
             if (!item.name) continue;
+            var cover = url + 'assets/tmp/book/avatar/' + item.avatar + '.jpg';
 
             listItems.push({
                 title: titleCase(item.name),
-                cover: url + 'assets/tmp/book/avatar/' + item.avatar + '.jpg',
+                cover: `/_next/image?url=${cover}&w=230&q=75`,
                 chapter: 'Chapter ' + item.last_chapter,
                 slug: item.url + '-' + item.id_book,
                 updateAt: item.last_update,

@@ -5,10 +5,11 @@ export const getComicInfo = async (comicSLug: string): Promise<any> => {
     const html = (await axios.get(`truyen-tranh/${comicSLug}`)).data;
     const dom = parse(html);
     const index = dom.querySelectorAll("#nt_listchapter ul li:not(.heading)").map((item, index) => index).reverse();
+    const cover = dom.querySelector("#item-detail .col-image img")?.getAttribute('src')?.replace('//', 'https://');
 
     return {
         title: dom.querySelector('#item-detail .title-detail')?.innerText,
-        cover: dom.querySelector("#item-detail .col-image img")?.getAttribute('src')?.replace('//', 'https://'),
+        cover: `/_next/image?url=${cover}&w=230&q=75`,
         author: dom.querySelector("#item-detail .author .col-xs-8")?.innerText,
         status: dom.querySelector("#item-detail .status .col-xs-8")?.innerText,
         genres: dom.querySelectorAll("#item-detail .kind .col-xs-8 a")?.map((genre: any) => genre.innerText),

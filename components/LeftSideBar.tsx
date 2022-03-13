@@ -3,13 +3,13 @@ import { SOURCES } from 'shared/constants';
 import Router from 'next/router';
 import { handleSource } from 'store/action';
 
-const LeftSideBar = ({ id, closeNav, show }: any) => {
+const LeftSideBar = ({ id, closeNav }: any) => {
     const select: any = useSelector((state: any) => state.reducer);
     const dispatch = useDispatch();
 
     return (
-        <div id={id} className={`sidenav ${show ? 'left-0' : '-left-[250px]'}`}>
-            <div><a className="closebtn" onClick={() => closeNav()}>×</a></div>
+        <div id={id} className='sidenav z-20'>
+            <div><a className="closebtn" onClick={closeNav}>×</a></div>
             {SOURCES.map((item: any) => (
                 <div key={item.source} onClick={() => {
                     dispatch(handleSource(item.source, 'latest'));

@@ -24,7 +24,7 @@ const getHome = async (page: number = 1, type: string, source: string, url: stri
 
                 return {
                     title: decodeHTMLEntity(item.childNodes[3].innerText),
-                    cover: url + image,
+                    cover: `/_next/image?url=${url + image}&w=230&q=75`,
                     chapter: item.querySelector(".newestChapter a")?.innerText,
                     slug: getQueryParams('id', item.getElementsByTagName('a')[1].getAttribute('href')!),
                     updateAt: null,

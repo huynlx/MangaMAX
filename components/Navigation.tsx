@@ -74,10 +74,10 @@ const Navigation = ({ chapters, chapterId, comicSlug, select, select2 }: Navigat
     return (
         <div className={`z-10 overflow-x-hidden flex items-center gap-1 w-full justify-center bg-primary ${direction === 'up' && 'sticky top-0'}`}>
             <LinkCheck select={select} reducer3={select2}>
-                <FaHome className='mr-2' size={30} />
+                <a><FaHome className='mr-2' size={30} /></a>
             </LinkCheck>
             <Link as={`/comic/${router.query.slug}`} href={`/comic/${router.query.slug}?source=${select.source}&type=${select.type}`}>
-                <FaList className='mr-2' size={30} />
+                <a><FaList className='mr-2' size={30} /></a>
             </Link>
             <button disabled={selectedIndex === chapters.length - 1} onClick={prevChapter} className='p-2 bg-link hover:bg-link-hover w-10 h-10 text-white disabled:opacity-50'>
                 <FaChevronLeft size={20} />

@@ -10,7 +10,8 @@ const Comic = ({ item, select, mangaRef }: any) => (
                     className='object-cover absolute top-0 left-0 w-full h-full transition-opacity duration-300'
                     src={item.cover}
                     color={item.color}
-                    className2='!h-[16rem]' />
+                    className2='!h-[16rem]'
+                />
                 {item.status &&
                     <small className='px-2 md:py-1 rounded-full absolute bg-green-400/[.7] md:font-semibold text-white top-1 left-1 whitespace-nowrap text-ellipsis overflow-hidden max-w-[80%] 2xl:w-[auto]'>{item.status}</small>}
                 {item.updateAt &&

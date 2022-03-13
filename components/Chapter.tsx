@@ -35,7 +35,7 @@ const ChapterComponent = ({ chapter, chapterId, comicSlug }: any) => {
                 <Navigation chapters={chapter.chapters} chapterId={chapterId} comicSlug={comicSlug} select={select} select2={select2} />
                 <div className='min-h-[100vh] w-full'>
                     {
-                        chapter.images.map((image: string | undefined, index: any) => <ReadImage className='mx-auto object-cover w-full h-auto lg:min-w-[50vw] lg:max-w-[55vw]' key={index} src={image} />)
+                        chapter.images.map((image: string | undefined, index: any) => <ReadImage className='mx-auto object-cover w-full h-auto lg:min-w-[50vw] lg:max-w-[55vw] transition-opacity' key={index} src={image} />)
                     }
                 </div>
                 <div className={`w-full h-60 p-8 ${selectedIndex < 1 && 'hidden'}`}>
