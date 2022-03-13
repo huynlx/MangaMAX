@@ -43,7 +43,7 @@ const Navbar = ({ scroll }: { scroll: boolean }) => {
             <div className='flex items-center justify-between'>
                 <LinkCheck select={select} reducer3={reducer3}>
                     <a className={`flex items-center justify-start gap-3 ${(pathname == '/' || pathname === '/search') && 'pointer-events-none'}`}>
-                        <img src={`/_next/image?url=/favicon.ico&w=300&q=75`} className="w-9 h-8" alt="Logo" />
+                        <img src={`/_next/image?url=/favicon.ico&w=300&q=75`} className="max-w-[2.25rem] max-h-[2rem]" alt="Logo" />
                         <h1 className="text-2xl font-bold text-white">
                             <span className="text-link font-bold borderText">Manga</span>MAX
                         </h1>
@@ -65,7 +65,7 @@ const Navbar = ({ scroll }: { scroll: boolean }) => {
                 onSubmit={handleFormSubmit}
                 id='myForm'
             >
-                <button type='submit' className="bg-gray-300 flex-shrink-0 flex justify-center items-center h-8 w-8 hover:bg-white">
+                <button aria-label="Search" type='submit' className="bg-gray-300 flex-shrink-0 flex justify-center items-center h-8 w-8 hover:bg-white">
                     <FaSearch className='text-black' />
                 </button>
                 <input
