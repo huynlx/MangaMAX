@@ -8,7 +8,7 @@ const LeftSideBar = ({ id, closeNav, show }: any) => {
     const dispatch = useDispatch();
 
     return (
-        <div id={id} className={`sidenav -left-[${show ? '0' : '250px'}]`}>
+        <div id={id} className={`sidenav ${show ? 'left-0' : '-left-[250px]'}`}>
             <div><a className="closebtn" onClick={() => closeNav()}>×</a></div>
             {SOURCES.map((item: any) => (
                 <div key={item.source} onClick={() => {
