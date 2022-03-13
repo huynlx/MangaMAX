@@ -1,6 +1,5 @@
 import instance from "../axios";
 import { parse } from "node-html-parser";
-import { generateRandomColor } from "../getRandomColor";
 
 const getHome = async (page: number = 1, type: string, source: string, url: string): Promise<any> => {
 

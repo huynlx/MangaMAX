@@ -11,7 +11,7 @@ export const getComicInfo = async (comicSLug: string): Promise<any> => {
 
     return {
         title: decodeHTMLEntity(dom.querySelector('h1.title-detail')?.innerText.trim()!),
-        cover: `/_next/image?url=${cover}&w=230&q=75`,
+        cover: cover,
         author: dom.querySelector('.col-md-8 .row.mt-2 a[href*=tacgia]')?.innerText,
         status: dom.querySelectorAll('.col-md-8 .row.mt-2 .col-8')[1].innerText,
         genres: dom.querySelectorAll('.col-md-8 .row.mt-2 .col-8')[2].querySelectorAll('a').map(genre => genre.innerText),

@@ -23,7 +23,7 @@ const getHome = async (page: number = 1, type: string, source: string, url: stri
 
             listItems.push({
                 title: titleCase(item.name),
-                cover: `/_next/image?url=${cover}&w=230&q=75`,
+                cover: cover,
                 chapter: 'Chapter ' + item.last_chapter,
                 slug: item.url + '-' + item.id_book,
                 updateAt: item.last_update,

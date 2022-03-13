@@ -9,7 +9,7 @@ export const getComicInfo = async (comicSLug: string): Promise<any> => {
 
     return {
         title: dom.querySelector('#item-detail .title-detail')?.innerText,
-        cover: `/_next/image?url=${cover}&w=230&q=75`,
+        cover: cover,
         author: dom.querySelector("#item-detail .author .col-xs-8")?.innerText,
         status: dom.querySelector("#item-detail .status .col-xs-8")?.innerText,
         genres: dom.querySelectorAll("#item-detail .kind .col-xs-8 a")?.map((genre: any) => genre.innerText),

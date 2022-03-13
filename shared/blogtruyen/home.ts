@@ -22,7 +22,7 @@ const getHome = async (page: number = 1, type: string, source: string, url: stri
 
                     return ({
                         title: decodeHTMLEntity(item.querySelector("a")?.innerText!),
-                        cover: `/_next/image?url=${cover}&w=230&q=75`,
+                        cover: cover,
                         chapter: item.querySelector("span:nth-child(2)")?.innerText + ' chương' ?? '',
                         slug: item
                             .querySelector("a")
@@ -57,7 +57,7 @@ const getHome = async (page: number = 1, type: string, source: string, url: stri
 
                     return ({
                         title: decodeHTMLEntity(item.querySelector("h3.title > a")?.innerText!),
-                        cover: `/_next/image?url=${cover}&w=230&q=75`,
+                        cover: cover,
                         chapter: item.querySelector("div:nth-child(2) > div:nth-child(4) > span:nth-child(1)")?.innerText ?? '',
                         slug: item
                             .querySelector("div:nth-child(1) > a")

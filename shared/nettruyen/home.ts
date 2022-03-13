@@ -27,7 +27,7 @@ const getHome = async (page: number = 1, type: string): Promise<any> => {
 
                 return ({
                     title: item.querySelector(".jtip")?.innerText,
-                    cover: `/_next/image?url=${cover}&w=230&q=75`,
+                    cover: cover,
                     chapter: item.querySelector(".chapter a")?.innerText,
                     slug: item
                         .querySelector("a")
