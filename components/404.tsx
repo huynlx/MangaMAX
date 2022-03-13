@@ -18,7 +18,7 @@ const Component404 = () => {
                 </ul>
             </div>
             <Link as={`/`} href={`/?source=${select.source}&type=${select.type}`} passHref>
-                <p className='text-center text-lg p-3 px-9 w-fit mx-[auto] border-2 duration-300 hover:border-link hover:text-primary rounded-full hover:bg-link'>Go to Home</p>
+                <a className='text-center text-lg p-3 px-9 w-fit mx-[auto] border-2 duration-300 hover:border-link hover:text-primary rounded-full hover:bg-link'>Go to Home</a>
             </Link>
         </div>
     )

@@ -12,7 +12,7 @@ const nextConfig = {
       'mangapk.com',
       'truyentranhlh.net'
     ],
-    deviceSizes: [230, 720, 1280, 1920]
+    deviceSizes: [230, 300, 720, 1280, 1920]
   },
 }
 

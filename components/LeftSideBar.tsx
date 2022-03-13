@@ -9,14 +9,14 @@ const LeftSideBar = ({ id, closeNav }: any) => {
 
     return (
         <div id={id} className='sidenav z-20'>
-            <div><a className="closebtn" onClick={closeNav}>×</a></div>
+            <div><p className="closebtn" onClick={closeNav}>×</p></div>
             {SOURCES.map((item: any) => (
                 <div key={item.source} onClick={() => {
                     dispatch(handleSource(item.source, 'latest'));
                     dispatch({ type: 'SCROLL_POSITION', payload: { scrollPosition: 0 } });
                     Router.push('/');
                 }}>
-                    <a className={`text-center ${select.source == item.source && '!text-white !text-3xl'}`}>{item.name}</a>
+                    <p className={`text-center ${select.source == item.source && '!text-white !text-3xl'}`}>{item.name}</p>
                 </div>
             ))}
         </div>

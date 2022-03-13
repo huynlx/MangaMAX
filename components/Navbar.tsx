@@ -43,7 +43,7 @@ const Navbar = ({ scroll }: { scroll: boolean }) => {
             <div className='flex items-center justify-between'>
                 <LinkCheck select={select} reducer3={reducer3}>
                     <a className={`flex items-center justify-start gap-3 ${(pathname == '/' || pathname === '/search') && 'pointer-events-none'}`}>
-                        <img src="/favicon.ico" className="w-9 h-8" alt="icon" />
+                        <img src={`/_next/image?url=/favicon.ico&w=300&q=75`} className="w-9 h-8" alt="Logo" />
                         <h1 className="text-2xl font-bold text-white">
                             <span className="text-link font-bold borderText">Manga</span>MAX
                         </h1>
