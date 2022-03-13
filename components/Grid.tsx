@@ -9,7 +9,8 @@ import useFetchSearch from '../hooks/useFetchSearch';
 import { handleSource } from '../store/action';
 import { IoArrowBack } from 'react-icons/io5';
 import Router from 'next/router';
-import LoadMore from './LoadMore';
+import dynamic from 'next/dynamic';
+const LoadMore = dynamic(() => import('./LoadMore'));
 
 const Grid = ({ keyword }: { keyword?: string }) => {
     const { windowSize } = useSelector((state: any) => state.reducer2);
@@ -136,7 +137,7 @@ const Grid = ({ keyword }: { keyword?: string }) => {
                 }
             </div>
             {
-                hasNextPage && <LoadMore />
+                (hasNextPage && page > 1) && <LoadMore />
             }
         </main>
     );

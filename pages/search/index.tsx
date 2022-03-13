@@ -1,14 +1,15 @@
 import { NextPage } from 'next';
 import React, { memo } from 'react';
-import Grid from '../../components/Grid';
-import { useRouter } from 'next/router';
+import dynamic from 'next/dynamic';
+import Loader from 'components/Loader';
+const SearchComponent = dynamic(() => import('components/Search'), {
+    loading: () => <Loader />,
+});
 
 const Search: NextPage = () => {
-    const router = useRouter();
-    const { keyword } = router.query;
-    
+
     return (
-        <Grid keyword={keyword as string} />
+        <SearchComponent />
     );
 };
 
