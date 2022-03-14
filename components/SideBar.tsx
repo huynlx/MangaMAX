@@ -26,8 +26,7 @@ const SideBar = ({ className, id }: any) => {
                 closeNav={closeNav}
             />
             <span
-                className='hover:text-white transition duration-300'
-                style={{ fontSize: '30px', cursor: 'pointer' }}
+                className='hover:text-white transition duration-300 cursor-pointer text-[30px]'
                 onClick={openNav}
             >
                 <FaCompass />

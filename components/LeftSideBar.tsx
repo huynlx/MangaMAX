@@ -19,6 +19,48 @@ const LeftSideBar = ({ id, closeNav }: any) => {
                     <p className={`text-center ${select.source == item.source && '!text-white !text-3xl'}`}>{item.name}</p>
                 </div>
             ))}
+            <style jsx>{`
+                .sidenav {
+                    height: 100%;
+                    width: 250px;
+                    position: fixed;
+                    top: 0;
+                    left: -250px;
+                    background-color: #111;
+                    overflow-x: hidden;
+                    transition: 0.2s ease-out;
+                    padding-top: 60px;
+                  }
+                  
+                  .sidenav p {
+                    text-decoration: none;
+                    font-size: 25px;
+                    color: #818181;
+                    display: block;
+                    transition: 0.3s;
+                  }
+                  
+                  .sidenav p:hover {
+                    color: #f1f1f1;
+                  }
+                  
+                  .sidenav .closebtn {
+                    position: absolute;
+                    top: 0;
+                    right: 25px;
+                    font-size: 36px;
+                    margin-left: 50px;
+                  }
+                  
+                  @media screen and (max-height: 450px) {
+                    .sidenav {
+                      padding-top: 15px;
+                    }
+                    .sidenav a {
+                      font-size: 18px;
+                    }
+                  }                  
+            `}</style>
         </div>
     );
 };

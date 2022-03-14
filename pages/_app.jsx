@@ -1,9 +1,7 @@
 import '../styles/globals.css';
-import '../styles/sidebar.css';
 import "tailwindcss/tailwind.css";
 import React, { useEffect, useState } from 'react';
 import "../styles/nprogress.css";
-import '../styles/loading.css';
 import Navbar from '../components/Navbar';
 import { wrapper } from '../store';
 import { useSelector, useDispatch } from 'react-redux';
@@ -123,6 +121,7 @@ const MyApp = ({ Component, pageProps }) => {
   return (
     <>
       <Head>
+        <meta charset="utf-8" />
         <title>MangaMAX</title>
         <link rel="shortcut icon" href="/favicon.ico" />
         <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests"></meta>

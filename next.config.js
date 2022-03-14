@@ -13,7 +13,7 @@ const nextConfig = {
       'truyentranhlh.net'
     ],
     deviceSizes: [230, 300, 720, 1280, 1920]
-  },
+  }
 }
 
 module.exports = nextConfig

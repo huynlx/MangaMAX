@@ -50,7 +50,7 @@ const Navbar = ({ scroll }: { scroll: boolean }) => {
                     </a>
                 </LinkCheck>
                 <SideBar className='block md:hidden' id='sidenav1' />
-                <button className="md:hidden block" onClick={() => setIsActive((prev) => !prev)}>
+                <button aria-label="Search" className="md:hidden block" onClick={() => setIsActive((prev) => !prev)}>
                     {
                         isActive ? <GrClose className='invert' size={25} /> : <FaSearch size={25} />
                     }
@@ -75,7 +75,7 @@ const Navbar = ({ scroll }: { scroll: boolean }) => {
                     placeholder="Search..."
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
-                    autoComplete='disabled'
+                    autoComplete='off'
                 />
             </form>
         </div>
