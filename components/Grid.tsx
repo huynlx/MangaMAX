@@ -82,10 +82,7 @@ const Grid = ({ keyword }: { keyword?: string }) => {
     }, [data, page])
 
     useEffect(() => {
-        let currentPage = data?.pageParams.slice(-1)[0] || 1;
-        if (page !== currentPage) {
-            setPage(currentPage);
-        }
+        setPage(1);
     }, [select])
 
     return (
