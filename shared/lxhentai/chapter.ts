@@ -10,7 +10,7 @@ export const getChapter = async (comicSLug: any, chapterSLug: any, chapterId: an
     const list = [...dom.querySelectorAll('#content_chap p img')].length === 0 ? dom.querySelectorAll('#content_chap div:not(.text-center) img')
         : dom.querySelectorAll('#content_chap p img');
     const index = dom.querySelectorAll("#selectChapter:first-child option").map((item, index) => index).reverse();
-    const image = (img: string | undefined) => img;
+    const image = (img: string | undefined) => img?.includes('https') ? `/_next/image?url=${img}&w=1920&q=100` : img;
 
     return {
         title: dom.querySelector("#mainpage h4 a")?.innerText,

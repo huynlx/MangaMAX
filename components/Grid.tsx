@@ -18,16 +18,14 @@ const Grid = ({ keyword }: { keyword?: string }) => {
     const select: any = useSelector((state: any) => state.reducer);
     const fetch = keyword ? useFetchSearch : useFetchHome;
     const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } = fetch({ source: select.source, type: select.type, keyword: keyword });
-    const [page, setPage] = useState(1);
-    const [first, setFirst] = useState(true);
+    const [page, setPage] = useState<any>(1);
     const list = useMemo(() => data?.pages.map((list) => list.items).flat(), [data]); //gộp nhiều mảng page thành 1 mảng duy nhất
     const content = useMemo(() => setData(cols, list ? list : []), [cols, list]);
     const dispatch = useDispatch();
     const { reducer3 } = useSelector((state: any) => state);
 
     useEffect(() => {
-        !first && fetchNextPage();
-        setFirst(false);
+        (page > 1) && fetchNextPage();
     }, [page])
 
     useEffect(() => {
@@ -82,6 +80,15 @@ const Grid = ({ keyword }: { keyword?: string }) => {
             window.removeEventListener("scroll", handleScroll)
         }
     }, [data, page])
+
+    useEffect(() => {
+        if (hasNextPage) {
+            let currentPage = data?.pageParams.slice(-1)[0] || 1;
+            if (page !== currentPage) {
+                setPage(currentPage);
+            }
+        }
+    }, [select])
 
     return (
         <main className='main px-[2vw] lg:px-[5vw] mb-28'>

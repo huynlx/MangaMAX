@@ -108,7 +108,7 @@ const MyApp = ({ Component, pageProps }) => {
     return () => {
       window.removeEventListener('scroll', listenToScroll);
     }
-  }, [scroll]) //=> add scroll để cập nhật giá trị của scroll trong useEffect()
+  }, [scroll]) //=> add scroll để chạy lại => cập nhật giá trị của scroll trong useEffect()
 
   // let persistor = persistStore(wrapper);
 
@@ -121,7 +121,7 @@ const MyApp = ({ Component, pageProps }) => {
   return (
     <>
       <Head>
-        <meta charset="utf-8" />
+        <meta charSet="utf-8" />
         <title>MangaMAX</title>
         <link rel="shortcut icon" href="/favicon.ico" />
         <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests"></meta>

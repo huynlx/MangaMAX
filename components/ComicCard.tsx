@@ -2,9 +2,9 @@ import Link from 'next/link';
 import React from 'react';
 import ReadImage from './ReadImage';
 
-const Comic = ({ item, select, mangaRef }: any) => (
+const Comic = ({ item, select }: any) => (
     <Link href={`/comic/${item.slug}?source=${select.source}&type=${select.type}`} as={`/comic/${item.slug}`}>
-        <a ref={mangaRef} className='flex flex-col items-stretch comic border overflow-hidden border-transparent rounded-xl'>
+        <a className='flex flex-col items-stretch comic border overflow-hidden border-transparent rounded-xl'>
             <div className='w-full h-0 pb-[155%] relative flex-grow bg-gray-400'>
                 <ReadImage
                     className='object-cover absolute top-0 left-0 w-full h-full transition-opacity duration-300'
