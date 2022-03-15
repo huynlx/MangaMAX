@@ -82,7 +82,7 @@ const Grid = ({ keyword }: { keyword?: string }) => {
     }, [data, page])
 
     useEffect(() => {
-        setPage(1);
+        (page > 1) && setPage(1);
     }, [select])
 
     return (
