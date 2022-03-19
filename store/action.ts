@@ -61,7 +61,7 @@ export const windowResize = (size: number) => (dispatch: any) => {
 export const setScroll = (position?: number | null, keyword?: string | null, indexChapters?: boolean | null) => (dispatch: any) => {
     let payload: LooseObject = {};
 
-    if (position) payload.scrollPosition = position;
+    if (position || position === 0) payload.scrollPosition = position;
     if (keyword) payload.keyword = keyword;
     if (indexChapters) payload.indexChapters = indexChapters;
 
