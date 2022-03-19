@@ -15,6 +15,14 @@ const LinkCheck = ({ select, reducer3, children }: PropsWithChildren<LinkCheckPr
         );
     }
 
+    if (select.type === 'bookmarks') {
+        return (
+            <Link href={`/bookmarks`}>
+                {children}
+            </Link>
+        );
+    }
+
     return (
         <Link as={`/`} href={`/?source=${select.source}&type=${select.type}`}>
             {children}

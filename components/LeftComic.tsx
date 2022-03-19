@@ -83,6 +83,7 @@ const LeftComic = ({ info, select, slug }: any) => {
                     <h1 className=' font-bold text-3xl text-white'>{info.title}</h1>
                     <p className='text-white text-lg font-semibold'>Author: <span className='text-gray-300'>{info.author}</span></p>
                     <p className='text-white text-lg font-semibold'>Status: <span className='text-green-400'>{info.status}</span></p>
+                    <p className='text-white text-lg font-semibold'>Server: <span className='text-white'>{select.source}</span></p>
                     <FollowIcon
                         iconSize={30}
                         iconClassName='text-red-400 hover:scale-125 transition'

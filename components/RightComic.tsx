@@ -4,14 +4,15 @@ import { CgDisplayGrid } from 'react-icons/cg';
 import { useDispatch, useSelector } from 'react-redux';
 import Index from './Index';
 import dynamic from 'next/dynamic';
+import { setScroll } from 'store/action';
 const List = dynamic(() => import('./List'));
 
 const RightComic = ({ dt, handleSort, slug, select }: any) => {
     const { reducer3 } = useSelector((state: any) => state);
     const dispatch = useDispatch();
     const handleChapter = () => {
-        dispatch({ type: 'SCROLL_POSITION', payload: { indexChapters: !reducer3.indexChapters } })
-    }
+        dispatch(setScroll(null, null, !reducer3.indexChapters));
+    }    
 
     return (
         <div className='chapters lg:w-[40%]'>

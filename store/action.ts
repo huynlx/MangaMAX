@@ -1,8 +1,13 @@
 import axios from "../shared/axios";
 
+interface LooseObject {
+    [key: string]: any
+}
+
 export const handleTypes = {
     SOURCE: 'SOURCE',
-    WINDOW_RESIZE: 'WINDOW_RESIZE'
+    WINDOW_RESIZE: 'WINDOW_RESIZE',
+    SCROLL: 'SCROLL_POSITION'
 }
 
 export const handleSource = (source: any, type: any, store?: any) => (dispatch: any) => {
@@ -50,5 +55,18 @@ export const windowResize = (size: number) => (dispatch: any) => {
     dispatch({
         type: handleTypes.WINDOW_RESIZE,
         payload: { windowSize: size }
+    });
+};
+
+export const setScroll = (position?: number | null, keyword?: string | null, indexChapters?: boolean | null) => (dispatch: any) => {
+    let payload: LooseObject = {};
+
+    if (position) payload.scrollPosition = position;
+    if (keyword) payload.keyword = keyword;
+    if (indexChapters) payload.indexChapters = indexChapters;
+
+    dispatch({
+        type: handleTypes.SCROLL,
+        payload
     });
 };

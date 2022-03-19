@@ -4,22 +4,25 @@ import { setData } from '../shared/useSetData';
 import { setCol } from '../shared/useSetData';
 import Loader from '../components/Loader';
 import ColumnRender from './ColumnRender';
-import useFetchHome from '../hooks/useFetchHome';
-import useFetchSearch from '../hooks/useFetchSearch';
-import { handleSource } from '../store/action';
-import { IoArrowBack } from 'react-icons/io5';
-import Router from 'next/router';
 import dynamic from 'next/dynamic';
 const LoadMore = dynamic(() => import('./LoadMore'));
+import { User } from 'firebase/auth';
+import { setScroll } from 'store/action';
 
-const Grid = ({ keyword }: { keyword?: string }) => {
+interface GridProps {
+    keyword?: string,
+    fetch?: (props: any) => any,
+    typeRender: React.ComponentType<{}>,
+    user?: User | null
+}
+
+const Grid = ({ keyword, fetch, typeRender: TypeRender, user }: GridProps) => {
     const { windowSize } = useSelector((state: any) => state.reducer2);
     const [cols, setCols] = useState(8);
     const select: any = useSelector((state: any) => state.reducer);
-    const fetch = keyword ? useFetchSearch : useFetchHome;
-    const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } = fetch({ source: select.source, type: select.type, keyword: keyword });
+    const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } = fetch!({ source: select.source, type: select.type, keyword: keyword, user: user });
     const [page, setPage] = useState<any>(1);
-    const list = useMemo(() => data?.pages.map((list) => list.items).flat(), [data]); //gộp nhiều mảng page thành 1 mảng duy nhất
+    const list = useMemo(() => data?.pages.map((list: any) => list.items).flat(), [data]); //gộp nhiều mảng page thành 1 mảng duy nhất
     const content = useMemo(() => setData(cols, list ? list : []), [cols, list]);
     const dispatch = useDispatch();
     const { reducer3 } = useSelector((state: any) => state);
@@ -39,7 +42,7 @@ const Grid = ({ keyword }: { keyword?: string }) => {
 
         const handleClick = () => {
             const position = window.pageYOffset;
-            dispatch({ type: 'SCROLL_POSITION', payload: { scrollPosition: position } })
+            dispatch(setScroll(position));
         };
 
         window.addEventListener('click', handleClick, { passive: true });
@@ -94,36 +97,7 @@ const Grid = ({ keyword }: { keyword?: string }) => {
                 isFetchingNextPage && <Loader className='md:hidden' />
             }
             <div className='picker flex gap-5 items-center my-5'>
-                {
-                    keyword && <h1
-                        className={`w-full font-semibold text-white text-2xl`}
-                    >
-                        Search
-                        <span onClick={() => { dispatch(handleSource(select.source, 'latest')); Router.push(`/`); }} className='float-right flex text-gray-300 hover:text-white transition gap-1 font-normal'><IoArrowBack size={30} /> Back</span>
-                    </h1>
-                }
-                {
-                    !keyword && (
-                        <>
-                            <h1
-                                className={`font-semibold ${select.type === 'latest' ? 'text-white text-2xl' : 'text-xl brightness-75'}`}
-                                onClick={() => {
-                                    dispatch(handleSource(select.source, 'latest'))
-                                }}
-                            >
-                                Latest
-                            </h1>
-                            <h1
-                                className={`font-semibold ${select.type === 'browse' ? 'text-white text-2xl' : 'text-xl brightness-75'}`}
-                                onClick={() => {
-                                    dispatch(handleSource(select.source, 'browse'))
-                                }}
-                            >
-                                Browse
-                            </h1>
-                        </>
-                    )
-                }
+                <TypeRender />
             </div>
             <div className={`grid gap-2 comic-list mb-10`}>
                 {

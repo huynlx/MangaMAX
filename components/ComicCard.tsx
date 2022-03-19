@@ -1,9 +1,8 @@
 import Link from 'next/link';
-import React from 'react';
 import ReadImage from './ReadImage';
 
 const Comic = ({ item, select }: any) => (
-    <Link href={`/comic/${item.slug}?source=${select.source}&type=${select.type}`} as={`/comic/${item.slug}`}>
+    <Link href={`/comic/${item.slug}?source=${item.source ?? select.source}&type=${item.type ?? select.type}`} as={`/comic/${item.slug}`}>
         <a className='flex flex-col items-stretch comic border overflow-hidden border-transparent rounded-xl'>
             <div className='w-full h-0 pb-[155%] relative flex-grow bg-gray-400'>
                 <ReadImage

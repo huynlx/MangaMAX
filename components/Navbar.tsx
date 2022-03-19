@@ -6,12 +6,12 @@ import SideBar from './SideBar';
 import { useDispatch, useSelector } from 'react-redux';
 import { titleCase } from '../shared/cmanga/titleCase';
 import LinkCheck from './LinkCheck';
-import { handleSource } from '../store/action';
+import { handleSource, setScroll } from '../store/action';
 import { GrClose } from 'react-icons/gr';
 import { FaSearch } from 'react-icons/fa';
 import Link from 'next/link';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth } from 'shared/firebase';
+import { auth, logout } from 'shared/firebase';
 
 const Navbar = ({ scroll }: { scroll: boolean }) => {
     const [user] = useAuthState(auth);
@@ -28,7 +28,7 @@ const Navbar = ({ scroll }: { scroll: boolean }) => {
         e.preventDefault();
         if (inputValue.trim()) {
             dispatch(handleSource(select.source, 'search'));
-            dispatch({ type: 'SCROLL_POSITION', payload: { keyword: inputValue.trim(), scrollPosition: 0 } });
+            dispatch(setScroll(0, inputValue.trim()));
             document.getElementById('keyword')?.blur();
             router.push({
                 pathname: "/search",
@@ -46,7 +46,7 @@ const Navbar = ({ scroll }: { scroll: boolean }) => {
         <div className={`${isActive ? 'h-28' : 'h-14'} md:h-14 bg-primary flex flex-col md:flex-row justify-around md:justify-between items-stretch md:items-center px-[3vw] lg:px-[5vw] ${!router.pathname.includes('chap') ? 'sticky top-0 z-10' : 'relative'}`}>
             <div className='flex items-center justify-between'>
                 <LinkCheck select={select} reducer3={reducer3}>
-                    <a className={`flex items-center justify-start gap-3 ${(pathname == '/' || pathname === '/search') && 'pointer-events-none'}`}>
+                    <a className={`flex items-center justify-start gap-3 ${(pathname == '/' || pathname === '/search' || pathname === '/bookmarks') && 'pointer-events-none'}`}>
                         <img src={`/_next/image?url=/favicon.ico&w=300&q=75`} className="max-w-[2.25rem] max-h-[2rem]" alt="Logo" />
                         <h1 className="text-2xl font-bold text-white">
                             <span className="text-link font-bold borderText">Manga</span>MAX
@@ -61,7 +61,7 @@ const Navbar = ({ scroll }: { scroll: boolean }) => {
                 </button>
             </div>
             {
-                (scroll && (pathname == '/' || pathname == '/search')) && <h1 className='hidden lg:block font-bold text-2xl top-2/4 absolute left-2/4 transform -translate-x-2/4 -translate-y-2/4'>{titleCase(select.type)}</h1>
+                (scroll && (pathname == '/' || pathname == '/search' || pathname == '/bookmarks')) && <h1 className='hidden lg:block font-semibold text-white text-2xl top-2/4 absolute left-2/4 transform -translate-x-2/4 -translate-y-2/4'>{titleCase(select.type)}</h1>
             }
             <SideBar className='hidden md:block' id='sidenav2' />
             <form
@@ -86,20 +86,28 @@ const Navbar = ({ scroll }: { scroll: boolean }) => {
                 {
                     user ?
                         <a>
-                            <img
-                                title={user.displayName!}
-                                src={user?.photoURL!}
-                                className='rounded-full ml-3'
-                                alt=""
-                                width={30}
-                                height={30}
-                            />
+                            <div className="dropdown">
+                                <img
+                                    title={user.displayName!}
+                                    src={user?.photoURL!}
+                                    className='rounded-full ml-3'
+                                    alt="Photo"
+                                    width={30}
+                                    height={30}
+                                />
+                                <div className="dropdown-content rounded-sm">
+                                    <Link href="/recents"><a>Recents</a></Link>
+                                    <Link href="/bookmarks"><a onClick={() => dispatch(setScroll(0))}>Bookmarks</a></Link>
+                                    <Link href="/dashboard"><a>Dashboard</a></Link>
+                                    <Link href='#'><a onClick={logout}>Log out</a></Link>
+                                </div>
+                            </div>
                         </a>
                         :
                         <a className='text-lg ml-3 text-white'>LOGIN</a>
                 }
             </Link>
-        </div>
+        </div >
     );
 };
 
