@@ -1,0 +1,30 @@
+.reset {
+  height: 85vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.reset__container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  @apply bg-primary;
+  padding: 30px;
+}
+.reset__textBox {
+  padding: 10px;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+.reset__btn {
+  padding: 10px;
+  font-size: 18px;
+  margin-bottom: 10px;
+  border: none;
+  color: white;
+  @apply bg-gray-600;
+}
+.reset div {
+  margin-top: 7px;
+}

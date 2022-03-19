@@ -12,7 +12,7 @@ export const getChapter = async (comicSLug: any, chapterSLug: any, chapterId: an
 
     const dom = parse(html[0]);
 
-    const list = dom.querySelectorAll('.text-left > div > img');
+    const list = dom.querySelectorAll('.text-left > div img');
     const index = dom.querySelectorAll(".c-selectpicker")[0].querySelectorAll('option').map((item, index) => index).reverse();
 
     return {

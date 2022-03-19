@@ -1,8 +1,6 @@
 //redux toolkit
 import { configureStore, createAction, createReducer, createStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import storage from 'redux-persist/lib/storage'
 import { combineReducers } from "redux";
-import { persistReducer } from 'redux-persist'
 import { createWrapper, HYDRATE } from 'next-redux-wrapper';
 
 // actions

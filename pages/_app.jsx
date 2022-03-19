@@ -1,17 +1,14 @@
-import '../styles/globals.css';
 import "tailwindcss/tailwind.css";
+import "styles/index.css";
 import React, { useEffect, useState } from 'react';
-import "../styles/nprogress.css";
-import Navbar from '../components/Navbar';
-import { wrapper } from '../store';
+import Navbar from 'components/Navbar';
+import { wrapper } from 'store';
 import { useSelector, useDispatch } from 'react-redux';
-import { WINDOW_RESIZE_DEBOUNCE, WINDOW_SIZE } from '../shared/constants';
-import { windowResize } from '../store/action';
+import { WINDOW_RESIZE_DEBOUNCE, WINDOW_SIZE } from 'shared/constants';
+import { windowResize } from 'store/action';
 import { QueryClient, QueryClientProvider } from "react-query";
-import { removeLoadingBar, callLoadingBar } from '../shared/callLoadingBar';
+import { removeLoadingBar, callLoadingBar } from 'shared/callLoadingBar';
 import Head from 'next/head';
-// import { PersistGate } from 'redux-persist/integration/react'
-// import { persistStore } from 'redux-persist'
 
 const queryClient = new QueryClient({
   defaultOptions: {

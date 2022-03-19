@@ -7,7 +7,7 @@ const Component404 = () => {
 
     return (
         <div className='px-[5vw] h-[auto]'>
-            <img src={'/404.png'} className='w-[90%] sm:w-[70%] lg:w-[60%] xl:w-[45%] mx-[auto] mt-[2.5rem] my-[2rem]' alt='404' />
+            <img src={'/_next/image?url=/404.png&w=1920&q=75'} className='w-[90%] sm:w-[70%] lg:w-[60%] xl:w-[45%] mx-[auto] mt-[2.5rem] my-[2rem]' alt='404' />
             <div className='text-left text-lg text-white mx-[auto] w-fit mb-3'>
                 <h1 className='mb-2'>Trong lúc chúng tôi đang giải quyết vấn đề của bạn, bạn có thể thử:</h1>
                 <ul className='mx-auto w-fit ml-4 md:ml-[auto]'>

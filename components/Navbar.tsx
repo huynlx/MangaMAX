@@ -9,8 +9,12 @@ import LinkCheck from './LinkCheck';
 import { handleSource } from '../store/action';
 import { GrClose } from 'react-icons/gr';
 import { FaSearch } from 'react-icons/fa';
+import Link from 'next/link';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from 'shared/firebase';
 
 const Navbar = ({ scroll }: { scroll: boolean }) => {
+    const [user] = useAuthState(auth);
     const [isActive, setIsActive] = useState(false);
     const [inputValue, setInputValue] = useState("");
     const select: any = useSelector((state: any) => state.reducer);
@@ -78,6 +82,23 @@ const Navbar = ({ scroll }: { scroll: boolean }) => {
                     autoComplete='off'
                 />
             </form>
+            <Link href={user ? '/dashboard' : '/login'}>
+                {
+                    user ?
+                        <a>
+                            <img
+                                title={user.displayName!}
+                                src={user?.photoURL!}
+                                className='rounded-full ml-3'
+                                alt=""
+                                width={30}
+                                height={30}
+                            />
+                        </a>
+                        :
+                        <a className='text-lg ml-3 text-white'>LOGIN</a>
+                }
+            </Link>
         </div>
     );
 };
