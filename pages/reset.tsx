@@ -30,7 +30,7 @@ const Reset: NextPage<FC> = () => {
                     Send password reset email
                 </button>
                 <div>
-                    Don't have an account? <Link href="/register">Register</Link> now.
+                    Don&apos;t have an account? <Link href="/register">Register</Link> now.
                 </div>
             </div>
         </div>

@@ -2,6 +2,7 @@
   "extends": "next/core-web-vitals",
   "rules": {
     "@next/next/no-img-element": "off",
-    "@next/next/no-stylesheets-in-head-component": "off"
+    "@next/next/no-stylesheets-in-head-component": "off",
+    "react/no-unescaped-entities": 0
   }
 }

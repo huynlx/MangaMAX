@@ -51,7 +51,7 @@ const Login: NextPage<FC> = () => {
                     <Link href="/reset">Forgot Password</Link>
                 </div>
                 <div>
-                    Don't have an account? <Link href="/register"><a className="text-link">Register</a></Link>
+                    Don&apos;t have an account? <Link href="/register"><a className="text-link">Register</a></Link>
                 </div>
             </div>
         </div>
