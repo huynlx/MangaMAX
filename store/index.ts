@@ -1,5 +1,5 @@
 import { createStore, AnyAction, Store, applyMiddleware, combineReducers } from 'redux';
-import { createWrapper, Context, HYDRATE } from 'next-redux-wrapper';
+import { createWrapper, HYDRATE } from 'next-redux-wrapper';
 import thunkMiddleware from 'redux-thunk';
 import { WINDOW_SIZE } from '../shared/constants';
 
@@ -74,10 +74,38 @@ const reducer3 = (state = defaultState3, action: AnyAction) => {
     }
 }
 
+const defaultState4 = {
+    recents: []
+}
+
+const reducer4 = (state = defaultState4, action: AnyAction) => {
+    switch (action.type) {
+        case HYDRATE:
+
+            return { ...state }
+        case "RECENTS":
+            const checkDuplicate = state.recents.findIndex((item: any) => item.slug === action.payload.recents[0].slug);
+            if (checkDuplicate !== -1) {
+                state.recents.splice(checkDuplicate, 1);
+            }
+
+            return {
+                recents: [
+                    ...state.recents,
+                    ...action.payload.recents
+                ]
+            }
+        default:
+
+            return state
+    }
+}
+
 var rootReducer = combineReducers({
     reducer,
     reducer2,
-    reducer3
+    reducer3,
+    reducer4
 });
 
 // create a makeStore function

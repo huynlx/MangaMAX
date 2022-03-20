@@ -1,20 +1,29 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { BsFillImageFill } from "react-icons/bs";
+import { useIsMounted } from 'hooks/useIsMounted';
 
 const ReadImage = ({ src, opacity, ...props }: any) => {
     const [loaded, setLoaded] = useState(false);
+    const isMounted = useIsMounted();
+
+    const loadImage = useCallback(async (image: string) => {
+        return new Promise((resolve, reject) => {
+            const loadImg = new Image();
+            loadImg.src = image;
+            loadImg.onload = () => resolve(image);
+            loadImg.onerror = (err) => reject(err);
+        }).then(() => {
+            if (!isMounted.current) return null  //fix unmounted => cause component is dismounted before async complete
+            setLoaded(true);
+        }).catch((err) => {
+            if (!isMounted.current) return null
+            setLoaded(true);
+        });
+    }, []) //useRef thì ko cần thêm vào deps, props or state thì mới thêm
 
     useEffect(() => {
         setLoaded(false);
-        const loadImage = (image: string) => {
-            return new Promise((resolve, reject) => {
-                const loadImg = new Image();
-                loadImg.src = image;
-                loadImg.onload = () => resolve(image);
-                loadImg.onerror = (err) => reject(err);
-            });
-        };
-        loadImage(src).then(() => setLoaded(true)).catch((err) => setLoaded(true));
+        loadImage(src);
     }, [src])
 
     return (

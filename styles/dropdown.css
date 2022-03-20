@@ -6,11 +6,11 @@
   display: none;
   position: absolute;
   background-color: #f9f9f9;
-  min-width: 100px;
+  min-width: 140px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-  transform: translate(-27px, 10px);
-  /* left: 0; */
+  transform: translate(10px, 10px);
+  right: 0;
+  z-index: 999;
 }
 
 .dropdown::after {
@@ -25,7 +25,7 @@
   position: absolute;
   z-index: -1;
   content: "";
-  right: calc(50% - 7px);
+  right: calc(50% - 52px);
   top: -6px;
   border-style: solid;
   border-width: 0 7px 9px 7px;
@@ -34,14 +34,15 @@
   transition-property: transform;
 }
 
-.dropdown-content a {
+.dropdown-content > a,
+.dropdown-content > p {
   color: black;
   padding: 12px 16px;
   text-decoration: none;
-  display: block;
 }
 
-.dropdown-content a:hover {
+.dropdown-content > a:hover,
+.dropdown-content > p:hover {
   background-color: #f1f1f1;
 }
 

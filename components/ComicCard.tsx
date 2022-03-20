@@ -16,7 +16,7 @@ const Comic = ({ item, select }: any) => (
                 {item.updateAt &&
                     <small className='lg:leading-[1.1] px-2 md:py-1 rounded-full absolute bg-nav/[.7] md:font-semibold text-white bottom-1 left-1 whitespace-nowrap text-ellipsis overflow-hidden max-w-[80%] 2xl:w-[auto]'>{item.updateAt}</small>}
             </div>
-            <div className='root p-2 bg-gray-700 text-white'>
+            <div className='root p-2 bg-root text-white'>
                 <h1 className='font-semibold max-w-full text-center flex-shrink-0 text-sm sm:text-base'>{item.title}</h1>
                 {/* <p className='max-w-full whitespace-nowrap overflow-ellipsis overflow-hidden text-center flex-shrink-0'>{item.chapter}</p> */}
             </div>

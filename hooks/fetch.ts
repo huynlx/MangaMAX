@@ -27,7 +27,7 @@ export const getSearch = async ({ source, page, keyword }: any): Promise<any> =>
 export const getBookmarks = async ({ user }: any): Promise<any> => {
     const q = query(collection(db, "users"), where("uid", "==", user?.uid));
     const doc = await getDocs(q);
-    const data = doc && doc.docs[0].data().bookmarks;
+    const data = doc && doc.docs[0].data().bookmarks.reverse();
 
     return {
         pages: [{

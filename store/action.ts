@@ -1,4 +1,4 @@
-import axios from "../shared/axios";
+import axios from "shared/axios";
 
 interface LooseObject {
     [key: string]: any
@@ -7,7 +7,8 @@ interface LooseObject {
 export const handleTypes = {
     SOURCE: 'SOURCE',
     WINDOW_RESIZE: 'WINDOW_RESIZE',
-    SCROLL: 'SCROLL_POSITION'
+    SCROLL: 'SCROLL_POSITION',
+    RECENTS: 'RECENTS'
 }
 
 export const handleSource = (source: any, type: any, store?: any) => (dispatch: any) => {
@@ -63,10 +64,17 @@ export const setScroll = (position?: number | null, keyword?: string | null, ind
 
     if (position || position === 0) payload.scrollPosition = position;
     if (keyword) payload.keyword = keyword;
-    if (indexChapters) payload.indexChapters = indexChapters;
+    if (indexChapters !== null) payload.indexChapters = indexChapters;
 
     dispatch({
         type: handleTypes.SCROLL,
         payload
+    });
+};
+
+export const recents = (data: any) => (dispatch: any) => {
+    dispatch({
+        type: handleTypes.RECENTS,
+        payload: { recents: [data] }
     });
 };

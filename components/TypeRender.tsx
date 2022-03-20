@@ -10,12 +10,12 @@ const TypeRender = (type: string) => {
 
     return (
         <h1
-            className={`w-full font-semibold text-white text-2xl`}
+            className={`w-full font-semibold text-white text-3xl`}
         >
             {type}
             <span
                 onClick={() => { dispatch(handleSource(select.source, 'latest')); Router.push(`/`); }}
-                className='float-right flex text-gray-300 hover:text-white transition gap-1 font-normal'
+                className='float-right flex text-gray-300 hover:text-white transition gap-1 font-normal text-2xl leading-[1.2]'
             >
                 <IoArrowBack size={30} /> Back
             </span>

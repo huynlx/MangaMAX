@@ -1,35 +1,40 @@
 .login {
-    height: 85vh;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .login__container {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    @apply bg-primary; 
-    padding: 30px;
-  }
-  .login__textBox {
-    padding: 10px;
-    margin-bottom: 10px;
-    width: 22vw;
-    border-radius: 9999px;
-  }
-  .login__btn {
-    padding: 10px;
-    font-size: 18px;
-    margin-bottom: 10px;
-    border: none;
-    color: white;
-    @apply bg-gray-600;
-    border-radius: 9999px;
-  }
-  .login__google {
-    background-color: #4285f4;
-  }
-  .login div {
-    margin-top: 7px;
-  }
+  height: 85vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.login__container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  @apply bg-primary;
+  padding: 30px;
+}
+.login__textBox {
+  padding: 10px;
+  margin-bottom: 10px;
+  width: 22vw;
+  border-radius: 9999px;
+}
+.login__btn {
+  padding: 10px;
+  font-size: 18px;
+  margin-bottom: 10px;
+  border: none;
+  @apply bg-gray-600;
+  border-radius: 9999px;
+  color: white;
+}
+.login__google {
+  background-color: #fff;
+  color: #000000;
+}
+.login__facebook {
+  background-color: #4285f4;
+  color: #ffffff;
+}
+.login div {
+  margin-top: 7px;
+}

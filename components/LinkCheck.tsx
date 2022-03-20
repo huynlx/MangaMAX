@@ -23,6 +23,14 @@ const LinkCheck = ({ select, reducer3, children }: PropsWithChildren<LinkCheckPr
         );
     }
 
+    if (select.type === 'recents') {
+        return (
+            <Link href={`/recents`}>
+                {children}
+            </Link>
+        );
+    }
+
     return (
         <Link as={`/`} href={`/?source=${select.source}&type=${select.type}`}>
             {children}

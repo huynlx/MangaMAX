@@ -27,9 +27,10 @@ const DashboardComponent: React.FC = () => {
         <div className="dashboard">
             <div className="dashboard__container">
                 Logged in as
+                <img src={user?.photoURL!} alt="Photo" className="rounded-full mt-3" />
                 <div>{name}</div>
                 <div>{user?.email}</div>
-                <button className="dashboard__btn" onClick={logout}>
+                <button className="dashboard__btn rounded-full" onClick={logout}>
                     Logout
                 </button>
             </div>

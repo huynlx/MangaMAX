@@ -19,6 +19,8 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, db } from 'shared/firebase';
 import { BsSuitHeartFill } from 'react-icons/bs';
 import FollowIcon from 'components/Icon';
+import { useDispatch } from 'react-redux';
+import { recents } from 'store/action';
 
 interface mangaProps {
     title: string,
@@ -33,31 +35,36 @@ const LeftComic = ({ info, select, slug }: any) => {
     const [user] = useAuthState(auth);
     const [follow, setFollow] = useState<boolean>(false);
     const docRef = useRef<DocumentReference<DocumentData>>();
+    const dispatch = useDispatch();
 
-    const mangaObj: mangaProps = {
+    const mangaObj = (type: string): mangaProps => ({
         title: info.title,
         cover: info.cover,
         slug: slug,
-        url: `/comic/${slug}?source=${select.source}&type=bookmarks`,
+        url: `/comic/${slug}?source=${select.source}&type=${type}`,
         source: select.source,
-        type: 'bookmarks'
-    }
+        type: type
+    })
 
     const addFollow = useCallback(async () => {
+        if (!user) {
+            return alert('Login to add to your bookmarks');
+        }
         setFollow(true);
         await updateDoc(docRef.current!, {
-            bookmarks: arrayUnion(mangaObj)
+            bookmarks: arrayUnion(mangaObj('bookmarks'))
         });
     }, [follow])
 
     const removeFollow = useCallback(async () => {
         setFollow(false);
         await updateDoc(docRef.current!, {
-            bookmarks: arrayRemove(mangaObj)
+            bookmarks: arrayRemove(mangaObj('bookmarks'))
         });
     }, [follow])
 
     useEffect(() => {
+        dispatch(recents(mangaObj('recents')));
         const fetch = async () => {
             const q = query(collection(db, "users"), where("uid", "==", user?.uid));
             const docs = await getDocs(q);
@@ -76,9 +83,9 @@ const LeftComic = ({ info, select, slug }: any) => {
         <div className='lg:w-[59vw] lg:pr-10 max-h-[none] lg:max-h-[100vh] overflow-auto'>
             <div className='flex mb-4 gap-5 flex-col sm:flex-row'>
                 <ReadImage
-                    className='h-[315px] w-[200px] min-w-[200px] object-cover mx-auto sm:mx-0 rounded-lg duration-[0ms]'
+                    className='w-[170px] h-[270px] md:h-[315px] md:min-w-[200px] object-cover mx-auto rounded-lg duration-[0ms]'
                     src={info.cover}
-                    className2='bg-gray-400 rounded-lg !h-[315px] max-w-[200px]' />
+                    className2='bg-gray-400 mx-auto rounded-lg h-[270px] w-[170px] md:w-[200px] md:h-[315px]' />
                 <div className='info gap-2 flex flex-col'>
                     <h1 className=' font-bold text-3xl text-white'>{info.title}</h1>
                     <p className='text-white text-lg font-semibold'>Author: <span className='text-gray-300'>{info.author}</span></p>

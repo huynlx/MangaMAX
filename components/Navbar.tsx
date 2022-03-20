@@ -9,9 +9,9 @@ import LinkCheck from './LinkCheck';
 import { handleSource, setScroll } from '../store/action';
 import { GrClose } from 'react-icons/gr';
 import { FaSearch } from 'react-icons/fa';
-import Link from 'next/link';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth, logout } from 'shared/firebase';
+import { auth } from 'shared/firebase';
+import Dropdown from './Dropdown';
 
 const Navbar = ({ scroll }: { scroll: boolean }) => {
     const [user] = useAuthState(auth);
@@ -23,6 +23,10 @@ const Navbar = ({ scroll }: { scroll: boolean }) => {
 
     const router = useRouter();
     const { pathname } = router;
+
+    const checkPathname = (): boolean => {
+        return ['/', '/search', '/bookmarks', '/recents'].some(item => item === pathname);
+    }
 
     const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -46,9 +50,9 @@ const Navbar = ({ scroll }: { scroll: boolean }) => {
         <div className={`${isActive ? 'h-28' : 'h-14'} md:h-14 bg-primary flex flex-col md:flex-row justify-around md:justify-between items-stretch md:items-center px-[3vw] lg:px-[5vw] ${!router.pathname.includes('chap') ? 'sticky top-0 z-10' : 'relative'}`}>
             <div className='flex items-center justify-between'>
                 <LinkCheck select={select} reducer3={reducer3}>
-                    <a className={`flex items-center justify-start gap-3 ${(pathname == '/' || pathname === '/search' || pathname === '/bookmarks') && 'pointer-events-none'}`}>
+                    <a className={`flex items-center justify-start gap-3 ${checkPathname() && 'pointer-events-none'}`}>
                         <img src={`/_next/image?url=/favicon.ico&w=300&q=75`} className="max-w-[2.25rem] max-h-[2rem]" alt="Logo" />
-                        <h1 className="text-2xl font-bold text-white">
+                        <h1 className="text-2xl font-bold text-white hidden md:block">
                             <span className="text-link font-bold borderText">Manga</span>MAX
                         </h1>
                     </a>
@@ -59,9 +63,10 @@ const Navbar = ({ scroll }: { scroll: boolean }) => {
                         isActive ? <GrClose className='invert' size={25} /> : <FaSearch size={25} />
                     }
                 </button>
+                <Dropdown className='block md:hidden' user={user} />
             </div>
             {
-                (scroll && (pathname == '/' || pathname == '/search' || pathname == '/bookmarks')) && <h1 className='hidden lg:block font-semibold text-white text-2xl top-2/4 absolute left-2/4 transform -translate-x-2/4 -translate-y-2/4'>{titleCase(select.type)}</h1>
+                (scroll && checkPathname()) && <h1 className='hidden lg:block font-semibold text-white text-2xl top-2/4 absolute left-2/4 transform -translate-x-2/4 -translate-y-2/4'>{titleCase(select.type)}</h1>
             }
             <SideBar className='hidden md:block' id='sidenav2' />
             <form
@@ -82,31 +87,7 @@ const Navbar = ({ scroll }: { scroll: boolean }) => {
                     autoComplete='off'
                 />
             </form>
-            <Link href={user ? '/dashboard' : '/login'}>
-                {
-                    user ?
-                        <a>
-                            <div className="dropdown">
-                                <img
-                                    title={user.displayName!}
-                                    src={user?.photoURL!}
-                                    className='rounded-full ml-3'
-                                    alt="Photo"
-                                    width={30}
-                                    height={30}
-                                />
-                                <div className="dropdown-content rounded-sm">
-                                    <Link href="/recents"><a>Recents</a></Link>
-                                    <Link href="/bookmarks"><a onClick={() => dispatch(setScroll(0))}>Bookmarks</a></Link>
-                                    <Link href="/dashboard"><a>Dashboard</a></Link>
-                                    <Link href='#'><a onClick={logout}>Log out</a></Link>
-                                </div>
-                            </div>
-                        </a>
-                        :
-                        <a className='text-lg ml-3 text-white'>LOGIN</a>
-                }
-            </Link>
+            <Dropdown className='hidden md:block' user={user} />
         </div >
     );
 };
