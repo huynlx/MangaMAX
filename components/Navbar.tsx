@@ -25,7 +25,7 @@ const Navbar = ({ scroll }: { scroll: boolean }) => {
     const { pathname } = router;
 
     const checkPathname = (): boolean => {
-        return ['/', '/search', '/bookmarks', '/recents'].some(item => item === pathname);
+        return ['/', '/search', '/bookmarks', '/recents'].some((item: string) => item === pathname);
     }
 
     const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -70,16 +70,16 @@ const Navbar = ({ scroll }: { scroll: boolean }) => {
             }
             <SideBar className='hidden md:block' id='sidenav2' />
             <form
-                className={`${isActive ? 'flex' : 'hidden'} md:flex border-gray-300 rounded-full overflow-hidden`}
+                className={`${isActive ? 'flex' : 'hidden'} md:flex border-gray-300 rounded-full overflow-hidden h-8`}
                 onSubmit={handleFormSubmit}
                 id='myForm'
             >
-                <button aria-label="Search" type='submit' className="bg-gray-300 flex-shrink-0 flex justify-center items-center h-8 w-8 hover:bg-white">
+                <button aria-label="Search" type='submit' className="bg-gray-300 flex-shrink-0 flex justify-center items-center w-8 hover:bg-white">
                     <FaSearch className='text-black' />
                 </button>
                 <input
-                    type="text"
-                    className="bg-gray-300 h-8 px-3 flex-grow text-black outline-none"
+                    type="search"
+                    className="bg-gray-300 px-3 flex-grow text-black outline-none"
                     id='keyword'
                     placeholder="Search..."
                     value={inputValue}

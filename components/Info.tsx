@@ -47,14 +47,14 @@ const Info = ({ info, slug }: ComicProps) => {
                     slug={slug}
                 />
                 {/* Right Side Mobile */}
-                <p className='lg:hidden font-bold text-xl my-2 flex justify-between items-center'>
+                <div className='lg:hidden font-bold text-xl my-2 flex justify-between items-center'>
                     Chapters
                     <span className='space-x-2 flex'>
                         <CgDisplayGrid title='List | Index' onClick={() => handleChapter()} size={30} />
                         <div className='border h-[30px] bg-white'></div>
                         <RiSortDesc title='Sort' onClick={() => handleSort()} size={30} />
                     </span>
-                </p>
+                </div>
                 {/* Right Side Desktop */}
                 <RightComic
                     dt={dt}

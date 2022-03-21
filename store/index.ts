@@ -56,7 +56,7 @@ const reducer2 = (state = defaultState2, action: AnyAction) => {
 
 const defaultState3 = {
     scrollPosition: 0,
-    indexChapters: true, //true:index or false:list
+    indexChapters: false, //true:index or false:list
     keyword: null
 }
 

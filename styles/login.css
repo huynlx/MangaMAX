@@ -10,12 +10,12 @@
   flex-direction: column;
   text-align: center;
   @apply bg-primary;
-  padding: 30px;
+  padding: 0px 3vw;
+  width: 100%;
 }
 .login__textBox {
   padding: 10px;
   margin-bottom: 10px;
-  width: 22vw;
   border-radius: 9999px;
 }
 .login__btn {

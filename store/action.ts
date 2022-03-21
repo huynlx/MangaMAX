@@ -64,7 +64,7 @@ export const setScroll = (position?: number | null, keyword?: string | null, ind
 
     if (position || position === 0) payload.scrollPosition = position;
     if (keyword) payload.keyword = keyword;
-    if (indexChapters !== null) payload.indexChapters = indexChapters;
+    if (indexChapters === true || indexChapters === false) payload.indexChapters = indexChapters;
 
     dispatch({
         type: handleTypes.SCROLL,

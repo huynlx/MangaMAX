@@ -10,8 +10,8 @@
   flex-direction: column;
   text-align: center;
   @apply bg-primary;
-  padding: 30px;
-  width: 22vw;
+  padding: 0px 3vw;
+  width: 100%;
 }
 .reset__textBox {
   padding: 10px;

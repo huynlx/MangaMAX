@@ -1,9 +1,9 @@
 import React from 'react';
 import { RiSortDesc } from 'react-icons/ri';
 import { CgDisplayGrid } from 'react-icons/cg';
-import Index from './Index';
+import List from './List';
 import dynamic from 'next/dynamic';
-const List = dynamic(() => import('./List'));
+const Index = dynamic(() => import('./Index'));
 
 const RightComic = ({ dt, handleSort, slug, select, handleChapter, reducer3 }: any) => (
     <div className='chapters lg:w-[40%]'>
