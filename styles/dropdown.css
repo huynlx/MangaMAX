@@ -16,10 +16,10 @@
 .dropdown::after {
   content: "";
   height: 10px;
-  transform: translate(9px, 10px);
+  transform: translate(9px, 0px);
   right: 0;
   position: absolute;
-  width: 100px;
+  width: 60px;
 }
 
 .dropdown-content::before {

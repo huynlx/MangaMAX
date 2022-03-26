@@ -27,8 +27,8 @@ const DashboardComponent: React.FC = () => {
         <div className="dashboard">
             <div className="dashboard__container">
                 Logged in as
-                <img src={user?.photoURL!} alt="Photo" className="rounded-full mt-3" />
-                <div>{name}</div>
+                <img src={user?.photoURL!} alt="Photo" className="rounded-full mt-3 object-cover" width={135} height={135} />
+                <div className="font-bold text-lg">{name}</div>
                 <div>{user?.email}</div>
                 <button className="dashboard__btn rounded-full" onClick={logout}>
                     Logout

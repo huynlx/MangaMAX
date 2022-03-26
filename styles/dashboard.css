@@ -23,3 +23,6 @@
 .dashboard div {
     margin-top: 7px;
 }
+.dashboard__container div:last-of-type {
+    margin-top: 0px;
+}
