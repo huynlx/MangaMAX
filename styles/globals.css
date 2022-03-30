@@ -9,6 +9,10 @@ body {
   @apply bg-primary text-gray-300;
 }
 
+body {
+  @apply overflow-y-scroll;
+}
+
 .borderText {
   text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
 }
@@ -77,7 +81,7 @@ input[type="search"] {
 
 @media only screen and (min-width: 1200px) {
   .comic-list {
-    grid-template-columns: repeat(8, minmax(100px, 1fr));
+    grid-template-columns: repeat(8, minmax(auto, 1fr));
   }
   .login__container,
   .reset__container,

@@ -12,8 +12,10 @@ import { FaSearch } from 'react-icons/fa';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from 'shared/firebase';
 import Dropdown from './Dropdown';
+import { useScroll } from 'hooks/useScroll';
 
 const Navbar = ({ scroll }: { scroll: boolean }) => {
+    const direction = useScroll();
     const [user] = useAuthState(auth);
     const [isActive, setIsActive] = useState(false);
     const [inputValue, setInputValue] = useState("");
@@ -47,7 +49,7 @@ const Navbar = ({ scroll }: { scroll: boolean }) => {
     };
 
     return (
-        <div className={`${isActive ? 'h-28' : 'h-14'} md:h-14 bg-primary flex flex-col md:flex-row justify-around md:justify-between items-stretch md:items-center px-[3vw] lg:px-[5vw] ${!router.pathname.includes('chap') ? 'sticky top-0 z-10' : 'relative'}`}>
+        <div className={`${isActive ? 'h-28' : 'h-14'} md:h-14 bg-primary flex flex-col md:flex-row justify-around md:justify-between items-stretch md:items-center px-[3vw] lg:px-[5vw] ${(!router.pathname.includes('chap') && direction === 'up') ? 'sticky top-0 z-10' : 'relative'}`}>
             <div className='flex items-center justify-between'>
                 <LinkCheck select={select} reducer3={reducer3}>
                     <a className={`flex items-center justify-start gap-3 ${checkPathname() && 'pointer-events-none'}`}>

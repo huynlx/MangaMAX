@@ -40,7 +40,7 @@ export const handleSource = (source: any, type: any, store?: any) => (dispatch: 
             dispatch({ type: handleTypes.SOURCE, payload: { type: type ?? "latest", source: '8', name: 'Server 8', url: 'https://mangapk.com/' } })
             break;
         case "9":
-            dispatch({ type: handleTypes.SOURCE, payload: { type: type ?? "latest", source: '9', name: 'Server 9', url: 'https://hentaicube.net/' } })
+            dispatch({ type: handleTypes.SOURCE, payload: { type: type ?? "latest", source: '9', name: 'Server 9', url: 'https://hentaicb.top/' } })
             break;
         default:
             break;

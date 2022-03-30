@@ -6,7 +6,7 @@ const nextConfig = {
       'st.nettruyenmoi.com',
       'st.nhattruyengo.com',
       'cmanganew.com',
-      'hentaicube.net',
+      'hentaicb.top',
       'lxhentai.com',
       'i7.xem-truyen.com',
       'mangapk.com',

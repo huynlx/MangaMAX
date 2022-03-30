@@ -52,7 +52,7 @@ export const SOURCES = [
     {
         source: '9',
         name: 'Server 9',
-        url: 'https://hentaicube.net/',
+        url: 'https://hentaicb.top/',
         type: 'latest'
     }
 ]

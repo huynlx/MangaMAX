@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect } from 'react';
 import Link from 'next/link';
 import { NavigationProps } from '../shared/types';
 import LinkCheck from './LinkCheck';
 import { FaChevronLeft, FaChevronRight, FaHome, FaList } from 'react-icons/fa';
+import { useScroll } from 'hooks/useScroll';
 
 const Navigation = ({ chapters, chapterId, comicSlug, select, select2 }: NavigationProps) => {
-    let oldScrollY = 0;
-    const [direction, setDirection] = useState('up');
+    const direction = useScroll();
     const selectedIndex = chapters.indexOf(chapters.find((chap) => chap.id === chapterId)!);
     const router = useRouter();
 
@@ -54,22 +54,6 @@ const Navigation = ({ chapters, chapterId, comicSlug, select, select2 }: Navigat
 
         return () => window.removeEventListener("keyup", handler);
     }, [prevChapter, nextChapter]);
-
-    const controlDirection = () => {
-        if (window.scrollY > oldScrollY) {
-            setDirection('down');
-        } else {
-            setDirection('up');
-        }
-        oldScrollY = window.scrollY;
-    }
-
-    useEffect(() => {
-        window.addEventListener('scroll', controlDirection);
-        return () => {
-            window.removeEventListener('scroll', controlDirection);
-        };
-    }, []);
 
     return (
         <div className={`z-10 overflow-x-hidden flex items-center gap-1 w-full justify-center bg-primary ${direction === 'up' && 'sticky top-0'}`}>
