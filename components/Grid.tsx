@@ -89,7 +89,7 @@ const Grid = ({ keyword, fetch, typeRender: TypeRender, user }: GridProps) => {
     }, [select])
 
     return (
-        <main className='main px-[2vw] lg:px-[5vw] mb-28'>
+        <main className={`main px-[2vw] lg:px-[5vw] mb-28 min-h-[75vh] ${isLoading && 'bg-grid bg-no-repeat bg-contain sm:bg-auto bg-sm lg:bg-lg'}`}>
             {
                 isLoading && <Loader />
             }

@@ -52,10 +52,10 @@ const Navbar = ({ scroll }: { scroll: boolean }) => {
         <div className={`${isActive ? 'h-28' : 'h-14'} md:h-14 bg-primary flex flex-col md:flex-row justify-around md:justify-between items-stretch md:items-center px-[3vw] lg:px-[5vw] ${(!router.pathname.includes('chap') && direction === 'up') ? 'sticky top-0 z-10' : 'relative'}`}>
             <div className='flex items-center justify-between'>
                 <LinkCheck select={select} reducer3={reducer3}>
-                    <a className={`flex items-center justify-start gap-3 ${checkPathname() && 'pointer-events-none'}`}>
-                        <img src={`/_next/image?url=/favicon.ico&w=300&q=75`} className="max-w-[2.25rem] max-h-[2rem]" alt="Logo" />
+                    <a className={`flex items-center justify-start gap-2 ${checkPathname() && 'pointer-events-none'}`}>
+                        <img src={`/_next/image?url=/favicon.ico&w=720&q=100`} className="max-w-[3rem] max-h-[auto] " alt="Logo" />
                         <h1 className="text-2xl font-bold text-white hidden md:block">
-                            <span className="text-link font-bold borderText">Manga</span>MAX
+                            <span className="text-[#D04A32] font-bold borderText">Manga</span>MAX
                         </h1>
                     </a>
                 </LinkCheck>

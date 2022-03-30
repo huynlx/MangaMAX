@@ -1,6 +1,6 @@
 import Router from 'next/router';
 import React from 'react';
-import { IoArrowBack } from 'react-icons/io5';
+import { FaChevronLeft } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { handleSource } from 'store/action';
 
@@ -17,7 +17,7 @@ const TypeRender = (type: string) => {
                 onClick={() => { dispatch(handleSource(select.source, 'latest')); Router.push(`/`); }}
                 className='float-right flex text-gray-300 hover:text-white transition gap-1 font-normal text-2xl leading-[1.2]'
             >
-                <IoArrowBack size={30} /> Back
+                <FaChevronLeft size={22} className='mt-[4.5px]' />  Back
             </span>
         </h1>
     );

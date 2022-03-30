@@ -37,7 +37,7 @@ const Info = ({ info, slug }: ComicProps) => {
                     <h1
                         title='Go Back'
                         className='absolute top-[4px] text-2xl font-semibold -ml-[0.3rem] hover:text-white'>
-                        <FaChevronLeft className='inline mb-[0.3rem]' /> {titleCase(select.type)}
+                        <FaChevronLeft className='inline mb-[0.3rem]' size={22} /> {titleCase(select.type)}
                     </h1>
                 </LinkCheck>
                 {/* Left Side */}

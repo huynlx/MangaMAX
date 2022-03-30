@@ -8,6 +8,7 @@ module.exports = {
     extend: {
       backgroundImage: {
         'header': "url('/bg.jpg')",
+        'grid': "url('/favicon.ico')"
       },
       colors: {
         primary: "#1A1A1A",
@@ -17,7 +18,18 @@ module.exports = {
         chapter: "rgb(17 46 64)",
         root: '#2D2D2E'
       },
-    },
+      backgroundSize: {
+        'auto': 'auto',
+        'cover': 'cover',
+        'contain': 'contain',
+        '90%': '90%',
+        '16': '4rem',
+      },
+      backgroundPosition: {
+        'sm': '50% 60%',
+        'lg': '50% 80%'
+      }
+    }
   },
   plugins: []
 };

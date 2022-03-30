@@ -85,7 +85,7 @@ const LeftComic = ({ info, select, slug }: any) => {
                 <ReadImage
                     className='w-[170px] h-[270px] md:h-[315px] md:min-w-[200px] object-cover mx-auto rounded-lg duration-[0ms]'
                     src={info.cover}
-                    className2='bg-gray-400 mx-auto rounded-lg h-[270px] w-[170px] md:w-[200px] md:h-[315px]' />
+                    className2='bg-gray-400 mx-auto rounded-lg max-h-[270px] w-[170px] md:w-[200px] md:max-h-[315px]' />
                 <div className='info gap-2 flex flex-col'>
                     <h1 className=' font-bold text-3xl text-white'>{info.title}</h1>
                     <p className='text-white text-lg font-semibold'>Author: <span className='text-gray-300'>{info.author}</span></p>
