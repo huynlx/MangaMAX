@@ -2,6 +2,7 @@ import { memo, useCallback, useRef } from 'react';
 import { useOnClickOutside } from 'shared/useOnClickOutside';
 import { FaCompass } from 'react-icons/fa';
 import LeftSideBar from 'components/LeftSideBar';
+import { IoListSharp } from 'react-icons/io5';
 
 const SideBar = ({ className, id }: any) => {
     const ref = useRef(null);
@@ -18,7 +19,7 @@ const SideBar = ({ className, id }: any) => {
     return (
         <div
             ref={ref}
-            className={'z-20 ml-auto pr-3 ' + className}
+            className={'z-20 ml-0 md:ml-auto pr-3 ' + className}
             title='Source'
         >
             <LeftSideBar
@@ -29,7 +30,8 @@ const SideBar = ({ className, id }: any) => {
                 className='hover:text-white transition duration-300 cursor-pointer text-[30px]'
                 onClick={openNav}
             >
-                <FaCompass />
+                <FaCompass className='hidden md:block' />
+                <IoListSharp className='block md:hidden' />
             </span>
         </div >
 

@@ -123,6 +123,7 @@ const MyApp = ({ Component, pageProps }) => {
         <link rel="shortcut icon" href="/favicon.ico" />
         <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests"></meta>
         <meta name="description" content="Website đọc manga hoàn toàn miễn phí, không quảng cáo." />
+        <script defer src="https://unpkg.com/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js"></script>
       </Head>
       {/* <PersistGate loading={<p className='w-full text-center'>Loading Source</p>} persistor={persistor}> */}
       <QueryClientProvider client={queryClient}>

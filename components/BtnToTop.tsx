@@ -33,7 +33,7 @@ const BtnToTop: FC<{ className?: String }> = ({ className }) => {
       title="Top"
       onClick={scrollToTop}
       className={`hover:text-white fixed rounded-full p-4 bg-gray-700  ${visible ? 'visible' : 'hidden'} ` + className}>
-      < FaArrowUp size={20} />
+      <FaArrowUp size={20} />
     </button >
   );
 };

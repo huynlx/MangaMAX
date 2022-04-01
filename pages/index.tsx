@@ -13,7 +13,7 @@ const Home: NextPage<GridProps> = () => {
   const typeRender = () => (
     <>
       <h1
-        className={`font-semibold ${select.type === 'latest' ? 'text-white sm:text-3xl text-2xl' : 'sm:text-2xl text-xl brightness-75'}`}
+        className={`font-bold ${select.type === 'latest' ? 'text-white sm:text-3xl text-2xl' : 'sm:text-2xl text-xl brightness-75'}`}
         onClick={() => {
           dispatch(handleSource(select.source, 'latest'))
         }}
@@ -21,7 +21,7 @@ const Home: NextPage<GridProps> = () => {
         Latest
       </h1>
       <h1
-        className={`font-semibold ${select.type === 'browse' ? 'text-white sm:text-3xl text-2xl' : 'sm:text-2xl text-xl brightness-75'}`}
+        className={`font-bold ${select.type === 'browse' ? 'text-white sm:text-3xl text-2xl' : 'sm:text-2xl text-xl brightness-75'}`}
         onClick={() => {
           dispatch(handleSource(select.source, 'browse'))
         }}

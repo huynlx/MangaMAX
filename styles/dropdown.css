@@ -8,7 +8,7 @@
   background-color: #f9f9f9;
   min-width: 140px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  transform: translate(9px, 10px);
+  transform: translate(6px, 10px);
   right: 0;
   z-index: 999;
 }
@@ -16,7 +16,7 @@
 .dropdown::after {
   content: "";
   height: 10px;
-  transform: translate(9px, 0px);
+  transform: translate(6px, 0px);
   right: 0;
   position: absolute;
   width: 60px;
@@ -26,7 +26,7 @@
   position: absolute;
   z-index: -1;
   content: "";
-  right: calc(50% - 52.5px);
+  right: calc(50% - 55px);
   top: -6px;
   border-style: solid;
   border-width: 0 7px 9px 7px;
