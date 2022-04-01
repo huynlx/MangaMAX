@@ -1,16 +1,19 @@
 /* Make clicks pass-through */
+:root {
+  --color: rgb(239 68 68);
+}
+
 #nprogress {
   pointer-events: none;
 }
 
 #nprogress .bar {
-  @apply bg-link;
-
+  background-color: var(--color);
   position: fixed;
   z-index: 1031;
   top: 0;
   left: 0;
-  height: 3px;
+  height: 3.5px;
   width: 100%;
 }
 
@@ -21,7 +24,7 @@
   right: 0px;
   width: 100px;
   height: 100%;
-  box-shadow: 0 0 10px #29d, 0 0 5px #29d;
+  box-shadow: 0 0 10px var(--color), 0 0 5px var(--color);
   opacity: 1;
 
   -webkit-transform: rotate(3deg) translate(0px, -4px);
@@ -43,8 +46,8 @@
   height: 25px;
   border: solid 3px transparent;
   box-sizing: border-box;
-  border-top-color: #29d;
-  border-left-color: #29d;
+  border-top-color: var(--color);
+  border-left-color: var(--color);
   border-radius: 50%;
 
   -webkit-animation: nprogress-spinner 400ms linear infinite;

@@ -1,9 +1,5 @@
 import { NextPage } from 'next';
-import dynamic from 'next/dynamic';
-import Loader from 'components/Loader';
-const BookmarksComponent = dynamic(() => import('components/Bookmarks'), {
-    loading: () => <Loader />,
-});
+import BookmarksComponent from 'components/Bookmarks';
 
 const Bookmarks: NextPage = () => (
     <BookmarksComponent />

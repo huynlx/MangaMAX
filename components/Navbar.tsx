@@ -6,7 +6,7 @@ import SideBar from './SideBar';
 import { useDispatch, useSelector } from 'react-redux';
 import { titleCase } from '../shared/cmanga/titleCase';
 import LinkCheck from './LinkCheck';
-import { handleSource, setScroll } from '../store/action';
+import { setScroll } from '../store/action';
 import { GrClose } from 'react-icons/gr';
 import { FaSearch } from 'react-icons/fa';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -33,7 +33,6 @@ const Navbar = ({ scroll }: { scroll: boolean }) => {
     const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (inputValue.trim()) {
-            dispatch(handleSource(select.source, 'search'));
             dispatch(setScroll(0, inputValue.trim()));
             document.getElementById('keyword')?.blur();
             router.push({
@@ -49,12 +48,12 @@ const Navbar = ({ scroll }: { scroll: boolean }) => {
     };
 
     return (
-        <div className={`${isActive ? 'h-28' : 'h-14'} md:h-14 bg-primary flex flex-col md:flex-row justify-around md:justify-between items-stretch md:items-center px-[3vw] lg:px-[5vw] ${(!router.pathname.includes('chap') && direction === 'up') ? 'sticky top-0 z-10' : 'relative'}`}>
+        <div className={`${isActive ? 'h-[7rem]' : 'h-[4rem]'} md:h-14 justify-evenly gap-0 bg-primary flex flex-col md:flex-row md:justify-between items-stretch md:items-center px-[2vw] lg:px-[5vw] ${(!router.pathname.includes('chap') && direction === 'up') ? 'sticky top-0 z-10' : 'relative'}`}>
             <div className='flex items-center justify-between'>
                 <LinkCheck select={select} reducer3={reducer3}>
                     <a className={`flex items-center justify-start gap-2 ${checkPathname() && 'pointer-events-none'}`}>
-                        <img src={`/_next/image?url=/favicon.ico&w=720&q=100`} className="max-w-[3rem] max-h-[auto] " alt="Logo" />
-                        <h1 className="text-2xl font-bold text-white hidden md:block">
+                        <img src={`/_next/image?url=/favicon.ico&w=720&q=100`} className="w-8 h-8 md:w-10 md:h-auto" alt="Logo" />
+                        <h1 className="text-2xl font-bold text-white hidden sm:block">
                             <span className="text-[#D04A32] font-bold borderText">Manga</span>MAX
                         </h1>
                     </a>
@@ -68,7 +67,7 @@ const Navbar = ({ scroll }: { scroll: boolean }) => {
                 <Dropdown className='block md:hidden' user={user} />
             </div>
             {
-                (scroll && checkPathname()) && <h1 className='hidden lg:block font-semibold text-white text-2xl top-2/4 absolute left-2/4 transform -translate-x-2/4 -translate-y-2/4'>{titleCase(select.type)}</h1>
+                (scroll && checkPathname()) && <h1 className='font-semibold text-white text-2xl top-[14px] md:top-[10px] absolute left-2/4 transform -translate-x-2/4'>{titleCase(select.type)}</h1>
             }
             <SideBar className='hidden md:block' id='sidenav2' />
             <form

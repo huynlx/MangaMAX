@@ -11,6 +11,7 @@ body {
 
 body {
   @apply overflow-y-scroll;
+  @apply overflow-x-hidden;
 }
 
 .borderText {

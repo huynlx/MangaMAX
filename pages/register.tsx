@@ -1,9 +1,5 @@
 import { NextPage } from "next";
-import dynamic from 'next/dynamic';
-import Loader from 'components/Loader';
-const RegisterComponent = dynamic(() => import('components/Register'), {
-    loading: () => <Loader />,
-});
+import RegisterComponent from 'components/Register';
 
 const Register: NextPage = () => (
     <RegisterComponent />

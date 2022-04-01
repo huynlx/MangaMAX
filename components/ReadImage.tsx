@@ -29,8 +29,9 @@ const ReadImage = ({ src, opacity, ...props }: any) => {
     return (
         <div className='cover'>
             {
-                !loaded && <div className={"flex items-center justify-center w-full h-[22rem] text-gray-500 " + props.className2}>
-                    <BsFillImageFill className="w-9 h-9 animate-pulse" />
+                !loaded && <div className={"flex flex-col items-center justify-center w-full text-gray-500 " + props.className2}>
+                    <BsFillImageFill className={"w-7 h-7 sm:w-9 sm:h-9 animate-pulse " + props.className3} />
+                    <p className={`animate-pulse mt-1 ${!props.textIcon && 'hidden'}`}>{props.textIcon}</p>
                 </div>
             }
             <img

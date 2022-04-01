@@ -1,9 +1,5 @@
 import { NextPage } from "next";
-import dynamic from 'next/dynamic';
-import Loader from 'components/Loader';
-const ResetComponent = dynamic(() => import('components/Reset'), {
-    loading: () => <Loader />,
-});
+import ResetComponent from 'components/Reset';
 
 const Reset: NextPage = () => (
     <ResetComponent />

@@ -52,7 +52,7 @@ const signInWithGoogle = async () => {
     }
   } catch (err) {
     console.error(err);
-    alert(err.message);
+    alert(err.message.replace('Firebase: ', ''));
   }
 };
 
@@ -74,7 +74,7 @@ const signInWithFacebook = async () => {
     }
   } catch (err) {
     console.error(err);
-    alert(err.message);
+    alert(err.message.replace('Firebase: ', ''));
   }
 };
 
@@ -83,7 +83,7 @@ const logInWithEmailAndPassword = async (email: string, password: string) => {
     await signInWithEmailAndPassword(auth, email, password);
   } catch (err) {
     console.error(err);
-    alert(err.message);
+    alert(err.message.replace('Firebase: ', ''));
   }
 };
 const registerWithEmailAndPassword = async (name: string, email: string, password: string) => {
@@ -99,7 +99,7 @@ const registerWithEmailAndPassword = async (name: string, email: string, passwor
     });
   } catch (err) {
     console.error(err);
-    alert(err.message);
+    alert(err.message.replace('Firebase: ', ''));
   }
 };
 const sendPasswordReset = async (email: string) => {
@@ -108,7 +108,7 @@ const sendPasswordReset = async (email: string) => {
     alert("Password reset link sent!");
   } catch (err) {
     console.error(err);
-    alert(err.message);
+    alert(err.message.replace('Firebase: ', ''));
   }
 };
 const logout = () => {

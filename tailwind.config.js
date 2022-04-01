@@ -16,7 +16,9 @@ module.exports = {
         link: "#248FFF",
         "link-hover": "#085ED7",
         chapter: "rgb(17 46 64)",
-        root: '#2D2D2E'
+        root: '#2D2D2E',
+        main: 'rgb(239 68 68)',
+        'main-hover': 'rgba(239,68,68,0.4)'
       },
       backgroundSize: {
         'auto': 'auto',
@@ -26,8 +28,8 @@ module.exports = {
         '16': '4rem',
       },
       backgroundPosition: {
-        'sm': '50% 60%',
-        'lg': '50% 80%'
+        'sm': '50% 70%',
+        'lg': '50% 120%'
       }
     }
   },

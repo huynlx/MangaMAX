@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import ReadImage from 'components/ReadImage';
 import Head from 'next/head';
 import { FaArrowRight } from 'react-icons/fa';
+import BtnToTop from 'components/BtnToTop';
 
 const ChapterComponent = ({ chapter, chapterId, comicSlug }: any) => {
     const select: any = useSelector((state: any) => state.reducer);
@@ -27,7 +28,7 @@ const ChapterComponent = ({ chapter, chapterId, comicSlug }: any) => {
             <div className='flex  flex-col items-center mx-auto'>
                 <p className="text-2xl px-[5vw]">
                     <Link as={`/comic/${comicSlug}`} href={`/comic/${comicSlug}?source=${select.source}&type=${select.type}`}>
-                        <a className="text-link">{chapter.title}</a>
+                        <a className="text-main">{chapter.title}</a>
                     </Link>
                     <span className='w-full'> {chapter.chapterCurrent} <small>{chapter.updateAt}</small></span>
 
@@ -35,7 +36,13 @@ const ChapterComponent = ({ chapter, chapterId, comicSlug }: any) => {
                 <Navigation chapters={chapter.chapters} chapterId={chapterId} comicSlug={comicSlug} select={select} select2={select2} />
                 <div className='min-h-[100vh] w-full'>
                     {
-                        chapter.images.map((image: string | undefined, index: any) => <ReadImage className='mx-auto object-cover w-full h-auto lg:min-w-[50vw] lg:max-w-[55vw] transition-opacity' key={index} src={image} />)
+                        chapter.images.map((image: string | undefined, index: any) => <ReadImage
+                            className='mx-auto object-cover w-full h-auto lg:min-w-[50vw] lg:max-w-[55vw] transition-opacity'
+                            key={index}
+                            src={image}
+                            textIcon={'Loading Resource...'}
+                            className2='h-[22rem]'
+                        />)
                     }
                 </div>
                 <div className={`w-full h-60 p-8 ${selectedIndex < 1 && 'hidden'}`}>
@@ -44,6 +51,7 @@ const ChapterComponent = ({ chapter, chapterId, comicSlug }: any) => {
                     </button>
                 </div>
             </div>
+            <BtnToTop className={'bottom-[5%] right-[5%]'} />
         </>
     );
 };

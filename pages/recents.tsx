@@ -1,9 +1,5 @@
 import { NextPage } from 'next';
-import dynamic from 'next/dynamic';
-import Loader from 'components/Loader';
-const RecentsComponent = dynamic(() => import('components/Recents'), {
-    loading: () => <Loader />,
-});
+import RecentsComponent from 'components/Recents';
 
 const Recents: NextPage = () => (
     <RecentsComponent />

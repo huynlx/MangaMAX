@@ -58,12 +58,12 @@ const Navigation = ({ chapters, chapterId, comicSlug, select, select2 }: Navigat
     return (
         <div className={`z-10 overflow-x-hidden flex items-center gap-1 w-full justify-center bg-primary ${direction === 'up' && 'sticky top-0'}`}>
             <LinkCheck select={select} reducer3={select2}>
-                <a><FaHome className='mr-2' size={30} /></a>
+                <a><FaHome className='mr-2 hover:text-white transition' size={30} title='Home' /></a>
             </LinkCheck>
             <Link as={`/comic/${router.query.slug}`} href={`/comic/${router.query.slug}?source=${select.source}&type=${select.type}`}>
-                <a><FaList className='mr-2' size={30} /></a>
+                <a><FaList className='mr-2 hover:text-white transition' size={30} title='Info' /></a>
             </Link>
-            <button disabled={selectedIndex === chapters.length - 1} onClick={prevChapter} className='p-2 bg-link hover:bg-link-hover w-10 h-10 text-white disabled:opacity-50'>
+            <button title='Prev Chapter' disabled={selectedIndex === chapters.length - 1} onClick={prevChapter} className='p-2 bg-main hover:bg-main-hover w-10 h-10 text-white disabled:opacity-50 transition'>
                 <FaChevronLeft size={20} />
             </button>
             <label className='hidden' htmlFor="selectChapter"></label>
@@ -80,7 +80,7 @@ const Navigation = ({ chapters, chapterId, comicSlug, select, select2 }: Navigat
                     ))
                 }
             </select>
-            <button disabled={selectedIndex < 1} onClick={nextChapter} className='p-2 bg-link hover:bg-link-hover w-10 h-10 text-white disabled:opacity-50'>
+            <button title='Next Chapter' disabled={selectedIndex < 1} onClick={nextChapter} className='p-2 bg-main hover:bg-main-hover w-10 h-10 text-white disabled:opacity-50 transition'>
                 <FaChevronRight size={20} />
             </button>
         </div>

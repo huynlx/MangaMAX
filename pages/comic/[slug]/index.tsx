@@ -4,11 +4,7 @@ import { getComicInfo } from 'shared/api/comic';
 import { ComicProps } from 'shared/types';
 import { wrapper } from 'store';
 import { handleSource } from 'store/action';
-import dynamic from 'next/dynamic';
-import Loader from 'components/Loader';
-const Info = dynamic(() => import('components/Info'), {
-    loading: () => <Loader />,
-});
+import Info from 'components/Info';
 
 const Comic: NextPage<ComicProps> = ({ info, slug }) => (
     <Info info={info} slug={slug} />

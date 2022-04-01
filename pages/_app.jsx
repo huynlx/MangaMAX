@@ -119,7 +119,7 @@ const MyApp = ({ Component, pageProps }) => {
     <>
       <Head>
         <meta charSet="utf-8" />
-        <title>MangaMAX</title>
+        <title>Manga Max</title>
         <link rel="shortcut icon" href="/favicon.ico" />
         <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests"></meta>
         <meta name="description" content="Website đọc manga hoàn toàn miễn phí, không quảng cáo." />

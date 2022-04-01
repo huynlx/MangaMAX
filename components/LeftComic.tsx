@@ -81,19 +81,19 @@ const LeftComic = ({ info, select, slug }: any) => {
 
     return (
         <div className='lg:w-[59vw] lg:pr-10 max-h-[none] lg:max-h-[100vh] overflow-auto'>
-            <div className='flex mb-4 gap-5 flex-col sm:flex-row'>
+            <div className='flex mb-5 gap-2 sm:gap-6 flex-col sm:flex-row'>
                 <ReadImage
                     className='w-[170px] h-[270px] md:h-[315px] md:min-w-[200px] object-cover mx-auto rounded-lg duration-[0ms]'
                     src={info.cover}
-                    className2='bg-gray-400 mx-auto rounded-lg max-h-[270px] w-[170px] md:w-[200px] md:max-h-[315px]' />
+                    className2='bg-gray-400 mx-auto rounded-lg max-h-[270px] w-[170px] md:w-[200px] md:max-h-[315px] h-[22rem]' />
                 <div className='info gap-2 flex flex-col'>
-                    <h1 className=' font-bold text-3xl text-white'>{info.title}</h1>
+                    <h1 className=' font-bold text-3xl text-white text-center sm:text-left'>{info.title}</h1>
                     <p className='text-white text-lg font-semibold'>Author: <span className='text-gray-300'>{info.author}</span></p>
                     <p className='text-white text-lg font-semibold'>Status: <span className='text-green-400'>{info.status}</span></p>
                     <p className='text-white text-lg font-semibold'>Server: <span className='text-white'>{select.source}</span></p>
                     <FollowIcon
                         iconSize={30}
-                        iconClassName='text-red-400 hover:scale-125 transition'
+                        iconClassName='text-red-400 md:hover:scale-125 transition'
                         cb={follow ? removeFollow : addFollow}
                         icon={follow ? BsSuitHeartFill : FaRegHeart}
                     />

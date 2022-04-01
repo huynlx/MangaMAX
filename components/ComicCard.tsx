@@ -3,13 +3,13 @@ import ReadImage from './ReadImage';
 
 const Comic = ({ item, select }: any) => (
     <Link href={`/comic/${item.slug}?source=${item.source ?? select.source}&type=${item.type ?? select.type}`} as={`/comic/${item.slug}`}>
-        <a className='flex flex-col items-stretch comic border overflow-hidden border-transparent rounded-xl'>
+        <a title={item.title} className='flex flex-col items-stretch comic border overflow-hidden border-transparent rounded-xl'>
             <div className='w-full h-0 pb-[155%] relative flex-grow bg-gray-400'>
                 <ReadImage
                     className='object-cover absolute top-0 left-0 w-full h-full transition-opacity duration-300'
                     src={item.cover}
                     color={item.color}
-                    className2='!h-[16rem]'
+                    className3='absolute transform top-2/4 left-2/4 -translate-x-2/4 -translate-y-2/4'
                 />
                 {item.status &&
                     <small className='px-2 md:py-1 rounded-full absolute bg-green-400/[.7] md:font-semibold text-white top-1 left-1 whitespace-nowrap text-ellipsis overflow-hidden max-w-[80%] 2xl:w-[auto]'>{item.status}</small>}

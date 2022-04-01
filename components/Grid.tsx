@@ -8,6 +8,7 @@ import dynamic from 'next/dynamic';
 const LoadMore = dynamic(() => import('./LoadMore'));
 import { User } from 'firebase/auth';
 import { setScroll } from 'store/action';
+import ToolNav from './ToolNav';
 
 interface GridProps {
     keyword?: string,
@@ -96,7 +97,7 @@ const Grid = ({ keyword, fetch, typeRender: TypeRender, user }: GridProps) => {
             {
                 isFetchingNextPage && <Loader className='md:hidden' />
             }
-            <div className='picker flex gap-5 items-center my-5'>
+            <div className='picker flex gap-5 items-center mb-3 md:mt-1'>
                 <TypeRender />
             </div>
             <div className={`grid gap-2 comic-list mb-10`}>
@@ -115,6 +116,7 @@ const Grid = ({ keyword, fetch, typeRender: TypeRender, user }: GridProps) => {
             {
                 (hasNextPage && page > 1) && <LoadMore />
             }
+            <ToolNav />
         </main>
     );
 };

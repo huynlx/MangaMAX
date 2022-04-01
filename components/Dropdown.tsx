@@ -31,10 +31,7 @@ const Dropdown: React.FC<{ user: User | null | undefined, className: string }> =
             </div>
           </div>
           :
-          <Link href='/login'><a className={`text-lg ml-3 text-white ${className}`}>Login</a></Link>
-      }
-      {
-        !user && <Link href={'/recents'}><a className={`text-lg ml-3 text-white ${className}`}>Recents</a></Link>
+          <Link href='/login'><a className={`text-md ml-3 text-white p-1 px-3 rounded-md bg-red-500 ${className}`}>Login</a></Link>
       }
     </>
   );

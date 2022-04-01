@@ -20,7 +20,7 @@ const BookmarksComponent: NextPage = () => {
 
         if (!user) {
             dispatch(handleSource(select.source, 'latest'));
-            navigate.push("/");
+            navigate.push("/login");
         } else {
             dispatch(handleSource(select.source, 'bookmarks'));
         };

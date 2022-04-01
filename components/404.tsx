@@ -3,7 +3,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 const Component404 = () => {
-    const select: any = useSelector((state: any) => state.reducer);
+    const { reducer: { source, type } }: any = useSelector((state: any) => state);
 
     return (
         <div className='px-[5vw] h-[auto]'>
@@ -17,8 +17,8 @@ const Component404 = () => {
                     <li className='list-disc md:leading-[2]'>Thay đổi server khác.</li>
                 </ul>
             </div>
-            <Link as={`/`} href={`/?source=${select.source}&type=${select.type}`} passHref>
-                <a><p className='text-center text-lg p-3 px-9 w-fit mx-[auto] border-2 duration-300 hover:border-link hover:text-primary rounded-full hover:bg-link'>Go to Home</p></a>
+            <Link as={`/`} href={`/?source=${source}&type=${type}`} passHref>
+                <a><p className='text-center text-lg p-3 px-9 w-fit mx-[auto] border-2 duration-300 hover:border-link rounded-full hover:bg-link'>Go to Home</p></a>
             </Link>
         </div>
     )
