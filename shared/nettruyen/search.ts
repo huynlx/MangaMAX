@@ -1,6 +1,5 @@
 import axios from "../axios";
 import { parse } from "node-html-parser";
-import { generateRandomColor } from "../getRandomColor";
 
 const getSearch = async (keyword: string, page: number = 1): Promise<any> => {
     const sections = {

@@ -17,7 +17,7 @@ const TypeRender = (type: string) => {
                 onClick={() => { dispatch(handleSource(select.source, 'latest')); Router.push(`/`); }}
                 className='float-right flex text-gray-300 hover:text-white transition gap-1 font-normal text-xl sm:text-2xl'
             >
-                <FaChevronLeft size={19} className='mt-[6px] sm:mt-[8px]' />  Back
+                <FaChevronLeft size={19} className='mt-[8px]' />  Back
             </span>
         </h1>
     );

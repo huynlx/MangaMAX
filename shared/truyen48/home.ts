@@ -15,27 +15,28 @@ const getHome = async (page: number = 1, type: string, source: string, url: stri
         return htmls.map((source, index) => {
             const dom = parse(source);
 
-            const items = dom.querySelectorAll(".list-stories li").map((item) => ({
-                title: item.querySelector("h3.title-book > a")?.innerText,
-                cover: item.querySelector("a > img")?.getAttribute("src"),
+            const items = dom.querySelectorAll(".list_grid li").map((item) => ({
+                title: item.querySelector("h3 > a")?.innerText,
+                cover: item.querySelector("a > img")?.getAttribute("data-src"),
                 chapter: item.querySelector(".episode-book > a")?.innerText,
                 slug: item
                     .querySelector("a")
                     ?.getAttribute("href")
                     ?.split("/")
-                    .slice(-1)[0],
+                    .slice(-1)[0].replace('.html', ''),
                 updateAt: item.querySelector(".time-ago")?.innerText,
+                hot: item.querySelector('.type-label.hot')?.innerText
             }));
 
             const pages = [];
-            for (const page of [...dom.querySelectorAll("ul.pagination-list li")]) {
-                const p = Number(page.querySelector('a')?.innerText.trim());
+            for (const page of [...dom.querySelectorAll(".page_redirect p")]) {
+                const p = Number(page.innerText.trim());
                 if (isNaN(p)) continue;
                 pages.push(p);
             }
             const lastPage = Math.max(...pages);
             const hasNextPage = (+page) !== lastPage;
-            const currentPage = (+dom.querySelector("li > a.is-current")?.innerText!);
+            const currentPage = (+dom.querySelector(".page_redirect p.active")?.innerText!);
 
             return {
                 name: Object.keys(sections)[index],

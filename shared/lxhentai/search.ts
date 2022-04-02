@@ -2,7 +2,6 @@ import axios from "../axios";
 import { parse } from "node-html-parser";
 import getQueryParams from "../useGetQueryParams";
 import decodeHTMLEntity from "../decodeHTML";
-import { generateRandomColor } from "../getRandomColor";
 
 const getSearch = async (keyword: string, page: number = 1, url: string): Promise<any> => {
 

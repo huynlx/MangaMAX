@@ -17,7 +17,7 @@ const ToolNav = () => {
   const slug = recents?.slug;
 
   return (
-    <div className="bg-nav w-auto justify-center items-center gap-5 flex bg-opacity-80 backdrop-blur-xl px-5 py-2 rounded-full fixed bottom-5 left-2/4 transform -translate-x-2/4">
+    <div className="bg-nav scale-90 lg:scale-100 w-auto justify-center items-center gap-5 flex bg-opacity-80 backdrop-blur-xl px-5 py-2 rounded-full fixed bottom-5 left-2/4 transform -translate-x-2/4">
       <MdHistory title='History' onClick={() => { dispatch(setScroll(0)); Router.push('/recents'); }} size={44} className='hover:text-white duration-300' />
       <span title='Bookmarks' onClick={() => { dispatch(setScroll(0)); Router.push('/bookmarks'); }} className='hover:border-white border-[3px] p-[6px] rounded-full hover:text-white duration-300'><BsFillBookmarkFill /></span>
       <span title='Search' onClick={() => Router.push('/search')} className='hover:border-white border-[3px] p-[4.2px] rounded-full hover:text-white duration-300'><BiSearch size={20} /></span>

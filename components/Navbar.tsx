@@ -48,30 +48,30 @@ const Navbar = ({ scroll }: { scroll: boolean }) => {
     };
 
     return (
-        <div className={`${isActive ? 'h-[6.1rem]' : 'h-[3.4rem]'} md:h-14 justify-evenly gap-0 bg-primary flex flex-col md:flex-row md:justify-between items-stretch md:items-center px-[2vw] lg:px-[5vw] ${(!router.pathname.includes('chap') && direction === 'up') ? 'sticky top-0 z-10' : 'relative'}`}>
+        <div className={`${isActive ? 'h-[6.1rem]' : 'h-[3.4rem]'} lg:h-14 justify-evenly gap-0 bg-primary flex flex-col lg:flex-row lg:justify-between items-stretch lg:items-center px-[2vw] lg:px-[5vw] ${(!router.pathname.includes('chap') && direction === 'up') ? 'sticky top-0 z-10' : 'relative'}`}>
             <div className='flex items-center justify-between'>
                 <LinkCheck select={select} reducer3={reducer3}>
-                    <a className={`hidden md:flex items-center justify-start gap-2 ${checkPathname() && 'pointer-events-none'}`}>
-                        <img src={`/_next/image?url=/favicon.ico&w=720&q=100`} className="w-8 h-8 md:w-10 md:h-auto" alt="Logo" />
+                    <a className={`hidden lg:flex items-center justify-start gap-2 ${checkPathname() && 'pointer-events-none'}`}>
+                        <img src={`/_next/image?url=/favicon.ico&w=720&q=100`} className="w-8 h-8 lg:w-10 lg:h-auto" alt="Logo" />
                         <h1 className="text-2xl font-bold text-white hidden sm:block">
                             <span className="text-[#D04A32] font-bold borderText">Manga</span>MAX
                         </h1>
                     </a>
                 </LinkCheck>
-                <SideBar className='block md:hidden' id='sidenav1' />
-                <button aria-label="Search" className="ml-auto md:hidden block" onClick={() => setIsActive((prev) => !prev)}>
+                <SideBar className='block lg:hidden' id='sidenav1' />
+                <button aria-label="Search" className="ml-auto lg:hidden block" onClick={() => setIsActive((prev) => !prev)}>
                     {
                         isActive ? <GrClose className='invert' size={25} /> : <FaSearch size={25} />
                     }
                 </button>
-                <Dropdown className='block md:hidden' user={user} />
+                <Dropdown className='block lg:hidden' user={user} />
             </div>
             {
-                (scroll && checkPathname()) && <h1 className='font-semibold text-white text-2xl top-[10px] md:top-[10px] absolute left-2/4 transform -translate-x-2/4'>{titleCase(select.type)}</h1>
+                (scroll && checkPathname()) && <h1 className='font-semibold text-white text-2xl top-[10px] lg:top-[10px] absolute left-2/4 transform -translate-x-2/4'>{titleCase(select.type)}</h1>
             }
-            <SideBar className='hidden md:block' id='sidenav2' />
+            <SideBar className='hidden lg:block' id='sidenav2' />
             <form
-                className={`${isActive ? 'flex' : 'hidden'} md:flex border-gray-300 rounded-full overflow-hidden h-8`}
+                className={`${isActive ? 'flex' : 'hidden'} lg:flex border-gray-300 rounded-full overflow-hidden h-8`}
                 onSubmit={handleFormSubmit}
                 id='myForm'
             >
@@ -88,7 +88,7 @@ const Navbar = ({ scroll }: { scroll: boolean }) => {
                     autoComplete='off'
                 />
             </form>
-            <Dropdown className='hidden md:block' user={user} />
+            <Dropdown className='hidden lg:block' user={user} />
         </div >
     );
 };
