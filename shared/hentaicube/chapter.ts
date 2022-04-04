@@ -13,16 +13,15 @@ export const getChapter = async (comicSLug: any, chapterSLug: any, chapterId: an
     const dom = parse(html[0]);
 
     const list = dom.querySelectorAll('.text-left > div img');
-    const index = dom.querySelectorAll(".c-selectpicker")[0].querySelectorAll('option').map((item, index) => index).reverse();
 
     return {
         title: decodeHTMLEntity(dom.querySelector("#chapter-heading")?.innerText.split('-')[0]),
         chapterCurrent: dom.querySelectorAll(".c-selectpicker")[0].querySelector('option:checked')?.innerText,
         updateAt: '',
-        images: list.map(img => `/api/proxy?url=${encodeURI((img.getAttribute('data-src') ?? img.getAttribute('src')) as string)}&source=${state.source}`),
+        images: list.map(img => `/api/proxy?url=${encodeURIComponent((img.getAttribute('data-src') ?? img.getAttribute('src')) as string)}&source=${state.source}`),
         chapters: dom.querySelectorAll(".c-selectpicker")[0].querySelectorAll('option').map((option, i) => ({
             name: option.innerText,
-            id: index[i].toString(),
+            id: option.getAttribute('data-redirect')?.split('/').slice(5, -1)[0],
             chap: option.getAttribute('data-redirect')?.split('/').slice(5, -1)[0],
         }))
     }

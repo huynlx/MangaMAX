@@ -1,4 +1,5 @@
 import { parse } from "node-html-parser";
+import useSlug from "shared/useSlug";
 import axios from "../axios"
 import decodeHTMLEntity from "../decodeHTML";
 import getQueryParams from "../useGetQueryParams";
@@ -21,7 +22,7 @@ export const getComicInfo = async (comicSLug: string): Promise<any> => {
             updateAt: chapter.childNodes[3].textContent,
             view: chapter.childNodes[5].textContent,
             id: getQueryParams('id', chapter.querySelector('div.col-5 a')?.getAttribute('href')!),
-            chap: 'chapter-' + (index[i] + 1),
+            chap: useSlug(chapter.querySelector('div.col-5 a')?.innerText.trim()!),
             nameIndex: index[i] + 1
         }))
     }

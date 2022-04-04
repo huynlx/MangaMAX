@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { useRouter } from 'next/router';
 import { useCallback, useEffect } from 'react';
 import Link from 'next/link';
@@ -14,33 +14,33 @@ const Navigation = ({ chapters, chapterId, comicSlug, select, select2 }: Navigat
 
     const prevChapter = useCallback(() => {
         router.push({
-            pathname: `/comic/${comicSlug}/${chapters[selectedIndex + 1].chap}`,
+            pathname: `/manga/${comicSlug}/${chapters[selectedIndex + 1].chap}`,
             query: {
                 id: chapters[selectedIndex + 1].id,
                 source: select.source,
                 type: select.type
             }
-        }, `/comic/${comicSlug}/${chapters[selectedIndex + 1].chap}`)
+        }, `/manga/${comicSlug}/${chapters[selectedIndex + 1].chap}`)
     }, [comicSlug, chapters, selectedIndex, router, select.source, select.type])
     const nextChapter = useCallback(() => {
         router.push({
-            pathname: `/comic/${comicSlug}/${chapters[selectedIndex - 1].chap}`,
+            pathname: `/manga/${comicSlug}/${chapters[selectedIndex - 1].chap}`,
             query: {
                 id: chapters[selectedIndex - 1].id,
                 source: select.source,
                 type: select.type
             }
-        }, `/comic/${comicSlug}/${chapters[selectedIndex - 1].chap}`)
+        }, `/manga/${comicSlug}/${chapters[selectedIndex - 1].chap}`)
     }, [comicSlug, chapters, selectedIndex, router, select.source, select.type])
     const selectChapter = (chapterSlug: string) => {
         router.push({
-            pathname: `/comic/${comicSlug}/${chapterSlug}`,
+            pathname: `/manga/${comicSlug}/${chapterSlug}`,
             query: {
                 id: chapters.find((chap: { chap: any; }) => chap.chap === chapterSlug)?.id,
                 source: select.source,
                 type: select.type
             },
-        }, `/comic/${comicSlug}/${chapterSlug}`);
+        }, `/manga/${comicSlug}/${chapterSlug}`);
     }
     useEffect(() => {
         const handler = (e: KeyboardEvent) => {
@@ -60,7 +60,7 @@ const Navigation = ({ chapters, chapterId, comicSlug, select, select2 }: Navigat
             <LinkCheck select={select} reducer3={select2}>
                 <a><FaHome className='mr-2 hover:text-white transition' size={30} title='Home' /></a>
             </LinkCheck>
-            <Link as={`/comic/${router.query.slug}`} href={`/comic/${router.query.slug}?source=${select.source}&type=${select.type}`}>
+            <Link as={`/manga/${router.query.slug}`} href={`/manga/${router.query.slug}?source=${select.source}&type=${select.type}`}>
                 <a><FaList className='mr-2 hover:text-white transition' size={30} title='Info' /></a>
             </Link>
             <button title='Prev Chapter' disabled={selectedIndex === chapters.length - 1} onClick={prevChapter} className='p-2 bg-main hover:bg-main-hover w-10 h-10 text-white disabled:opacity-50 transition'>

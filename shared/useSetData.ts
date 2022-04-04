@@ -1,4 +1,4 @@
-import { WINDOW_SIZE } from "./constants";
+import { WINDOW_SIZE } from "constants/index";
 
 export const setCol = (windowSize: any) => {
     switch (windowSize) {

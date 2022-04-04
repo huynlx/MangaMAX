@@ -20,7 +20,7 @@ export const getChapter = async (comicSLug: any, chapterSLug: any): Promise<any>
       url = url.startsWith("//")
         ? url.replace("//", "http://")
         : url;
-      return `/api/proxy?url=${encodeURI(url)}&source=${state.source}`
+      return `/api/proxy?url=${encodeURIComponent(url)}&source=${state.source}`
     }),
     chapters: dom.querySelectorAll(".selectEpisode option").map((chapter: any) => ({
       name: chapter.innerText.trim(),

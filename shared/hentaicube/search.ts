@@ -21,8 +21,10 @@ const getSearch = async (keyword: string, page: number = 1, source: string): Pro
 
             return ({
                 title: decodeHTMLEntity(item.querySelector(".post-title > h3 > a")?.innerText!),
-                cover: `/api/proxy?url=${encodeURI(url as string)}&source=${source}`,
+                cover: `/api/proxy?url=${encodeURIComponent(url as string)}&source=${source}`,
                 chapter: item.querySelector(".chapter > a")?.innerText,
+                chapSlug: item.querySelector(".chapter a")?.getAttribute('href')?.split('/').slice(5, -1)[0],
+                chapId: item.querySelector(".chapter a")?.getAttribute('href')?.split('/').slice(5, -1)[0],
                 slug: item
                     .querySelector(".c-image-hover > a")
                     ?.getAttribute("href")?.split('/').slice(4, -1)[0],

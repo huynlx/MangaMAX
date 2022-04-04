@@ -1,4 +1,5 @@
 import { parse } from "node-html-parser";
+import useSlug from "shared/useSlug";
 import axios from "../axios";
 
 export const getChapter = async (comicSLug: any, chapterSLug: any, chapterId: any): Promise<any> => {
@@ -9,8 +10,7 @@ export const getChapter = async (comicSLug: any, chapterSLug: any, chapterId: an
     const dom = parse(html[0]);
     const list = [...dom.querySelectorAll('#content_chap p img')].length === 0 ? dom.querySelectorAll('#content_chap div:not(.text-center) img')
         : dom.querySelectorAll('#content_chap p img');
-    const index = dom.querySelectorAll("#selectChapter:first-child option").map((item, index) => index).reverse();
-    const image = (img: string | undefined) => img?.includes('https') ? `/_next/image?url=${img}&w=1920&q=100` : img;
+    const image = (img: string | undefined) => img?.includes('https') ? `/_next/image?url=${encodeURIComponent(img)}&w=1920&q=100` : img;
 
     return {
         title: dom.querySelector("#mainpage h4 a")?.innerText,
@@ -22,7 +22,7 @@ export const getChapter = async (comicSLug: any, chapterSLug: any, chapterId: an
         chapters: dom.querySelectorAll("#selectChapter:first-child option").map((option, i) => ({
             name: option.innerText,
             id: option.getAttribute("value"),
-            chap: "chapter-" + (index[i] + 1)
+            chap: useSlug(option.innerText)
         }))
     }
 }

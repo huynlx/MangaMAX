@@ -2,6 +2,7 @@ import axios from "../axios";
 import { parse } from "node-html-parser";
 import getQueryParams from "../useGetQueryParams";
 import decodeHTMLEntity from "../decodeHTML";
+import useSlug from "shared/useSlug";
 
 const getSearch = async (keyword: string, page: number = 1, url: string): Promise<any> => {
 
@@ -25,6 +26,8 @@ const getSearch = async (keyword: string, page: number = 1, url: string): Promis
                 title: decodeHTMLEntity(item.childNodes[3].innerText),
                 cover: url + image,
                 chapter: item.querySelector(".newestChapter a")?.innerText,
+                chapSlug: useSlug(item.querySelector(".newestChapter a")?.innerText!),
+                chapId: getQueryParams('id', item.querySelector('.newestChapter a')?.getAttribute('href')!),
                 slug: getQueryParams('id', item.getElementsByTagName('a')[1].getAttribute('href')!),
                 updateAt: null,
                 id: getQueryParams('id', item.getElementsByTagName('a')[1].getAttribute('href')!),

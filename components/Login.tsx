@@ -1,21 +1,18 @@
 import React, { FC, useEffect, useState } from "react";
-import { auth, logInWithEmailAndPassword, signInWithFacebook, signInWithGoogle } from "shared/firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
+import { logInWithEmailAndPassword, signInWithFacebook, signInWithGoogle } from "shared/firebase";
 import { useRouter } from "next/router";
 import Link from "next/link";
+
+import { useAppSelector } from "hooks/useRedux";
 
 const LoginComponent: FC = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [user, loading, error] = useAuthState(auth);
+    const { reducer4: { user } } = useAppSelector(state => state);
     const navigate = useRouter();
     useEffect(() => {
-        if (loading) {
-            // maybe trigger a loading screen
-            return;
-        }
         if (user) navigate.back();
-    }, [user, loading]);
+    }, [user]);
     return (
         <div className="login">
             <div className="login__container">
@@ -58,7 +55,7 @@ const LoginComponent: FC = () => {
                     <Link href="/reset">Forgot Password</Link>
                 </div>
                 <div>
-                    Don&apos;t have an account? <Link href="/register"><a className="text-link">Register</a></Link>
+                    Don&apos;t have an account? <Link href="/register"><a className="text-link font-semibold">Register</a></Link>
                 </div>
             </div>
         </div>

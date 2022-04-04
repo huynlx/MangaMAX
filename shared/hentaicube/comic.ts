@@ -10,7 +10,7 @@ export const getComicInfo = async (comicSLug: string): Promise<any> => {
     let author = '';
     let genres = [];
     let status = '';
-    let url = encodeURI(dom.querySelector('.tab-summary img')?.getAttribute('src')?.replace('-193x278', '')!);
+    let url = encodeURIComponent(dom.querySelector('.tab-summary img')?.getAttribute('src')?.replace('-193x278', '')!);
     let desc = '';
     dom.querySelectorAll('.description-summary > .summary__content ul li').map((item) => {
         desc += '●  ' + item.innerText + '\n';
@@ -40,7 +40,7 @@ export const getComicInfo = async (comicSLug: string): Promise<any> => {
 
     return {
         title: decodeHTMLEntity(dom.querySelector('.post-title > h1')?.innerText.trim()!),
-        cover: `/api/proxy?url=${encodeURI(url as string)}&source=${state.source}`,
+        cover: `/api/proxy?url=${url as string}&source=${state.source}`,
         author: author !== '' ? author : 'Updating',
         status: status !== '' ? status : 'Updating',
         genres,
@@ -49,7 +49,7 @@ export const getComicInfo = async (comicSLug: string): Promise<any> => {
             name: chapter.querySelectorAll('a')[0]?.innerText.trim(),
             updateAt: chapter.querySelector('span')?.innerText.trim(),
             view: 'N/A',
-            id: index[i].toString(),
+            id: chapter.querySelectorAll('a')[0].getAttribute('href')?.split('/').slice(5, -1)[0],
             chap: chapter.querySelectorAll('a')[0].getAttribute('href')?.split('/').slice(5, -1)[0],
             nameIndex: index[i] + 1
         }))

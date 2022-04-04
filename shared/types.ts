@@ -1,3 +1,5 @@
+import { RootState } from "store"
+
 export interface ChaptersProps {
     name: string,
     updateAt: string,
@@ -30,8 +32,8 @@ export interface NavigationProps {
     chapters: ChaptersProps[],
     chapterId: string,
     comicSlug: string,
-    select: any,
-    select2: any
+    select: RootState,
+    select2: RootState
 }
 
 export interface GridProps {

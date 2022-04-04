@@ -1,20 +1,22 @@
-interface followProps {
+interface iconProps {
     iconClassName?: string;
-    icon: React.ComponentType<{ className?: string; size: number, onClick?: () => void }>;
+    icon: React.ComponentType<{ className?: string; size: number, onClick?: () => void, title?: string }>;
     iconSize?: number;
-    cb: () => void
+    cb: () => void,
+    title?: string
 }
 
-const Icon = (props: followProps) => {
+const Icon = (props: iconProps) => {
     const {
         iconSize = 16,
         icon: Icon,
         iconClassName,
-        cb
+        cb,
+        title
     } = props;
 
     return (
-        <Icon onClick={cb} className={iconClassName} size={iconSize} />
+        <Icon onClick={cb} className={iconClassName} size={iconSize} title={title} />
     );
 };
 

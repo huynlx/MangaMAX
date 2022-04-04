@@ -2,8 +2,9 @@ import instance from "../axios";
 import { parse } from "node-html-parser";
 import decodeHTMLEntity from "../decodeHTML";
 import getQueryParams from "../useGetQueryParams";
+import useSlug from "shared/useSlug";
 
-const getHome = async (page: number = 1, type: string, source: string, url: string): Promise<any> => {
+const getHome = async (page: number = 1, type: string, sourceNum: string, url: string): Promise<any> => {
     const handleSource = () => {
         if (type === 'browse') {
             return `story/index.php?p=${page}&hot`
@@ -19,15 +20,18 @@ const getHome = async (page: number = 1, type: string, source: string, url: stri
             const items = dom.querySelectorAll(".main .col-md-8 > .row div.col-md-3").map((item) => {
                 let style = (item.querySelector('div')?.getAttribute('style'));
                 const bg = (style?.split(";")[0]);
-                const image = bg?.replace('url(', '').replace(')', '').replace(/\"/gi, "").replace(/['"]+/g, '').split(":")[1].trim();
+                const image = url + bg?.replace('url(', '').replace(')', '').replace(/\"/gi, "").replace(/['"]+/g, '').split(":")[1].trim();
 
                 return {
                     title: decodeHTMLEntity(item.childNodes[3].innerText),
-                    cover: url + image,
+                    cover: image.replace('lxhentai.com//', 'lxhentai.com/'),
                     chapter: item.querySelector(".newestChapter a")?.innerText,
+                    chapSlug: useSlug(item.querySelector(".newestChapter a")?.innerText!),
+                    chapId: getQueryParams('id', item.querySelector('.newestChapter a')?.getAttribute('href')!),
                     slug: getQueryParams('id', item.getElementsByTagName('a')[1].getAttribute('href')!),
                     updateAt: null,
                     id: getQueryParams('id', item.getElementsByTagName('a')[1].getAttribute('href')!),
+                    source: sourceNum
                 }
             });
 

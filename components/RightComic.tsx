@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { RiSortDesc } from 'react-icons/ri';
 import { CgDisplayGrid } from 'react-icons/cg';
 import List from './List';

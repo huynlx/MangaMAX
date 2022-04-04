@@ -1,27 +1,27 @@
 import { useRouter } from 'next/router';
-import React from 'react';
+
 import { FormEvent } from 'react';
 import { useState } from 'react';
 import SideBar from './SideBar';
-import { useDispatch, useSelector } from 'react-redux';
+
 import { titleCase } from '../shared/cmanga/titleCase';
 import LinkCheck from './LinkCheck';
 import { setScroll } from '../store/action';
 import { GrClose } from 'react-icons/gr';
 import { FaSearch } from 'react-icons/fa';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth } from 'shared/firebase';
 import Dropdown from './Dropdown';
 import { useScroll } from 'hooks/useScroll';
 
+import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
+
 const Navbar = ({ scroll }: { scroll: boolean }) => {
     const direction = useScroll();
-    const [user] = useAuthState(auth);
+    const { reducer4: { user } } = useAppSelector((state) => state);
     const [isActive, setIsActive] = useState(false);
     const [inputValue, setInputValue] = useState("");
-    const select: any = useSelector((state: any) => state.reducer);
-    const { reducer3 }: any = useSelector((state: any) => state);
-    const dispatch = useDispatch();
+    const select = useAppSelector((state) => state.reducer);
+    const { reducer3 }: any = useAppSelector((state) => state);
+    const dispatch = useAppDispatch();
 
     const router = useRouter();
     const { pathname } = router;
@@ -52,9 +52,9 @@ const Navbar = ({ scroll }: { scroll: boolean }) => {
             <div className='flex items-center justify-between'>
                 <LinkCheck select={select} reducer3={reducer3}>
                     <a className={`hidden lg:flex items-center justify-start gap-2 ${checkPathname() && 'pointer-events-none'}`}>
-                        <img src={`/_next/image?url=/favicon.ico&w=720&q=100`} className="w-8 h-8 lg:w-10 lg:h-auto" alt="Logo" />
+                        <img src={`/_next/image?url=/favicon.ico&w=720&q=100`} className="w-8 h-8 lg:w-10 lg:h-auto lg:hidden" alt="Logo" />
                         <h1 className="text-2xl font-bold text-white hidden sm:block">
-                            <span className="text-[#D04A32] font-bold borderText">Manga</span>MAX
+                            <span className="text-[#D04A32] font-bold borderText">MANGA</span>MAX
                         </h1>
                     </a>
                 </LinkCheck>

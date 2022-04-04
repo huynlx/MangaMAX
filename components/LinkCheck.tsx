@@ -1,9 +1,10 @@
 import Link from 'next/link';
-import React, { PropsWithChildren } from 'react';
+import React, { PropsWithChildren, ReactNode } from 'react';
 
 interface LinkCheckProps {
     select?: any,
-    reducer3?: any
+    reducer3?: any,
+    children?: ReactNode
 }
 
 const LinkCheck = ({ select, reducer3, children }: PropsWithChildren<LinkCheckProps>) => {

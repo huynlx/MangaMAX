@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { ComicProps } from 'shared/types';
 import { RiSortDesc } from 'react-icons/ri';
-import { useDispatch, useSelector } from 'react-redux';
 import LeftComic from 'components/LeftComic';
 import RightComic from 'components/RightComic';
 import { FaChevronLeft } from 'react-icons/fa';
@@ -10,11 +9,12 @@ import Head from 'next/head';
 import LinkCheck from 'components/LinkCheck';
 import { CgDisplayGrid } from 'react-icons/cg';
 import { setScroll } from 'store/action';
+import { useAppDispatch, useAppSelector } from "hooks/useRedux";
 
 const Info = ({ info, slug }: ComicProps) => {
-    const select: any = useSelector((state: any) => state.reducer);
-    const { reducer3 }: any = useSelector((state: any) => state);
-    const dispatch = useDispatch();
+    const select = useAppSelector(state => state.reducer);
+    const { reducer3 }: any = useAppSelector(state => state);
+    const dispatch = useAppDispatch();
     const [dt, setDt] = useState<any>(info);
 
     const handleSort = () => {

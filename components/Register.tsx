@@ -1,26 +1,23 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { FC, useEffect, useState } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
-import {
-    auth,
-    registerWithEmailAndPassword,
-} from "shared/firebase";
 
-const RegisterComponent:FC = () => {
+import { registerWithEmailAndPassword } from "shared/firebase";
+import { useAppSelector } from "hooks/useRedux";
+
+const RegisterComponent: FC = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [name, setName] = useState("");
-    const [user, loading, error] = useAuthState(auth);
+    const { reducer4: { user } } = useAppSelector(state => state);
     const history = useRouter();
     const register = () => {
         if (!name) alert("Please enter name");
         registerWithEmailAndPassword(name, email, password);
     };
     useEffect(() => {
-        if (loading) return;
         if (user) history.push("/dashboard");
-    }, [user, loading]);
+    }, [user]);
     return (
         <div className="register">
             <div className="register__container">
@@ -49,7 +46,7 @@ const RegisterComponent:FC = () => {
                     Register
                 </button>
                 <div>
-                    Already have an account? <Link href="/login"><a className="text-link">Login</a></Link>
+                    Already have an account? <Link href="/login"><a className="text-link font-semibold">Login</a></Link>
                 </div>
             </div>
         </div>

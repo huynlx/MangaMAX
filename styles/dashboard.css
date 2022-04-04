@@ -14,11 +14,11 @@
 }
 .dashboard__btn {
     padding: 10px;
-    font-size: 18px;
+    font-size: 17px;
+    font-weight: 500;
     margin-top: 10px;
     border: none;
     color: white;
-    @apply bg-gray-600;
 }
 .dashboard div {
     margin-top: 7px;

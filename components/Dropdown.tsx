@@ -1,14 +1,15 @@
 import { User } from 'firebase/auth';
+import { useAppDispatch } from 'hooks/useRedux';
 import Link from 'next/link';
-import React from 'react';
+
 import { FaHistory, FaBookmark, FaUserAlt } from 'react-icons/fa';
 import { HiOutlineLogout } from 'react-icons/hi';
-import { useDispatch } from 'react-redux';
+
 import { logout } from 'shared/firebase';
 import { setScroll } from 'store/action';
 
 const Dropdown: React.FC<{ user: User | null | undefined, className: string }> = ({ user, className }) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   return (
     <>

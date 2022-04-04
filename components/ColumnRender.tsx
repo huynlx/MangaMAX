@@ -1,20 +1,17 @@
-import React from 'react';
 import ComicCard from './ComicCard';
 
-const ColumnRender = ({ colRendered, select }: any) => {
-
-    return (
-        <div className='col flex flex-col gap-2'>
-            {colRendered.map((item: any, index: any) => {
-
-                return <ComicCard
+const ColumnRender = ({ colRendered, select }: any) => (
+    <div className='col flex flex-col gap-2'>
+        {
+            colRendered.map((item: any, index: any) =>
+                <ComicCard
                     item={item}
                     key={index}
                     select={select}
                 />
-            })}
-        </div>
-    );
-};
+            )
+        }
+    </div>
+);
 
 export default ColumnRender;

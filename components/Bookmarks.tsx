@@ -1,35 +1,31 @@
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { useDispatch, useSelector } from 'react-redux';
-import { auth } from 'shared/firebase';
 import { handleSource } from 'store/action';
-import useFetchBookmarks from 'hooks/useFetchBookmarks';
 import TypeRender from './TypeRender';
 import Grid from './Grid';
+import { useAppDispatch, useAppSelector } from "hooks/useRedux";
+import getBookmarks from 'hooks/getBookmarks';
 
 const BookmarksComponent: NextPage = () => {
-    const [user, loading] = useAuthState(auth);
+    const { reducer4: { user } } = useAppSelector(state => state);
     const navigate = useRouter();
-    const dispatch = useDispatch();
-    const select: any = useSelector((state: any) => state.reducer);
+    const dispatch = useAppDispatch();
+    const select = useAppSelector(state => state.reducer);
 
     useEffect(() => {
-        if (loading) return;
-
         if (!user) {
             dispatch(handleSource(select.source, 'latest'));
             navigate.push("/login");
         } else {
             dispatch(handleSource(select.source, 'bookmarks'));
         };
-    }, [user, loading]);
+    }, [user]);
 
     return (
         <Grid
             typeRender={() => TypeRender('Bookmarks')}
-            fetch={useFetchBookmarks}
+            fetch={getBookmarks}
             user={user}
         />
     );

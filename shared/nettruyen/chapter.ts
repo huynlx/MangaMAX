@@ -25,7 +25,7 @@ export const getChapter = async (comicSLug: any, chapterSLug: any, chapterId: an
             url = url.startsWith("//")
                 ? url.replace("//", "http://")
                 : url;
-            return `/api/proxy?url=${encodeURI(url)}&source=${state.source}`
+            return `/api/proxy?url=${encodeURIComponent(url)}&source=${state.source}`
         }),
         chapters: dom2.querySelectorAll("#nt_listchapter ul li:not(.heading)").map((chapter: any) => ({
             name: chapter.querySelector('.chapter').innerText.trim(),

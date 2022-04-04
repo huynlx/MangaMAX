@@ -2,7 +2,7 @@ import instance from "../axios";
 import { parse } from "node-html-parser";
 import decodeHTMLEntity from "../decodeHTML";
 
-const getHome = async (page: number = 1, type: string, source: string, url: string): Promise<any> => {
+const getHome = async (page: number = 1, type: string, sourceNum: string, url: string): Promise<any> => {
 
     const handleSource = () => {
         if (type === 'browse') {
@@ -21,12 +21,15 @@ const getHome = async (page: number = 1, type: string, source: string, url: stri
                     ?? item.querySelector(".c-image-hover > a > img")?.getAttribute("src");
                 return ({
                     title: decodeHTMLEntity(item.querySelector(".post-title > h3 > a")?.innerText!),
-                    cover: `/api/proxy?url=${encodeURI(url as string)}&source=${source}`,
-                    chapter: item.querySelector(".chapter > a")?.innerText,
+                    cover: `/api/proxy?url=${encodeURIComponent(url as string)}&source=${sourceNum}`,
+                    chapter: item.querySelector(".chapter > a")?.innerText.trim(),
+                    chapSlug: item.querySelector(".chapter a")?.getAttribute('href')?.split('/').slice(5, -1)[0],
+                    chapId: item.querySelector(".chapter a")?.getAttribute('href')?.split('/').slice(5, -1)[0],
                     slug: item
                         .querySelector(".c-image-hover > a")
                         ?.getAttribute("href")?.split('/').slice(4, -1)[0],
                     updateAt: item.querySelector(".post-on")?.innerText.trim(),
+                    source: sourceNum
                 });
             });
 

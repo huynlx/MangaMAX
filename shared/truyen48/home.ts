@@ -1,7 +1,7 @@
 import instance from "../axios";
 import { parse } from "node-html-parser";
 
-const getHome = async (page: number = 1, type: string, source: string, url: string): Promise<any> => {
+const getHome = async (page: number = 1, type: string, sourceNum: string, url: string): Promise<any> => {
 
     const handleSource = () => {
         if (type === 'browse') {
@@ -18,14 +18,17 @@ const getHome = async (page: number = 1, type: string, source: string, url: stri
             const items = dom.querySelectorAll(".list_grid li").map((item) => ({
                 title: item.querySelector("h3 > a")?.innerText,
                 cover: item.querySelector("a > img")?.getAttribute("data-src"),
-                chapter: item.querySelector(".episode-book > a")?.innerText,
+                chapter: item.querySelector(".last_chapter a")?.innerText,
+                chapSlug: 'chap-' + item.querySelector(".last_chapter a")?.innerText.split(' ')[1],
+                chapId: item.querySelector(".last_chapter a")?.getAttribute('href')?.split('/').pop(),
                 slug: item
                     .querySelector("a")
                     ?.getAttribute("href")
                     ?.split("/")
                     .slice(-1)[0].replace('.html', ''),
                 updateAt: item.querySelector(".time-ago")?.innerText,
-                hot: item.querySelector('.type-label.hot')?.innerText
+                hot: item.querySelector('.type-label.hot')?.innerText,
+                source: sourceNum
             }));
 
             const pages = [];

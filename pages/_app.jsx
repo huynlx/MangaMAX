@@ -3,12 +3,24 @@ import "styles/index.css";
 import React, { useEffect, useState } from 'react';
 import Navbar from 'components/Navbar';
 import { wrapper } from 'store';
-import { useSelector, useDispatch } from 'react-redux';
-import { WINDOW_RESIZE_DEBOUNCE, WINDOW_SIZE } from 'shared/constants';
+import { WINDOW_RESIZE_DEBOUNCE, WINDOW_SIZE } from 'constants/index';
 import { windowResize } from 'store/action';
 import { QueryClient, QueryClientProvider } from "react-query";
 import { removeLoadingBar, callLoadingBar } from 'shared/callLoadingBar';
 import Head from 'next/head';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from 'shared/firebase';
+import Script from 'next/script';
+import { user as setUser, bookmarks as setBookmarks } from 'store/action';
+import { db } from 'shared/firebase';
+import { useAppSelector, useAppDispatch } from 'hooks/useRedux';
+import {
+  collection,
+  getDocs,
+  query,
+  where
+} from 'firebase/firestore';
+import Draggable from 'components/Draggable';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -22,10 +34,10 @@ const queryClient = new QueryClient({
 });
 
 const MyApp = ({ Component, pageProps }) => {
-  const { windowSize } = useSelector((state) => state.reducer2);
+  const { windowSize } = useAppSelector((state) => state.reducer2);
   const [scroll, setScroll] = useState(false);
-  const dispatch = useDispatch();
-  // const select = useSelector(state => state.reducer);
+  const [user] = useAuthState(auth);
+  const dispatch = useAppDispatch();
 
   // useEffect(() => {
   // console.log(queryClient.getQueryCache());
@@ -115,20 +127,47 @@ const MyApp = ({ Component, pageProps }) => {
     return () => removeLoadingBar();
   }, [])
 
+  useEffect(() => {
+    const fetchDocument = async () => {
+      const q = query(collection(db, "users"), where("uid", "==", user?.uid));
+      const docs = await getDocs(q);
+      const { bookmarks } = docs && docs.docs[0].data();
+      const { id } = docs.docs[0];
+
+      dispatch(setUser({
+        uid: user.uid,
+        email: user.email,
+        photoURL: user.photoURL,
+        displayName: user.displayName,
+        docid: id
+      }));
+      dispatch(setBookmarks(bookmarks));
+    }
+
+    if (user) {
+      fetchDocument();
+    } else {
+      dispatch(setUser(null));
+      dispatch(setBookmarks([]));
+    }
+  }, [user]);
+
   return (
     <>
       <Head>
         <meta charSet="utf-8" />
-        <title>Manga Max</title>
+        <title>Manga Max - Read Free Manga Online</title>
         <link rel="shortcut icon" href="/favicon.ico" />
         <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests"></meta>
         <meta name="description" content="Website đọc manga hoàn toàn miễn phí, không quảng cáo." />
-        <script defer src="https://unpkg.com/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js"></script>
+        {/* <script defer src="https://unpkg.com/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js"></script> */}
       </Head>
       {/* <PersistGate loading={<p className='w-full text-center'>Loading Source</p>} persistor={persistor}> */}
       <QueryClientProvider client={queryClient}>
         <Navbar scroll={scroll} />
         <Component {...pageProps} />
+        <Draggable />
+        <Script src="https://unpkg.com/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js"></Script>
       </QueryClientProvider>
       {/* </PersistGate> */}
     </>

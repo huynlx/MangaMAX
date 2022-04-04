@@ -1,7 +1,7 @@
 import instance from "../axios";
 import { parse } from "node-html-parser";
 
-const getHome = async (page: number = 1, type: string): Promise<any> => {
+const getHome = async (page: number = 1, type: string, sourceNum: string): Promise<any> => {
 
     const handleSource = () => {
         if (type === 'browse') {
@@ -23,12 +23,14 @@ const getHome = async (page: number = 1, type: string): Promise<any> => {
                 let cover = item
                     .querySelector("img")
                     ?.getAttribute("data-original")
-                    ?.replace("//", "http://");
+                    ?.replace("//", "https://");
 
                 return ({
                     title: item.querySelector(".jtip")?.innerText,
                     cover: cover,
                     chapter: item.querySelector(".chapter a")?.innerText,
+                    chapSlug: item.querySelector(".chapter a")?.getAttribute('href')?.split("/").slice(-2)[0],
+                    chapId: item.querySelector(".chapter a")?.getAttribute('href')?.split("/").pop(),
                     slug: item
                         .querySelector("a")
                         ?.getAttribute("href")
@@ -36,6 +38,7 @@ const getHome = async (page: number = 1, type: string): Promise<any> => {
                         .slice(-1)[0],
                     updateAt: item.querySelector(".chapter i")?.innerText,
                     status: status,
+                    source: sourceNum
                 });
             });
 

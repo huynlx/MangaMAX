@@ -1,24 +1,30 @@
-import React, { useCallback } from 'react';
+import React, { memo, useCallback, useEffect } from 'react';
 import Link from 'next/link';
 import Navigation from 'components/Navigation';
 import { useRouter } from 'next/router';
-import { useSelector } from 'react-redux';
 import ReadImage from 'components/ReadImage';
 import Head from 'next/head';
 import { FaArrowRight } from 'react-icons/fa';
-import BtnToTop from 'components/BtnToTop';
+import { useAppDispatch, useAppSelector } from "hooks/useRedux";
+import { mangaObj } from 'constants/index';
+import { recents } from 'store/action';
 
-const ChapterComponent = ({ chapter, chapterId, comicSlug }: any) => {
-    const select: any = useSelector((state: any) => state.reducer);
-    const select2: any = useSelector((state: any) => state.reducer3);
+const ChapterComponent = ({ chapter, chapterId, comicSlug, info }: any) => {
+    const select = useAppSelector(state => state.reducer);
+    const select2 = useAppSelector(state => state.reducer3);
     const router = useRouter();
-    const selectedIndex = chapter.chapters.indexOf(chapter.chapters.find((chap: { id: any; }) => chap.id === chapterId));
+    const dispatch = useAppDispatch();
+    const selectedIndex = chapter.chapters.indexOf(chapter.chapters.find((chap: { id: string }) => chap.id === chapterId));
     const nextChapter = useCallback(() => {
         router.push({
-            pathname: `/comic/${comicSlug}/${chapter.chapters[selectedIndex - 1].chap}`,
+            pathname: `/manga/${comicSlug}/${chapter.chapters[selectedIndex - 1].chap}`,
             query: { id: chapter.chapters[selectedIndex - 1].id, source: select.source, type: select.type }
-        }, `/comic/${comicSlug}/${chapter.chapters[selectedIndex - 1].chap}`)
+        }, `/manga/${comicSlug}/${chapter.chapters[selectedIndex - 1].chap}`)
     }, [comicSlug, chapter.chapters, selectedIndex, router, select.source, select.type])
+
+    useEffect(() => {
+        dispatch(recents(mangaObj(info, comicSlug, select, 'recents')));
+    }, [])
 
     return (
         <>
@@ -27,7 +33,7 @@ const ChapterComponent = ({ chapter, chapterId, comicSlug }: any) => {
             </Head>
             <div className='flex  flex-col items-center mx-auto'>
                 <p className="text-2xl px-[5vw]">
-                    <Link as={`/comic/${comicSlug}`} href={`/comic/${comicSlug}?source=${select.source}&type=${select.type}`}>
+                    <Link as={`/manga/${comicSlug}`} href={`/manga/${comicSlug}?source=${select.source}&type=${select.type}`}>
                         <a className="text-main">{chapter.title}</a>
                     </Link>
                     <span className='w-full'> {chapter.chapterCurrent} <small>{chapter.updateAt}</small></span>
@@ -51,9 +57,8 @@ const ChapterComponent = ({ chapter, chapterId, comicSlug }: any) => {
                     </button>
                 </div>
             </div>
-            <BtnToTop className={'bottom-[5%] right-[5%]'} />
         </>
     );
 };
 
-export default ChapterComponent;
+export default memo(ChapterComponent);

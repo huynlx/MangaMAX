@@ -9,9 +9,9 @@ import hentaicube from '../hentaicube/home';
 const getHome = async (page: number = 1, source: string, type: string, url: string): Promise<any> => {
     switch (source) {
         case '1':
-            return nettruyen(page, type); //nettruyen
+            return nettruyen(page, type, source); //nettruyen
         case '2':
-            return nettruyen(page, type); //nhattruyen
+            return nettruyen(page, type, source); //nhattruyen
         case '3':
             return lxhentai(page, type, source, url); //lxhentai
         case '4':

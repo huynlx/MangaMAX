@@ -1,7 +1,7 @@
 import instance from "../axios";
 import { parse } from "node-html-parser";
 
-const getHome = async (page: number = 1, type: string, source: string, url: string): Promise<any> => {
+const getHome = async (page: number = 1, type: string, sourceNum: string, url: string): Promise<any> => {
     const handleSource = () => {
         if (type === 'browse') {
             return `danh-sach?sort=new&page=${page}`
@@ -27,6 +27,7 @@ const getHome = async (page: number = 1, type: string, source: string, url: stri
                         ?.split("/")
                         .slice(-1)[0],
                     updateAt: item.querySelector("time.timeago")?.getAttribute("datetime"),
+                    source: sourceNum
                 });
             });
 

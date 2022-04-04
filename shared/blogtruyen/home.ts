@@ -2,7 +2,7 @@ import instance from "../axios";
 import { parse } from "node-html-parser";
 import decodeHTMLEntity from "../decodeHTML";
 
-const getHome = async (page: number = 1, type: string, source: string, url: string): Promise<any> => {
+const getHome = async (page: number = 1, type: string, sourceNum: string, url: string): Promise<any> => {
 
     const handleSource = () => {
         if (type === 'browse') {
@@ -28,6 +28,7 @@ const getHome = async (page: number = 1, type: string, source: string, url: stri
                             .querySelector("a")
                             ?.getAttribute("href")?.substr(1),
                         updateAt: null,
+                        source: sourceNum
                     });
                 });
 
@@ -63,6 +64,7 @@ const getHome = async (page: number = 1, type: string, source: string, url: stri
                             .querySelector("div:nth-child(1) > a")
                             ?.getAttribute("href")?.substr(1).replace('/', '-'),
                         updateAt: item.querySelector(".publishedDate")?.childNodes[2].textContent,
+                        source: sourceNum
                     });
                 });
 

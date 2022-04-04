@@ -14,17 +14,17 @@
   width: 100%;
 }
 .reset__textBox {
-  padding: 10px;
-  font-size: 18px;
+  padding: 10px 10px 10px 20px;
   margin-bottom: 10px;
   border-radius: 9999px;
 }
 .reset__btn {
   padding: 10px;
-  font-size: 18px;
+  font-size: 17px;
   margin-bottom: 10px;
   border: none;
   color: white;
+  font-weight: 500;
   @apply bg-gray-600;
   border-radius: 9999px;
 }

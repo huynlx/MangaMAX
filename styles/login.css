@@ -14,13 +14,14 @@
   width: 100%;
 }
 .login__textBox {
-  padding: 10px;
+  padding: 10px 10px 10px 20px;
   margin-bottom: 10px;
   border-radius: 9999px;
 }
 .login__btn {
   padding: 10px;
-  font-size: 18px;
+  font-size: 17px;
+  font-weight: 500;
   margin-bottom: 10px;
   border: none;
   @apply bg-gray-600;

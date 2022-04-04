@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import axios from "axios";
-import { SOURCES } from "../../shared/constants";
+import { SOURCES } from "constants/index";
 
 const proxy = async (req: NextApiRequest, res: NextApiResponse) => {
   const url = req.query.url as string;

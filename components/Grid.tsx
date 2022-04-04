@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux'
 import { setData } from '../shared/useSetData';
 import { setCol } from '../shared/useSetData';
 import Loader from '../components/Loader';
@@ -8,7 +7,8 @@ import dynamic from 'next/dynamic';
 const LoadMore = dynamic(() => import('./LoadMore'));
 import { User } from 'firebase/auth';
 import { setScroll } from 'store/action';
-import ToolNav from './ToolNav';
+import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
+import Router from 'next/router';
 
 interface GridProps {
     keyword?: string,
@@ -18,15 +18,15 @@ interface GridProps {
 }
 
 const Grid = ({ keyword, fetch, typeRender: TypeRender, user }: GridProps) => {
-    const { windowSize } = useSelector((state: any) => state.reducer2);
+    const { windowSize } = useAppSelector(state => state.reducer2);
     const [cols, setCols] = useState(8);
-    const select: any = useSelector((state: any) => state.reducer);
+    const select = useAppSelector(state => state.reducer);
     const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } = fetch!({ source: select.source, type: select.type, keyword: keyword, user: user });
     const [page, setPage] = useState<any>(1);
     const list = useMemo(() => data?.pages.map((list: any) => list.items).flat(), [data]); //gộp nhiều mảng page thành 1 mảng duy nhất
     const content = useMemo(() => setData(cols, list ? list : []), [cols, list]);
-    const dispatch = useDispatch();
-    const { reducer3 } = useSelector((state: any) => state);
+    const dispatch = useAppDispatch();
+    const { reducer3 } = useAppSelector(state => state);
 
     useEffect(() => {
         (page > 1) && fetchNextPage();
@@ -41,16 +41,15 @@ const Grid = ({ keyword, fetch, typeRender: TypeRender, user }: GridProps) => {
     useEffect(() => {
         window.scrollTo(0, reducer3.scrollPosition);
 
-        const handleClick = () => {
+        const handlePosition = () => {
             const position = window.pageYOffset;
             dispatch(setScroll(position));
         };
 
-        window.addEventListener('click', handleClick, { passive: true });
-
+        Router.events.on('routeChangeStart', handlePosition);
         return () => {
-            window.removeEventListener('click', handleClick);
-        };
+            Router.events.off('routeChangeStart', handlePosition);
+        }
     }, []);
 
     // Listen to scroll positions for loading more data on scroll
@@ -116,7 +115,6 @@ const Grid = ({ keyword, fetch, typeRender: TypeRender, user }: GridProps) => {
             {
                 (hasNextPage && page > 1) && <LoadMore />
             }
-            <ToolNav />
         </main>
     );
 };

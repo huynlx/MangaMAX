@@ -1,7 +1,7 @@
-import { useSelector } from "react-redux";
+import { useAppSelector } from "hooks/useRedux";
 
 const getRecents = () => {
-    const { reducer4 }: any = useSelector((state: any) => state);
+    const { reducer4 }: any = useAppSelector(state => state);
 
     return {
         data:{

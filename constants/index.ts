@@ -1,3 +1,8 @@
+import { mangaProps } from "components/LeftComic";
+import { RootState } from "store";
+
+export const regexMatchMultiString = /NhatTruyen|TruyenQQ|NetTruyen|Cmangavip.com|Cmanga/g;
+
 export const API_URL = "http://www.nettruyenmoi.com/";
 
 export const SOURCES = [
@@ -68,6 +73,11 @@ export const WINDOW_SIZE = {
 
 export const WINDOW_RESIZE_DEBOUNCE = 400;
 
-
-
-
+export const mangaObj = (info: any, slug: string, select: RootState, type: string): mangaProps => ({
+    title: info.title,
+    cover: info.cover,
+    slug: slug,
+    url: `/manga/${slug}?source=${info.source ?? select.source}&type=${type}`,
+    source: info.source ?? select.source,
+    type: type
+});

@@ -2,10 +2,10 @@ import instance from "../axios";
 import { decrypt_data } from "./decrypt";
 import { titleCase } from "./titleCase";
 
-const getHome = async (page: number = 1, type: string, source: string, url: string): Promise<any> => {
+const getHome = async (page: number = 1, type: string, sourceNum: string, url: string): Promise<any> => {
     const handleSource = () => {
         if (type === 'browse') {
-            if (source === '8') return `api/list_item?page=${page}&limit=40&sort=new&type=all&tag=&child=off&status=completed&num_chapter=0`
+            if (sourceNum === '8') return `api/list_item?page=${page}&limit=40&sort=new&type=all&tag=&child=off&status=completed&num_chapter=0`
             return `api/list_item?page=${page}&limit=40&sort=new&type=all&tag=Truy%E1%BB%87n%20si%C3%AAu%20hay&child=off&status=all&num_chapter=0`
         } else {
             return `api/list_item?page=${page}&limit=40&sort=new&type=all&tag=&child=off&status=all&num_chapter=0`
@@ -25,8 +25,11 @@ const getHome = async (page: number = 1, type: string, source: string, url: stri
                 title: titleCase(item.name),
                 cover: cover,
                 chapter: 'Chapter ' + item.last_chapter,
+                chapSlug: 'chapter-' + parseFloat(item.last_chapter),
+                chapId: item.last_chapter_id,
                 slug: item.url + '-' + item.id_book,
                 updateAt: item.last_update,
+                source: sourceNum
             });
         };
 

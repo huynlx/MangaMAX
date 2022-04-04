@@ -6,9 +6,9 @@ export const useScroll = () => {
 
   const controlDirection = () => {
     if (window.scrollY > oldScrollY) {
-        setDirection('down');
+      setDirection('down');
     } else {
-        setDirection('up');
+      setDirection('up');
     }
     oldScrollY = window.scrollY;
   }
@@ -18,7 +18,7 @@ export const useScroll = () => {
     return () => {
       window.removeEventListener('scroll', controlDirection);
     };
-  }, []);  
+  }, []);
 
   return direction;
 };

@@ -17,6 +17,8 @@ const getSearch = async (keyword: string, page: number = 1): Promise<any> => {
             title: item.querySelector("h3 > a")?.innerText,
             cover: item.querySelector("a > img")?.getAttribute("data-src"),
             chapter: item.querySelector(".episode-book > a")?.innerText,
+            chapSlug: 'chap-' + item.querySelector(".last_chapter a")?.innerText.split(' ')[1],
+            chapId: item.querySelector(".last_chapter a")?.getAttribute('href')?.split('/').pop(),
             slug: item
                 .querySelector("a")
                 ?.getAttribute("href")

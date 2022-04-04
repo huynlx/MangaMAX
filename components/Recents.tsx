@@ -1,13 +1,13 @@
 import getRecents from 'hooks/getRecents';
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { handleSource } from 'store/action';
 import Grid from './Grid';
 import TypeRender from './TypeRender';
+import { useAppDispatch, useAppSelector } from "hooks/useRedux";
 
 const RecentsComponent = () => {
-    const dispatch = useDispatch();
-    const select: any = useSelector((state: any) => state.reducer);
+    const dispatch = useAppDispatch();
+    const select = useAppSelector(state => state.reducer);
 
     useEffect(() => {
         dispatch(handleSource(select.source, 'recents'));

@@ -26,6 +26,8 @@ const getSearch = async (keyword: string, page: number = 1): Promise<any> => {
                     ?.getAttribute("data-original")
                     ?.replace("//", "http://"),
                 chapter: item.querySelector(".chapter a")?.innerText,
+                chapSlug: item.querySelector(".chapter a")?.getAttribute('href')?.split("/").slice(-2)[0],
+                chapId: item.querySelector(".chapter a")?.getAttribute('href')?.split("/").pop(),
                 slug: item
                     .querySelector("a")
                     ?.getAttribute("href")

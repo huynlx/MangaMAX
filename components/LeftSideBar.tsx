@@ -1,11 +1,12 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { SOURCES } from 'shared/constants';
+
+import { SOURCES } from 'constants/index';
 import Router from 'next/router';
 import { handleSource, setScroll } from 'store/action';
+import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 
 const LeftSideBar = ({ id, closeNav }: any) => {
-  const select: any = useSelector((state: any) => state.reducer);
-  const dispatch = useDispatch();
+  const select = useAppSelector((state) => state.reducer);
+  const dispatch = useAppDispatch();
 
   return (
     <div id={id} className='sidenav z-20'>

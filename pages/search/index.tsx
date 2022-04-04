@@ -2,17 +2,23 @@ import { NextPage } from 'next';
 import React, { memo, useEffect } from 'react';
 import SearchComponent from 'components/Search';
 import { handleSource } from 'store/action';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from "hooks/useRedux";
+import Head from 'next/head';
 
 const Search: NextPage = () => {
-    const { reducer: { source } } = useSelector((state: any) => state);
-    const dispatch = useDispatch();
+    const { reducer: { source } } = useAppSelector(state => state);
+    const dispatch = useAppDispatch();
     useEffect(() => {
         dispatch(handleSource(source, 'search'));
     }, [])
 
     return (
-        <SearchComponent />
+        <>
+            <Head>
+                <title>Search</title>
+            </Head>
+            <SearchComponent />
+        </>
     );
 };
 

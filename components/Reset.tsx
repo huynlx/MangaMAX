@@ -1,17 +1,17 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth, sendPasswordReset } from "shared/firebase";
+
+import { sendPasswordReset } from "shared/firebase";
+import { useAppSelector } from "hooks/useRedux";
 
 const ResetComponent = () => {
     const [email, setEmail] = useState("");
-    const [user, loading, error] = useAuthState(auth);
+    const { reducer4: { user } } = useAppSelector(state => state);
     const navigate = useRouter();
     useEffect(() => {
-        if (loading) return;
         if (user) navigate.push("/dashboard");
-    }, [user, loading]);
+    }, [user]);
     return (
         <div className="reset">
             <div className="reset__container">
@@ -29,7 +29,7 @@ const ResetComponent = () => {
                     Send password reset email
                 </button>
                 <div>
-                    Don&apos;t have an account? <Link href="/register"><a className="text-link">Register</a></Link>
+                    Don&apos;t have an account? <Link href="/register"><a className="text-link font-semibold">Register</a></Link>
                 </div>
             </div>
         </div>

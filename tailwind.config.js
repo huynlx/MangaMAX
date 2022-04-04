@@ -7,8 +7,8 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        'header': "url('/bg.jpg')",
-        'grid': "url('/favicon.ico')"
+        'header': "url('/_next/image?url=/bg.jpg&w=1920&q=100')",
+        'grid': "url('/_next/image?url=/favicon.ico&w=1920&q=100')"
       },
       colors: {
         primary: "#1A1A1A",
@@ -30,7 +30,11 @@ module.exports = {
       backgroundPosition: {
         'sm': '50% 70%',
         'lg': '50% 120%'
-      }
+      },
+      transitionProperty: {
+        'width': 'width',
+        'height': 'height'
+      },
     }
   },
   plugins: []

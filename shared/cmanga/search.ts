@@ -17,6 +17,8 @@ const getSearch = async (keyword: string, page: number = 1, url: string): Promis
             title: titleCase(item.name),
             cover: url + 'assets/tmp/book/avatar/' + item.avatar + '.jpg',
             chapter: 'Chapter ' + item.last_chapter,
+            chapSlug: 'chapter-' + parseFloat(item.last_chapter),
+            chapId: item.last_chapter_id,
             slug: item.url + '-' + item.id_book,
             updateAt: item.last_update
         }));

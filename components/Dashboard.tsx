@@ -1,37 +1,30 @@
-import React, { useEffect, useState } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth, db, logout } from "shared/firebase";
+import React, { useEffect } from "react";
+import { logout } from "shared/firebase";
 import { useRouter } from "next/router";
-import { query, collection, where, getDocs } from "firebase/firestore";
+import { useAppSelector } from "hooks/useRedux";
+import { HiOutlineLogout } from "react-icons/hi";
+import { RiArrowGoBackFill } from "react-icons/ri";
 
 const DashboardComponent: React.FC = () => {
-    const [user, loading, error] = useAuthState(auth);
-    const [name, setName] = useState("");
+    const { reducer4: { user } } = useAppSelector(state => state);
     const navigate = useRouter();
-    const fetchUserName = async () => {
-        try {
-            const q = query(collection(db, "users"), where("uid", "==", user?.uid));
-            const doc = await getDocs(q);
-            const data = doc && doc.docs[0].data();
-            setName(data.name);
-        } catch (err) {
-            console.error(err);
-        }
-    };
+
     useEffect(() => {
-        if (loading) return;
         if (!user) navigate.push("/");
-        fetchUserName();
-    }, [user, loading]);
+    }, [user]);
+
     return (
         <div className="dashboard">
             <div className="dashboard__container">
                 Logged in as
                 <img src={user?.photoURL!} alt="Photo" className="rounded-full mt-3 object-cover" width={135} height={135} />
-                <div className="font-bold text-lg">{name}</div>
+                <div className="font-bold text-lg">{user?.displayName}</div>
                 <div>{user?.email}</div>
-                <button className="dashboard__btn rounded-full" onClick={logout}>
-                    Logout
+                <button className="bg-gray-600 dashboard__btn rounded-full flex gap-1 items-center justify-center" onClick={logout}>
+                    <HiOutlineLogout size={26} /> Logout
+                </button>
+                <button className="bg-link dashboard__btn rounded-full flex gap-1 items-center justify-center" onClick={() => navigate.back()}>
+                    <RiArrowGoBackFill size={23} /> Return
                 </button>
             </div>
         </div>
