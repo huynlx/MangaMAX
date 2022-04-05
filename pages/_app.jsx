@@ -10,7 +10,6 @@ import { removeLoadingBar, callLoadingBar } from 'shared/callLoadingBar';
 import Head from 'next/head';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from 'shared/firebase';
-import Script from 'next/script';
 import { user as setUser, bookmarks as setBookmarks } from 'store/action';
 import { db } from 'shared/firebase';
 import { useAppSelector, useAppDispatch } from 'hooks/useRedux';
@@ -160,14 +159,12 @@ const MyApp = ({ Component, pageProps }) => {
         <link rel="shortcut icon" href="/favicon.ico" />
         <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests"></meta>
         <meta name="description" content="Website đọc manga hoàn toàn miễn phí, không quảng cáo." />
-        {/* <script defer src="https://unpkg.com/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js"></script> */}
       </Head>
       {/* <PersistGate loading={<p className='w-full text-center'>Loading Source</p>} persistor={persistor}> */}
       <QueryClientProvider client={queryClient}>
         <Navbar scroll={scroll} />
         <Component {...pageProps} />
         <Draggable />
-        <Script src="https://unpkg.com/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js"></Script>
       </QueryClientProvider>
       {/* </PersistGate> */}
     </>

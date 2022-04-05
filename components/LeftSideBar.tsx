@@ -1,4 +1,3 @@
-
 import { SOURCES } from 'constants/index';
 import Router from 'next/router';
 import { handleSource, setScroll } from 'store/action';
@@ -10,7 +9,7 @@ const LeftSideBar = ({ id, closeNav }: any) => {
 
   return (
     <div id={id} className='sidenav z-20'>
-      <div><p className="closebtn" onClick={closeNav}>×</p></div>
+      {/* <div><p className="closebtn" onClick={closeNav}>×</p></div> */}
       {SOURCES.map((item: any) => (
         <div key={item.source} onClick={() => {
           dispatch(handleSource(item.source, 'latest'));
@@ -27,9 +26,9 @@ const LeftSideBar = ({ id, closeNav }: any) => {
                     position: fixed;
                     top: 0;
                     left: -250px;
-                    background-color: #111;
+                    background-color: #212121;
                     overflow-x: hidden;
-                    transition: 0.2s ease-out;
+                    transition: 225ms cubic-bezier(0, 0, 0.2, 1) 0ms;
                     padding-top: 60px;
                   }
                   

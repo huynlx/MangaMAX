@@ -5,12 +5,10 @@ import { ComicProps } from 'shared/types';
 import { AppDispatch, wrapper } from 'store';
 import { handleSource } from 'store/action';
 import Info from 'components/Info';
-import ToolNav from 'components/ToolNav';
 
 const Comic: NextPage<ComicProps> = ({ info, slug }) => (
     <>
         <Info info={info} slug={slug} />
-        <ToolNav />
     </>
 );
 

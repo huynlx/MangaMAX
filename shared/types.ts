@@ -29,6 +29,7 @@ export interface SourceProps {
 }
 
 export interface NavigationProps {
+    cover: string,
     chapters: ChaptersProps[],
     chapterId: string,
     comicSlug: string,

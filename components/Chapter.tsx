@@ -8,6 +8,7 @@ import { FaArrowRight } from 'react-icons/fa';
 import { useAppDispatch, useAppSelector } from "hooks/useRedux";
 import { mangaObj } from 'constants/index';
 import { recents } from 'store/action';
+import Spinner from './Spinner';
 
 const ChapterComponent = ({ chapter, chapterId, comicSlug, info }: any) => {
     const select = useAppSelector(state => state.reducer);
@@ -18,7 +19,7 @@ const ChapterComponent = ({ chapter, chapterId, comicSlug, info }: any) => {
     const nextChapter = useCallback(() => {
         router.push({
             pathname: `/manga/${comicSlug}/${chapter.chapters[selectedIndex - 1].chap}`,
-            query: { id: chapter.chapters[selectedIndex - 1].id, source: select.source, type: select.type }
+            query: { id: chapter.chapters[selectedIndex - 1].id, source: select.source, type: select.type, cover: info.cover }
         }, `/manga/${comicSlug}/${chapter.chapters[selectedIndex - 1].chap}`)
     }, [comicSlug, chapter.chapters, selectedIndex, router, select.source, select.type])
 
@@ -31,24 +32,31 @@ const ChapterComponent = ({ chapter, chapterId, comicSlug, info }: any) => {
             <Head>
                 <title>{chapter.title + " (" + chapter.chapterCurrent.replace('- ', '') + ")"}</title>
             </Head>
-            <div className='flex  flex-col items-center mx-auto'>
+            <div className='flex flex-col items-center mx-auto'>
                 <p className="text-2xl px-[5vw]">
                     <Link as={`/manga/${comicSlug}`} href={`/manga/${comicSlug}?source=${select.source}&type=${select.type}`}>
                         <a className="text-main">{chapter.title}</a>
                     </Link>
                     <span className='w-full'> {chapter.chapterCurrent} <small>{chapter.updateAt}</small></span>
-
                 </p>
-                <Navigation chapters={chapter.chapters} chapterId={chapterId} comicSlug={comicSlug} select={select} select2={select2} />
-                <div className='min-h-[100vh] w-full'>
+                <Navigation
+                    cover={info.cover}
+                    chapters={chapter.chapters}
+                    chapterId={chapterId}
+                    comicSlug={comicSlug}
+                    select={select}
+                    select2={select2}
+                />
+                <div className='min-h-[100vh] w-full p-4'>
                     {
-                        chapter.images.map((image: string | undefined, index: any) => <ReadImage
-                            className='mx-auto object-cover w-full h-auto lg:min-w-[50vw] lg:max-w-[55vw] transition-opacity'
-                            key={index}
-                            src={image}
-                            textIcon={'Loading Resource...'}
-                            className2='h-[22rem]'
-                        />)
+                        chapter.images.map((image: string | undefined, index: any) =>
+                            <ReadImage
+                                className='mx-auto object-cover w-full h-auto lg:min-w-[50vw] lg:max-w-[55vw] transition-opacity'
+                                key={index}
+                                src={image}
+                                icon={Spinner}
+                                className3='text-logo'
+                            />)
                     }
                 </div>
                 <div className={`w-full h-60 p-8 ${selectedIndex < 1 && 'hidden'}`}>

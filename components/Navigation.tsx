@@ -1,4 +1,3 @@
-
 import { useRouter } from 'next/router';
 import { useCallback, useEffect } from 'react';
 import Link from 'next/link';
@@ -7,7 +6,7 @@ import LinkCheck from './LinkCheck';
 import { FaChevronLeft, FaChevronRight, FaHome, FaList } from 'react-icons/fa';
 import { useScroll } from 'hooks/useScroll';
 
-const Navigation = ({ chapters, chapterId, comicSlug, select, select2 }: NavigationProps) => {
+const Navigation = ({ cover, chapters, chapterId, comicSlug, select, select2 }: NavigationProps) => {
     const direction = useScroll();
     const selectedIndex = chapters.indexOf(chapters.find((chap) => chap.id === chapterId)!);
     const router = useRouter();
@@ -18,7 +17,8 @@ const Navigation = ({ chapters, chapterId, comicSlug, select, select2 }: Navigat
             query: {
                 id: chapters[selectedIndex + 1].id,
                 source: select.source,
-                type: select.type
+                type: select.type,
+                cover
             }
         }, `/manga/${comicSlug}/${chapters[selectedIndex + 1].chap}`)
     }, [comicSlug, chapters, selectedIndex, router, select.source, select.type])
@@ -28,7 +28,8 @@ const Navigation = ({ chapters, chapterId, comicSlug, select, select2 }: Navigat
             query: {
                 id: chapters[selectedIndex - 1].id,
                 source: select.source,
-                type: select.type
+                type: select.type,
+                cover
             }
         }, `/manga/${comicSlug}/${chapters[selectedIndex - 1].chap}`)
     }, [comicSlug, chapters, selectedIndex, router, select.source, select.type])
@@ -38,7 +39,8 @@ const Navigation = ({ chapters, chapterId, comicSlug, select, select2 }: Navigat
             query: {
                 id: chapters.find((chap: { chap: any; }) => chap.chap === chapterSlug)?.id,
                 source: select.source,
-                type: select.type
+                type: select.type,
+                cover
             },
         }, `/manga/${comicSlug}/${chapterSlug}`);
     }

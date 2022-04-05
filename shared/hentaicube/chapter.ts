@@ -13,7 +13,7 @@ export const getChapter = async (comicSLug: any, chapterSLug: any, chapterId: an
     const dom = parse(html[0]);
 
     const list = dom.querySelectorAll('.text-left > div img');
-
+    
     return {
         title: decodeHTMLEntity(dom.querySelector("#chapter-heading")?.innerText.split('-')[0]),
         chapterCurrent: dom.querySelectorAll(".c-selectpicker")[0].querySelector('option:checked')?.innerText,

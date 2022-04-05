@@ -13,7 +13,8 @@ export const getServerSideProps = wrapper.getServerSideProps(
         store.dispatch<AppDispatch>(handleSource(query.source, query.type, store));
 
         try {
-            const chapter = await getChapter(params?.slug, params?.chapter, query.id)
+            const chapter = await getChapter(params?.slug, params?.chapter, query.id);
+            
             return {
                 props: {
                     chapter,

@@ -8,7 +8,7 @@ module.exports = {
     extend: {
       backgroundImage: {
         'header': "url('/_next/image?url=/bg.jpg&w=1920&q=100')",
-        'grid': "url('/_next/image?url=/favicon.ico&w=1920&q=100')"
+        'grid': "url('/_next/image?url=/background.png&w=1920&q=100')"
       },
       colors: {
         primary: "#1A1A1A",
@@ -18,7 +18,8 @@ module.exports = {
         chapter: "rgb(17 46 64)",
         root: '#2D2D2E',
         main: 'rgb(239 68 68)',
-        'main-hover': 'rgba(239,68,68,0.4)'
+        'main-hover': 'rgba(239,68,68,0.4)',
+        logo: '#D04A32'
       },
       backgroundSize: {
         'auto': 'auto',
@@ -35,6 +36,9 @@ module.exports = {
         'width': 'width',
         'height': 'height'
       },
+      screens: {
+        'xs':'480px'
+      }
     }
   },
   plugins: []

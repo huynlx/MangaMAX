@@ -21,7 +21,7 @@ const Home: NextPage<GridProps> = () => {
         Latest
       </h1>
       <h1
-        className={`${select.type === 'browse' ? 'text-white sm:text-3xl text-2xl font-bold ' : 'sm:text-2xl text-xl brightness-75 font-semibold mt-1'}`}
+        className={`${select.type === 'browse' ? 'text-white sm:text-3xl text-2xl font-bold ' : 'sm:text-2xl text-xl brightness-75 font-semibold sm:mt-1'}`}
         onClick={() => {
           dispatch(handleSource(select.source, 'browse'))
         }}

@@ -69,13 +69,13 @@ const Draggable: React.FC = () => {
 
   return (
     <div className="container" ref={containerRef}>
-      <div className="draggableItem" ref={draggableRef} onMouseDown={onMouseDown} onTouchStartCapture={onTouchStart}>
+      <div className="draggableItem" ref={draggableRef} onMouseDown={onMouseDown} onTouchStart={onTouchStart}>
         <ToolNav />
       </div>
       <style jsx>{`
           .container{
             position: fixed;
-            z-index: 10;
+            z-index: 11;
             top: 0;
             left: 0;
             overflow: hidden;
@@ -89,7 +89,6 @@ const Draggable: React.FC = () => {
           }
         `}</style>
     </div>
-
   );
 };
 

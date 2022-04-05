@@ -1,27 +1,24 @@
-import { memo, useCallback, useRef } from 'react';
-import { useOnClickOutside } from 'shared/useOnClickOutside';
+import { FC, memo, useCallback, useState } from 'react';
 import { FaCompass } from 'react-icons/fa';
 import LeftSideBar from 'components/LeftSideBar';
 import { IoListSharp } from 'react-icons/io5';
+import OverlayModal from './OverlayModal';
 
-const SideBar = ({ className, id }: any) => {
-    const ref = useRef(null);
+const SideBar: FC<{ className: string, id: string }> = ({ className, id }) => {
+    const [overlay, setOverlay] = useState(false);
 
     const openNav = useCallback(() => {
         document.getElementById(id)!.style.left = "0";
+        setOverlay(true);
     }, [])
     const closeNav = useCallback(() => {
         document.getElementById(id)!.style.left = "-250px";
+        setOverlay(false)
     }, [])
 
-    useOnClickOutside(ref, closeNav);
-
     return (
-        <div
-            ref={ref}
-            className={'z-20 ml-0 lg:ml-auto pr-3 ' + className}
-            title='Source'
-        >
+        <div className={'ml-0 lg:ml-auto pr-3 ' + className} title='Sources'>
+            <OverlayModal isOpen={overlay} onClose={closeNav} className='bg-[#00000080]' />
             <LeftSideBar
                 id={id}
                 closeNav={closeNav}
@@ -34,7 +31,6 @@ const SideBar = ({ className, id }: any) => {
                 <IoListSharp className='block lg:hidden' />
             </span>
         </div >
-
     );
 };
 

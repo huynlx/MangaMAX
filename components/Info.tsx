@@ -47,7 +47,7 @@ const Info = ({ info, slug }: ComicProps) => {
                     slug={slug}
                 />
                 {/* Right Side Mobile */}
-                <div className='lg:hidden font-bold text-xl my-2 flex justify-between items-center'>
+                <div className='lg:hidden font-bold text-xl flex justify-between items-end'>
                     Chapters
                     <span className='space-x-2 flex'>
                         <CgDisplayGrid title='List | Index' onClick={() => handleChapter()} size={30} />
@@ -63,6 +63,7 @@ const Info = ({ info, slug }: ComicProps) => {
                     select={select}
                     handleChapter={handleChapter}
                     reducer3={reducer3}
+                    cover={info.cover}
                 />
             </div >
         </>

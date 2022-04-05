@@ -1,9 +1,7 @@
 import { useRouter } from 'next/router';
-
 import { FormEvent } from 'react';
 import { useState } from 'react';
 import SideBar from './SideBar';
-
 import { titleCase } from '../shared/cmanga/titleCase';
 import LinkCheck from './LinkCheck';
 import { setScroll } from '../store/action';
@@ -11,7 +9,6 @@ import { GrClose } from 'react-icons/gr';
 import { FaSearch } from 'react-icons/fa';
 import Dropdown from './Dropdown';
 import { useScroll } from 'hooks/useScroll';
-
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 
 const Navbar = ({ scroll }: { scroll: boolean }) => {
@@ -48,13 +45,13 @@ const Navbar = ({ scroll }: { scroll: boolean }) => {
     };
 
     return (
-        <div className={`${isActive ? 'h-[6.1rem]' : 'h-[3.4rem]'} lg:h-14 justify-evenly gap-0 bg-primary flex flex-col lg:flex-row lg:justify-between items-stretch lg:items-center px-[2vw] lg:px-[5vw] ${(!router.pathname.includes('chap') && direction === 'up') ? 'sticky top-0 z-10' : 'relative'}`}>
+        <div className={`${isActive ? 'h-[6.1rem]' : 'h-[3.4rem]'} lg:h-14 justify-evenly gap-0 bg-primary flex flex-col lg:flex-row lg:justify-between items-stretch lg:items-center px-[2vw] lg:px-[5vw] ${(!router.pathname.includes('chap') && direction === 'up') ? 'sticky top-0 z-20' : 'relative'}`}>
             <div className='flex items-center justify-between'>
                 <LinkCheck select={select} reducer3={reducer3}>
                     <a className={`hidden lg:flex items-center justify-start gap-2 ${checkPathname() && 'pointer-events-none'}`}>
                         <img src={`/_next/image?url=/favicon.ico&w=720&q=100`} className="w-8 h-8 lg:w-10 lg:h-auto lg:hidden" alt="Logo" />
                         <h1 className="text-2xl font-bold text-white hidden sm:block">
-                            <span className="text-[#D04A32] font-bold borderText">MANGA</span>MAX
+                            <span className="text-logo font-bold borderText">MANGA</span>MAX
                         </h1>
                     </a>
                 </LinkCheck>
@@ -67,7 +64,7 @@ const Navbar = ({ scroll }: { scroll: boolean }) => {
                 <Dropdown className='block lg:hidden' user={user} />
             </div>
             {
-                (scroll && checkPathname()) && <h1 className='font-semibold text-white text-2xl top-[10px] lg:top-[10px] absolute left-2/4 transform -translate-x-2/4'>{titleCase(select.type)}</h1>
+                (scroll && checkPathname()) && <h1 className='font-semibold text-white text-xl lg:text-2xl top-[12px] lg:top-[10px] absolute left-2/4 transform -translate-x-2/4'>{titleCase(select.type)}</h1>
             }
             <SideBar className='hidden lg:block' id='sidenav2' />
             <form

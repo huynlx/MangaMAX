@@ -5,7 +5,7 @@ import List from './List';
 import dynamic from 'next/dynamic';
 const Index = dynamic(() => import('./Index'));
 
-const RightComic = ({ dt, handleSort, slug, select, handleChapter, reducer3 }: any) => (
+const RightComic = ({ dt, handleSort, slug, select, handleChapter, reducer3, cover }: any) => (
     <div className='chapters lg:w-[40%]'>
         <div className='py-1 mb-1 hidden lg:block sticky bg-primary top-0 text-white text-xl font-bold'>
             <h1 className='inline text-2xl border-l-[5px] border-red-400 pl-2'>Chapters</h1>
@@ -18,12 +18,16 @@ const RightComic = ({ dt, handleSort, slug, select, handleChapter, reducer3 }: a
                 <Index
                     select={select}
                     dt={dt}
-                    slug={slug} />
+                    slug={slug}
+                    cover={cover}
+                />
             ) : (
                 <List
                     select={select}
                     dt={dt}
-                    slug={slug} />
+                    slug={slug}
+                    cover={cover}
+                />
             )}
         </ul>
     </div>

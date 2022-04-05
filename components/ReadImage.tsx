@@ -1,8 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { BsFillImageFill } from "react-icons/bs";
 import { useIsMounted } from 'hooks/useIsMounted';
 
-const ReadImage = ({ src, opacity, ...props }: any) => {
+const ReadImage: React.FC<any> = ({ src, opacity, icon: Icon, ...props }) => {
     const [loaded, setLoaded] = useState(false);
     const isMounted = useIsMounted();
 
@@ -27,10 +26,10 @@ const ReadImage = ({ src, opacity, ...props }: any) => {
     }, [src])
 
     return (
-        <div className='cover'>
+        <>
             {
-                !loaded && <div className={"flex flex-col items-center justify-center w-full text-gray-500 " + props.className2}>
-                    <BsFillImageFill className={"w-7 h-7 sm:w-9 sm:h-9 animate-pulse " + props.className3} />
+                !loaded && <div className={"flex flex-col items-center justify-center w-full " + props.className2}>
+                    <Icon className={`${props.className3}`} />
                     <p className={`animate-pulse mt-1 ${!props.textIcon && 'hidden'}`}>{props.textIcon}</p>
                 </div>
             }
@@ -40,7 +39,7 @@ const ReadImage = ({ src, opacity, ...props }: any) => {
                 className={props.className + (loaded ? '' : ' opacity-0 !h-0')}
                 loading='lazy'
             />
-        </div>
+        </>
     );
 };
 
