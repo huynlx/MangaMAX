@@ -12,8 +12,7 @@ import { setScroll } from 'store/action';
 import { useAppDispatch, useAppSelector } from "hooks/useRedux";
 
 const Info = ({ info, slug }: ComicProps) => {
-    const select = useAppSelector(state => state.reducer);
-    const { reducer3 }: any = useAppSelector(state => state);
+    const { reducer: select, reducer3 } = useAppSelector(state => state);
     const dispatch = useAppDispatch();
     const [dt, setDt] = useState<any>(info);
 

@@ -4,9 +4,13 @@ import ChapterComponent from 'components/Chapter';
 import { AppDispatch, wrapper } from 'store';
 import { handleSource } from 'store/action';
 
-const Chapter: NextPage<any> = ({ chapter, chapterId, comicSlug, info }) => (
-    <ChapterComponent chapter={chapter} chapterId={chapterId} comicSlug={comicSlug} info={info} />
-);
+const Chapter: NextPage<any> = ({ chapter, chapterId, comicSlug, info, scrollPosition }) => {
+    console.log(scrollPosition);
+
+    return (
+        <ChapterComponent chapter={chapter} chapterId={chapterId} comicSlug={comicSlug} info={info} />
+    );
+};
 
 export const getServerSideProps = wrapper.getServerSideProps(
     (store) => async ({ params, query }) => {
@@ -14,7 +18,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
 
         try {
             const chapter = await getChapter(params?.slug, params?.chapter, query.id);
-            
+
             return {
                 props: {
                     chapter,

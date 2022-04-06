@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from "hooks/useRedux";
 
 const RecentsComponent = () => {
     const dispatch = useAppDispatch();
-    const select = useAppSelector(state => state.reducer);
+    const { reducer: select } = useAppSelector(state => state);
 
     useEffect(() => {
         dispatch(handleSource(select.source, 'recents'));

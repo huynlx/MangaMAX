@@ -19,7 +19,8 @@ module.exports = {
         root: '#2D2D2E',
         main: 'rgb(239 68 68)',
         'main-hover': 'rgba(239,68,68,0.4)',
-        logo: '#D04A32'
+        logo: '#D04A32',
+        accent: '#2c2c2c'
       },
       backgroundSize: {
         'auto': 'auto',
@@ -37,7 +38,7 @@ module.exports = {
         'height': 'height'
       },
       screens: {
-        'xs':'480px'
+        'xs': '480px'
       }
     }
   },

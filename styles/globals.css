@@ -48,7 +48,6 @@ input[type="search"] {
 .comic-list {
   grid-template-columns: repeat(2, minmax(100px, 1fr));
   grid-auto-rows: 1fr;
-  min-height: 50vh;
 }
 
 @media only screen and (min-width: 320px) {
@@ -83,10 +82,24 @@ input[type="search"] {
 @media only screen and (min-width: 1200px) {
   .comic-list {
     grid-template-columns: repeat(8, minmax(100px, 1fr));
+    grid-column-gap: 0.6rem;
   }
   .login__container,
   .reset__container,
   .register__container {
     width: 30%;
   }
+}
+
+#keyword::placeholder {
+  color: white;
+  opacity: 1;
+}
+
+#keyword:-ms-input-placeholder {
+  color: white;
+}
+
+#keyword::-ms-input-placeholder {
+  color: white;
 }

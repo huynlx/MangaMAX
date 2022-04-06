@@ -13,7 +13,7 @@ export const getChapter = async (comicSLug: any, chapterSLug: any, chapterId: an
     const html = await Promise.all(links.map(async (link) => (await axios.get(link)).data));
     const dom = parse(html[0]);
     const dom2 = parse(html[1])
-    if (!dom.querySelector(".txt-primary a")?.innerText) {
+    if (!dom.querySelector(".txt-primary a")?.innerText) { //trường hợp chapter mới nhất hiển thị ở HomePage nhưng chưa đọc được
         throw new Error("Wrong Hash");
     }
     return {

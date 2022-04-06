@@ -24,7 +24,7 @@ const getHome = async (page: number = 1, type: string, sourceNum: string, url: s
 
                 return {
                     title: decodeHTMLEntity(item.childNodes[3].innerText),
-                    cover: image.replace('lxhentai.com//', 'lxhentai.com/'),
+                    cover:`/api/proxy?url=${encodeURIComponent(image.replace('lxhentai.com//', 'lxhentai.com/') as string)}&source=${sourceNum}`,
                     chapter: item.querySelector(".newestChapter a")?.innerText,
                     chapSlug: useSlug(item.querySelector(".newestChapter a")?.innerText!),
                     chapId: getQueryParams('id', item.querySelector('.newestChapter a')?.getAttribute('href')!),

@@ -1,41 +1,39 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { useIsMounted } from 'hooks/useIsMounted';
+import React, { useEffect } from 'react';
+import { useImage } from 'hooks/useImage';
 
-const ReadImage: React.FC<any> = ({ src, opacity, icon: Icon, ...props }) => {
-    const [loaded, setLoaded] = useState(false);
-    const isMounted = useIsMounted();
+interface ReadImageProps {
+    src: string,
+    opacity?: number,
+    icon?: React.ComponentType<{ className: string }>
+    className?: string,
+    className2?: string,
+    className3?: string,
+    textIcon?: string,
+    alt: string
+}
 
-    const loadImage = useCallback(async (image: string) => {
-        return new Promise((resolve, reject) => {
-            const loadImg = new Image();
-            loadImg.src = image;
-            loadImg.onload = () => resolve(image);
-            loadImg.onerror = (err) => reject(err);
-        }).then(() => {
-            if (!isMounted.current) return null  //fix unmounted => cause component is dismounted before async complete
-            setLoaded(true);
-        }).catch((err) => {
-            if (!isMounted.current) return null
-            setLoaded(true);
-        });
-    }, []) //useRef thì ko cần thêm vào deps, props or state thì mới thêm
+const ReadImage: React.FC<ReadImageProps> = ({ src, opacity, icon: Icon, alt, ...props }) => {
+    const { loaded, loadImage, toggleloaded } = useImage(src);
 
     useEffect(() => {
-        setLoaded(false);
-        loadImage(src);
+        toggleloaded(false);
+        loadImage();
     }, [src])
 
     return (
         <>
             {
                 !loaded && <div className={"flex flex-col items-center justify-center w-full " + props.className2}>
-                    <Icon className={`${props.className3}`} />
+                    {
+                        Icon && <Icon className={`${props.className3}`} />
+                    }
                     <p className={`animate-pulse mt-1 ${!props.textIcon && 'hidden'}`}>{props.textIcon}</p>
                 </div>
             }
             <img
-                alt="Đọc truyện tại MangaMAX"
+                alt={alt}
                 src={src}
+                onError={(e) => e.currentTarget.src = '/_next/image?url=/onError.png&w=720&q=75'}
                 className={props.className + (loaded ? '' : ' opacity-0 !h-0')}
                 loading='lazy'
             />

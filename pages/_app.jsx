@@ -33,7 +33,7 @@ const queryClient = new QueryClient({
 });
 
 const MyApp = ({ Component, pageProps }) => {
-  const { windowSize } = useAppSelector((state) => state.reducer2);
+  const { reducer2: { windowSize } } = useAppSelector((state) => state);
   const [scroll, setScroll] = useState(false);
   const [user] = useAuthState(auth);
   const dispatch = useAppDispatch();

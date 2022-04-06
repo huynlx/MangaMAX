@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "hooks/useRedux";
 
 const TypeRender = (type: string) => {
     const dispatch = useAppDispatch();
-    const select = useAppSelector(state => state.reducer);
+    const { reducer: select } = useAppSelector(state => state);
 
     return (
         <h1 className={`w-full font-bold text-white sm:text-3xl text-2xl`}>

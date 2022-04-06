@@ -8,7 +8,7 @@ import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 
 const Home: NextPage<GridProps> = () => {
   const dispatch = useAppDispatch();
-  const select = useAppSelector((state) => state.reducer);
+  const { reducer: select } = useAppSelector((state) => state);
 
   const typeRender = () => (
     <>
@@ -32,7 +32,10 @@ const Home: NextPage<GridProps> = () => {
   )
 
   return (
-    <Grid fetch={useFetchHome} typeRender={typeRender} />
+    <Grid
+      fetch={useFetchHome}
+      typeRender={typeRender}
+    />
   )
 }
 

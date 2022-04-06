@@ -11,8 +11,7 @@ import { recents } from 'store/action';
 import Spinner from './Spinner';
 
 const ChapterComponent = ({ chapter, chapterId, comicSlug, info }: any) => {
-    const select = useAppSelector(state => state.reducer);
-    const select2 = useAppSelector(state => state.reducer3);
+    const { reducer: select, reducer3: select2 } = useAppSelector(state => state);
     const router = useRouter();
     const dispatch = useAppDispatch();
     const selectedIndex = chapter.chapters.indexOf(chapter.chapters.find((chap: { id: string }) => chap.id === chapterId));
@@ -47,15 +46,16 @@ const ChapterComponent = ({ chapter, chapterId, comicSlug, info }: any) => {
                     select={select}
                     select2={select2}
                 />
-                <div className='min-h-[100vh] w-full p-4'>
+                <div className='min-h-[100vh] w-full py-4'>
                     {
-                        chapter.images.map((image: string | undefined, index: any) =>
+                        chapter.images.map((image: string, index: number) =>
                             <ReadImage
                                 className='mx-auto object-cover w-full h-auto lg:min-w-[50vw] lg:max-w-[55vw] transition-opacity'
                                 key={index}
                                 src={image}
                                 icon={Spinner}
                                 className3='text-logo'
+                                alt='Đọc truyện tại Manga Max'
                             />)
                     }
                 </div>

@@ -8,10 +8,9 @@ import { useAppDispatch, useAppSelector } from "hooks/useRedux";
 import getBookmarks from 'hooks/getBookmarks';
 
 const BookmarksComponent: NextPage = () => {
-    const { reducer4: { user } } = useAppSelector(state => state);
+    const { reducer4: { user }, reducer: select } = useAppSelector(state => state);
     const navigate = useRouter();
     const dispatch = useAppDispatch();
-    const select = useAppSelector(state => state.reducer);
 
     useEffect(() => {
         if (!user) {

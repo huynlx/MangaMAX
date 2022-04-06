@@ -1,8 +1,10 @@
+import { usePosition } from "hooks/usePosition";
 import { FC, memo, useEffect, useState } from "react";
 import { FaArrowUp } from "react-icons/fa";
 
 const BtnToTop: FC<{ className?: String }> = ({ className }) => {
   const [visible, setVisible] = useState(false);
+  const { handleScrollTo } = usePosition();
 
   const toggleVisible = () => {
     const scrolled = document.documentElement.scrollTop;
@@ -15,13 +17,6 @@ const BtnToTop: FC<{ className?: String }> = ({ className }) => {
     }
   };
 
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-  };
-
   useEffect(() => {
     window.addEventListener('scroll', toggleVisible);
 
@@ -31,7 +26,7 @@ const BtnToTop: FC<{ className?: String }> = ({ className }) => {
   return (
     <button
       title="Top"
-      onClick={scrollToTop}
+      onClick={() => handleScrollTo('smooth', 0)}
       className={`hover:text-white fixed rounded-full p-4 bg-gray-700  ${visible ? 'visible' : 'hidden'} ` + className}>
       <FaArrowUp size={20} />
     </button >

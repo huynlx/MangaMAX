@@ -6,9 +6,8 @@ import ColumnRender from './ColumnRender';
 import dynamic from 'next/dynamic';
 const LoadMore = dynamic(() => import('./LoadMore'));
 import { User } from 'firebase/auth';
-import { setScroll } from 'store/action';
-import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
-import Router from 'next/router';
+import { useAppSelector } from 'hooks/useRedux';
+import { usePosition } from 'hooks/usePosition';
 
 interface GridProps {
     keyword?: string,
@@ -18,15 +17,13 @@ interface GridProps {
 }
 
 const Grid = ({ keyword, fetch, typeRender: TypeRender, user }: GridProps) => {
-    const { windowSize } = useAppSelector(state => state.reducer2);
     const [cols, setCols] = useState(8);
-    const select = useAppSelector(state => state.reducer);
+    const [page, setPage] = useState<number>(1);
+    const { reducer2: { windowSize }, reducer3, reducer: select } = useAppSelector(state => state);
+    const { handleScrollTo } = usePosition();
     const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } = fetch!({ source: select.source, type: select.type, keyword: keyword, user: user });
-    const [page, setPage] = useState<any>(1);
-    const list = useMemo(() => data?.pages.map((list: any) => list.items).flat(), [data]); //gộp nhiều mảng page thành 1 mảng duy nhất
-    const content = useMemo(() => setData(cols, list ? list : []), [cols, list]);
-    const dispatch = useAppDispatch();
-    const { reducer3 } = useAppSelector(state => state);
+    const list = data?.pages.map((list: any) => list.items).flat(); //gộp nhiều mảng page thành 1 mảng duy nhất
+    const content = setData(cols, list ? list : []);
 
     useEffect(() => {
         (page > 1) && fetchNextPage();
@@ -39,17 +36,7 @@ const Grid = ({ keyword, fetch, typeRender: TypeRender, user }: GridProps) => {
     }, [windowSize])
 
     useEffect(() => {
-        window.scrollTo(0, reducer3.scrollPosition);
-
-        const handlePosition = () => {
-            const position = window.pageYOffset;
-            dispatch(setScroll(position));
-        };
-
-        Router.events.on('routeChangeStart', handlePosition);
-        return () => {
-            Router.events.off('routeChangeStart', handlePosition);
-        }
+        handleScrollTo('auto', reducer3.scrollPosition);
     }, []);
 
     // Listen to scroll positions for loading more data on scroll
@@ -101,15 +88,12 @@ const Grid = ({ keyword, fetch, typeRender: TypeRender, user }: GridProps) => {
             </div>
             <div className={`grid gap-2 comic-list mb-10`}>
                 {
-                    content.map((colRendered: any, key: number) => {
-                        return (
-                            <ColumnRender
-                                colRendered={colRendered}
-                                key={key}
-                                select={select}
-                            />
-                        );
-                    })
+                    content.map((colRendered: any, key: number) => (
+                        <ColumnRender
+                            colRendered={colRendered}
+                            key={key}
+                            select={select} />
+                    ))
                 }
             </div>
             {

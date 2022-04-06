@@ -1,33 +1,21 @@
 import { User } from 'firebase/auth';
-import { useAppDispatch } from 'hooks/useRedux';
-import Link from 'next/link';
-import { FaHistory, FaBookmark, FaUserAlt } from 'react-icons/fa';
-import { HiOutlineLogout } from 'react-icons/hi';
-import { logout } from 'shared/firebase';
-import { setScroll } from 'store/action';
 
-const Dropdown: React.FC<{ user: User | null | undefined, className: string }> = ({ user, className }) => {
-  const dispatch = useAppDispatch();
-
+const Dropdown: React.FC<{ user: User | null | undefined, className: string, dataId: string }> = ({ user, className }) => {
   return user ? (
-    <div className={`dropdown ${className}`}>
+    <span className={`${className}`}>
       <img
         title={user.displayName!}
         src={user?.photoURL!}
-        className='rounded-full ml-3'
+        className='w-8 h-8 lg:w-10 lg:h-10 rounded-full ml-3'
         alt="Photo"
-        width={33}
-        height={33}
       />
-      <div className="dropdown-content rounded-sm">
-        <Link href="/recents"><a className='flex items-center space-x-2' onClick={() => dispatch(setScroll(0))}><FaHistory className='inline' /> <span>Recents</span></a></Link>
-        <Link href="/bookmarks"><a className='flex items-center space-x-2' onClick={() => dispatch(setScroll(0))}><FaBookmark className='inline' /> <span>Bookmarks</span></a></Link>
-        <Link href="/dashboard"><a className='flex items-center space-x-2'><FaUserAlt className='inline' /> <span>Dashboard</span></a></Link>
-        <p onClick={logout} className='flex items-center space-x-1'><HiOutlineLogout className='inline' size={20} /> <span>Logout</span></p>
-      </div>
-    </div>
+    </span>
   ) : (
-    <Link href='/login'><a className={`text-md font-semibold ml-3 text-white p-1 px-3 rounded-md bg-red-500 ${className}`}>Login</a></Link>
+    <span className={`ml-3 text-white p-1 rounded-full bg-accent ${className}`}>
+      <svg data-v-20f285ec="" data-v-316b5106="" width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="lg:w-8 lg:h-8 text-icon-black dark:text-icon-white text-false icon" id="avatar">
+        <path data-v-20f285ec="" d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></path>
+      </svg>
+    </span>
   )
 };
 

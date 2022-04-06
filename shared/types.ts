@@ -54,3 +54,9 @@ export interface GridProps {
     size: number,
     setSize: (value: number) => void
 }
+
+export interface SidebarProps {
+    id: string,
+    closeNav: () => void,
+    user?: any
+}

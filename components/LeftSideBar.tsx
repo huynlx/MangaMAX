@@ -1,66 +1,28 @@
 import { SOURCES } from 'constants/index';
 import Router from 'next/router';
-import { handleSource, setScroll } from 'store/action';
+import { handleSource } from 'store/action';
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
+import { usePosition } from 'hooks/usePosition';
+import { SidebarProps } from 'shared/types';
+import { FC } from 'react';
 
-const LeftSideBar = ({ id, closeNav }: any) => {
-  const select = useAppSelector((state) => state.reducer);
+const LeftSideBar: FC<SidebarProps> = ({ id, closeNav }: any) => {
+  const { reducer: select } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
+  const { handlePosition } = usePosition();
 
   return (
-    <div id={id} className='sidenav z-20'>
-      {/* <div><p className="closebtn" onClick={closeNav}>×</p></div> */}
+    <div id={id} className='sidenav z-20' style={{ "left": "-250px" }}>
       {SOURCES.map((item: any) => (
         <div key={item.source} onClick={() => {
           dispatch(handleSource(item.source, 'latest'));
-          dispatch(setScroll(0));
+          handlePosition(0);
           Router.push('/');
+          closeNav();
         }}>
           <p className={`text-center ${select.source == item.source && '!text-white !text-3xl'}`}>{item.name}</p>
         </div>
       ))}
-      <style jsx>{`
-                .sidenav {
-                    height: 100%;
-                    width: 250px;
-                    position: fixed;
-                    top: 0;
-                    left: -250px;
-                    background-color: #212121;
-                    overflow-x: hidden;
-                    transition: 225ms cubic-bezier(0, 0, 0.2, 1) 0ms;
-                    padding-top: 60px;
-                  }
-                  
-                  .sidenav p {
-                    text-decoration: none;
-                    font-size: 25px;
-                    color: #818181;
-                    display: block;
-                    transition: 0.3s;
-                  }
-                  
-                  .sidenav p:hover {
-                    color: #f1f1f1;
-                  }
-                  
-                  .sidenav .closebtn {
-                    position: absolute;
-                    top: 0;
-                    right: 25px;
-                    font-size: 36px;
-                    margin-left: 50px;
-                  }
-                  
-                  @media screen and (max-height: 450px) {
-                    .sidenav {
-                      padding-top: 15px;
-                    }
-                    .sidenav a {
-                      font-size: 18px;
-                    }
-                  }                  
-            `}</style>
     </div>
   );
 };
