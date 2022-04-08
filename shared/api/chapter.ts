@@ -16,7 +16,7 @@ export const getChapter = async (comicSLug: any, chapterSLug: any, chapterId: an
         case '3':
             return lxhentai(comicSLug, chapterSLug, chapterId); //lxhentai
         case '4':
-            return truyen48(comicSLug, chapterSLug); //truyen48
+            return truyen48(comicSLug, chapterSLug, chapterId); //truyen48
         case '7':
             return cmanga(comicSLug, chapterSLug, chapterId); //cmanga
         case '8':

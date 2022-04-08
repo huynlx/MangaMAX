@@ -12,6 +12,7 @@ body {
 body {
   @apply overflow-y-scroll;
   @apply overflow-x-hidden;
+  @apply lg:ml-[230px];
 }
 
 .borderText {
@@ -20,7 +21,7 @@ body {
 
 /* width */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 7px;
 }
 
 /* Track */
@@ -46,6 +47,7 @@ input[type="search"] {
 }
 
 .comic-list {
+  display: grid;
   grid-template-columns: repeat(2, minmax(100px, 1fr));
   grid-auto-rows: 1fr;
 }

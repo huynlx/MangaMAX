@@ -10,55 +10,64 @@ export const SOURCES = [
         source: '1',
         name: 'Server 1',
         url: 'http://www.nettruyenmoi.com/',
-        type: 'latest'
+        type: 'latest',
+        server: "nettruyen"
     },
     {
         source: '2',
         name: 'Server 2',
         url: 'http://nhattruyengo.com/',
-        type: 'latest'
+        type: 'latest',
+        server: 'netruyen'
     },
     {
         source: '3',
         name: 'Server 3',
         url: 'https://lxhentai.com/',
-        type: 'latest'
+        type: 'latest',
+        server: 'lxhentai'
     },
     {
         source: '4',
         name: 'Server 4',
         url: 'http://truyen48.com/',
-        type: 'latest'
+        type: 'latest',
+        server: 'truyen48'
     },
     {
         source: '5',
         name: 'Server 5',
         url: 'https://truyentranhlh.net/',
-        type: 'latest'
+        type: 'latest',
+        server: 'truyentranhlh'
     },
     {
         source: '6',
         name: 'Server 6',
         url: 'https://blogtruyen.vn/',
-        type: 'latest'
+        type: 'latest',
+        server:'blogtruyen'
     },
     {
         source: '7',
         name: 'Server 7',
         url: 'https://cmanganew.com/',
-        type: 'latest'
+        type: 'latest',
+        server:'cmanga'
     },
     {
         source: '8',
         name: 'Server 8',
         url: 'https://mangapk.com/',
-        type: 'latest'
+        type: 'latest',
+        server: 'cmanga'
     },
     {
         source: '9',
         name: 'Server 9',
         url: 'https://hentaicb.top/',
-        type: 'latest'
+        type: 'latest',
+        server: 'hentaicube'
     }
 ]
 

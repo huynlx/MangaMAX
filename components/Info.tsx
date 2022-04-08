@@ -31,7 +31,7 @@ const Info = ({ info, slug }: ComicProps) => {
             <Head>
                 <title>{info.title}</title>
             </Head>
-            <div className='px-[2vw] lg:px-[5vw] lg:h-[92.5vh] pt-10 pb-3 flex flex-col lg:flex-row relative lg:max-h-[100vh] overflow-hidden gap-3'>
+            <div className='px-[2vw] lg:px-x lg:h-[92.5vh] pt-10 pb-3 flex flex-col lg:flex-row relative lg:max-h-[100vh] overflow-hidden gap-3'>
                 <LinkCheck select={select} reducer3={reducer3}>
                     <h1
                         title='Go Back'

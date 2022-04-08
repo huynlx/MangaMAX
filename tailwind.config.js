@@ -7,8 +7,8 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        'header': "url('/_next/image?url=/bg.jpg&w=1920&q=100')",
-        'grid': "url('/_next/image?url=/background.png&w=1920&q=100')"
+        'header': "url('/_next/image?url=/bg.jpg&w=480&q=75')",
+        'grid': "url('/_next/image?url=/background.png&w=480&q=75')"
       },
       colors: {
         primary: "#1A1A1A",
@@ -20,7 +20,9 @@ module.exports = {
         main: 'rgb(239 68 68)',
         'main-hover': 'rgba(239,68,68,0.4)',
         logo: '#D04A32',
-        accent: '#2c2c2c'
+        accent: '#2c2c2c',
+        'accent-lighten': '#3d3d3d',
+        'shade-mid': '#b4b9be'
       },
       backgroundSize: {
         'auto': 'auto',
@@ -29,17 +31,22 @@ module.exports = {
         '90%': '90%',
         '16': '4rem',
       },
-      backgroundPosition: {
-        'sm': '50% 70%',
-        'lg': '50% 120%'
-      },
       transitionProperty: {
         'width': 'width',
         'height': 'height'
       },
       screens: {
         'xs': '480px'
-      }
+      },
+      padding: {
+        'x': "var(--padding-x)"
+      },
+      inset: {
+        'x': "var(--padding-x)"
+      },
+      gridTemplateColumns: {
+        chapter: "repeat(auto-fill, minmax(60px, 1fr))"
+      },
     }
   },
   plugins: []

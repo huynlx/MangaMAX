@@ -20,7 +20,7 @@ const ToolNav: FC = () => {
   const { handlePosition, handleScrollTo } = usePosition();
 
   return (
-    <div className={`bg-nav scale-[.8] lg:scale-100 w-auto justify-center items-center gap-5 flex bg-opacity-80 backdrop-blur-xl px-5 py-2 rounded-full fixed bottom-5 left-2/4 transform -translate-x-2/4 z-[6] overflow-hidden transition-width`}>
+    <div className={`bg-nav scale-[.8] lg:scale-[.95] w-auto justify-center items-center gap-5 flex bg-opacity-80 backdrop-blur-xl px-5 py-2 rounded-full fixed bottom-5 left-2/4 transform -translate-x-2/4 z-[6] overflow-hidden transition-width`}>
       {
         !close && (
           <>

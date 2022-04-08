@@ -1,6 +1,5 @@
 .dashboard {
-    height: 85vh;
-    width: 100vw;
+    height: calc(100vh - 4rem);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -9,7 +8,7 @@
     display: flex;
     flex-direction: column;
     text-align: center;
-    @apply bg-primary; 
+    @apply bg-primary;
     padding: 30px;
 }
 .dashboard__btn {

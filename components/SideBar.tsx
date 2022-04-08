@@ -1,36 +1,73 @@
-import { FC, memo, useCallback, useState } from 'react';
+import { FC, memo, useCallback, useEffect, useState } from 'react';
 import LeftSideBar from 'components/LeftSideBar';
 import { IoListSharp } from 'react-icons/io5';
 import RightSideBar from 'components/RightSideBar';
-import OverlayModal from './OverlayModal';
+import OverlayModal from 'components/OverlayModal';
+import { useMediaQuery } from 'hooks/useMediaQuery';
 
 const SideBar: FC<{ className: string, id1: string, id2: string, user: any }> = ({ className, id1, id2, user }) => {
-    const [overlay, setOverlay] = useState<{ side: string, status: boolean, onClose: () => void }>({
-        side: '',
-        status: false,
-        onClose: () => { }
+    const matches = useMediaQuery('(min-width: 1024px)');
+    const [overlay, setOverlay] = useState<any>({
+        left: {
+            status: false,
+            onClose: null
+        },
+        right: {
+            status: false,
+            onClose: null
+        }
     });
 
+    const [mobile, setMobile] = useState<boolean>(false);
+
     const openLeftNav = useCallback(() => {
-        document.getElementById(id1)!.style.left = "0";
-        setOverlay({ side: 'left', status: true, onClose: closeLeftNav });
-    }, [])
+        document.getElementById(id1)!.style.left = '0';
+        if (matches) {
+            document.body.style.removeProperty("margin-left");
+            document.documentElement.style.removeProperty('--padding-x');
+        }
+
+        setOverlay({ ...overlay, left: { status: true, onClose: closeLeftNav } });
+    }, [matches, overlay])
     const closeLeftNav = useCallback(() => {
-        document.getElementById(id1)!.style.left = "-250px";
-        setOverlay({ side: 'left', status: false, onClose: closeLeftNav });
-    }, [])
+        document.getElementById(id1)!.style.left = '-230px';
+        if (matches) {
+            document.body.style.marginLeft = '0px';
+            document.documentElement.style.setProperty('--padding-x', '5vw');
+        }
+
+        setOverlay({ ...overlay, left: { status: false, onClose: null } });
+    }, [matches, overlay])
     const openRightNav = useCallback(() => {
         document.getElementById(id2)!.style.right = "0";
-        setOverlay({ side: 'right', status: true, onClose: closeRightNav });
-    }, [])
+
+        setOverlay({ ...overlay, right: { status: true, onClose: closeRightNav } });
+    }, [overlay])
     const closeRightNav = useCallback(() => {
-        document.getElementById(id2)!.style.right = "-270px";
-        setOverlay({ side: 'right', status: false, onClose: closeLeftNav });
-    }, [])
+        document.getElementById(id2)!.removeAttribute('style');
+
+        setOverlay({ ...overlay, right: { status: false, onClose: null } });
+    }, [overlay])
+
+    useEffect(() => {
+        if (matches) {
+            !overlay.left.status && openLeftNav();
+            mobile && setMobile(false);
+        } else {
+            overlay.left.status && closeLeftNav();
+            !mobile && setMobile(true);
+        }
+    }, [matches])
 
     return (
         <div className={'ml-0 lg:ml-auto p-1 rounded-full mr-3 ' + className}>
-            <OverlayModal isOpen={overlay.status} onClose={overlay.onClose} className='bg-[#00000080]' />
+            {
+                (mobile || overlay.right.status) && <OverlayModal
+                    isOpen={overlay.right.status || overlay.left.status}
+                    onClose={overlay.right.onClose || overlay.left.onClose}
+                    className={`bg-[#00000080]`}
+                />
+            }
             <LeftSideBar
                 id={id1}
                 closeNav={closeLeftNav}
@@ -41,17 +78,19 @@ const SideBar: FC<{ className: string, id1: string, id2: string, user: any }> = 
                 user={user}
             />
 
-            <span className='absolute top-2/4 -translate-y-2/4 right-[2vw] lg:right-[5vw] w-10 h-10 rounded-full' onClick={openRightNav} />
-
             <span
-                className='hover:text-white duration-200 cursor-pointer text-[30px]' onClick={openLeftNav}>
+                className='lg:absolute lg:top-2/4 lg:-translate-y-2/4 left-[2vw] lg:left-x text-[30px] hover:bg-shade-mid hover:bg-opacity-30 rounded-full lg:w-10 lg:h-10 flex items-center justify-center transition ease-out duration-100 hover:text-white'
+                onClick={overlay.left.status ? closeLeftNav : openLeftNav}
+            >
                 <span data-v-6b3fd699="" className="hidden lg:flex pointer-events-none items-center justify-center font-medium select-none">
-                    <svg data-v-20f285ec="" data-v-6b3fd699="" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-currentColor w-7 h-7">
+                    <svg data-v-20f285ec="" data-v-6b3fd699="" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-7 h-7">
                         <path data-v-20f285ec="" d="M3 12h12M3 6h18M3 18h6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                 </span>
                 <IoListSharp className='block lg:hidden' />
             </span>
+
+            <span className='absolute top-2/4 -translate-y-2/4 right-[2vw] lg:right-x w-10 h-10 rounded-full' onClick={openRightNav} />
         </div >
     );
 };

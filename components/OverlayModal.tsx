@@ -3,7 +3,7 @@ import { FC } from 'react';
 interface OverlayModalProps {
   onClose: () => void;
   isOpen: boolean,
-  className?: string
+  className?: string,
 }
 
 const OverlayModal: FC<OverlayModalProps> = ({ onClose, isOpen, className }) => (

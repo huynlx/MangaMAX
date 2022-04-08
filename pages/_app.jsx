@@ -20,6 +20,7 @@ import {
   where
 } from 'firebase/firestore';
 import Draggable from 'components/Draggable';
+import { useRouter } from "next/router";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -37,6 +38,8 @@ const MyApp = ({ Component, pageProps }) => {
   const [scroll, setScroll] = useState(false);
   const [user] = useAuthState(auth);
   const dispatch = useAppDispatch();
+  const router = useRouter();
+  const { pathname } = router;
 
   // useEffect(() => {
   // console.log(queryClient.getQueryCache());
@@ -125,6 +128,14 @@ const MyApp = ({ Component, pageProps }) => {
     callLoadingBar();
     return () => removeLoadingBar();
   }, [])
+
+  useEffect(() => {
+    if (pathname === '/') {
+      document.body.style.removeProperty('transition');
+    } else {
+      document.body.style.transition = 'all 325ms cubic-bezier(0, 0, 0.2, 1) 0ms';
+    }
+  }, [pathname])
 
   useEffect(() => {
     const fetchDocument = async () => {

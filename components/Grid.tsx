@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { setData } from '../shared/useSetData';
 import { setCol } from '../shared/useSetData';
 import Loader from '../components/Loader';
@@ -16,7 +16,7 @@ interface GridProps {
     user?: User | null
 }
 
-const Grid = ({ keyword, fetch, typeRender: TypeRender, user }: GridProps) => {
+const Grid: React.FC<GridProps> = ({ keyword, fetch, typeRender: TypeRender, user }) => {
     const [cols, setCols] = useState(8);
     const [page, setPage] = useState<number>(1);
     const { reducer2: { windowSize }, reducer3, reducer: select } = useAppSelector(state => state);
@@ -76,7 +76,7 @@ const Grid = ({ keyword, fetch, typeRender: TypeRender, user }: GridProps) => {
     }, [select])
 
     return (
-        <main className={`main px-[2vw] lg:px-[5vw] mb-28 min-h-[75vh] ${isLoading && 'bg-grid bg-no-repeat bg-contain sm:bg-auto bg-sm lg:bg-lg'}`}>
+        <main className={`main px-[2vw] min-h-[calc(100vh-4rem)] relative lg:px-x ${isLoading ? 'bg-grid bg-no-repeat bg-contain xs:bg-auto bg-center' : 'mb-28'}`}>
             {
                 isLoading && <Loader />
             }
@@ -86,13 +86,14 @@ const Grid = ({ keyword, fetch, typeRender: TypeRender, user }: GridProps) => {
             <div className='picker flex gap-5 items-center mb-3 md:mt-1'>
                 <TypeRender />
             </div>
-            <div className={`grid gap-2 comic-list mb-10`}>
+            <div className={`gap-2 comic-list mb-10`}>
                 {
                     content.map((colRendered: any, key: number) => (
                         <ColumnRender
                             colRendered={colRendered}
                             key={key}
-                            select={select} />
+                            select={select}
+                        />
                     ))
                 }
             </div>

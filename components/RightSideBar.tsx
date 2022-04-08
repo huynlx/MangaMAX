@@ -8,8 +8,8 @@ const RightSideBar: FC<SidebarProps> = ({ id, closeNav, user }) => {
   const { handlePosition } = usePosition();
 
   return (
-    <div id={id} className='sidenav z-20 !w-[270px] p-6 !bg-[#191a1c]' style={{ "right": "-270px" }}>
-      <p className="closebtn" onClick={closeNav}>×</p>
+    <div id={id} className='sidenav z-20 w-[270px] p-6 bg-[#191a1c] -right-[270px] pt-[60px]'>
+      <p className="lg:!hidden closebtn" onClick={closeNav}>×</p>
 
       {!user ? (
         <>
@@ -61,7 +61,7 @@ const RightSideBar: FC<SidebarProps> = ({ id, closeNav, user }) => {
             <Link href="/recents">
               <a className='flex text-white text-[17px] items-center space-x-2' onClick={() => { handlePosition(0); closeNav(); }}>
                 <svg data-v-20f285ec data-v-a376878c width={24} height={24} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="mr-1 text-icon-black dark:text-icon-white text-false icon"><path data-v-20f285ec d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" /></svg>
-                <span className='font-semibold'>List Recents</span>
+                <span className='font-semibold'>Recent List</span>
               </a>
             </Link>
           </div>

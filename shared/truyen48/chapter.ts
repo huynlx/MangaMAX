@@ -2,7 +2,7 @@ import { parse } from "node-html-parser";
 import axios from "../axios";
 import { store } from "../../store";
 
-export const getChapter = async (comicSLug: any, chapterSLug: any): Promise<any> => {
+export const getChapter = async (comicSLug: any, chapterSLug: any, chapterId: any): Promise<any> => {
   const state = store.getState().reducer;
   const links = [
     `truyen-tranh/${comicSLug}-${chapterSLug.replace('.', '-')}`
