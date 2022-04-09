@@ -40,7 +40,7 @@ const Comic = ({ item, select: { source, type } }: any) => {
 
     return (
         <div className='flex flex-col items-stretch comic border overflow-hidden border-transparent rounded-xl'>
-            <div className='group w-full h-0 pb-[150%] bg-gray-700 relative flex-grow overflow-hidden'>
+            <div className='group w-full h-0 pb-[155%] bg-gray-700 relative flex-grow overflow-hidden'>
                 <OverlayImage>
                     {
                         detail

@@ -25,6 +25,7 @@ const SideBar: FC<{ className: string, id1: string, id2: string, user: any }> = 
         if (matches) {
             document.body.style.removeProperty("margin-left");
             document.documentElement.style.removeProperty('--padding-x');
+            document.getElementById('logo1')!.style.display = 'none';
         }
 
         setOverlay({ ...overlay, left: { status: true, onClose: closeLeftNav } });
@@ -34,6 +35,7 @@ const SideBar: FC<{ className: string, id1: string, id2: string, user: any }> = 
         if (matches) {
             document.body.style.marginLeft = '0px';
             document.documentElement.style.setProperty('--padding-x', '5vw');
+            document.getElementById('logo1')!.removeAttribute('style');
         }
 
         setOverlay({ ...overlay, left: { status: false, onClose: null } });
@@ -60,7 +62,7 @@ const SideBar: FC<{ className: string, id1: string, id2: string, user: any }> = 
     }, [matches])
 
     return (
-        <div className={'ml-0 lg:ml-auto p-1 rounded-full mr-3 ' + className}>
+        <div className={'ml-0 lg:ml-auto py-1 rounded-full mr-3 ' + className}>
             {
                 (mobile || overlay.right.status) && <OverlayModal
                     isOpen={overlay.right.status || overlay.left.status}

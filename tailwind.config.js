@@ -22,7 +22,8 @@ module.exports = {
         logo: '#D04A32',
         accent: '#2c2c2c',
         'accent-lighten': '#3d3d3d',
-        'shade-mid': '#b4b9be'
+        'shade-mid': '#b4b9be',
+        'logo-darken': '#e6613e'
       },
       backgroundSize: {
         'auto': 'auto',
@@ -47,7 +48,12 @@ module.exports = {
       gridTemplateColumns: {
         chapter: "repeat(auto-fill, minmax(60px, 1fr))"
       },
+      borderRadius: {
+        '4': '4px'
+      }
     }
   },
-  plugins: []
+  plugins: [
+    require('@tailwindcss/line-clamp'),
+  ]
 };

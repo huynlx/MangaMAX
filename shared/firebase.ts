@@ -1,5 +1,4 @@
 import { initializeApp } from "firebase/app";
-
 import {
   GoogleAuthProvider,
   getAuth,
@@ -10,7 +9,6 @@ import {
   signInWithEmailAndPassword,
   FacebookAuthProvider
 } from "firebase/auth";
-
 import {
   getFirestore,
   query,
@@ -79,41 +77,27 @@ const signInWithFacebook = async () => {
 };
 
 const logInWithEmailAndPassword = async (email: string, password: string) => {
-  try {
-    await signInWithEmailAndPassword(auth, email, password);
-  } catch (err) {
-    console.error(err);
-    alert(err.message.replace('Firebase: ', ''));
-  }
+  await signInWithEmailAndPassword(auth, email, password);
 };
 const registerWithEmailAndPassword = async (name: string, email: string, password: string) => {
-  try {
-    const res = await createUserWithEmailAndPassword(auth, email, password);
-    const user = res.user;
-    await addDoc(collection(db, "users"), {
-      uid: user.uid,
-      name,
-      authProvider: "local",
-      email,
-      bookmarks: []
-    });
-  } catch (err) {
-    console.error(err);
-    alert(err.message.replace('Firebase: ', ''));
-  }
+  const res = await createUserWithEmailAndPassword(auth, email, password);
+  const user = res.user;
+  await addDoc(collection(db, "users"), {
+    uid: user.uid,
+    name,
+    authProvider: "local",
+    email,
+    bookmarks: []
+  });
 };
 const sendPasswordReset = async (email: string) => {
-  try {
-    await sendPasswordResetEmail(auth, email);
-    alert("Password reset link sent!");
-  } catch (err) {
-    console.error(err);
-    alert(err.message.replace('Firebase: ', ''));
-  }
+  await sendPasswordResetEmail(auth, email);
+  alert("Password reset link sent!");
 };
 const logout = () => {
   signOut(auth);
 };
+
 export {
   auth,
   db,

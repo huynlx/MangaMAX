@@ -2,7 +2,7 @@ import { createStore, AnyAction, Store, applyMiddleware, combineReducers } from 
 import { createWrapper, HYDRATE } from 'next-redux-wrapper';
 import thunkMiddleware from 'redux-thunk';
 import { WINDOW_SIZE } from 'constants/index';
-import { handleTypes } from './action';
+import { handleTypes } from 'store/action';
 
 const bindMiddleware = (middleware: any) => applyMiddleware(...middleware);
 
@@ -53,7 +53,7 @@ const reducer2 = (state = defaultState2, action: AnyAction) => {
 
 const defaultState3 = {
     scrollPosition: 0,
-    indexChapters: false, //true:index or false:list
+    indexChapters: true, //true:index or false:list
     keyword: null
 }
 
@@ -75,7 +75,8 @@ const reducer3 = (state = defaultState3, action: AnyAction) => {
 const defaultState4 = {
     recents: [],
     user: null,
-    bookmarks: []
+    bookmarks: [],
+    isLoading: null
 }
 
 //reducer 4
@@ -108,6 +109,11 @@ const reducer4 = (state = defaultState4, action: AnyAction) => {
                 bookmarks: [
                     ...action.bookmarks
                 ]
+            }
+        case 'LOADING':
+            return {
+                ...state,
+                isLoading: action.isLoading
             }
         default:
 

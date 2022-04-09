@@ -1,20 +1,39 @@
-import React, { FC, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { logInWithEmailAndPassword, signInWithFacebook, signInWithGoogle } from "shared/firebase";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { useAppDispatch, useAppSelector } from "hooks/useRedux";
+import Form from "./Form";
+import { ImSpinner8 } from "react-icons/im";
 
-import { useAppSelector } from "hooks/useRedux";
+export const validateEmail = (email: string): boolean => /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email.toLowerCase());
 
 const LoginComponent: FC = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const { reducer4: { user } } = useAppSelector(state => state);
+    const { reducer4: { user, isLoading } } = useAppSelector(state => state);
     const navigate = useRouter();
+    const dispatch = useAppDispatch();
+
+    const login = () => {
+        if (validateEmail(email)) {
+            dispatch({ type: 'LOADING', isLoading: true });
+            logInWithEmailAndPassword(email, password)
+                .catch((err) => {
+                    dispatch({ type: 'LOADING', isLoading: false });
+                    alert(err.message.replace('Firebase: ', ''));
+                })
+        } else {
+            alert('Error (auth/invalid-email).');
+        }
+    }
+
     useEffect(() => {
         if (user) navigate.back();
     }, [user]);
+
     return (
-        <div className="login">
+        <Form className="login">
             <div className="login__container">
                 <input
                     type="email"
@@ -22,6 +41,7 @@ const LoginComponent: FC = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="E-mail Address"
+                    required
                 />
                 <input
                     type="password"
@@ -29,14 +49,18 @@ const LoginComponent: FC = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Password"
+                    required
                 />
                 <button
                     className="login__btn"
-                    onClick={() => logInWithEmailAndPassword(email, password)}
+                    onClick={login}
+                    type='submit'
                 >
-                    Login
+                    {
+                        isLoading ? <ImSpinner8 size={25.5} className="animate-spin mx-auto" /> : "Login"
+                    }
                 </button>
-                <button className="login__btn login__google relative" onClick={signInWithGoogle}>
+                <button type="button" className="login__btn login__google relative" onClick={signInWithGoogle}>
                     <svg stroke="currentColor" fill="currentColor" strokeWidth="0" version="1.1" x="0px" y="0px" viewBox="0 0 48 48" enableBackground="new 0 0 48 48" className="w-6 h-6 absolute left-6" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
                         <path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12
                         c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24
@@ -47,7 +71,7 @@ const LoginComponent: FC = () => {
                     </svg>
                     Login with Google
                 </button>
-                <button className="login__btn login__facebook relative" onClick={signInWithFacebook}>
+                <button type="button" className="login__btn login__facebook relative" onClick={signInWithFacebook}>
                     <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 320 512" className="w-6 h-6 absolute left-6" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"></path></svg>
                     Login with Facebook
                 </button>
@@ -58,7 +82,7 @@ const LoginComponent: FC = () => {
                     Don&apos;t have an account? <Link href="/register"><a className="text-link font-semibold">Register</a></Link>
                 </div>
             </div>
-        </div>
+        </Form>
     );
 }
 export default LoginComponent;

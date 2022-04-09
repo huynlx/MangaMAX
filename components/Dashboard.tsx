@@ -17,7 +17,14 @@ const DashboardComponent: React.FC = () => {
         <div className="dashboard">
             <div className="dashboard__container">
                 Logged in as
-                <img src={user?.photoURL!} alt="Photo" className="rounded-full mt-3 object-cover" width={135} height={135} />
+                {
+                    user?.photoURL ?
+                        <img src={user?.photoURL!} alt="Photo" className="rounded-full mt-3 object-cover" width={135} height={135} />
+                        :
+                        <div className='text-black w-[135px] h-[135px] rounded-full bg-white flex justify-center items-center font-bold text-4xl !mt-3'>
+                            {user?.displayName?.slice(0, 1).toUpperCase()}
+                        </div>
+                }
                 <div className="font-bold text-lg">{user?.displayName}</div>
                 <div>{user?.email}</div>
                 <button className="bg-gray-600 hover:bg-gray-700 dashboard__btn duration-150 rounded-full flex gap-1 items-center justify-center" onClick={logout}>

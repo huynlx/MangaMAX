@@ -7,6 +7,7 @@ import Dropdown from 'components/Dropdown';
 import { useScroll } from 'hooks/useScroll';
 import { useAppSelector } from 'hooks/useRedux';
 import Input from 'components/Input';
+import LinkCheck from 'components/LinkCheck';
 
 export const checkPathname = (pathname: string): boolean => {
     return ['/', '/search', '/bookmarks', '/recents'].some((item: string) => item === pathname);
@@ -23,6 +24,14 @@ const Navbar = ({ scroll }: { scroll: boolean }) => {
     return (
         <div id='navbar' className={`${isActive ? 'h-[6.4rem]' : 'h-[3.4rem]'} lg:h-14 justify-evenly gap-0 bg-primary flex flex-col lg:flex-row lg:justify-between items-stretch lg:items-center px-[2vw] lg:px-x ${(!router.pathname.includes('chap') && direction === 'up') ? 'sticky top-0 z-20' : 'relative'}`}>
             <div className='flex items-center justify-between'>
+                <LinkCheck select={select} reducer3={reducer3}>
+                    <a id='logo1' className={`items-center ml-[50px] hidden lg:flex justify-start gap-3 ${checkPathname(pathname) && 'pointer-events-none'}`}>
+                        <img src={`/_next/image?url=/favicon.ico&w=300&q=100`} width={40} height={40} alt="Logo" />
+                        <h1 className="text-2xl font-bold text-white">
+                            <span className="text-logo font-bold borderText">Manga</span>Max
+                        </h1>
+                    </a>
+                </LinkCheck>
                 <SideBar
                     user={user}
                     className='block lg:hidden'

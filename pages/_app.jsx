@@ -141,17 +141,18 @@ const MyApp = ({ Component, pageProps }) => {
     const fetchDocument = async () => {
       const q = query(collection(db, "users"), where("uid", "==", user?.uid));
       const docs = await getDocs(q);
-      const { bookmarks } = docs && docs.docs[0].data();
+      const { bookmarks, name } = docs && docs.docs[0].data();
       const { id } = docs.docs[0];
 
       dispatch(setUser({
         uid: user.uid,
         email: user.email,
         photoURL: user.photoURL,
-        displayName: user.displayName,
+        displayName: name,
         docid: id
       }));
       dispatch(setBookmarks(bookmarks));
+      dispatch({ type: 'LOADING', isLoading: false });
     }
 
     if (user) {
@@ -170,6 +171,7 @@ const MyApp = ({ Component, pageProps }) => {
         <link rel="shortcut icon" href="/favicon.ico" />
         <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests"></meta>
         <meta name="description" content="Website đọc manga hoàn toàn miễn phí, không quảng cáo." />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
       {/* <PersistGate loading={<p className='w-full text-center'>Loading Source</p>} persistor={persistor}> */}
       <QueryClientProvider client={queryClient}>

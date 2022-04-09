@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 const Loader = ({ className }: { className?: string }) => (
     <div className={`loading scale-[.67] fixed lg:absolute lg:scale-[.85] -translate-x-2/4 -translate-y-1/2 z-10 p-5 rounded-md bg-nav/[.80] backdrop-blur-3xl ${className}`}>
         <div className="lds-spinner">
@@ -104,4 +106,4 @@ const Loader = ({ className }: { className?: string }) => (
     </div>
 );
 
-export default Loader;
+export default memo(Loader);

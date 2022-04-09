@@ -54,12 +54,12 @@ const ChapterComponent = ({ chapter, chapterId, comicSlug, info }: any) => {
                                 key={index}
                                 src={image}
                                 icon={Spinner}
-                                className3='text-logo'
+                                className3='text-logo-darken'
                                 alt='Đọc truyện tại Manga Max'
                             />)
                     }
                 </div>
-                <div className={`w-full h-60 p-8 ${selectedIndex < 1 && 'hidden'}`}>
+                <div className={`w-full h-60 p-8 mb-20 ${selectedIndex < 1 && 'hidden'}`}>
                     <button onClick={nextChapter} className="w-full h-full border-2 border-dashed border-gray-600 text-gray-600 hover:border-white hover:text-white transition duration-300 flex items-center justify-center">
                         <p className="text-2xl flex gap-3 items-center">Next Chapter <FaArrowRight className='mt-[3px]' /></p>
                     </button>

@@ -11,63 +11,72 @@ export const SOURCES = [
         name: 'Server 1',
         url: 'http://www.nettruyenmoi.com/',
         type: 'latest',
-        server: "nettruyen"
+        server: "nettruyen",
+        adult: false
     },
     {
         source: '2',
         name: 'Server 2',
         url: 'http://nhattruyengo.com/',
         type: 'latest',
-        server: 'netruyen'
+        server: 'netruyen',
+        adult: false
     },
     {
         source: '3',
-        name: 'Server 3',
+        name: 'Server 3 (18+)',
         url: 'https://lxhentai.com/',
         type: 'latest',
-        server: 'lxhentai'
+        server: 'lxhentai',
+        adult: true
     },
     {
         source: '4',
         name: 'Server 4',
         url: 'http://truyen48.com/',
         type: 'latest',
-        server: 'truyen48'
+        server: 'truyen48',
+        adult: false
     },
     {
         source: '5',
         name: 'Server 5',
         url: 'https://truyentranhlh.net/',
         type: 'latest',
-        server: 'truyentranhlh'
+        server: 'truyentranhlh',
+        adult: false
     },
     {
         source: '6',
         name: 'Server 6',
         url: 'https://blogtruyen.vn/',
         type: 'latest',
-        server:'blogtruyen'
+        server: 'blogtruyen',
+        adult: false
     },
     {
         source: '7',
         name: 'Server 7',
         url: 'https://cmanganew.com/',
         type: 'latest',
-        server:'cmanga'
+        server: 'cmanga',
+        adult: false
     },
     {
         source: '8',
         name: 'Server 8',
         url: 'https://mangapk.com/',
         type: 'latest',
-        server: 'cmanga'
+        server: 'cmanga',
+        adult: false
     },
     {
         source: '9',
-        name: 'Server 9',
+        name: 'Server 9 (18+)',
         url: 'https://hentaicb.top/',
         type: 'latest',
-        server: 'hentaicube'
+        server: 'hentaicube',
+        adult: true
     }
 ]
 
@@ -90,3 +99,6 @@ export const mangaObj = (info: any, slug: string, select: RootState, type: strin
     source: info.source ?? select.source,
     type: type
 });
+
+export const TITLES = ['latest', 'browse'];
+export const FORYOU = ['recents', 'bookmarks'];

@@ -1,6 +1,5 @@
 .reset {
   height: 85vh;
-  width: 100vw;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -17,6 +16,7 @@
   padding: 10px 10px 10px 20px;
   margin-bottom: 10px;
   border-radius: 9999px;
+  color: black;
 }
 .reset__btn {
   padding: 10px;

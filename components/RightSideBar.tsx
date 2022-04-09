@@ -33,13 +33,20 @@ const RightSideBar: FC<SidebarProps> = ({ id, closeNav, user }) => {
         </>
       ) : (
         <div className='flex flex-col items-center gap-4'>
-          <img
-            src={user?.photoURL!}
-            className='rounded-full'
-            alt="Photo"
-            width={64}
-            height={64}
-          />
+          {
+            user?.photoURL ?
+              <img
+                src={user?.photoURL! || '/avatar.jpg'}
+                className='rounded-full w-16 h-16 object-cover'
+                alt="Photo"
+                width={64}
+                height={64}
+              />
+              :
+              <div className='text-black w-16 h-16 rounded-full bg-white flex justify-center items-center font-bold text-2xl'>
+                {user.displayName?.slice(0, 1).toUpperCase()}
+              </div>
+          }
           <span className='text-white text-2xl font-bold'>{user.displayName}</span>
           <span className='px-2 py-1 rounded-[3px] text-sm bg-white text-black'>Member</span>
 
