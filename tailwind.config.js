@@ -8,7 +8,7 @@ module.exports = {
     extend: {
       backgroundImage: {
         'header': "url('/_next/image?url=/bg.jpg&w=480&q=75')",
-        'grid': "url('/_next/image?url=/background.png&w=480&q=75')"
+        'grid': "url('/_next/image?url=/background.png&w=720&q=75')"
       },
       colors: {
         primary: "#1A1A1A",

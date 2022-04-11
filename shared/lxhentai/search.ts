@@ -4,7 +4,7 @@ import getQueryParams from "../useGetQueryParams";
 import decodeHTMLEntity from "../decodeHTML";
 import useSlug from "shared/useSlug";
 
-const getSearch = async (keyword: string, page: number = 1, url: string): Promise<any> => {
+const getSearch = async (sourceNum: string, keyword: string, page: number = 1, url: string): Promise<any> => {
 
     const sections = {
         "Tìm truyện tranh": `story/search.php?key=${encodeURI(keyword)}&p=${page ? page : 1}`
@@ -20,17 +20,18 @@ const getSearch = async (keyword: string, page: number = 1, url: string): Promis
         const items = dom.querySelectorAll(".row div.py-2").map((item) => {
             let style = (item.querySelector('div')?.getAttribute('style'));
             const bg = (style?.split(";")[0]);
-            const image = bg?.replace('url(', '').replace(')', '').replace(/\"/gi, "").replace(/['"]+/g, '').split(":")[1].trim();
+            const image = url + bg?.replace('url(', '').replace(')', '').replace(/\"/gi, "").replace(/['"]+/g, '').split(":")[1].trim();
 
             return {
                 title: decodeHTMLEntity(item.childNodes[3].innerText),
-                cover: url + image,
+                cover: `/api/proxy?url=${encodeURIComponent(image.replace('lxhentai.com//', 'lxhentai.com/') as string)}&source=${sourceNum}`,
                 chapter: item.querySelector(".newestChapter a")?.innerText,
                 chapSlug: useSlug(item.querySelector(".newestChapter a")?.innerText!),
                 chapId: getQueryParams('id', item.querySelector('.newestChapter a')?.getAttribute('href')!),
                 slug: getQueryParams('id', item.getElementsByTagName('a')[1].getAttribute('href')!),
                 updateAt: null,
                 id: getQueryParams('id', item.getElementsByTagName('a')[1].getAttribute('href')!),
+                source: sourceNum
             }
         });
 

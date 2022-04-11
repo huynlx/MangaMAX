@@ -17,11 +17,9 @@ const Input: React.FC<any> = ({ isActive }) => {
       router.push({
         pathname: "/search",
         query: {
-          keyword: inputValue.trim(),
-          source: select.source,
-          type: 'search'
+          keyword: inputValue.trim()
         },
-      }, `/search/${inputValue.trim().replace(/ /g, '+')}`);
+      });
       // setInputValue(''); //reset form
     }
   };

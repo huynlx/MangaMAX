@@ -1,7 +1,7 @@
 import { parse } from "node-html-parser";
 import axios from "../axios"
 
-export const getComicInfo = async (comicSLug: string): Promise<any> => {
+export const getComicInfo = async (comicSLug: string, source: string): Promise<any> => {
     const html = (await axios.get(`truyen-tranh/${comicSLug}`)).data;
     const dom = parse(html);
     const index = dom.querySelectorAll("#nt_listchapter ul li:not(.heading)").map((item, index) => index).reverse();
@@ -25,7 +25,9 @@ export const getComicInfo = async (comicSLug: string): Promise<any> => {
                 ?.split("/")
                 .slice(-2)[0],
             nameIndex: index[i] + 1
-        }))
+        })),
+        source,
+        lastUpdate: dom.querySelector("#item-detail time.small")?.innerText.match(/\[Cập nhật lúc: (.*?)\]/)?.[1]
     }
 }
 

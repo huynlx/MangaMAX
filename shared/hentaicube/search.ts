@@ -2,7 +2,7 @@ import axios from "../axios";
 import { parse } from "node-html-parser";
 import decodeHTMLEntity from "../decodeHTML";
 
-const getSearch = async (keyword: string, page: number = 1, source: string): Promise<any> => {
+const getSearch = async (source: string, keyword: string, page: number = 1): Promise<any> => {
     const sections = {
         "Tìm truyện tranh": `page/${page ? page : 1}/?s=${encodeURI(keyword)}&post_type=wp-manga`
     }
@@ -29,6 +29,7 @@ const getSearch = async (keyword: string, page: number = 1, source: string): Pro
                     .querySelector(".c-image-hover > a")
                     ?.getAttribute("href")?.split('/').slice(4, -1)[0],
                 updateAt: item.querySelector(".post-on .font-meta")?.innerText.trim(),
+                source
             });
         });
 
@@ -47,7 +48,7 @@ const getSearch = async (keyword: string, page: number = 1, source: string): Pro
             nameAlt: 'Search results',
             items,
             hasNextPage,
-            currentPage
+            currentPage,
         };
     });
 

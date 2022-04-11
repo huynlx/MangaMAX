@@ -1,39 +1,17 @@
 import { NextPage } from 'next';
-import { getChapter } from 'shared/api/chapter';
 import ChapterComponent from 'components/Chapter';
-import { AppDispatch, wrapper } from 'store';
-import { handleSource } from 'store/action';
+import { useRouter } from 'next/router';
+import useFetchChapter from 'hooks/useFetchChapter';
+import Loader from 'components/Loader';
 
-const Chapter: NextPage<any> = ({ chapter, chapterId, comicSlug, info, scrollPosition }) => (
-    <ChapterComponent chapter={chapter} chapterId={chapterId} comicSlug={comicSlug} info={info} />
-);
+const Chapter: NextPage = () => {
+    const router = useRouter();
+    const { slug, chapter, id, source } = router.query;
+    const { data, isLoading } = useFetchChapter(slug, source, chapter, id);
 
-export const getServerSideProps = wrapper.getServerSideProps(
-    (store) => async ({ params, query }) => {
-        store.dispatch<AppDispatch>(handleSource(query.source, query.type, store));
-
-        try {
-            const chapter = await getChapter(params?.slug, params?.chapter, query.id);
-
-            return {
-                props: {
-                    chapter,
-                    chapterId: query.id,
-                    comicSlug: params?.slug,
-                    info: {
-                        title: chapter.title,
-                        cover: query.cover,
-                        source: query.source
-                    }
-                }
-            }
-        } catch (error) {
-            console.log(error);
-            return {
-                notFound: true
-            }
-        }
-    }
-);
+    return !isLoading ? (
+        <ChapterComponent chapter={data} chapterId={id} comicSlug={slug} />
+    ) : <div className='relative min-h-[calc(100vh-7rem)]'><Loader /></div>;
+};
 
 export default Chapter;

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-const List = ({ select, slug, dt, cover }: any) => {
+const List = ({ select, slug, dt, source }: any) => {
     return dt.chapters.map((item: any) => (
         <Link
             as={`/manga/${slug}/${item.chap}`}
@@ -9,9 +9,7 @@ const List = ({ select, slug, dt, cover }: any) => {
                 pathname: `/manga/${slug}/${item.chap}`,
                 query: {
                     id: item.id,
-                    source: select.source,
-                    type: select.type,
-                    cover
+                    source: source,
                 }
             }}
         >

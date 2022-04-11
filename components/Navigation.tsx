@@ -6,7 +6,7 @@ import LinkCheck from './LinkCheck';
 import { FaChevronLeft, FaChevronRight, FaHome, FaList } from 'react-icons/fa';
 import { useScroll } from 'hooks/useScroll';
 
-const Navigation = ({ cover, chapters, chapterId, comicSlug, select, select2 }: NavigationProps) => {
+const Navigation = ({ chapters, chapterId, comicSlug, select, select2, source }: NavigationProps) => {
     const direction = useScroll();
     const selectedIndex = chapters.indexOf(chapters.find((chap) => chap.id === chapterId)!);
     const router = useRouter();
@@ -16,34 +16,28 @@ const Navigation = ({ cover, chapters, chapterId, comicSlug, select, select2 }: 
             pathname: `/manga/${comicSlug}/${chapters[selectedIndex + 1].chap}`,
             query: {
                 id: chapters[selectedIndex + 1].id,
-                source: select.source,
-                type: select.type,
-                cover
+                source
             }
-        }, `/manga/${comicSlug}/${chapters[selectedIndex + 1].chap}`)
-    }, [comicSlug, chapters, selectedIndex, router, select.source, select.type])
+        })
+    }, [selectedIndex])
     const nextChapter = useCallback(() => {
         router.push({
             pathname: `/manga/${comicSlug}/${chapters[selectedIndex - 1].chap}`,
             query: {
                 id: chapters[selectedIndex - 1].id,
-                source: select.source,
-                type: select.type,
-                cover
+                source
             }
-        }, `/manga/${comicSlug}/${chapters[selectedIndex - 1].chap}`)
-    }, [comicSlug, chapters, selectedIndex, router, select.source, select.type])
-    const selectChapter = (chapterSlug: string) => {
+        })
+    }, [selectedIndex])
+    const selectChapter = useCallback((chapterSlug: string) => {
         router.push({
             pathname: `/manga/${comicSlug}/${chapterSlug}`,
             query: {
                 id: chapters.find((chap: { chap: any; }) => chap.chap === chapterSlug)?.id,
-                source: select.source,
-                type: select.type,
-                cover
+                source
             },
-        }, `/manga/${comicSlug}/${chapterSlug}`);
-    }
+        });
+    }, [])
     useEffect(() => {
         const handler = (e: KeyboardEvent) => {
             if (e.keyCode === 37) {
@@ -62,7 +56,7 @@ const Navigation = ({ cover, chapters, chapterId, comicSlug, select, select2 }: 
             <LinkCheck select={select} reducer3={select2}>
                 <a><FaHome className='mr-2 hover:text-white transition' size={30} title='Home' /></a>
             </LinkCheck>
-            <Link as={`/manga/${router.query.slug}`} href={`/manga/${router.query.slug}?source=${select.source}&type=${select.type}`}>
+            <Link href={`/manga/${router.query.slug}?source=${source}`}>
                 <a><FaList className='mr-2 hover:text-white transition' size={30} title='Info' /></a>
             </Link>
             <button title='Prev Chapter' disabled={selectedIndex === chapters.length - 1} onClick={prevChapter} className='p-2 bg-main hover:bg-main-hover w-10 h-10 text-white disabled:opacity-50 transition'>

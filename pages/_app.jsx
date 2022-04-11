@@ -2,7 +2,6 @@ import "tailwindcss/tailwind.css";
 import "styles/index.css";
 import React, { useEffect, useState } from 'react';
 import Navbar from 'components/Navbar';
-import { wrapper } from 'store';
 import { WINDOW_RESIZE_DEBOUNCE, WINDOW_SIZE } from 'constants/index';
 import { windowResize } from 'store/action';
 import { QueryClient, QueryClientProvider } from "react-query";
@@ -13,6 +12,7 @@ import { auth } from 'shared/firebase';
 import { user as setUser, bookmarks as setBookmarks } from 'store/action';
 import { db } from 'shared/firebase';
 import { useAppSelector, useAppDispatch } from 'hooks/useRedux';
+import { wrapper } from 'store';
 import {
   collection,
   getDocs,
@@ -121,8 +121,6 @@ const MyApp = ({ Component, pageProps }) => {
     }
   }, [scroll]) //=> add scroll để chạy lại => cập nhật giá trị của scroll trong useEffect()
 
-  // let persistor = persistStore(wrapper);
-
   //handle router loading
   useEffect(() => {
     callLoadingBar();
@@ -130,7 +128,7 @@ const MyApp = ({ Component, pageProps }) => {
   }, [])
 
   useEffect(() => {
-    if (pathname === '/') {
+    if (pathname === '/' || pathname === '/search') {
       document.body.style.removeProperty('transition');
     } else {
       document.body.style.transition = 'all 325ms cubic-bezier(0, 0, 0.2, 1) 0ms';
@@ -173,32 +171,13 @@ const MyApp = ({ Component, pageProps }) => {
         <meta name="description" content="Website đọc manga hoàn toàn miễn phí, không quảng cáo." />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
-      {/* <PersistGate loading={<p className='w-full text-center'>Loading Source</p>} persistor={persistor}> */}
       <QueryClientProvider client={queryClient}>
         <Navbar scroll={scroll} />
         <Component {...pageProps} />
         <Draggable />
       </QueryClientProvider>
-      {/* </PersistGate> */}
     </>
   )
 }
-
-// MyApp.getInitialProps = async ({ Component, ctx }) => {
-//   const footerData = { cc: 'cc' };
-//   let pageProps = {};
-//   console.log(ctx.query);
-//   if (Component.getInitialProps) {
-//     pageProps = await Component.getInitialProps(ctx);
-//   }
-//   return { pageProps, footerData };
-// };
-
-// MyApp.getInitialProps = async ({ store }) => {
-//   // console.log(store);
-//   const initialData = { data: 'test' }
-
-//   return { initialData }
-// };
 
 export default wrapper.withRedux(MyApp);

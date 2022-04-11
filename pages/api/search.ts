@@ -5,7 +5,7 @@ import { SOURCES } from 'constants/index';
 
 export default async function handler(
     req: NextApiRequest,
-    res: NextApiResponse<any>
+    res: NextApiResponse
 ) {
     const source = SOURCES.find(item => item.source == req.query.source)
     instance.defaults.baseURL = source?.url;

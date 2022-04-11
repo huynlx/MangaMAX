@@ -1,7 +1,7 @@
 import { parse } from "node-html-parser";
 import axios from "../axios"
 
-export const getComicInfo = async (comicSLug: string): Promise<any> => {
+export const getComicInfo = async (comicSLug: string, source: string): Promise<any> => {
   const html = (await axios.get(`truyen-tranh/${comicSLug}`)).data;
   const dom = parse(html);
   const index = dom.querySelectorAll(".works-chapter-list .works-chapter-item").map((item, index) => index).reverse();
@@ -18,10 +18,12 @@ export const getComicInfo = async (comicSLug: string): Promise<any> => {
       name: chapter.querySelector('.name-chap a').innerText.trim(),
       updateAt: chapter.querySelector('.time-chap').innerText,
       view: 'N/A',
-      id: chapter.querySelector('.name-chap a').getAttribute('href')?.split('/').pop(),
+      id: chapter.querySelector('.name-chap a').getAttribute('href')?.split('/').pop().match(/\d+/g)?.join(''),
       chap: 'chap-' + chapter.querySelector('.name-chap a').innerText.split(' ')[1],
       nameIndex: index[i] + 1
-    }))
+    })),
+    source,
+    lastUpdate: dom.querySelector(".works-chapter-list .works-chapter-item:first-child .time-chap")?.innerText.trim()
   }
 }
 

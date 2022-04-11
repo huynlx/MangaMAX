@@ -2,12 +2,9 @@ import { parse } from "node-html-parser";
 import axios from "../axios";
 import { decrypt_data } from "./decrypt";
 import { titleCase } from "./titleCase";
-import { store } from "../../store";
 import decodeHTMLEntity from "../decodeHTML";
 
-export const getComicInfo = async (comicSLug: string): Promise<any> => {
-    const state = store.getState().reducer;
-
+export const getComicInfo = async (comicSLug: string, url: string, source: string): Promise<any> => {
     const html = (await axios.get(`${comicSLug}`)).data;
     const book_id = html.match(/book_id.+"(.+)"/)[1];
     const html2 = (await axios.get(`api/book_chapter?opt1=${book_id}`)).data;
@@ -39,7 +36,7 @@ export const getComicInfo = async (comicSLug: string): Promise<any> => {
     let tags = detail.tags.split(",").slice(1, -1).map((item: any) => titleCase(item));
     let status = detail.status;
     let desc = dom.querySelectorAll("#book_detail")[0].innerText === '' ? dom.querySelectorAll("#book_more")[0].innerText : dom.querySelectorAll("#book_detail")[0].innerText;
-    let image = state.url + dom.querySelectorAll(".book_avatar img")[0].getAttribute("src");
+    let image = url + dom.querySelectorAll(".book_avatar img")[0].getAttribute("src");
     let creator = dom.querySelector(".profile a")?.innerText || 'Updating';
     let title = dom.querySelector('.name')?.innerText
 
@@ -50,7 +47,9 @@ export const getComicInfo = async (comicSLug: string): Promise<any> => {
         status: status,
         genres: tags,
         desc: decodeHTMLEntity(desc),
-        chapters: chapters
+        chapters: chapters,
+        source,
+        lastUpdate: detail.last_update
     }
 }
 

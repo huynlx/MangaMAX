@@ -4,7 +4,7 @@ import axios from "../axios"
 import decodeHTMLEntity from "../decodeHTML";
 import getQueryParams from "../useGetQueryParams";
 
-export const getComicInfo = async (comicSLug: string): Promise<any> => {
+export const getComicInfo = async (comicSLug: string, source: string): Promise<any> => {
     const html = (await axios.get(`story/view.php?id=${comicSLug}`)).data;
     const dom = parse(html);
     const cover = 'https://lxhentai.com' + dom.querySelector('.col-md-8 > .row > .col-md-4 > img')?.getAttribute('src');
@@ -24,7 +24,9 @@ export const getComicInfo = async (comicSLug: string): Promise<any> => {
             id: getQueryParams('id', chapter.querySelector('div.col-5 a')?.getAttribute('href')!),
             chap: useSlug(chapter.querySelector('div.col-5 a')?.innerText.trim()!),
             nameIndex: index[i] + 1
-        }))
+        })),
+        source,
+        lastUpdate: dom.querySelector("time.small")?.innerText.match(/\[Cập nhật lúc: (.*?)\]/)?.[1]
     }
 }
 

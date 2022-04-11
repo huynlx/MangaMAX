@@ -6,10 +6,11 @@ export interface ChaptersProps {
     view: string,
     id: string,
     chap: string,
+    source: string
 }
 
 export interface ComicProps {
-    slug: string,
+    slug: string | string[] | undefined,
     info: {
         title: string,
         cover: string,
@@ -17,7 +18,8 @@ export interface ComicProps {
         status: string,
         genres: string[],
         desc: string,
-        chapters: ChaptersProps[]
+        chapters: ChaptersProps[],
+        source: string
     }
 }
 
@@ -29,12 +31,12 @@ export interface SourceProps {
 }
 
 export interface NavigationProps {
-    cover: string,
     chapters: ChaptersProps[],
     chapterId: string,
     comicSlug: string,
     select: RootState,
-    select2: RootState
+    select2: RootState,
+    source: string
 }
 
 export interface GridProps {

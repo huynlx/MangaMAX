@@ -1,7 +1,7 @@
 import axios from "../axios";
 import { parse } from "node-html-parser";
 
-const getSearch = async (keyword: string, page: number = 1): Promise<any> => {
+const getSearch = async (sourceNum: string, keyword: string, page: number = 1): Promise<any> => {
     const sections = {
         "Tìm truyện tranh": `tim-kiem/trang-${page}.html?q=${encodeURI(keyword)}`
     }
@@ -25,7 +25,8 @@ const getSearch = async (keyword: string, page: number = 1): Promise<any> => {
                 ?.split("/")
                 .slice(-1)[0].replace('.html', ''),
             updateAt: item.querySelector(".time-ago")?.innerText,
-            hot: item.querySelector('.type-label.hot')?.innerText
+            hot: item.querySelector('.type-label.hot')?.innerText,
+            source: sourceNum
         }));
 
         const pages = [];
@@ -43,7 +44,7 @@ const getSearch = async (keyword: string, page: number = 1): Promise<any> => {
             nameAlt: 'Search results',
             items,
             hasNextPage,
-            currentPage
+            currentPage,
         };
     });
 

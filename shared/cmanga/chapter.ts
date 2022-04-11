@@ -2,7 +2,7 @@ import axios from "../axios";
 import { decrypt_data } from "./decrypt";
 import { titleCase } from "./titleCase";
 
-export const getChapter = async (comicSLug: any, chapterSLug: any, chapterId: any): Promise<any> => {
+export const getChapter = async (source: string, comicSLug: any, chapterSLug: any, chapterId: any): Promise<any> => {
     const links = [
         `api/chapter_content?opt1=${chapterId}`,
         `${comicSLug}`
@@ -40,6 +40,7 @@ export const getChapter = async (comicSLug: any, chapterSLug: any, chapterId: an
         chapterCurrent: chapter.chapter_name,
         updateAt: chapter.last_update,
         images: pages,
-        chapters: chapters
+        chapters: chapters,
+        source
     }
 }

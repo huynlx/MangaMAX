@@ -20,7 +20,7 @@ const getHome = async (page: number = 1, type: string, sourceNum: string, url: s
                 cover: item.querySelector("a > img")?.getAttribute("data-src"),
                 chapter: item.querySelector(".last_chapter a")?.innerText,
                 chapSlug: 'chap-' + item.querySelector(".last_chapter a")?.innerText.split(' ')[1],
-                chapId: item.querySelector(".last_chapter a")?.getAttribute('href')?.split('/').pop(),
+                chapId: item.querySelector(".last_chapter a")?.getAttribute('href')?.split('/').pop()?.match(/\d+/g)?.join(''),
                 slug: item
                     .querySelector("a")
                     ?.getAttribute("href")

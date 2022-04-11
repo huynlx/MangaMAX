@@ -16,7 +16,7 @@ const getHome = async (page: number = 1, type: string, sourceNum: string, url: s
         return htmls.map((html, index) => {
             const dom = parse(html);
 
-            const items = dom.querySelectorAll(".tab-content-wrap .c-tabs-item__content").map((item) => {
+            const items = dom.querySelectorAll(".tab-content-wrap .c-tabs-item__content").map((item, index) => {
                 const url = item.querySelector(".c-image-hover > a > img")?.getAttribute("data-src") ?? item.querySelector(".c-image-hover > a > img")?.getAttribute("src");
                 return ({
                     title: decodeHTMLEntity(item.querySelector(".post-title > h3 > a")?.innerText!),

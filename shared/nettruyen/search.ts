@@ -1,7 +1,7 @@
 import axios from "../axios";
 import { parse } from "node-html-parser";
 
-const getSearch = async (keyword: string, page: number = 1): Promise<any> => {
+const getSearch = async (sourceNum: string, keyword: string, page: number = 1): Promise<any> => {
     const sections = {
         "Tìm truyện tranh": `tim-truyen?keyword=${encodeURI(keyword)}&page=${page ? page : 1}`
     }
@@ -35,6 +35,7 @@ const getSearch = async (keyword: string, page: number = 1): Promise<any> => {
                     .slice(-1)[0],
                 updateAt: item.querySelector(".chapter i")?.innerText,
                 status: status,
+                source: sourceNum
             });
         });
 

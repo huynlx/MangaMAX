@@ -1,7 +1,7 @@
 import axios from "../axios";
 import { titleCase } from "./titleCase";
 
-const getSearch = async (keyword: string, page: number = 1, url: string): Promise<any> => {
+const getSearch = async (sourceNum: string, keyword: string, page: number = 1, url: string): Promise<any> => {
     const sections = {
         "Tìm truyện tranh": `api/search?opt1=${encodeURI(keyword)}`
     }
@@ -20,7 +20,8 @@ const getSearch = async (keyword: string, page: number = 1, url: string): Promis
             chapSlug: 'chapter-' + parseFloat(item.last_chapter),
             chapId: item.last_chapter_id,
             slug: item.url + '-' + item.id_book,
-            updateAt: item.last_update
+            updateAt: item.last_update,
+            source: sourceNum
         }));
 
         const hasNextPage = false;
@@ -31,7 +32,7 @@ const getSearch = async (keyword: string, page: number = 1, url: string): Promis
             nameAlt: 'Search results',
             items,
             hasNextPage,
-            currentPage
+            currentPage,
         };
     });
 

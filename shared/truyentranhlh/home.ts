@@ -1,5 +1,6 @@
 import instance from "../axios";
 import { parse } from "node-html-parser";
+import decodeHTMLEntity from "shared/decodeHTML";
 
 const getHome = async (page: number = 1, type: string, sourceNum: string, url: string): Promise<any> => {
     const handleSource = () => {
@@ -14,13 +15,16 @@ const getHome = async (page: number = 1, type: string, sourceNum: string, url: s
         return htmls.map((source, index) => {
             const dom = parse(source);
 
-            const items = dom.querySelectorAll(".col-md-8 > .card > .card-body > .row .thumb-item-flow").map((item) => {
+            const items = dom.querySelectorAll(".col-md-8 > .card > .card-body > .row .thumb-item-flow").map((item, index) => {
                 const cover = item.querySelector(".a6-ratio > div.img-in-ratio")?.getAttribute("data-bg");
 
                 return ({
-                    title: item.querySelector(".series-title > a")?.innerText,
-                    cover: cover,
-                    chapter: item.querySelector(".thumb-detail > div > a")?.innerText ?? '',
+                    title: decodeHTMLEntity(item.querySelector(".series-title > a")?.innerText),
+                    cover: `https://images.weserv.nl/?url=${cover}&w=250`,
+                    coverOrigin: cover,
+                    chapter: item.querySelector(".thumb-detail > div > a")?.innerText.split(":")[0].split('-')[0],
+                    chapSlug: item.querySelector(".thumb-detail > div > a")?.getAttribute('href')?.split('/').pop(),
+                    chapId: item.querySelector(".thumb-detail > div > a")?.getAttribute('href')?.split('/').pop()?.match(/\d+/g)?.join(''),
                     slug: item
                         .querySelector(".series-title > a")
                         ?.getAttribute("href")

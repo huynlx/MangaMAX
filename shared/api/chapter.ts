@@ -3,25 +3,27 @@ import { getChapter as lxhentai } from "../lxhentai/chapter";
 import { getChapter as cmanga } from "../cmanga/chapter";
 import { getChapter as hentaicube } from "../hentaicube/chapter";
 import { getChapter as truyen48 } from "../truyen48/chapter";
-import { store } from "../../store";
+import { getChapter as truyentranhlh } from "../truyentranhlh/chapter";
 
-export const getChapter = async (comicSLug: any, chapterSLug: any, chapterId: any): Promise<any> => {
-    const { reducer } = store.getState();
+export const getChapter = async (sourceObj: any, comicSLug: any, chapterSLug: any, chapterId: any): Promise<any> => {
+    const { source } = sourceObj;
 
-    switch (reducer.source) {
+    switch (source) {
         case '1':
-            return nettruyen(comicSLug, chapterSLug, chapterId); //nettruyen
+            return nettruyen(source, comicSLug, chapterSLug, chapterId); //nettruyen
         case '2':
-            return nettruyen(comicSLug, chapterSLug, chapterId); //nhattruyen
+            return nettruyen(source, comicSLug, chapterSLug, chapterId); //nhattruyen
         case '3':
-            return lxhentai(comicSLug, chapterSLug, chapterId); //lxhentai
+            return lxhentai(source, comicSLug, chapterSLug, chapterId); //lxhentai
         case '4':
-            return truyen48(comicSLug, chapterSLug, chapterId); //truyen48
+            return truyen48(source, comicSLug, chapterSLug, chapterId); //truyen48
+        case '5':
+            return truyentranhlh(source, comicSLug, chapterSLug, chapterId); //truyen48
         case '7':
-            return cmanga(comicSLug, chapterSLug, chapterId); //cmanga
+            return cmanga(source, comicSLug, chapterSLug, chapterId); //cmanga
         case '8':
-            return cmanga(comicSLug, chapterSLug, chapterId); //mangapk
+            return cmanga(source, comicSLug, chapterSLug, chapterId); //mangapk
         case '9':
-            return hentaicube(comicSLug, chapterSLug, chapterId); //hentaicube
+            return hentaicube(source, comicSLug, chapterSLug, chapterId); //hentaicube
     }
 }

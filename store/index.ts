@@ -17,15 +17,15 @@ export let defaultState = {
 const reducer = (state: any = defaultState, action: AnyAction) => {
     switch (action.type) {
         case HYDRATE:
-            const clientState = { ...state }; //state sau khi dispatch ở client, nếu ko thì luôn là defaultState
-            const serverState = { ...action.payload.reducer }; //action.payload => previous state => khi vào ssr thì phải dispatch thì mới có (dispatch ở server), còn nếu ko dispatch thì nó cũng lại là defaultState
+            const clientState = { ...state }; //state after dispatch on client, otherwise it's always defaultState
+            const serverState = { ...action.payload.reducer }; //action.payload => previous state => when go to ssr then must be dispatched it just has (dispatch on server), otherwise dispatch then it's also defaultState
 
-            const nextState = { ...clientState, ...serverState }; //state server ghi đè state client
+            const nextState = { ...clientState, ...serverState }; //state server overwrite state client
 
-            return nextState; //đây là state đồng bộ cho cả server và client (là initialState nằm trong response của request) (dispatch ở server thì mới đồng bộ đc còn dispatch ở client thì đéo)
+            return nextState; //this is state that synced for either server and client (initialState in response of request) (only dispatch on server then can it be synchronized, but dispatch on client then can't)
         case handleTypes.SOURCE:
 
-            return { ...state, ...action.payload }; //=> previous state sau khi dispatch ở ssr (dispatch ở server)
+            return { ...state, ...action.payload }; //=> previous state after dispatch in ssr (dispatch on server)
         default:
 
             return state;

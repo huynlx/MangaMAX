@@ -1,28 +1,32 @@
-import { store } from "../../store";
 import { getComicInfo as nettruyen } from "../nettruyen/comic";
+import { getComicInfo as nhattruyen } from "../nettruyen/comic";
 import { getComicInfo as lxhentai } from "../lxhentai/comic";
 import { getComicInfo as cmanga } from "../cmanga/comic";
+import { getComicInfo as mangapk } from "../cmanga/comic";
 import { getComicInfo as hentaicube } from "../hentaicube/comic";
 import { getComicInfo as truyen48 } from "../truyen48/comic";
+import { getComicInfo as truyentranhlh } from "../truyentranhlh/comic";
 
-export const getComicInfo = async (comicSLug: string): Promise<any> => {
-    const { reducer } = store.getState();
+export const getComicInfo = async (sourceObj: any, comicSLug: string): Promise<any> => {
+    const { url, source } = sourceObj;
 
-    switch (reducer.source) {
+    switch (source) {
         case '1':
-            return nettruyen(comicSLug); //nettruyen
+            return nettruyen(comicSLug, source);
         case '2':
-            return nettruyen(comicSLug); //nhattruyen
+            return nhattruyen(comicSLug, source);
         case '3':
-            return lxhentai(comicSLug); //lxhentai
+            return lxhentai(comicSLug, source);
         case '4':
-            return truyen48(comicSLug); //lxhentai
+            return truyen48(comicSLug, source);
+        case '5':
+            return truyentranhlh(comicSLug, source);
         case '7':
-            return cmanga(comicSLug); //cmanga
+            return cmanga(comicSLug, url, source);
         case '8':
-            return cmanga(comicSLug); //mangapk
+            return mangapk(comicSLug, url, source);
         case '9':
-            return hentaicube(comicSLug); //hentaicube
+            return hentaicube(comicSLug, source);
     }
 }
 

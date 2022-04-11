@@ -21,3 +21,15 @@ export const getSearch = async ({ source, page, keyword }: any): Promise<any> =>
         }
     }
 }
+
+export const getComic = async ({ source, slug }: any): Promise<any> => {
+    const { data } = await axios.get(`/api/comic?source=${source}&slug=${slug}`);
+
+    return data;
+}
+
+export const getChapter = async ({ source, slug, chapter, id }: any): Promise<any> => {
+    const { data } = await axios.get(`/api/chapter?source=${source}&slug=${slug}&chapSlug=${chapter}&id=${id}`);
+
+    return data;
+}

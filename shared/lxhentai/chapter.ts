@@ -2,7 +2,7 @@ import { parse } from "node-html-parser";
 import useSlug from "shared/useSlug";
 import axios from "../axios";
 
-export const getChapter = async (comicSLug: any, chapterSLug: any, chapterId: any): Promise<any> => {
+export const getChapter = async (source: string, comicSLug: any, chapterSLug: any, chapterId: any): Promise<any> => {
     const links = [
         `story/chapter.php?id=${chapterId}`
     ];
@@ -23,6 +23,7 @@ export const getChapter = async (comicSLug: any, chapterSLug: any, chapterId: an
             name: option.innerText,
             id: option.getAttribute("value"),
             chap: useSlug(option.innerText)
-        }))
+        })),
+        source
     }
 }

@@ -1,13 +1,12 @@
 import Link from 'next/link';
-import React, { FC, useEffect, useState } from 'react';
+import { FC, useState } from 'react';
 import { FaChevronRight } from 'react-icons/fa';
 import ReadImage from './ReadImage';
 import { FaRegHeart } from 'react-icons/fa';
 import { BsSuitHeartFill } from 'react-icons/bs';
 import FollowIcon from 'components/Icon';
-import { recents } from 'store/action';
 import { mangaObj, regexMatchMultiString } from 'constants/index';
-import { useAppDispatch, useAppSelector } from "hooks/useRedux";
+import { useAppSelector } from "hooks/useRedux";
 import { useBookmarks } from 'hooks/useBookmarks';
 import OverlayImage from 'components/OverlayImage';
 import Modal from 'components/Modal';
@@ -27,7 +26,6 @@ const LeftComic: FC<any> = ({ info, select, slug }) => {
     const [showModal, setShowModal] = useState<boolean>(false);
     const manga = mangaObj(info, slug, select, 'bookmarks');
     const follow = bookmarks.some((item: mangaProps) => item.url === manga.url);
-    const dispatch = useAppDispatch();
     const { addFollow, removeFollow } = useBookmarks(info, slug);
 
     const handleShow = () => {
@@ -37,10 +35,6 @@ const LeftComic: FC<any> = ({ info, select, slug }) => {
     const handleHide = () => {
         setShowModal(false);
     }
-
-    useEffect(() => {
-        dispatch(recents(mangaObj(info, slug, select, 'recents')));
-    }, [])
 
     return (
         <div className='lg:w-[59vw] lg:pr-4 max-h-[none] lg:max-h-[100vh] overflow-auto'>
@@ -60,8 +54,8 @@ const LeftComic: FC<any> = ({ info, select, slug }) => {
                 </div>
                 <Modal isOpen={showModal} onClose={handleHide} className='bg-root bg-opacity-[.95]'>
                     <img
-                        className='fixed top-2/4 left-2/4 transform -translate-x-2/4 -translate-y-2/4 h-[80%] z-50 object-contain'
-                        src={info.cover}
+                        className='fixed top-2/4 left-2/4 transform -translate-x-2/4 -translate-y-2/4 min-h-[60%] max-h-[100%] z-50 object-contain'
+                        src={info.coverOrigin ?? info.cover}
                         alt="Modal Image"
                         onError={(e) => e.currentTarget.src = '/_next/image?url=/onError.png&w=720&q=75'}
                     />
@@ -70,7 +64,8 @@ const LeftComic: FC<any> = ({ info, select, slug }) => {
                     <h1 className='font-semibold text-2xl lg:text-3xl text-white text-center sm:text-left'>{info.title}</h1>
                     <p className='text-white text-base font-semibold'>Author: <span className='text-gray-300'>{info.author}</span></p>
                     <p className='text-white text-base font-semibold'>Status: <span className='text-green-400'>{info.status}</span></p>
-                    <p className='text-white text-base font-semibold'>Server: <span className='text-white'>{select.source}</span></p>
+                    <p className='text-white text-base font-semibold'>Last Updated: <span className='text-gray-300'>{info.lastUpdate}</span></p>
+                    <p className='text-white text-base font-semibold'>Server: <span className='text-white'>{info.source}</span></p>
                     <FollowIcon
                         iconSize={30}
                         iconClassName='text-red-400 md:hover:scale-125 transition hidden lg:block'
@@ -81,19 +76,17 @@ const LeftComic: FC<any> = ({ info, select, slug }) => {
                     {/* <p>Thể loại: {info.genres.join(", ")}</p> */}
                     {info.chapters.length > 0 && <div className='my-2 flex items-center'>
                         <Link
-                            as={`/manga/${slug}/${info.chapters.slice(-1)[0].chap}`}
                             href={{
                                 pathname: `/manga/${slug}/${info.chapters.slice(-1)[0].chap}`,
-                                query: { id: info.chapters.slice(-1)[0].id, source: select.source, type: select.type, cover: info.cover },
+                                query: { id: info.chapters.slice(-1)[0].id, source: info.source },
                             }}
                         >
-                            <a className='text-white mr-4 bg-[#2675f4] pr-2 py-1 pl-4 rounded-full text-xl font-bold'  style={{backgroundImage:'linear-gradient(315deg, #09c6f9 0%, #2675f4 74%)'}}>READ <FaChevronRight className='inline mb-[0.3rem]' /></a>
+                            <a className='text-white mr-4 bg-[#2675f4] pr-2 py-1 pl-4 rounded-full text-xl font-bold' style={{ backgroundImage: 'linear-gradient(315deg, #09c6f9 0%, #2675f4 74%)' }}>READ <FaChevronRight className='inline mb-[0.3rem]' /></a>
                         </Link>
                         <Link
-                            as={`/manga/${slug}/${info.chapters[0].chap}`}
                             href={{
                                 pathname: `/manga/${slug}/${info.chapters[0].chap}`,
-                                query: { id: info.chapters[0].id, source: select.source, type: select.type, cover: info.cover },
+                                query: { id: info.chapters[0].id, source: info.source },
                             }}
                         >
                             <a className='text-white text-xl bg-yellow-500/[.8] h-[42px] min-w-[42px] px-2 flex items-center justify-center rounded-full hover:bg-yellow-500 duration-300 font-bold'>{info.chapters[0].nameIndex}</a>
