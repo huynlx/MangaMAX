@@ -1,5 +1,7 @@
+const withPWA = require("next-pwa");
+
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+const nextConfig = withPWA({
   reactStrictMode: true,
   images: {
     domains: [
@@ -13,7 +15,14 @@ const nextConfig = {
       'truyentranhlh.net'
     ],
     deviceSizes: [230, 300, 480, 720, 1280, 1920, 3840]
-  }
-}
+  },
+  pwa: {
+    dest: "public",
+    register: true,
+    skipWaiting: true,
+    disable: process.env.NODE_ENV === "development",
+    mode: 'production'
+  },
+})
 
 module.exports = nextConfig
