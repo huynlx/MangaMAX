@@ -4,9 +4,11 @@ import { IoListSharp } from 'react-icons/io5';
 import RightSideBar from '@/components/RightSideBar';
 import OverlayModal from '@/components/OverlayModal';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
+import { useAppSelector } from '@/hooks/useRedux';
 
-const SideBar: FC<{ className: string, id1: string, id2: string, user: any }> = ({ className, id1, id2, user }) => {
+const SideBar: FC<{ className: string, id1: string, id2: string }> = ({ className, id1, id2 }) => {
     const matches = useMediaQuery('(min-width: 1024px)');
+
     const [overlay, setOverlay] = useState<any>({
         left: {
             status: false,
@@ -77,7 +79,6 @@ const SideBar: FC<{ className: string, id1: string, id2: string, user: any }> = 
             <RightSideBar
                 id={id2}
                 closeNav={closeRightNav}
-                user={user}
             />
 
             <span
@@ -85,7 +86,7 @@ const SideBar: FC<{ className: string, id1: string, id2: string, user: any }> = 
                 onClick={overlay.left.status ? closeLeftNav : openLeftNav}
             >
                 <span data-v-6b3fd699="" className="hidden lg:flex pointer-events-none items-center justify-center font-medium select-none">
-                    <svg data-v-20f285ec="" data-v-6b3fd699="" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-7 h-7">
+                    <svg data-v-20f285ec="" data-v-6b3fd699="" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6">
                         <path data-v-20f285ec="" d="M3 12h12M3 6h18M3 18h6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                 </span>

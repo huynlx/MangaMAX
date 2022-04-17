@@ -15,25 +15,25 @@ export const checkPathname = (pathname: string): boolean => {
 
 const Navbar = ({ scroll }: { scroll: boolean }) => {
     const direction = useScroll();
-    const { reducer4: { user }, reducer: select, reducer3 } = useAppSelector((state) => state);
+    const { reducer: select } = useAppSelector((state) => state);
     const [isActive, setIsActive] = useState(false);
     const router = useRouter();
     const { pathname } = router;
     const checkScroll: boolean = scroll && checkPathname(pathname);
 
     return (
-        <div id='navbar' className={`${isActive ? 'h-[6.4rem]' : 'h-[3.4rem]'} lg:h-14 justify-evenly gap-0 bg-primary flex flex-col lg:flex-row lg:justify-between items-stretch lg:items-center px-[2vw] lg:px-x ${(!router.pathname.includes('chap') && direction === 'up') ? 'sticky top-0 z-20' : 'relative'}`}>
+        <div id='navbar' className={`${isActive ? 'h-[6.4rem]' : 'h-[3.4rem]'} lg:h-14 justify-evenly gap-0 bg-primary flex flex-col lg:flex-row lg:justify-between items-stretch lg:items-center px-[2vw] lg:px-x ${(!router.pathname.includes('chap') && direction === 'up') ? 'sticky top-0 z-20' : 'relative'} ${checkScroll && '!bg-accent !bg-opacity-[.97]'}`}>
             <div className='flex items-center justify-between'>
-                <LinkCheck select={select} reducer3={reducer3}>
-                    <a id='logo1' className={`items-center ml-[50px] hidden lg:flex justify-start gap-3 ${checkPathname(pathname) && 'pointer-events-none'}`}>
-                        <img src={`/_next/image?url=/favicon.ico&w=300&q=100`} width={40} height={40} alt="Logo" />
-                        <h1 className="text-2xl font-bold text-white">
-                            <span className="text-logo font-bold borderText">Manga</span>Max
+                <LinkCheck>
+                    <a id='logo1' className={`items-center ml-[50px] hidden lg:flex justify-start gap-3`}>
+                        <img src={`/_next/image?url=/favicon.ico&w=300&q=100`} width={41} height={41} alt="Logo" />
+                        <h1 className="text-xl text-white transition flex-col flex">
+                            <span className='font-bold leading-6'>Manga Max</span>
+                            <small className='text-gray-400 leading-6'>free manga online</small>
                         </h1>
                     </a>
                 </LinkCheck>
                 <SideBar
-                    user={user}
                     className='block lg:hidden'
                     id1='leftNav'
                     id2='rightNav'
@@ -45,21 +45,19 @@ const Navbar = ({ scroll }: { scroll: boolean }) => {
                         </svg>
                     }
                 </button>
-                <Dropdown className='block lg:hidden' user={user} dataId='rightNav' />
+                <Dropdown className='block lg:hidden' dataId='rightNav' />
             </div>
             {
                 checkScroll && <h1 className='font-semibold text-white text-xl lg:text-2xl top-[12px] lg:top-[10px] absolute left-2/4 transform -translate-x-2/4'>{titleCase(select.type)}</h1>
             }
             <SideBar
-                user={user}
                 className='hidden lg:block'
                 id1='leftNav2'
                 id2='rightNav2'
             />
-            <Input isActive={isActive} />
+            <Input isActive={isActive} checkScroll={checkScroll} />
             <Dropdown
                 className='hidden lg:block'
-                user={user}
                 dataId='rightNav'
             />
         </div >

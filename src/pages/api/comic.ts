@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import instance from '../../shared/axios';
+import instance from '@/utils/axios';
 import { SOURCES } from '@/constants/index';
 import { getComicInfo } from '@/shared/api/comic';
 

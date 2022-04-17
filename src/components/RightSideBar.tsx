@@ -1,15 +1,18 @@
 import { FC } from 'react';
-import { SidebarProps } from '@/shared/types';
+import { SidebarProps } from '@/types';
 import Link from 'next/link';
 import { usePosition } from '@/hooks/usePosition';
-import { logout } from '@/shared/firebase';
+import { useAppSelector, useAppDispatch } from '@/hooks/useRedux';
+import { handleLogout } from '@/store/action';
 
-const RightSideBar: FC<SidebarProps> = ({ id, closeNav, user }) => {
+const RightSideBar: FC<SidebarProps> = ({ id, closeNav }) => {
   const { handlePosition } = usePosition();
+  const { reducer4: { user } } = useAppSelector(state => state);
+  const dispatch = useAppDispatch();
 
   return (
     <div id={id} className='sidenav z-20 w-[270px] p-6 bg-[#191a1c] -right-[270px] pt-[60px]'>
-      <p className="lg:!hidden closebtn" onClick={closeNav}>×</p>
+      <p className="closebtn text-white" onClick={closeNav}>×</p>
 
       {!user ? (
         <>
@@ -75,7 +78,7 @@ const RightSideBar: FC<SidebarProps> = ({ id, closeNav, user }) => {
 
           <hr className='my-3 w-full' />
 
-          <span onClick={logout} className='text-start w-full flex space-x-2 text-white text-[17px]'>
+          <span onClick={() => dispatch(handleLogout())} className='text-start w-full flex space-x-2 text-white text-[17px]'>
             <svg data-v-20f285ec data-v-6bf95648 width={24} height={24} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="mr-1 text-icon-black dark:text-icon-white text-false icon"><path data-v-20f285ec d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" /></svg>
             <span className='font-semibold'>Sign Out</span>
           </span>

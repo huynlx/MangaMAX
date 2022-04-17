@@ -1,11 +1,11 @@
-import { getComicInfo as nettruyen } from "../nettruyen/comic";
-import { getComicInfo as nhattruyen } from "../nettruyen/comic";
-import { getComicInfo as lxhentai } from "../lxhentai/comic";
-import { getComicInfo as cmanga } from "../cmanga/comic";
-import { getComicInfo as mangapk } from "../cmanga/comic";
-import { getComicInfo as hentaicube } from "../hentaicube/comic";
-import { getComicInfo as truyen48 } from "../truyen48/comic";
-import { getComicInfo as truyentranhlh } from "../truyentranhlh/comic";
+import { getComicInfo as nettruyen } from "@/shared/nettruyen/comic";
+import { getComicInfo as nhattruyen } from "@/shared/nettruyen/comic";
+import { getComicInfo as lxhentai } from "@/shared/lxhentai/comic";
+import { getComicInfo as cmanga } from "@/shared/cmanga/comic";
+import { getComicInfo as mangapk } from "@/shared/cmanga/comic";
+import { getComicInfo as hentaicube } from "@/shared/hentaicube/comic";
+import { getComicInfo as truyen48 } from "@/shared/truyen48/comic";
+import { getComicInfo as truyentranhlh } from "@/shared/truyentranhlh/comic";
 
 export const getComicInfo = async (sourceObj: any, comicSLug: string): Promise<any> => {
     const { url, source } = sourceObj;
@@ -27,6 +27,8 @@ export const getComicInfo = async (sourceObj: any, comicSLug: string): Promise<a
             return mangapk(comicSLug, url, source);
         case '9':
             return hentaicube(comicSLug, source);
+        case '10':
+            return truyen48(comicSLug, source);
     }
 }
 

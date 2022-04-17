@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import { logInWithEmailAndPassword, signInWithFacebook, signInWithGoogle } from "@/shared/firebase";
+import { logInWithEmailAndPassword, signInWithFacebook, signInWithGoogle } from "@/utils/firebase";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";

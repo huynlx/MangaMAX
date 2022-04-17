@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ComicProps } from '@/shared/types';
+import { ComicProps } from '@/types';
 import { RiSortDesc } from 'react-icons/ri';
 import LeftComic from '@/components/LeftComic';
 import RightComic from '@/components/RightComic';
@@ -30,7 +30,7 @@ const Info = ({ info, slug }: ComicProps) => {
         <>
             <Head title={info.title} />
             <div className='px-[2vw] lg:px-x lg:h-[92.5vh] pt-10 pb-3 flex flex-col lg:flex-row relative lg:max-h-[100vh] overflow-hidden gap-3'>
-                <LinkCheck select={select} reducer3={reducer3}>
+                <LinkCheck>
                     <h1
                         title='Go Back'
                         className='absolute top-[4px] text-xl font-semibold -ml-[0.3rem] text-white'>
@@ -38,11 +38,7 @@ const Info = ({ info, slug }: ComicProps) => {
                     </h1>
                 </LinkCheck>
                 {/* Left Side */}
-                <LeftComic
-                    info={info}
-                    select={select}
-                    slug={slug}
-                />
+                <LeftComic info={info} slug={slug} />
                 {/* Right Side Mobile */}
                 <div className='lg:hidden font-bold text-xl flex justify-between items-end'>
                     Chapters
@@ -57,9 +53,7 @@ const Info = ({ info, slug }: ComicProps) => {
                     dt={dt}
                     handleSort={handleSort}
                     slug={slug}
-                    select={select}
                     handleChapter={handleChapter}
-                    reducer3={reducer3}
                     source={info.source}
                 />
             </div >

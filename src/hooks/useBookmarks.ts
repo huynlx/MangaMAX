@@ -3,7 +3,7 @@ import { doc, DocumentData, DocumentReference, updateDoc } from "firebase/firest
 import { useCallback, useEffect, useRef } from "react";
 import { useAppDispatch, useAppSelector } from "./useRedux";
 import { bookmarks as setBookmarks } from '@/store/action';
-import { db } from "@/shared/firebase";
+import { db } from "@/utils/firebase";
 import { mangaObj } from "@/constants/index";
 
 export const useBookmarks = (info: any, slug: string) => {

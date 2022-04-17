@@ -1,8 +1,10 @@
 import { useInfiniteQuery } from 'react-query';
-import { getHome } from './fetch';
+import Fetch from '@/hooks/fetch';
 
 const useFetchHome = (props: any) => {
-    const fetchList = ({ pageParam = 1 }) => getHome({ ...props, page: pageParam });
+    const fetch = new Fetch(props);
+
+    const fetchList = ({ pageParam = 1 }) => fetch.getHome({ ...props, page: pageParam });
 
     return useInfiniteQuery(["home", props], fetchList, { //props trên này là props truyền vào
         getNextPageParam: ({ hasNextPage, currentPage }) => { //props dưới này là dữ liệu trả về

@@ -1,6 +1,6 @@
 import { parse } from "node-html-parser";
-import useSlug from "@/shared/useSlug";
-import axios from "../axios";
+import useSlug from "@/utils/setSlug";
+import axios from "@/utils/axios";
 
 export const getChapter = async (source: string, comicSLug: any, chapterSLug: any, chapterId: any): Promise<any> => {
     const links = [

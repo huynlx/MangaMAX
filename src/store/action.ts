@@ -1,5 +1,7 @@
 import { SOURCES } from "@/constants/index";
-import axios from "@/shared/axios";
+import axios from "@/utils/axios";
+import { logout } from "@/utils/firebase";
+import { AppDispatch } from '@/store';
 
 interface LooseObject {
     [key: string]: any
@@ -11,10 +13,14 @@ export const handleTypes = {
     SCROLL: 'SCROLL_POSITION',
     RECENTS: 'RECENTS',
     USER: 'USER',
-    BOOKMARKS: 'BOOKMARKS'
+    BOOKMARKS: 'BOOKMARKS',
+    LOADING: "LOADING",
+    LAYOUT: "LAYOUT",
+    DEL_RECENTS: 'DEL_RECENTS',
+    DEL_BOOKMARKS: 'DEL_BOOKMARKS'
 }
 
-export const handleSource = (source: string | string[] | undefined, type: string | string[] | undefined, store?: any) => (dispatch: any) => {
+export const handleSource = (source: string | string[] | undefined, type: string | string[] | undefined, store?: any) => (dispatch: AppDispatch) => {
     // console.log('2. Page.getServerSideProps uses the store to dispatch things');
     const sourceData = SOURCES.find(item => item.source == source);
 
@@ -30,12 +36,10 @@ export const handleSource = (source: string | string[] | undefined, type: string
     }
 }
 
-export const windowResize = (size: number) => (dispatch: any) => {
-    dispatch({
-        type: handleTypes.WINDOW_RESIZE,
-        payload: { windowSize: size }
-    });
-};
+export const windowResize = (size: number) => ({
+    type: handleTypes.WINDOW_RESIZE,
+    payload: { windowSize: size }
+});
 
 export const setScroll = (position?: number | null, keyword?: string | null, indexChapters?: boolean | null) => (dispatch: any) => {
     let payload: LooseObject = {};
@@ -50,23 +54,36 @@ export const setScroll = (position?: number | null, keyword?: string | null, ind
     });
 };
 
-export const recents = (data: any) => (dispatch: any) => {
-    dispatch({
-        type: handleTypes.RECENTS,
-        payload: { recents: [data] }
-    });
+export const recents = (data: any) => ({
+    type: handleTypes.RECENTS,
+    payload: { recents: [data] }
+});
+
+export const user = (data: any) => ({
+    type: handleTypes.USER,
+    user: data
+});
+
+export const bookmarks = (data: any) => ({
+    type: handleTypes.BOOKMARKS,
+    bookmarks: data
+});
+
+export const layout = (option: number) => ({
+    type: handleTypes.LAYOUT,
+    layout: option
+});
+
+export const handleLogout = () => (dispatch: AppDispatch) => {
+    dispatch(user(null));
+    dispatch(bookmarks([]));
+    logout();
 };
 
-export const user = (data: any) => (dispatch: any) => {
-    dispatch({
-        type: handleTypes.USER,
-        user: data
-    });
-};
+export const del_recents = () => ({
+    type: handleTypes.DEL_RECENTS
+});
 
-export const bookmarks = (data: any) => (dispatch: any) => {
-    dispatch({
-        type: handleTypes.BOOKMARKS,
-        bookmarks: data
-    });
-};
+export const del_bookmarks = () => ({
+    type: handleTypes.DEL_BOOKMARKS
+});

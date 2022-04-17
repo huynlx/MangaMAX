@@ -1,8 +1,10 @@
-import { getComic } from "@/hooks/fetch";
+import Fetch from '@/hooks/fetch';
 import { useQuery } from "react-query";
 
 const useFetchComic = (slug: any, source: any) => {
-  return useQuery(["comic", slug], () => getComic({ source: source, slug: slug }));
+  const fetch = new Fetch({ source: source });
+
+  return useQuery(["comic", slug], () => fetch.getComic({ source: source, slug: slug }));
 }
 
 export default useFetchComic;

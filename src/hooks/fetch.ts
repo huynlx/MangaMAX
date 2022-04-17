@@ -1,35 +1,51 @@
 import axios from "axios";
 
-export const getHome = async ({ source, type, page }: any): Promise<any> => {
-    const { data } = await axios.get(`/api/home?source=${source}&type=${type}&page=${page}`);
+type IProps = {
+    source?: string;
+    type?: string;
+};
+class Fetch {
+    source?: string;
+    type?: string;
 
-    return data[0];
-}
+    constructor(select: IProps) {
+        this.source = select.source;
+        this.type = select.type;
+    }
 
-export const getSearch = async ({ source, page, keyword }: any): Promise<any> => {
-    try {
-        const { data } = await axios.get(`/api/search?source=${source}&keyword=${keyword}&page=${page}`);
+    getHome = async ({ page }: any): Promise<any> => {
+        const { data } = await axios.get(`/api/home?source=${this.source}&type=${this.type}&page=${page}`);
 
         return data[0];
-    } catch (error) {
-        return {
-            hasNextPage: false,
-            name: 'Search',
-            nameAlt: 'Search results',
-            items: [],
-            currentPage: null
+    }
+
+    getSearch = async ({ page, keyword }: any): Promise<any> => {
+        try {
+            const { data } = await axios.get(`/api/search?source=${this.source}&keyword=${keyword}&page=${page}`);
+
+            return data[0];
+        } catch (error) {
+            return {
+                hasNextPage: false,
+                name: 'Search',
+                nameAlt: 'Search results',
+                items: [],
+                currentPage: null
+            }
         }
+    }
+
+    getComic = async ({ slug }: any): Promise<any> => {
+        const { data } = await axios.get(`/api/comic?source=${this.source}&slug=${slug}`);
+
+        return data;
+    }
+
+    getChapter = async ({ slug, chapter, id }: any): Promise<any> => {
+        const { data } = await axios.get(`/api/chapter?source=${this.source}&slug=${slug}&chapSlug=${chapter}&id=${id}`);
+
+        return data;
     }
 }
 
-export const getComic = async ({ source, slug }: any): Promise<any> => {
-    const { data } = await axios.get(`/api/comic?source=${source}&slug=${slug}`);
-
-    return data;
-}
-
-export const getChapter = async ({ source, slug, chapter, id }: any): Promise<any> => {
-    const { data } = await axios.get(`/api/chapter?source=${source}&slug=${slug}&chapSlug=${chapter}&id=${id}`);
-
-    return data;
-}
+export default Fetch;

@@ -13,10 +13,9 @@ interface ReadImageProps {
 }
 
 const ReadImage: React.FC<ReadImageProps> = ({ src, opacity, icon: Icon, alt, ...props }) => {
-    const { loaded, loadImage, toggleloaded } = useImage(src);
+    const { loaded, loadImage } = useImage(src);
 
     useEffect(() => {
-        toggleloaded(false);
         loadImage();
     }, [src])
 
@@ -27,7 +26,9 @@ const ReadImage: React.FC<ReadImageProps> = ({ src, opacity, icon: Icon, alt, ..
                     {
                         Icon && <Icon className={`${props.className3}`} />
                     }
-                    <p className={`animate-pulse mt-1 ${!props.textIcon && 'hidden'}`}>{props.textIcon}</p>
+                    {
+                        props.textIcon && <p className={`animate-pulse mt-1`}>{props.textIcon}</p>
+                    }
                 </div>
             }
             <img

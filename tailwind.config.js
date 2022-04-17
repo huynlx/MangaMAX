@@ -46,7 +46,8 @@ module.exports = {
         'x': "var(--padding-x)"
       },
       gridTemplateColumns: {
-        chapter: "repeat(auto-fill, minmax(60px, 1fr))"
+        chapter: "repeat(auto-fill, minmax(60px, 1fr))",
+        comic: 'repeat(auto-fill, minmax(135px, 1fr));'
       },
       borderRadius: {
         '4': '4px'
@@ -54,6 +55,6 @@ module.exports = {
     }
   },
   plugins: [
-    require('@tailwindcss/line-clamp'),
+    require('@tailwindcss/line-clamp')
   ]
 };

@@ -1,6 +1,6 @@
 import { parse } from "node-html-parser";
-import decodeHTMLEntity from "@/shared/decodeHTML";
-import axios from "../axios"
+import decodeHTMLEntity from "@/utils/decodeHTML";
+import axios from "@/utils/axios"
 
 export const getComicInfo = async (comicSLug: string, source: string): Promise<any> => {
   const html = (await axios.get(`truyen-tranh/${comicSLug}`)).data;
@@ -34,7 +34,7 @@ export const getComicInfo = async (comicSLug: string, source: string): Promise<a
 
   return {
     title: decodeHTMLEntity(dom.querySelector('.series-name > a')?.innerText),
-    cover: `https://images.weserv.nl/?url=${cover}&w=250`,
+    cover,
     coverOrigin: cover,
     author,
     status,

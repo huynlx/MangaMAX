@@ -1,8 +1,8 @@
-import axios from "../axios";
+import axios from "@/utils/axios";
 import { parse } from "node-html-parser";
-import getQueryParams from "../useGetQueryParams";
-import decodeHTMLEntity from "../decodeHTML";
-import useSlug from "@/shared/useSlug";
+import getQueryParams from "@/utils/getQueryParams";
+import decodeHTMLEntity from "@/utils/decodeHTML";
+import useSlug from "@/utils/setSlug";
 
 const getSearch = async (sourceNum: string, keyword: string, page: number = 1, url: string): Promise<any> => {
 

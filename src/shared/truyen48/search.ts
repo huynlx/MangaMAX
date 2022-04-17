@@ -1,4 +1,4 @@
-import axios from "../axios";
+import axios from "@/utils/axios";
 import { parse } from "node-html-parser";
 
 const getSearch = async (sourceNum: string, keyword: string, page: number = 1): Promise<any> => {

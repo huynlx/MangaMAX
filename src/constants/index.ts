@@ -77,6 +77,14 @@ export const SOURCES = [
         type: 'latest',
         server: 'hentaicube',
         adult: true
+    },
+    {
+        source: '10',
+        name: 'Server 10',
+        url: 'http://truyenqqpro.com/',
+        type: 'latest',
+        server: 'truyenqq',
+        adult: false
     }
 ]
 

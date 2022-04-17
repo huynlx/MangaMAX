@@ -1,9 +1,9 @@
-import nettruyen from '../nettruyen/search';
-import lxhentai from '../lxhentai/search';
-import cmanga from '../cmanga/search';
-import hentaicube from '../hentaicube/search';
-import truyen48 from '../truyen48/search';
-import truyentranhlh from '../truyentranhlh/search';
+import nettruyen from '@/shared/nettruyen/search';
+import lxhentai from '@/shared/lxhentai/search';
+import cmanga from '@/shared/cmanga/search';
+import hentaicube from '@/shared/hentaicube/search';
+import truyen48 from '@/shared/truyen48/search';
+import truyentranhlh from '@/shared/truyentranhlh/search';
 
 const getSearch = async (page: number = 1, source: string, url: string, keyword: string): Promise<any> => {
 
@@ -24,6 +24,8 @@ const getSearch = async (page: number = 1, source: string, url: string, keyword:
             return cmanga(source, keyword, page, url); //mangapk
         case '9':
             return hentaicube(source, keyword, page); //hentaicube
+        case '10':
+            return truyen48(source, keyword, page); //truyenqq
     }
 };
 

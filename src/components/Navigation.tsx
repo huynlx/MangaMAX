@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useCallback, useEffect } from 'react';
 import Link from 'next/link';
-import { NavigationProps } from '../shared/types';
+import { NavigationProps } from '@/types';
 import LinkCheck from './LinkCheck';
 import { FaChevronLeft, FaChevronRight, FaHome, FaList } from 'react-icons/fa';
 import { useScroll } from '@/hooks/useScroll';
@@ -53,7 +53,7 @@ const Navigation = ({ chapters, chapterId, comicSlug, select, select2, source }:
 
     return (
         <div className={`z-10 overflow-x-hidden flex items-center gap-1 w-full justify-center bg-primary ${direction === 'up' && 'sticky top-0'}`}>
-            <LinkCheck select={select} reducer3={select2}>
+            <LinkCheck>
                 <a><FaHome className='mr-2 hover:text-white transition' size={30} title='Home' /></a>
             </LinkCheck>
             <Link href={`/manga/${router.query.slug}?source=${source}`}>

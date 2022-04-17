@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import getHome from '../../shared/api/home';
-import instance from '../../shared/axios';
+import getHome from '@/shared/api/home';
+import instance from '@/utils/axios';
 import { SOURCES } from '@/constants/index';
 
 export default async function handler(

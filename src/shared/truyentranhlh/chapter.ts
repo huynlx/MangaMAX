@@ -1,6 +1,6 @@
 import { parse } from "node-html-parser";
-import decodeHTMLEntity from "@/shared/decodeHTML";
-import axios from "../axios";
+import decodeHTMLEntity from "@/utils/decodeHTML";
+import axios from "@/utils/axios";
 
 export const getChapter = async (source: string, comicSLug: any, chapterSLug: any, chapterId: any): Promise<any> => {
   const links = [

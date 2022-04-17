@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { setData } from '../shared/useSetData';
-import { setCol } from '../shared/useSetData';
-import Loader from '../components/Loader';
-import ColumnRender from './ColumnRender';
+import React, { useEffect, useMemo, useState } from 'react';
+import { setData } from '@/utils/setData';
+import { setCol } from '@/utils/setData';
+import Loader from '@/components/Loader';
+import ColumnRender from '@/components/ColumnRender';
 import dynamic from 'next/dynamic';
 const LoadMore = dynamic(() => import('./LoadMore'));
 import { User } from 'firebase/auth';
 import { useAppSelector } from '@/hooks/useRedux';
 import { usePosition } from '@/hooks/usePosition';
+import ComicCard from '@/components/ComicCard';
 
 interface GridProps {
     keyword?: string,
@@ -19,11 +20,15 @@ interface GridProps {
 const Grid: React.FC<GridProps> = ({ keyword, fetch, typeRender: TypeRender, user }) => {
     const [cols, setCols] = useState(8);
     const [page, setPage] = useState<number>(1);
-    const { reducer2: { windowSize }, reducer3, reducer: select } = useAppSelector(state => state);
+    const { reducer2: { windowSize }, reducer3, reducer: select, reducer4: { layout } } = useAppSelector(state => state);
     const { handleScrollTo } = usePosition();
     const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } = fetch!({ source: select.source, type: select.type, keyword: keyword, user: user });
-    const list = data?.pages.map((list: any) => list.items).flat(); //gộp nhiều mảng page thành 1 mảng duy nhất
-    const content = setData(cols, list ? list : []);
+    const list = useMemo(() => {
+        return data?.pages.map((list: any) => list.items).flat();
+    }, [data]); //gộp nhiều mảng page thành 1 mảng duy nhất
+    const content = useMemo(() => {
+        return setData(cols, list ? list : [])
+    }, [cols, list]);
 
     useEffect(() => {
         (page > 1) && fetchNextPage();
@@ -42,34 +47,20 @@ const Grid: React.FC<GridProps> = ({ keyword, fetch, typeRender: TypeRender, use
     // Listen to scroll positions for loading more data on scroll
     useEffect(() => {
         const handleScroll = () => {
-            // To get page offset of last comic
-            const lastComicLoaded = document.querySelector<HTMLElement>(
-                ".comic-list .comic:last-child"
-            )
-
-            if (lastComicLoaded) {
-                const lastComicLoadedOffset = lastComicLoaded.offsetTop + lastComicLoaded.clientHeight
-                const pageOffset = window.pageYOffset + window.innerHeight
-
-                // Detects when user scrolls down till the last comic
-                if (pageOffset - lastComicLoadedOffset > -300) {
-                    if (hasNextPage) {
-                        // Trigger fetch
-                        let nextPage = data?.pages.slice(-1)[0].currentPage + 1;
-                        if (page !== nextPage) {
-                            setPage(nextPage);
-                        }
-                    }
-                }
+            if (
+                window.innerHeight + window.scrollY >=
+                document.body.offsetHeight - 500
+            ) {
+                page !== page + 1 && setPage(page + 1);
             }
         }
 
         // Listen for scroll events
-        window.addEventListener("scroll", handleScroll)
+        hasNextPage && window.addEventListener("scroll", handleScroll)
         return () => {
             window.removeEventListener("scroll", handleScroll)
         }
-    }, [data, page])
+    }, [data])
 
     useEffect(() => {
         (page > 1) && setPage(1);
@@ -86,19 +77,35 @@ const Grid: React.FC<GridProps> = ({ keyword, fetch, typeRender: TypeRender, use
             <div className='picker flex gap-5 items-center mb-3 md:mt-1'>
                 <TypeRender />
             </div>
-            <div className={`gap-2 comic-list mb-10`}>
-                {
-                    content.map((colRendered: any, key: number) => (
-                        <ColumnRender
-                            colRendered={colRendered}
-                            key={key}
-                            select={select}
-                        />
-                    ))
-                }
-            </div>
             {
-                (hasNextPage && page > 1) && <LoadMore />
+                layout === 1 &&
+                <div className={`gap-2 comic-list mb-10`}>
+                    {
+                        content.map((colRendered: any, key: number) => (
+                            <ColumnRender
+                                colRendered={colRendered}
+                                key={key}
+                            />
+                        ))
+                    }
+                </div>
+            }
+            {
+                layout === 0 &&
+                <div className='gap-[0.6rem] grid grid-cols-comic mb-10'>
+                    {
+                        list?.map((comic: any, index: number) => (
+                            <ComicCard
+                                key={index}
+                                item={comic}
+                            />
+                        ))
+                    }
+                </div>
+            }
+
+            {
+                hasNextPage && <LoadMore />
             }
         </main>
     );

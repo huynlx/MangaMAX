@@ -11,8 +11,8 @@ interface HeadProps {
 
 const Head: React.FC<HeadProps> = (props) => {
   const {
-    title = "Manga Max",
-    description = "Website đọc manga hoàn toàn miễn phí, không quảng cáo.",
+    title = "Manga Max - Read free manga online",
+    description = "Read free manga online.",
     image = "https://mangamax-huynh.cf/_next/image?url=/favicon.ico&w=300&q=100",
   } = props;
 
@@ -24,6 +24,7 @@ const Head: React.FC<HeadProps> = (props) => {
       <title>{title}</title>
       <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests"></meta>
       <link rel="manifest" href="/manifest.json" />
+      <link rel="apple-touch-icon" href="/icon.png"></link>
 
       <meta name="title" content={title} />
       <meta name="description" content={description} />
@@ -46,10 +47,7 @@ const Head: React.FC<HeadProps> = (props) => {
       <meta name="apple-mobile-web-app-title" content="Manga Max" />
       <meta name="theme-color" content="#1A1A1A" />
       <meta name="msapplication-navbutton-color" content="#1A1A1A" />
-      <meta
-        name="apple-mobile-web-app-status-bar-style"
-        content="black-translucent"
-      />
+      <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
       <meta name="msapplication-starturl" content="/" />
     </NextHead>
   );

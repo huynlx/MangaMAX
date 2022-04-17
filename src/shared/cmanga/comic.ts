@@ -1,8 +1,8 @@
 import { parse } from "node-html-parser";
-import axios from "../axios";
+import axios from "@/utils/axios";
 import { decrypt_data } from "./decrypt";
 import { titleCase } from "./titleCase";
-import decodeHTMLEntity from "../decodeHTML";
+import decodeHTMLEntity from "@/utils/decodeHTML";
 
 export const getComicInfo = async (comicSLug: string, url: string, source: string): Promise<any> => {
     const html = (await axios.get(`${comicSLug}`)).data;

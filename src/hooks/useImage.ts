@@ -9,6 +9,7 @@ export const useImage = (src: string) => {
 
   const loadImage = useCallback(async () => {
     return new Promise((resolve, reject) => {
+      loaded && setLoaded(false);
       const loadImg = new Image();
       loadImg.src = src;
       loadImg.onload = () => resolve(src);

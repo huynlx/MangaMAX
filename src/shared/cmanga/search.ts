@@ -1,4 +1,4 @@
-import axios from "../axios";
+import axios from "@/utils/axios";
 import { titleCase } from "./titleCase";
 
 const getSearch = async (sourceNum: string, keyword: string, page: number = 1, url: string): Promise<any> => {

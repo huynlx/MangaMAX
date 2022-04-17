@@ -6,7 +6,7 @@ const getRecents = () => {
     return {
         data: {
             pages: [{
-                items: reducer4.recents.slice().reverse()
+                items: [...reducer4.recents].reverse()
             }]
         }
     };

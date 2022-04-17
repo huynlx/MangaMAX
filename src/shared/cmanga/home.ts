@@ -1,4 +1,4 @@
-import instance from "../axios";
+import instance from "@/utils/axios";
 import { decrypt_data } from "./decrypt";
 import { titleCase } from "./titleCase";
 

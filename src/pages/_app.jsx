@@ -1,25 +1,23 @@
+import "tailwindcss/tailwind.css";
 import "src/styles/index.css";
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Navbar from 'src/components/Navbar';
-import { WINDOW_RESIZE_DEBOUNCE, WINDOW_SIZE } from '@/constants/index';
+import { WINDOW_RESIZE_DEBOUNCE, WINDOW_SIZE } from 'src/constants/index';
 import { windowResize } from 'src/store/action';
 import { QueryClient, QueryClientProvider } from "react-query";
-import { removeLoadingBar, callLoadingBar } from 'src/shared/callLoadingBar';
+import { removeLoadingBar, callLoadingBar } from 'src/utils/callLoadingBar';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth } from 'src/shared/firebase';
+import { auth } from 'src/utils/firebase';
 import { user as setUser, bookmarks as setBookmarks } from 'src/store/action';
-import { db } from 'src/shared/firebase';
+import { db } from 'src/utils/firebase';
 import { useAppSelector, useAppDispatch } from 'src/hooks/useRedux';
-import { wrapper } from 'src/store';
-import {
-  collection,
-  getDocs,
-  query,
-  where
-} from 'firebase/firestore';
+import { collection, getDocs, query, where } from 'firebase/firestore';
 import Draggable from '@/components/Draggable';
 import { useRouter } from "next/router";
 import Head from 'src/components/Head';
+import { PersistGate } from 'redux-persist/integration/react';
+import { Provider } from 'react-redux';
+import { wrapper, store, persistor } from 'src/store';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -33,17 +31,12 @@ const queryClient = new QueryClient({
 });
 
 const MyApp = ({ Component, pageProps }) => {
-  const { reducer2: { windowSize } } = useAppSelector((state) => state);
+  const { reducer2: { windowSize }, reducer4: { user: userState, layout } } = useAppSelector((state) => state);
   const [scroll, setScroll] = useState(false);
   const [user] = useAuthState(auth);
   const dispatch = useAppDispatch();
   const router = useRouter();
   const { pathname } = router;
-
-  // useEffect(() => {
-  // console.log(queryClient.getQueryCache());
-  //   queryClient.clear(); //change source to clear all cache => bị fetch api 2 lần
-  // }, [select.source, select.type]);
 
   //watch resize
   useEffect(() => {
@@ -93,7 +86,8 @@ const MyApp = ({ Component, pageProps }) => {
       }, WINDOW_RESIZE_DEBOUNCE);
     };
     onWidthResize();
-    window.addEventListener('resize', onWidthResize);
+
+    layout === 1 && window.addEventListener('resize', onWidthResize);
     return () => {
       window.removeEventListener('resize', onWidthResize);
     };
@@ -154,20 +148,23 @@ const MyApp = ({ Component, pageProps }) => {
 
     if (user) {
       fetchDocument();
-    } else {
-      dispatch(setUser(null));
-      dispatch(setBookmarks([]));
+    } else if (userState) {
+      return;
     }
   }, [user]);
 
   return (
     <>
       <Head />
-      <QueryClientProvider client={queryClient}>
-        <Navbar scroll={scroll} />
-        <Component {...pageProps} />
-        <Draggable />
-      </QueryClientProvider>
+      <Provider store={store}>
+        <PersistGate persistor={persistor} loading={null}>
+          <QueryClientProvider client={queryClient}>
+            <Navbar scroll={scroll} />
+            <Component {...pageProps} />
+            <Draggable />
+          </QueryClientProvider>
+        </PersistGate>
+      </Provider>
     </>
   )
 }

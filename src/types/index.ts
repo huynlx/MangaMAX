@@ -59,6 +59,5 @@ export interface GridProps {
 
 export interface SidebarProps {
     id: string,
-    closeNav: () => void,
-    user?: any
+    closeNav: () => void
 }

@@ -1,9 +1,9 @@
-import { getChapter as nettruyen } from "../nettruyen/chapter";
-import { getChapter as lxhentai } from "../lxhentai/chapter";
-import { getChapter as cmanga } from "../cmanga/chapter";
-import { getChapter as hentaicube } from "../hentaicube/chapter";
-import { getChapter as truyen48 } from "../truyen48/chapter";
-import { getChapter as truyentranhlh } from "../truyentranhlh/chapter";
+import { getChapter as nettruyen } from "@/shared/nettruyen/chapter";
+import { getChapter as lxhentai } from "@/shared/lxhentai/chapter";
+import { getChapter as cmanga } from "@/shared/cmanga/chapter";
+import { getChapter as hentaicube } from "@/shared/hentaicube/chapter";
+import { getChapter as truyen48 } from "@/shared/truyen48/chapter";
+import { getChapter as truyentranhlh } from "@/shared/truyentranhlh/chapter";
 
 export const getChapter = async (sourceObj: any, comicSLug: any, chapterSLug: any, chapterId: any): Promise<any> => {
     const { source } = sourceObj;
@@ -25,5 +25,7 @@ export const getChapter = async (sourceObj: any, comicSLug: any, chapterSLug: an
             return cmanga(source, comicSLug, chapterSLug, chapterId); //mangapk
         case '9':
             return hentaicube(source, comicSLug, chapterSLug, chapterId); //hentaicube
+        case '10':
+            return truyen48(source, comicSLug, chapterSLug, chapterId); //truyenqq
     }
 }

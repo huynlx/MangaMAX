@@ -1,5 +1,5 @@
 import { parse } from "node-html-parser";
-import axios from "../axios";
+import axios from "@/utils/axios";
 
 export const getChapter = async (source: string, comicSLug: any, chapterSLug: any, chapterId: any): Promise<any> => {
     const handleSlug = comicSLug.split("-").slice(0, -1).join("-");

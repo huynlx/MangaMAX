@@ -1,8 +1,10 @@
-import { getChapter } from "@/hooks/fetch";
+import Fetch from '@/hooks/fetch';
 import { useQuery } from "react-query";
 
 const useFetchChapter = (slug: any, source: any, chapter: any, id: any) => {
-  return useQuery(["chapter", { slug, id }], () => getChapter({ source, slug, chapter, id }));
+  const fetch = new Fetch({ source: source })
+
+  return useQuery(["chapter", { slug, id }], () => fetch.getChapter({ source, slug, chapter, id }));
 }
 
 export default useFetchChapter;

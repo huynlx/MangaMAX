@@ -1,8 +1,10 @@
 import { useInfiniteQuery } from 'react-query';
-import { getSearch } from './fetch';
+import Fetch from '@/hooks/fetch';
 
 const useFetchSearch = (props: any) => {
-    const fetchList = ({ pageParam = 1 }) => getSearch({ ...props, page: pageParam });
+    const fetch = new Fetch(props);
+
+    const fetchList = ({ pageParam = 1 }) => fetch.getSearch({ ...props, page: pageParam });
 
     return useInfiniteQuery(["search", props], fetchList, { //props is returned data
         getNextPageParam: (props) => {

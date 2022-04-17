@@ -1,6 +1,6 @@
-import instance from "../axios";
+import instance from "@/utils/axios";
 import { parse } from "node-html-parser";
-import decodeHTMLEntity from "../decodeHTML";
+import decodeHTMLEntity from "@/utils/decodeHTML";
 
 const getHome = async (page: number = 1, type: string, sourceNum: string, url: string): Promise<any> => {
 

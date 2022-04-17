@@ -1,6 +1,6 @@
-import axios from "../axios";
+import axios from "@/utils/axios";
 import { parse } from "node-html-parser";
-import decodeHTMLEntity from "../decodeHTML";
+import decodeHTMLEntity from "@/utils/decodeHTML";
 
 const getSearch = async (source: string, keyword: string, page: number = 1): Promise<any> => {
     const sections = {

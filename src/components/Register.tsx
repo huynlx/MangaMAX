@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { FC, useEffect, useState } from "react";
-import { registerWithEmailAndPassword } from "@/shared/firebase";
+import { registerWithEmailAndPassword } from "@/utils/firebase";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import Form from "@/components/Form";
 import { ImSpinner8 } from "react-icons/im";

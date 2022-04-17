@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import getSearch from '../../shared/api/search';
-import instance from '../../shared/axios';
+import getSearch from '@/shared/api/search';
+import instance from '@/utils/axios';
 import { SOURCES } from '@/constants/index';
 
 export default async function handler(

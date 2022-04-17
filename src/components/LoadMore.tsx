@@ -1,4 +1,3 @@
-import { memo } from 'react';
 import {ImSpinner8} from 'react-icons/im'
 
 const LoadMore = () => (
@@ -7,4 +6,4 @@ const LoadMore = () => (
     </div>
 );
 
-export default memo(LoadMore);
+export default LoadMore;

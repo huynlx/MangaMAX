@@ -21,8 +21,8 @@ export interface mangaProps {
     type: string
 }
 
-const LeftComic: FC<any> = ({ info, select, slug }) => {
-    const { reducer4: { bookmarks } } = useAppSelector(state => state);
+const LeftComic: FC<any> = ({ info, slug }) => {
+    const { reducer4: { bookmarks, reducer: select } } = useAppSelector(state => state);
     const [showModal, setShowModal] = useState<boolean>(false);
     const manga = mangaObj(info, slug, select, 'bookmarks');
     const follow = bookmarks.some((item: mangaProps) => item.url === manga.url);
@@ -39,7 +39,7 @@ const LeftComic: FC<any> = ({ info, select, slug }) => {
     return (
         <div className='lg:w-[59vw] lg:pr-4 max-h-[none] lg:max-h-[100vh] overflow-auto'>
             <div className='flex mb-5 gap-2 sm:gap-6 flex-col sm:flex-row'>
-                <div onClick={handleShow} className='flex-shrink-0 relative mx-auto group overflow-hidden rounded-[.45rem] w-[150px] h-[230px] lg:w-[190px] lg:h-[270px]'>
+                <div onClick={handleShow} className='flex-shrink-0 relative mx-auto group overflow-hidden w-[150px] h-[230px] lg:w-[190px] lg:h-[270px]'>
                     <OverlayImage>
                         <svg data-v-20f285ec="" data-v-fd73eeec="" width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="#fff" className="xLarge icon"><path data-v-20f285ec="" fill="currentColor" d="m9.5 13.09 1.41 1.41-4.5 4.5H10v2H3v-7h2v3.59l4.5-4.5m1.41-3.59L9.5 10.91 5 6.41V10H3V3h7v2H6.41l4.5 4.5m3.59 3.59 4.5 4.5V14h2v7h-7v-2h3.59l-4.5-4.5 1.41-1.41M13.09 9.5l4.5-4.5H14V3h7v7h-2V6.41l-4.5 4.5-1.41-1.41Z"></path></svg>
                     </OverlayImage>

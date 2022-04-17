@@ -1,14 +1,13 @@
-import { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { FC, useEffect } from 'react';
 import { handleSource } from '@/store/action';
 import TypeRender from '@/components/TypeRender';
 import Grid from '@/components/Grid';
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import getBookmarks from '@/hooks/getBookmarks';
 
-const BookmarksComponent: NextPage = () => {
-    const { reducer4: { user }, reducer: select } = useAppSelector(state => state);
+const BookmarksComponent: FC = () => {
+    const { reducer4: { user, bookmarks }, reducer: select } = useAppSelector(state => state);
     const navigate = useRouter();
     const dispatch = useAppDispatch();
 
@@ -23,7 +22,7 @@ const BookmarksComponent: NextPage = () => {
 
     return (
         <Grid
-            typeRender={() => TypeRender('Bookmarks')}
+            typeRender={() => TypeRender('Bookmarks', bookmarks.length)}
             fetch={getBookmarks}
             user={user}
         />

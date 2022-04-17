@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-const Index = ({ dt, slug, select, source }: any) => (
+const Index = ({ dt, slug, source }: any) => (
     <div className='grid grid-cols-chapter gap-[7px] pr-2'>
         {dt.chapters.map((item: any) => (
             <Link

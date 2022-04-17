@@ -1,7 +1,3 @@
-:root {
-  --padding-x: 25px;
-}
-
 .sidenav {
   height: 100%;
   position: fixed;
@@ -13,13 +9,7 @@
 .sidenav p {
   text-decoration: none;
   font-size: 25px;
-  color: #818181;
   display: block;
-  transition: 0.3s;
-}
-
-.sidenav p:hover {
-  color: #f1f1f1;
 }
 
 .sidenav .closebtn {

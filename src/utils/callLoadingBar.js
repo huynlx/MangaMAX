@@ -3,7 +3,7 @@ import Router from 'next/router';
 
 export const callLoadingBar = () => {
   NProgress.configure({
-    showSpinner: true,
+    showSpinner: false,
     trickleSpeed: 100, //ms
     minimum: 0.1,
     trickleRate: 0.05

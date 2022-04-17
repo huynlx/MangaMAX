@@ -1,10 +1,10 @@
-import nettruyen from '../nettruyen/home';
-import lxhentai from '../lxhentai/home';
-import truyen48 from '../truyen48/home';
-import truyentranhlh from '../truyentranhlh/home';
-import blogtruyen from '../blogtruyen/home';
-import cmanga from '../cmanga/home';
-import hentaicube from '../hentaicube/home';
+import nettruyen from '@/shared/nettruyen/home';
+import lxhentai from '@/shared/lxhentai/home';
+import truyen48 from '@/shared/truyen48/home';
+import truyentranhlh from '@/shared/truyentranhlh/home';
+import blogtruyen from '@/shared/blogtruyen/home';
+import cmanga from '@/shared/cmanga/home';
+import hentaicube from '@/shared/hentaicube/home';
 
 const getHome = async (page: number = 1, source: string, type: string, url: string): Promise<any> => {
     switch (source) {
@@ -26,6 +26,8 @@ const getHome = async (page: number = 1, source: string, type: string, url: stri
             return cmanga(page, type, source, url); //mangapk
         case '9':
             return hentaicube(page, type, source, url); //hentaicube
+        case '10':
+            return truyen48(page, type, source, url); //truyenqq
     }
 };
 

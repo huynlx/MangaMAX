@@ -35,7 +35,7 @@ const ToolNav: FC = () => {
         )
       }
       {
-        close && <FiTool title='Open Tools' onClick={() => setClose(false)} size={35} className='hover:text-white duration-300' />
+        close && <FiTool title='Open Tools' onClick={() => setClose(false)} size={35} className='hover:text-white duration-300 m-1' />
       }
     </div>
   );

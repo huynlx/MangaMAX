@@ -1,8 +1,8 @@
 import { parse } from "node-html-parser";
-import useSlug from "@/shared/useSlug";
-import axios from "../axios"
-import decodeHTMLEntity from "../decodeHTML";
-import getQueryParams from "../useGetQueryParams";
+import useSlug from "@/utils/setSlug";
+import axios from "@/utils/axios"
+import decodeHTMLEntity from "@/utils/decodeHTML";
+import getQueryParams from "@/utils/getQueryParams";
 
 export const getComicInfo = async (comicSLug: string, source: string): Promise<any> => {
     const html = (await axios.get(`story/view.php?id=${comicSLug}`)).data;
