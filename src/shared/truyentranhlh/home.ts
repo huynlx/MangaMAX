@@ -20,7 +20,7 @@ const getHome = async (page: number = 1, type: string, sourceNum: string, url: s
 
                 return ({
                     title: decodeHTMLEntity(item.querySelector(".series-title > a")?.innerText),
-                    cover,
+                    cover: `https://images.weserv.nl/?url=${encodeURIComponent(cover as string)}&w=250`,
                     coverOrigin: cover,
                     chapter: item.querySelector(".thumb-detail > div > a")?.innerText.split(":")[0].split('-')[0],
                     chapSlug: item.querySelector(".thumb-detail > div > a")?.getAttribute('href')?.split('/').pop(),

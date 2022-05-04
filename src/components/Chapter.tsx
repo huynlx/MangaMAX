@@ -8,10 +8,9 @@ import { useAppSelector } from "@/hooks/useRedux";
 import Spinner from './Spinner';
 import Head from './Head';
 
-const ChapterComponent = ({ chapter, chapterId, comicSlug }: any) => {
+const ChapterComponent = ({ chapter, chapterId, comicSlug, selectedIndex }: any) => {
     const { reducer: select, reducer3: select2 } = useAppSelector(state => state);
     const router = useRouter();
-    const selectedIndex = chapter.chapters.indexOf(chapter.chapters.find((chap: { id: string }) => chap.id === chapterId));
     const nextChapter = useCallback(() => {
         router.push({
             pathname: `/manga/${comicSlug}/${chapter.chapters[selectedIndex - 1].chap}`,

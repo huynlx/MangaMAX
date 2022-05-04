@@ -11,6 +11,7 @@ import { useBookmarks } from '@/hooks/useBookmarks';
 import OverlayImage from '@/components/OverlayImage';
 import Modal from '@/components/Modal';
 import { BsFillImageFill } from 'react-icons/bs';
+import Spinner from './Spinner';
 
 export interface mangaProps {
     title: string,
@@ -53,11 +54,13 @@ const LeftComic: FC<any> = ({ info, slug }) => {
                     />
                 </div>
                 <Modal isOpen={showModal} onClose={handleHide} className='bg-root bg-opacity-[.95]'>
-                    <img
+                    <ReadImage
                         className='fixed top-2/4 left-2/4 transform -translate-x-2/4 -translate-y-2/4 min-h-[60%] max-h-[100%] z-50 object-contain'
                         src={info.coverOrigin ?? info.cover}
+                        icon={Spinner}
+                        className3='text-logo-darken'
                         alt="Modal Image"
-                        onError={(e) => e.currentTarget.src = '/_next/image?url=/onError.png&w=720&q=75'}
+                        className2='fixed top-2/4 left-2/4 transform -translate-x-2/4 -translate-y-2/4 min-h-[60%] max-h-[100%] z-50'
                     />
                 </Modal>
                 <div className='info gap-2 flex flex-col w-full'>

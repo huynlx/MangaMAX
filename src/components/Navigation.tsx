@@ -51,6 +51,12 @@ const Navigation = ({ chapters, chapterId, comicSlug, select, select2, source }:
         return () => window.removeEventListener("keyup", handler);
     }, [prevChapter, nextChapter]);
 
+    useEffect(() => {
+        if (!chapters[selectedIndex]) {
+            router.push('/404')
+        }
+    }, [])
+
     return (
         <div className={`z-10 overflow-x-hidden flex items-center gap-1 w-full justify-center bg-primary ${direction === 'up' && 'sticky top-0'}`}>
             <LinkCheck>

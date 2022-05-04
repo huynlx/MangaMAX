@@ -13,7 +13,7 @@ const Component404 = () => (
                 <li className='list-disc md:leading-[1.5]'>Thay đổi server khác.</li>
             </ul>
         </div>
-        <button onClick={() => Router.back()} className='block text-center text-lg p-3 px-9 w-fit mx-[auto] border-2 duration-300 hover:border-link rounded-full hover:bg-link hover:text-white'>Return</button>
+        <button onClick={() => Router.back()} className='block text-center text-lg p-3 px-9 w-fit mx-[auto] border-2 duration-300 hover:border-link rounded-full hover:bg-link hover:text-white'>Return Home</button>
     </div>
 )
 

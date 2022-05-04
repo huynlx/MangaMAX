@@ -24,7 +24,7 @@ const getSearch = async (sourceNum: string, keyword: string, page: number = 1, u
 
             return {
                 title: decodeHTMLEntity(item.childNodes[3].innerText),
-                cover: `/api/proxy?url=${encodeURIComponent(image.replace('lxhentai.com//', 'lxhentai.com/') as string)}&source=${sourceNum}`,
+                cover: `https://images.weserv.nl/?url=${encodeURIComponent(image?.replace('lxhentai.com//', 'lxhentai.com/') as string)}`,
                 chapter: item.querySelector(".newestChapter a")?.innerText,
                 chapSlug: useSlug(item.querySelector(".newestChapter a")?.innerText!),
                 chapId: getQueryParams('id', item.querySelector('.newestChapter a')?.getAttribute('href')!),
