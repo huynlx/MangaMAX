@@ -20,7 +20,8 @@ const getHome = async (page: number = 1, type: string, sourceNum: string, url: s
                 const url = item.querySelector(".c-image-hover > a > img")?.getAttribute("data-src") ?? item.querySelector(".c-image-hover > a > img")?.getAttribute("src");
                 return ({
                     title: decodeHTMLEntity(item.querySelector(".post-title > h3 > a")?.innerText!),
-                    cover: `/api/proxy?url=${encodeURIComponent(url as string)}&source=${sourceNum}`,
+                    // cover: `/api/proxy?url=${encodeURIComponent(url as string)}&source=${sourceNum}`,
+                    cover: `https://apoqrsgtqq.cloudimg.io/${url}`,
                     chapter: item.querySelector(".chapter > a")?.innerText.trim(),
                     chapSlug: item.querySelector(".chapter a")?.getAttribute('href')?.split('/').slice(5, -1)[0],
                     chapId: item.querySelector(".chapter a")?.getAttribute('href')?.split('/').slice(5, -1)[0],

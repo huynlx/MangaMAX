@@ -8,7 +8,7 @@ export const getComicInfo = async (comicSLug: string, source: string): Promise<a
     let author = '';
     let genres = [];
     let status = '';
-    let url = encodeURIComponent(dom.querySelector('.tab-summary img')?.getAttribute('src')?.replace('-193x278', '')!);
+    let url = dom.querySelector('.tab-summary img')?.getAttribute('src')?.replace('-193x278', '')!;
     let desc = '';
     dom.querySelectorAll('.description-summary > .summary__content ul li').map((item) => {
         desc += '●  ' + item.innerText + '\n';
@@ -38,7 +38,8 @@ export const getComicInfo = async (comicSLug: string, source: string): Promise<a
 
     return {
         title: decodeHTMLEntity(dom.querySelector('.post-title > h1')?.innerText.trim()!),
-        cover: `/api/proxy?url=${url as string}&source=${source}`,
+        // cover: `/api/proxy?url=${url as string}&source=${source}`,
+        cover: `https://apoqrsgtqq.cloudimg.io/${url}`,
         author: author !== '' ? author : 'Updating',
         status: status !== '' ? status : 'Updating',
         genres,

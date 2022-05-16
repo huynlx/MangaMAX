@@ -21,7 +21,8 @@ const getSearch = async (source: string, keyword: string, page: number = 1): Pro
 
             return ({
                 title: decodeHTMLEntity(item.querySelector(".post-title > h3 > a")?.innerText!),
-                cover: `/api/proxy?url=${encodeURIComponent(url as string)}&source=${source}`,
+                // cover: `/api/proxy?url=${encodeURIComponent(url as string)}&source=${source}`,
+                cover: `https://apoqrsgtqq.cloudimg.io/${url}`,
                 chapter: item.querySelector(".chapter > a")?.innerText,
                 chapSlug: item.querySelector(".chapter a")?.getAttribute('href')?.split('/').slice(5, -1)[0],
                 chapId: item.querySelector(".chapter a")?.getAttribute('href')?.split('/').slice(5, -1)[0],

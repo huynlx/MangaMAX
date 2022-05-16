@@ -18,7 +18,7 @@ const getSearch = async (sourceNum: string, keyword: string, page: number = 1): 
 
             return ({
                 title: item.querySelector(".series-title > a")?.innerText,
-                cover: `https://images.weserv.nl/?url=${encodeURIComponent(cover as string)}&w=250`,
+                cover: `https://apoqrsgtqq.cloudimg.io/${cover}?width=250`,
                 coverOrigin: cover,
                 chapter: item.querySelector(".thumb-detail > div > a")?.innerText.split(":")[0].split('-')[0],
                 chapSlug: item.querySelector(".thumb-detail > div > a")?.getAttribute('href')?.split('/').pop(),

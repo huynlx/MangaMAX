@@ -9,7 +9,7 @@ export const SOURCES = [
     {
         source: '1',
         name: 'Server 1',
-        url: 'http://www.nettruyenmoi.com/',
+        url: 'http://www.nettruyenco.com/',
         type: 'latest',
         server: "nettruyen",
         adult: false
@@ -17,7 +17,7 @@ export const SOURCES = [
     {
         source: '2',
         name: 'Server 2',
-        url: 'http://nhattruyengo.com/',
+        url: 'http://nhattruyenmoi.com/',
         type: 'latest',
         server: 'netruyen',
         adult: false
@@ -57,7 +57,7 @@ export const SOURCES = [
     {
         source: '7',
         name: 'Server 7',
-        url: 'https://cmanganew.com/',
+        url: 'https://cmangab.com/',
         type: 'latest',
         server: 'cmanga',
         adult: false

@@ -34,7 +34,7 @@ export const getComicInfo = async (comicSLug: string, source: string): Promise<a
 
   return {
     title: decodeHTMLEntity(dom.querySelector('.series-name > a')?.innerText),
-    cover: `https://images.weserv.nl/?url=${encodeURIComponent(cover as string)}&w=250`,
+    cover: `https://apoqrsgtqq.cloudimg.io/${cover}?width=250`,
     coverOrigin: cover,
     author,
     status,
