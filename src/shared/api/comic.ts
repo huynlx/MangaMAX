@@ -8,7 +8,7 @@ import { getComicInfo as truyen48 } from "@/shared/truyen48/comic";
 import { getComicInfo as truyentranhlh } from "@/shared/truyentranhlh/comic";
 
 export const getComicInfo = async (sourceObj: any, comicSLug: string): Promise<any> => {
-    const { url, source } = sourceObj;
+    const { url, source } = sourceObj;    
 
     switch (source) {
         case '1':

@@ -31,9 +31,9 @@ const DashboardComponent: React.FC = () => {
                 <button className="bg-gray-600 hover:bg-gray-700 dashboard__btn duration-150 rounded-full flex gap-1 items-center justify-center" onClick={() => dispatch(handleLogout())}>
                     <HiOutlineLogout size={26} /> Logout
                 </button>
-                <button className="bg-red-500 hover:bg-red-700 duration-150 dashboard__btn rounded-full flex gap-1 items-center justify-center" onClick={() => navigate.back()}>
+                {/* <button className="bg-red-500 hover:bg-red-700 duration-150 dashboard__btn rounded-full flex gap-1 items-center justify-center" onClick={() => navigate.back()}>
                     <RiArrowGoBackFill size={23} /> Return
-                </button>
+                </button> */}
             </div>
         </div>
     );

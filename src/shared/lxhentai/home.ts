@@ -1,15 +1,13 @@
 import instance from "@/utils/axios";
 import { parse } from "node-html-parser";
 import decodeHTMLEntity from "@/utils/decodeHTML";
-import getQueryParams from "@/utils/getQueryParams";
-import useSlug from "@/utils/setSlug";
 
 const getHome = async (page: number = 1, type: string, sourceNum: string, url: string): Promise<any> => {
     const handleSource = () => {
         if (type === 'browse') {
-            return `story/index.php?p=${page}&hot`
+            return `danh-sach?sort=-views&page=${page}&filter%5Bstatus%5D=2,1`
         } else {
-            return `story/index.php?p=${page}`
+            return `danh-sach?sort=-updated_at&page=${page}&filter%5Bstatus%5D=2,1`
         }
     }
 
@@ -17,33 +15,33 @@ const getHome = async (page: number = 1, type: string, sourceNum: string, url: s
         return htmls.map((source, index) => {
             const dom = parse(source);
 
-            const items = dom.querySelectorAll(".main .col-md-8 > .row div.col-md-3").map((item) => {
-                let style = (item.querySelector('div')?.getAttribute('style'));
-                const bg = (style?.split(";")[0]);
-                const image = url + bg?.replace('url(', '').replace(')', '').replace(/\"/gi, "").replace(/['"]+/g, '').split(":")[1].trim();
+            const items = dom.querySelectorAll("div.grid div.manga-vertical").map((item) => {
+                let style = item.querySelector('div.cover')?.getAttribute('style');
+                const bg = style?.split(";")[0];
+                const image = 'https:' + bg?.replace('url(', '').replace(')', '').replace(/\"/gi, "").replace(/['"]+/g, '').split(":")[2].trim();
 
                 return {
                     title: decodeHTMLEntity(item.childNodes[3].innerText),
                     cover: `https://images.weserv.nl/?url=${encodeURIComponent(image?.replace('lxhentai.com//', 'lxhentai.com/') as string)}`,
-                    chapter: item.querySelector(".newestChapter a")?.innerText,
-                    chapSlug: useSlug(item.querySelector(".newestChapter a")?.innerText!),
-                    chapId: getQueryParams('id', item.querySelector('.newestChapter a')?.getAttribute('href')!),
-                    slug: getQueryParams('id', item.getElementsByTagName('a')[1].getAttribute('href')!),
+                    chapter: item.querySelector(".latest-chapter a")?.innerText,
+                    chapSlug: item.getElementsByTagName('a')[1].getAttribute('href')?.split('/').pop(),
+                    chapId: item.getElementsByTagName('a')[1].getAttribute('href')?.split('/').pop(),
+                    slug: item.getElementsByTagName('a')[1].getAttribute('href')?.split('/')[2],
                     updateAt: null,
-                    id: getQueryParams('id', item.getElementsByTagName('a')[1].getAttribute('href')!),
+                    id: item.getElementsByTagName('a')[1].getAttribute('href')!,
                     source: sourceNum
                 }
             });
 
             const pages = [];
-            for (const page of [...dom.querySelectorAll("ul.pagination li")]) {
-                const p = Number(page.querySelector('a')?.childNodes[0]?.textContent.trim());
+            for (const page of [...dom.querySelectorAll("ul.flex.gap-2 a.page-link")]) {
+                const p = Number(page.querySelector('li')?.childNodes[0]?.textContent.trim());
                 if (isNaN(p)) continue;
                 pages.push(p);
             }
             const lastPage = Math.max(...pages);
             const hasNextPage = (+page) !== lastPage;
-            const currentPage = Number(dom.querySelector('li.active a.page-link')?.childNodes[0].textContent.trim());
+            const currentPage = Number(dom.querySelector('li.bg-white')?.childNodes[0].textContent.trim());
 
             return {
                 name: Object.keys(sections)[index],

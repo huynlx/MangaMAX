@@ -6,7 +6,7 @@ import { usePosition } from '@/hooks/usePosition';
 import { SidebarProps } from '@/types';
 import { FC, PropsWithChildren } from 'react';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
-import { BiExtension } from 'react-icons/bi';
+import {AiOutlineCompass} from 'react-icons/ai';
 import { FiBookOpen, FiUsers } from 'react-icons/fi';
 import { capitalizeFirstLetter } from '@/utils/capitalizeFirstLetter';
 import LinkCheck from '@/components/LinkCheck';
@@ -132,7 +132,7 @@ const LeftSideBar: FC<SidebarProps> = ({ id, closeNav }) => {
       </Section>
 
       <Section
-        icon={BiExtension}
+        icon={AiOutlineCompass}
         name='SERVERS'
         id='servers'
         size={29}

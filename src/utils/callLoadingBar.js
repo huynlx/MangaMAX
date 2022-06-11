@@ -9,7 +9,7 @@ const handleRouteChangeError = (err, url) => {
 
 export const callLoadingBar = () => {
   NProgress.configure({
-    showSpinner: false,
+    showSpinner: true,
     trickleSpeed: 100, //ms
     minimum: 0.1,
     trickleRate: 0.05

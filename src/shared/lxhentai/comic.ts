@@ -1,32 +1,32 @@
 import { parse } from "node-html-parser";
-import useSlug from "@/utils/setSlug";
 import axios from "@/utils/axios"
 import decodeHTMLEntity from "@/utils/decodeHTML";
-import getQueryParams from "@/utils/getQueryParams";
 
 export const getComicInfo = async (comicSLug: string, source: string): Promise<any> => {
-    const html = (await axios.get(`story/view.php?id=${comicSLug}`)).data;
+    const html = (await axios.get(`truyen/${comicSLug}`)).data;
     const dom = parse(html);
-    const cover = 'https://lxhentai.com' + dom.querySelector('.col-md-8 > .row > .col-md-4 > img')?.getAttribute('src');
-    const index = dom.querySelectorAll('#listChuong > ul > .row:not(:first-child) > div.col-5').map((item, index) => index).reverse();
+    let style = dom.querySelector('div.cover')?.getAttribute('style');
+    const bg = style?.split(";")[0];
+    const cover = 'https:' + bg?.replace('url(', '').replace(')', '').replace(/\"/gi, "").replace(/['"]+/g, '').split(":")[2].trim();
+    const index = dom.querySelectorAll('.overflow-y-auto.overflow-x-hidden a li').map((item, index) => index).reverse();
 
     return {
-        title: decodeHTMLEntity(dom.querySelector('h1.title-detail')?.innerText.trim()!),
+        title: decodeHTMLEntity(dom.querySelector('div.truncate > span.font-semibold')?.innerText.trim()!),
         cover: `https://images.weserv.nl/?url=${encodeURIComponent(cover?.replace('lxhentai.com//', 'lxhentai.com/') as string)}`,
-        author: dom.querySelector('.col-md-8 .row.mt-2 a[href*=tacgia]')?.innerText,
-        status: dom.querySelectorAll('.col-md-8 .row.mt-2 .col-8')[1].innerText,
-        genres: dom.querySelectorAll('.col-md-8 .row.mt-2 .col-8')[2].querySelectorAll('a').map(genre => genre.innerText),
-        desc: dom.querySelector('.detail-content > p')?.innerText,
-        chapters: dom.querySelectorAll('#listChuong > ul > .row:not(:first-child)').map((chapter, i) => ({
-            name: chapter.querySelector('div.col-5 a')?.innerText.trim(),
-            updateAt: chapter.childNodes[3].textContent,
-            view: chapter.childNodes[5].textContent,
-            id: getQueryParams('id', chapter.querySelector('div.col-5 a')?.getAttribute('href')!),
-            chap: useSlug(chapter.querySelector('div.col-5 a')?.innerText.trim()!),
+        author: dom.querySelector('.grow .mt-2 span a[href*="tac-gia"]')?.innerText ?? null,
+        status: dom.querySelectorAll('.grow .mt-2')[2].querySelector(".text-blue-500")?.innerText,
+        genres: dom.querySelectorAll('.grow .mt-2 span:last-child a').map(genre => genre.innerText),
+        desc: dom.querySelector('.border-gray-200.py-4.border-t > p:nth-child(3)')?.innerText ?? '',
+        chapters: dom.querySelectorAll('.overflow-y-auto.overflow-x-hidden a').map((chapter, i) => ({
+            name: chapter.querySelector('.text-ellipsis')?.innerText.trim(),
+            updateAt: chapter.querySelector('.timeago')?.getAttribute('datetime')?.split(' ')[0],
+            view: 'null',
+            id: chapter.getAttribute('href')?.split('/').pop()!,
+            chap: chapter.getAttribute('href')?.split('/').pop()!,
             nameIndex: index[i] + 1
         })),
         source,
-        lastUpdate: dom.querySelector("time.small")?.innerText.match(/\[Cập nhật lúc: (.*?)\]/)?.[1]
+        lastUpdate: dom.querySelector(".timeago")?.getAttribute('datetime')
     }
 }
 

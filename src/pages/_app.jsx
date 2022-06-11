@@ -161,7 +161,7 @@ const MyApp = ({ Component, pageProps }) => {
           <QueryClientProvider client={queryClient}>
             <Navbar scroll={scroll} />
             <Component {...pageProps} />
-            <Draggable />
+            {/* <Draggable /> */}
           </QueryClientProvider>
         </PersistGate>
       </Provider>
