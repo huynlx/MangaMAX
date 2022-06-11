@@ -5,6 +5,8 @@ import truyentranhlh from '@/shared/truyentranhlh/home';
 import blogtruyen from '@/shared/blogtruyen/home';
 import cmanga from '@/shared/cmanga/home';
 import hentaicube from '@/shared/hentaicube/home';
+import mangaii from '@/shared/mangaii/home';
+import comick from '@/shared/comick/home';
 
 const getHome = async (page: number = 1, source: string, type: string, url: string): Promise<any> => {
     switch (source) {
@@ -23,11 +25,11 @@ const getHome = async (page: number = 1, source: string, type: string, url: stri
         case '7':
             return cmanga(page, type, source, url); //cmanga
         case '8':
-            return cmanga(page, type, source, url); //mangapk
+            return comick(page, type, source); //comick
         case '9':
             return hentaicube(page, type, source, url); //hentaicube
         case '10':
-            return truyen48(page, type, source, url); //truyenqq
+            return mangaii(page, type, source); //mangaii
     }
 };
 

@@ -39,7 +39,7 @@ const Comic: FC<any> = ({ item }) => {
                 query: { id: item.chapId, source: item.source }
             }}
         >
-            <a onClick={handleClick} className="hover:bg-white xl:px-5 hover:text-link duration-300 px-3 py-1 bg-link rounded-full font-semibold text-sm xl:text-base">{item.chapter.replace('Chapter', 'Chap')}</a>
+            <a onClick={handleClick} className="hover:bg-white xl:px-5 hover:text-link duration-300 px-3 py-1 bg-link rounded-full font-semibold text-sm xl:text-base line-clamp-1">{item.chapter.replace('Chapter', 'Chap')}</a>
         </Link>
     )
 

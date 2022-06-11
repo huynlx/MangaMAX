@@ -65,9 +65,9 @@ export const SOURCES = [
     {
         source: '8',
         name: 'Server 8',
-        url: 'https://mangapk.com/',
+        url: 'https://comick.xyz/',
         type: 'latest',
-        server: 'cmanga',
+        server: 'comick',
         adult: false
     },
     {
@@ -81,9 +81,9 @@ export const SOURCES = [
     {
         source: '10',
         name: 'Server 10',
-        url: 'http://truyenqqpro.com/',
+        url: 'https://mangaii.com/',
         type: 'latest',
-        server: 'truyenqq',
+        server: 'mangaii',
         adult: false
     }
 ]
