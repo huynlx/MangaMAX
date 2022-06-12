@@ -1,5 +1,4 @@
 import instance from "@/utils/axios";
-import { parse } from "node-html-parser";
 
 const getHome = async (page: number = 1, type: string, sourceNum: string): Promise<any> => {
 
@@ -7,18 +6,15 @@ const getHome = async (page: number = 1, type: string, sourceNum: string): Promi
     if (type === 'browse') {
       return `hot?page=${page}`
     } else {
-      return `https://api.mangaii.com/api/v1/comics?page=${page}`
+      return `https://api.mangaii.com/api/v1/comics?page=${page}&limit=70`
     }
   }
 
   const handleData = () => {
     return htmls.map((source, index) => {
       const items = [];
-      console.log(htmls);
 
       for (let manga of source.data) {
-        console.log(manga);
-
         const title = manga.name;
         const id = 'https://mangaii.com/comic/' + manga.slug;
         const image = `https://mangaii.com/_next/image?url=https%3A%2F%2Fapi.mangaii.com%2Fmedia%2Fcover_images%2F${manga.cover_image}&w=256&q=100`;
@@ -31,15 +27,11 @@ const getHome = async (page: number = 1, type: string, sourceNum: string): Promi
           chapSlug: 'test',
           chapId: sub,
           slug: id.split('/').pop(),
-          updateAt: 'test',
-          status: 'test',
+          updateAt: null,
+          status: null,
           source: sourceNum
         });
       }
-
-      console.log(items);
-
-
 
       const hasNextPage = true;
       const currentPage = page;

@@ -4,9 +4,9 @@ import cmanga from '@/shared/cmanga/search';
 import hentaicube from '@/shared/hentaicube/search';
 import truyen48 from '@/shared/truyen48/search';
 import truyentranhlh from '@/shared/truyentranhlh/search';
+import comick from '@/shared/comick/search';
 
 const getSearch = async (page: number = 1, source: string, url: string, keyword: string): Promise<any> => {
-
     switch (source) {
         case '1':
             return nettruyen(source, keyword, page); //nettruyen
@@ -21,7 +21,7 @@ const getSearch = async (page: number = 1, source: string, url: string, keyword:
         case '7':
             return cmanga(source, keyword, page, url); //cmanga
         case '8':
-            return cmanga(source, keyword, page, url); //mangapk
+            return comick(source, keyword, page); //comick
         case '9':
             return hentaicube(source, keyword, page); //hentaicube
         case '10':

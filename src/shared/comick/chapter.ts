@@ -13,15 +13,6 @@ export const getChapter = async (source: string, comicSLug: any, chapterSLug: an
     images: html.chapter.md_images.map((img: any) => {
       return `https://meo.comick.pictures/${img.b2key}`;
     }),
-    chapters: html.chapters.map((chapter: any) => {
-      const title = chapter.title ?? false;
-
-      return ({
-        name: 'Chap ' + chapter.chap + (title ? `: ${title}` : ''),
-        id: chapter.hid,
-        chap: chapter.chap,
-      });
-    }),
     source
   }
 }

@@ -14,14 +14,15 @@ import Head from './Head';
 const Info = ({ info, slug }: ComicProps) => {
     const { reducer: select, reducer3 } = useAppSelector(state => state);
     const dispatch = useAppDispatch();
-    const [dt, setDt] = useState<any>(info);
+    const [chapters, setChapters] = useState<any>(info);
 
     const handleSort = () => {
-        setDt({
-            ...dt,
-            chapters: dt.chapters.slice().reverse()
+        setChapters({
+            ...chapters,
+            chapters: chapters.chapters.reverse()
         });
     }
+
     const handleChapter = () => {
         dispatch(setScroll(null, null, !reducer3.indexChapters));
     }
@@ -38,7 +39,7 @@ const Info = ({ info, slug }: ComicProps) => {
                     </h1>
                 </LinkCheck>
                 {/* Left Side */}
-                <LeftComic info={info} slug={slug} />
+                <LeftComic info={{ ...info, ...chapters }} slug={slug} />
                 {/* Right Side Mobile */}
                 <div className='lg:hidden font-bold text-xl flex justify-between items-end'>
                     Chapters
@@ -50,11 +51,12 @@ const Info = ({ info, slug }: ComicProps) => {
                 </div>
                 {/* Right Side Desktop */}
                 <RightComic
-                    dt={dt}
+                    chapters={chapters.chapters}
                     handleSort={handleSort}
                     slug={slug}
                     handleChapter={handleChapter}
                     source={info.source}
+                    setChapters={(v: any) => setChapters(v)}
                 />
             </div >
         </>

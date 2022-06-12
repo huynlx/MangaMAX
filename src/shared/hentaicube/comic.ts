@@ -34,8 +34,6 @@ export const getComicInfo = async (comicSLug: string, source: string): Promise<a
         }
     }
 
-    const index = dom.querySelectorAll('.listing-chapters_wrap li').map((item, index) => index).reverse();
-
     return {
         title: decodeHTMLEntity(dom.querySelector('.post-title > h1')?.innerText.trim()!),
         // cover: `/api/proxy?url=${url as string}&source=${source}`,
@@ -44,14 +42,7 @@ export const getComicInfo = async (comicSLug: string, source: string): Promise<a
         status: status !== '' ? status : 'Updating',
         genres,
         desc,
-        chapters: dom.querySelectorAll('.listing-chapters_wrap li').map((chapter, i) => ({
-            name: chapter.querySelectorAll('a')[0]?.innerText.trim(),
-            updateAt: chapter.querySelector('span')?.innerText.trim(),
-            view: 'N/A',
-            id: chapter.querySelectorAll('a')[0].getAttribute('href')?.split('/').slice(5, -1)[0],
-            chap: chapter.querySelectorAll('a')[0].getAttribute('href')?.split('/').slice(5, -1)[0],
-            nameIndex: index[i] + 1
-        })),
+        chapters: [],
         source,
         lastUpdate: dom.querySelector(".col-12 p")?.innerText.match(/Last Updated:(.*)/)?.[1]
     }

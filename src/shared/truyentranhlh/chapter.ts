@@ -18,11 +18,6 @@ export const getChapter = async (source: string, comicSLug: any, chapterSLug: an
       let url = img.getAttribute("data-src") ?? img.getAttribute("src");
       return url;
     }),
-    chapters: dom.querySelectorAll("#chap_list li a").map((chapter: any) => ({
-      name: chapter.innerText.trim(),
-      id: chapter.getAttribute('href')?.split('/').pop()?.match(/\d+/g).join(''),
-      chap: chapter.getAttribute('href')?.split('/').pop()
-    })),
     source
   }
 }

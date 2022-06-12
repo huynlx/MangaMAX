@@ -17,11 +17,6 @@ export const getChapter = async (source: string, comicSLug: any, chapterSLug: an
         chapterCurrent: dom.querySelectorAll(".c-selectpicker")[0].querySelector('option:checked')?.innerText,
         updateAt: '',
         images: list.map(img => `/api/proxy?url=${encodeURIComponent((img.getAttribute('data-src') ?? img.getAttribute('src')) as string)}&source=${source}`),
-        chapters: dom.querySelectorAll(".c-selectpicker")[0].querySelectorAll('option').map((option, i) => ({
-            name: option.innerText,
-            id: option.getAttribute('data-redirect')?.split('/').slice(5, -1)[0],
-            chap: option.getAttribute('data-redirect')?.split('/').slice(5, -1)[0],
-        })),
         source
     }
 }

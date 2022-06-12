@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
-const List = ({ slug, dt, source }: any) => {
-    return dt.chapters.map((item: any) => (
+const List = ({ slug, chapters, source }: any) => {
+    return chapters.map((item: any) => (
         <Link
             // as={`/manga/${slug}/${item.chap}`}
             key={item.id}

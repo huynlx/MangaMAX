@@ -20,11 +20,6 @@ export const getChapter = async (source: string, comicSLug: any, chapterSLug: an
         : url;
       return `/api/proxy?url=${encodeURIComponent(url)}&source=${source}`
     }),
-    chapters: dom.querySelectorAll(".selectEpisode option").map((chapter: any) => ({
-      name: chapter.innerText.trim(),
-      id: chapter.getAttribute('value')?.split('/').pop().match(/\d+/g)?.join(''),
-      chap: 'chap-' + chapter.innerText.split(' ')[1],
-    })),
     source
   }
 }

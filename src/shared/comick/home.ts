@@ -4,9 +4,9 @@ const getHome = async (page: number = 1, type: string, sourceNum: string): Promi
 
   const handleSource = () => {
     if (type === 'browse') {
-      return `https://api.comick.fun/chapter?page=${page}&device-memory=8&order=hot`
+      return `https://api.comick.fun/chapter?lang=en-ja-vi&page=${page}&device-memory=8&order=hot`
     } else {
-      return `https://api.comick.fun/chapter?page=${page}&device-memory=8&order=new`
+      return `https://api.comick.fun/chapter?lang=en-ja-vi&page=${page}&device-memory=8&order=new`
     }
   }
 
@@ -17,7 +17,7 @@ const getHome = async (page: number = 1, type: string, sourceNum: string): Promi
       for (let manga of source) {
         items.push({
           title: manga.md_comics.title,
-          cover: `https://meo.comick.pictures/${manga.md_comics.md_covers[0].b2key}?width=240`,
+          cover: `https://meo.comick.pictures/${manga.md_comics.md_covers[0]?.b2key}?width=240`,
           chapter: 'Chap ' + manga.md_comics.last_chapter,
           chapSlug: manga.hid + '-chapter-' + manga.chap + '-en',
           chapId: manga.hid,
@@ -28,7 +28,7 @@ const getHome = async (page: number = 1, type: string, sourceNum: string): Promi
         });
       }
 
-      const hasNextPage = true;
+      const hasNextPage = page <= 40 ? true : false;
       const currentPage = page;
 
       return {

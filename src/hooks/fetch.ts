@@ -46,6 +46,12 @@ class Fetch {
 
         return data;
     }
+
+    getChapters = async ({ slug, chapter, id }: any): Promise<any> => {
+        const { data } = await axios.get(`/api/chapters?source=${this.source}&slug=${slug}&chapSlug=${chapter}&id=${id}`);
+
+        return data;
+    }
 }
 
 export default Fetch;

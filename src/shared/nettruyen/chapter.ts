@@ -5,12 +5,10 @@ export const getChapter = async (source: string, comicSLug: any, chapterSLug: an
     const handleSlug = comicSLug.split("-").slice(0, -1).join("-");
 
     const links = [
-        `truyen-tranh/${handleSlug}/${chapterSLug}/${chapterId}`,
-        `truyen-tranh/${comicSLug}`
+        `truyen-tranh/${handleSlug}/${chapterSLug}/${chapterId}`
     ];
     const html = await Promise.all(links.map(async (link) => (await axios.get(link)).data));
     const dom = parse(html[0]);
-    const dom2 = parse(html[1])
     if (!dom.querySelector(".txt-primary a")?.innerText) { //trường hợp chapter mới nhất hiển thị ở HomePage nhưng chưa đọc được
         throw new Error("Wrong Hash");
     }
@@ -25,15 +23,6 @@ export const getChapter = async (source: string, comicSLug: any, chapterSLug: an
                 : url;
             return `/api/proxy?url=${encodeURIComponent(url)}&source=${source}`
         }),
-        chapters: dom2.querySelectorAll("#nt_listchapter ul li:not(.heading)").map((chapter: any) => ({
-            name: chapter.querySelector('.chapter').innerText.trim(),
-            id: chapter.querySelector('a').getAttribute('data-id'),
-            chap: chapter
-                .querySelector(".chapter a")
-                ?.getAttribute("href")
-                ?.split("/")
-                .slice(-2)[0],
-        })),
         source
     }
 }

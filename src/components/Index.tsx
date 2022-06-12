@@ -1,8 +1,8 @@
 import Link from 'next/link';
 
-const Index = ({ dt, slug, source }: any) => (
+const Index = ({ chapters, slug, source }: any) => ( //chapters
     <div className='grid grid-cols-chapter gap-[7px] pr-2'>
-        {dt.chapters.map((item: any) => (
+        {chapters.map((item: any) => (
             <Link
                 key={item.id}
                 // as={`/manga/${slug}/${item.chap}`}

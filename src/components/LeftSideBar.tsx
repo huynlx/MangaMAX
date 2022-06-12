@@ -74,7 +74,7 @@ const LeftSideBar: FC<SidebarProps> = ({ id, closeNav }) => {
             }}
           >
             <img
-              className=' min-w-[2.75rem] h-11 border-2 rounded-full object-cover'
+              className=' min-w-[2.75rem] h-11 border-2 border-logo-darken rounded-full object-cover'
               src={reading.cover}
               alt="Cover"
               onError={(e) => e.currentTarget.src = '/_next/image?url=/onError.png&w=720&q=75'}

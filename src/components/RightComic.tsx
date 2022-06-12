@@ -3,9 +3,19 @@ import { CgDisplayGrid } from 'react-icons/cg';
 import Index from './Index';
 import List from './List';
 import { useAppSelector } from '@/hooks/useRedux';
+import useFetchChapters from '@/hooks/useFetchChapters';
+import { ImSpinner8 } from 'react-icons/im';
+import { useLayoutEffect } from 'react';
 
-const RightComic = ({ dt, handleSort, slug, handleChapter, source }: any) => {
+const RightComic = ({ chapters, handleSort, slug, handleChapter, source, setChapters }: any) => {
     const { reducer3 } = useAppSelector(state => state);
+    const { data, isLoading } = useFetchChapters(slug, source);
+
+    useLayoutEffect(() => {
+        if (data) {
+            setChapters(data);
+        }
+    }, [data])
 
     return (
         <div className='chapters lg:w-[40%]'>
@@ -15,16 +25,22 @@ const RightComic = ({ dt, handleSort, slug, handleChapter, source }: any) => {
                 <div className='float-right border h-[31px] bg-white'></div>
                 <CgDisplayGrid title='List | Index' onClick={() => handleChapter()} className='float-right hover:brightness-75 mx-2' size={30} />
             </div>
-            <ul className='overflow-y-scroll max-h-[80vh] -mr-[6px]'>
+            <ul className='overflow-y-scroll h-full max-h-[80vh] -mr-[6px]'>
+                {
+                    isLoading &&
+                    <div className='flex justify-center gap-[7px] pr-2 h-full'>
+                        <ImSpinner8 className='animate-spin absolute top-[45%]' size={60} />
+                    </div>
+                }
                 {reducer3.indexChapters ? (
                     <Index
-                        dt={dt}
+                        chapters={chapters}
                         slug={slug}
                         source={source}
                     />
                 ) : (
                     <List
-                        dt={dt}
+                        chapters={chapters}
                         slug={slug}
                         source={source}
                     />
