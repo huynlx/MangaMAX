@@ -1,7 +1,7 @@
 import Grid from '@/components/Grid';
 import { useRouter } from 'next/router';
 import useFetchSearch from '@/hooks/useFetchSearch';
-import TypeRender from './TypeRender';
+import TypeRender from './shared/TypeRender';
 
 const SearchComponent = () => {
     const router = useRouter();

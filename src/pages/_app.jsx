@@ -12,7 +12,7 @@ import { user as setUser, bookmarks as setBookmarks } from 'src/store/action';
 import { db } from 'src/utils/firebase';
 import { useAppSelector, useAppDispatch } from 'src/hooks/useRedux';
 import { collection, getDocs, query, where } from 'firebase/firestore';
-import Draggable from '@/components/Draggable';
+import Draggable from '@/components/shared/Draggable';
 import { useRouter } from "next/router";
 import Head from 'src/components/Head';
 import { PersistGate } from 'redux-persist/integration/react';

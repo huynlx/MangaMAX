@@ -2,7 +2,7 @@ import getRecents from '@/hooks/getRecents';
 import { FC, useEffect } from 'react';
 import { handleSource } from '@/store/action';
 import Grid from './Grid';
-import TypeRender from './TypeRender';
+import TypeRender from './shared/TypeRender';
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 
 const RecentsComponent:FC = () => {

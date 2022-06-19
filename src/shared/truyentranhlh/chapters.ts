@@ -1,7 +1,7 @@
 import { parse } from "node-html-parser";
 import axios from "@/utils/axios"
 
-export const getChapters = async (comicSLug: string): Promise<any> => {
+export const getChapters = async (comicSLug: string, source: number): Promise<any> => {
   const html = (await axios.get(`truyen-tranh/${comicSLug}`)).data;
   const dom = parse(html);
   const index = dom.querySelectorAll(".list-chapters.at-series > a").map((item, index) => index).reverse();
@@ -13,7 +13,8 @@ export const getChapters = async (comicSLug: string): Promise<any> => {
       view: 'N/A',
       id: chapter.getAttribute('href')?.split('/').pop()?.match(/\d+/g).join(''),
       chap: chapter.getAttribute('href')?.split('/').pop(),
-      nameIndex: index[i] + 1
+      nameIndex: index[i] + 1,
+      source
     })),
   }
 }

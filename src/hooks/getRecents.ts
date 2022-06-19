@@ -1,6 +1,6 @@
 import { useAppSelector } from "@/hooks/useRedux";
 
-const getRecents = () => {
+const GetRecents = () => {
     const { reducer4 } = useAppSelector(state => state);
 
     return {
@@ -12,4 +12,4 @@ const getRecents = () => {
     };
 };
 
-export default getRecents;
+export default GetRecents;

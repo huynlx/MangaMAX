@@ -1,15 +1,15 @@
-import { mangaProps } from "@/components/LeftComic";
+import { mangaProps } from "@/components/info/LeftComic";
 import { RootState } from "@/store";
 
 export const regexMatchMultiString = /NhatTruyen|TruyenQQ|NetTruyen|Cmangavip.com|Cmanga/g;
 
-export const API_URL = "http://www.nettruyenmoi.com/";
+export const API_URL = "http://www.nettruyenn.com/";
 
 export const SOURCES = [
     {
         source: '1',
         name: 'Server 1',
-        url: 'http://www.nettruyenco.com/',
+        url: 'http://www.nettruyenn.com/',
         type: 'latest',
         server: "nettruyen",
         adult: false

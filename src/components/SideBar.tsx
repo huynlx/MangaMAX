@@ -2,7 +2,7 @@ import { FC, memo, useCallback, useEffect, useState } from 'react';
 import LeftSideBar from '@/components/LeftSideBar';
 import { IoListSharp } from 'react-icons/io5';
 import RightSideBar from '@/components/RightSideBar';
-import OverlayModal from '@/components/OverlayModal';
+import OverlayModal from '@/components/shared/OverlayModal';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { useAppSelector } from '@/hooks/useRedux';
 

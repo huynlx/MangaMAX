@@ -24,7 +24,7 @@ const getSearch = async (sourceNum: string, keyword: string, page: number = 1, u
 
             return {
                 title: decodeHTMLEntity(item.childNodes[3].innerText),
-                cover: `https://images.weserv.nl/?url=${encodeURIComponent(image?.replace('lxhentai.com//', 'lxhentai.com/') as string)}`,
+                cover: `https://apoqrsgtqq.cloudimg.io/${(image?.replace('lxhentai.com//', 'lxhentai.com/'))}`,
                 chapter: item.querySelector(".latest-chapter a")?.innerText,
                 chapSlug: item.getElementsByTagName('a')[1].getAttribute('href')?.split('/').pop(),
                 chapId: item.getElementsByTagName('a')[1].getAttribute('href')?.split('/').pop(),

@@ -1,5 +1,4 @@
-import React, { useLayoutEffect } from 'react';
-import { useImage } from '@/hooks/useImage';
+import React, { useLayoutEffect, useState } from 'react';
 
 interface ReadImageProps {
     src: string,
@@ -13,10 +12,10 @@ interface ReadImageProps {
 }
 
 const ReadImage: React.FC<ReadImageProps> = ({ src, opacity, icon: Icon, alt, ...props }) => {
-    const { loaded, loadImage } = useImage(src);
+    const [loaded, setLoaded] = useState(false);
 
     useLayoutEffect(() => {
-        loadImage()
+        setLoaded(false);
     }, [src])
 
     return (
@@ -33,7 +32,8 @@ const ReadImage: React.FC<ReadImageProps> = ({ src, opacity, icon: Icon, alt, ..
             }
             <img
                 alt={alt}
-                src={loaded ? src : ''}
+                src={src}
+                onLoad={() => setLoaded(true)}
                 onError={(e) => e.currentTarget.src = '/_next/image?url=/onError.png&w=720&q=75'}
                 className={props.className + (loaded ? '' : ' opacity-0 !h-0')}
                 loading="lazy"

@@ -10,7 +10,7 @@ export const getChapter = async (source: string, comicSLug: any, chapterSLug: an
     const dom = parse(html[0]);
 
     const list = [...dom.querySelectorAll('.text-center img')]
-    const image = (img: string | undefined) => img?.includes('https') ? `https://images.weserv.nl/?url=${encodeURIComponent(img?.replace('lxhentai.com//', 'lxhentai.com/') as string)}` : img;
+    const image = (img: string | undefined) => img?.includes('https') ? `https://apoqrsgtqq.cloudimg.io/${(img?.replace('lxhentai.com//', 'lxhentai.com/'))}` : img;
 
     return {
         title: dom.querySelector('a.text-ellipsis.font-semibold')?.innerText,

@@ -1,7 +1,7 @@
 import { parse } from "node-html-parser";
 import axios from "@/utils/axios";
 
-export const getChapters = async (comicSLug: any): Promise<any> => {
+export const getChapters = async (comicSLug: any, source: number): Promise<any> => {
   const links = [
     `truyen-tranh/${comicSLug}`
   ];
@@ -20,7 +20,8 @@ export const getChapters = async (comicSLug: any): Promise<any> => {
         ?.getAttribute("href")
         ?.split("/")
         .slice(-2)[0],
-      nameIndex: index[i] + 1
+      nameIndex: index[i] + 1,
+      source
     })),
   }
 }

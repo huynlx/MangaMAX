@@ -1,4 +1,4 @@
-import { mangaProps } from "@/components/LeftComic";
+import { mangaProps } from "@/components/info/LeftComic";
 import { doc, DocumentData, DocumentReference, updateDoc } from "firebase/firestore";
 import { useCallback, useEffect, useRef } from "react";
 import { useAppDispatch, useAppSelector } from "./useRedux";

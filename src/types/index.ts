@@ -20,7 +20,8 @@ export interface ComicProps {
         desc: string,
         chapters: ChaptersProps[],
         source: string
-    }
+    },
+    chapters: ChaptersProps[]
 }
 
 export interface SourceProps {

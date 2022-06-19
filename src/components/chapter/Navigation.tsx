@@ -2,21 +2,22 @@ import { useRouter } from 'next/router';
 import { useCallback, useEffect } from 'react';
 import Link from 'next/link';
 import { NavigationProps } from '@/types';
-import LinkCheck from './LinkCheck';
+import LinkCheck from '../LinkCheck';
 import { FaChevronLeft, FaChevronRight, FaHome, FaList } from 'react-icons/fa';
 import { useScroll } from '@/hooks/useScroll';
 
-const Navigation = ({ chapters, chapterId, comicSlug, select, select2, source }: NavigationProps) => {
+const Navigation = ({ chapters, chapterId, comicSlug, source }: NavigationProps) => {
     const direction = useScroll();
-    const selectedIndex = chapters.indexOf(chapters.find((chap) => chap.id === chapterId)!);
+    const selectedIndex = chapters?.indexOf(chapters.find((chap) => chap.id === chapterId)!);
     const router = useRouter();
 
     const prevChapter = useCallback(() => {
+
         router.push({
             pathname: `/manga/${comicSlug}/${chapters[selectedIndex + 1].chap}`,
             query: {
                 id: chapters[selectedIndex + 1].id,
-                source
+                source: chapters[0].source
             }
         })
     }, [selectedIndex])
@@ -25,7 +26,7 @@ const Navigation = ({ chapters, chapterId, comicSlug, select, select2, source }:
             pathname: `/manga/${comicSlug}/${chapters[selectedIndex - 1].chap}`,
             query: {
                 id: chapters[selectedIndex - 1].id,
-                source
+                source: chapters[0].source
             }
         })
     }, [selectedIndex])
@@ -34,7 +35,7 @@ const Navigation = ({ chapters, chapterId, comicSlug, select, select2, source }:
             pathname: `/manga/${comicSlug}/${chapterSlug}`,
             query: {
                 id: chapters.find((chap: { chap: any; }) => chap.chap === chapterSlug)?.id,
-                source
+                source: chapters[0].source
             },
         });
     }, [])
@@ -58,14 +59,14 @@ const Navigation = ({ chapters, chapterId, comicSlug, select, select2, source }:
     }, [])
 
     return (
-        <div className={`z-10 overflow-x-hidden flex items-center gap-1 w-full justify-center bg-primary ${direction === 'up' && 'sticky top-0'}`}>
+        <div className={`z-10 overflow-x-hidden flex items-center gap-1 w-full justify-center bg-[#0d0d0d] ${direction === 'up' && 'sticky top-0'}`}>
             <LinkCheck>
                 <a><FaHome className='mr-2 hover:text-white transition' size={30} title='Home' /></a>
             </LinkCheck>
             <Link href={`/manga/${router.query.slug}?source=${source}`}>
                 <a><FaList className='mr-2 hover:text-white transition' size={30} title='Info' /></a>
             </Link>
-            <button title='Prev Chapter' disabled={selectedIndex === chapters.length - 1} onClick={prevChapter} className='p-2 bg-main hover:bg-main-hover w-10 h-10 text-white disabled:opacity-50 transition'>
+            <button title='Prev Chapter' disabled={selectedIndex === chapters?.length - 1} onClick={prevChapter} className='p-2 bg-main hover:bg-main-hover w-10 h-10 text-white disabled:opacity-50 transition'>
                 <FaChevronLeft size={20} />
             </button>
             <label className='hidden' htmlFor="selectChapter"></label>

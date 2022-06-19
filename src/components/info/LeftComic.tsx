@@ -1,17 +1,17 @@
 import Link from 'next/link';
 import { FC, useState } from 'react';
 import { FaChevronRight } from 'react-icons/fa';
-import ReadImage from './ReadImage';
+import ReadImage from '../shared/ReadImage';
 import { FaRegHeart } from 'react-icons/fa';
 import { BsSuitHeartFill } from 'react-icons/bs';
-import FollowIcon from '@/components/Icon';
+import FollowIcon from '@/components/shared/Icon';
 import { mangaObj, regexMatchMultiString } from '@/constants/index';
 import { useAppSelector } from "@/hooks/useRedux";
 import { useBookmarks } from '@/hooks/useBookmarks';
-import OverlayImage from '@/components/OverlayImage';
+import OverlayImage from '@/components/shared/OverlayImage';
 import Modal from '@/components/Modal';
 import { BsFillImageFill } from 'react-icons/bs';
-import Spinner from './Spinner';
+import Spinner from '../shared/Spinner';
 
 export interface mangaProps {
     title: string,
@@ -44,14 +44,16 @@ const LeftComic: FC<any> = ({ info, slug }) => {
                     <OverlayImage>
                         <svg data-v-20f285ec="" data-v-fd73eeec="" width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="#fff" className="xLarge icon"><path data-v-20f285ec="" fill="currentColor" d="m9.5 13.09 1.41 1.41-4.5 4.5H10v2H3v-7h2v3.59l4.5-4.5m1.41-3.59L9.5 10.91 5 6.41V10H3V3h7v2H6.41l4.5 4.5m3.59 3.59 4.5 4.5V14h2v7h-7v-2h3.59l-4.5-4.5 1.41-1.41M13.09 9.5l4.5-4.5H14V3h7v7h-2V6.41l-4.5 4.5-1.41-1.41Z"></path></svg>
                     </OverlayImage>
-                    <ReadImage
-                        alt='Cover'
-                        className='object-cover mx-auto w-full h-full'
-                        src={info.cover}
-                        className2='bg-gray-400 mx-auto w-full h-full'
-                        icon={BsFillImageFill}
-                        className3='text-gray-600 w-7 h-7 sm:w-9 sm:h-9 animate-pulse'
-                    />
+                    <div className='border-[3px] h-full'>
+                        <ReadImage
+                            alt='Cover'
+                            className='object-cover mx-auto w-full h-full'
+                            src={info.cover}
+                            className2='bg-gray-600 mx-auto w-full h-full animate-pulse'
+                            icon={BsFillImageFill}
+                            className3='text-gray-600 w-7 h-7 sm:w-9 sm:h-9'
+                        />
+                    </div>
                 </div>
                 <Modal isOpen={showModal} onClose={handleHide} className='bg-root bg-opacity-[.95]'>
                     <ReadImage
@@ -69,15 +71,8 @@ const LeftComic: FC<any> = ({ info, slug }) => {
                     <p className='text-white text-base font-semibold'>Status: <span className='text-green-400'>{info.status}</span></p>
                     <p className='text-white text-base font-semibold'>Last Updated: <span className='text-gray-300'>{info.lastUpdate}</span></p>
                     <p className='text-white text-base font-semibold'>Server: <span className='text-white'>{info.source}</span></p>
-                    <FollowIcon
-                        iconSize={30}
-                        iconClassName='text-red-400 md:hover:scale-125 transition hidden lg:block'
-                        cb={follow ? removeFollow : addFollow}
-                        icon={follow ? BsSuitHeartFill : FaRegHeart}
-                        title='Bookmark'
-                    />
                     {/* <p>Thể loại: {info.genres.join(", ")}</p> */}
-                    {info.chapters.length > 0 && <div className='my-2 flex items-center'>
+                    {info.chapters?.length > 0 && <div className='my-2 flex items-center'>
                         <Link
                             href={{
                                 pathname: `/manga/${slug}/${info.chapters.slice(-1)[0].chap}`,
@@ -92,8 +87,15 @@ const LeftComic: FC<any> = ({ info, slug }) => {
                                 query: { id: info.chapters[0].id, source: info.source },
                             }}
                         >
-                            <a className='text-white text-xl bg-yellow-500/[.8] h-[42px] min-w-[42px] px-2 flex items-center justify-center rounded-full hover:bg-yellow-500 duration-300 font-bold'>{info.chapters[0].nameIndex}</a>
+                            <a className='text-white text-xl bg-yellow-500/[.8] h-[42px] min-w-[42px] px-2 mr-4 flex items-center justify-center rounded-full hover:bg-yellow-500 duration-300 font-bold'>{info.chapters[0].nameIndex}</a>
                         </Link>
+                        <FollowIcon
+                            iconSize={30}
+                            iconClassName='text-red-400 md:hover:scale-125 transition hidden lg:block'
+                            cb={follow ? removeFollow : addFollow}
+                            icon={follow ? BsSuitHeartFill : FaRegHeart}
+                            title='Bookmark'
+                        />
                         <FollowIcon
                             iconSize={30}
                             iconClassName='text-red-400 md:hover:scale-125 transition ml-auto lg:hidden'

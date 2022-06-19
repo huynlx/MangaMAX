@@ -6,12 +6,13 @@ import { usePosition } from '@/hooks/usePosition';
 import { SidebarProps } from '@/types';
 import { FC, PropsWithChildren } from 'react';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
-import {AiOutlineCompass} from 'react-icons/ai';
+import { AiOutlineCompass } from 'react-icons/ai';
 import { FiBookOpen, FiUsers } from 'react-icons/fi';
 import { capitalizeFirstLetter } from '@/utils/capitalizeFirstLetter';
 import LinkCheck from '@/components/LinkCheck';
 import { FaAngleRight } from 'react-icons/fa';
 import Link from 'next/link';
+import Navbar from './Navbar';
 
 interface SectionProps {
   icon: React.ComponentType<{ size: number }>,
@@ -47,16 +48,7 @@ const LeftSideBar: FC<SidebarProps> = ({ id, closeNav }) => {
       <div className='py-4' id='logo2'>
         <LinkCheck>
           <a className={`flex items-center justify-start gap-3`}>
-            <img
-              src={`/_next/image?url=/favicon.ico&w=300&q=100`}
-              width={41}
-              height={41}
-              alt="Logo"
-            />
-            <h1 className="text-xl text-white transition flex-col flex">
-              <span className='font-bold leading-6'>Manga Max</span>
-              <small className='text-gray-400 leading-6'>free manga online</small>
-            </h1>
+            <Navbar.Logo />
           </a>
         </LinkCheck>
       </div>

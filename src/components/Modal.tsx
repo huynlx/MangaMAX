@@ -1,6 +1,6 @@
 import { FC, PropsWithChildren } from 'react';
 import { createPortal } from 'react-dom';
-import OverlayModal from '@/components/OverlayModal';
+import OverlayModal from '@/components/shared/OverlayModal';
 
 interface modalProps {
   isOpen: boolean,

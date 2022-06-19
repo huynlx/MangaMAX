@@ -1,6 +1,6 @@
 import axios from "@/utils/axios"
 
-export const getChapters = async (comicSLug: string): Promise<any> => {
+export const getChapters = async (comicSLug: string, source: number): Promise<any> => {
   const html = (await axios.get(`https://api.comick.fun/comic/${comicSLug.split('-').pop()}/chapter?lang=en,ja,vi`)).data; //chapters
 
   const pages = Math.ceil(html.total / 100);
@@ -36,7 +36,8 @@ export const getChapters = async (comicSLug: string): Promise<any> => {
         view: 'N/A',
         id: chapter.hid,
         chap: 'chap-' + chapter.chap,
-        nameIndex: index[i] + 1
+        nameIndex: index[i] + 1,
+        source
       });
     }),
     total: html.total

@@ -26,11 +26,7 @@ const Navbar = ({ scroll }: { scroll: boolean }) => {
             <div className='flex items-center justify-between'>
                 <LinkCheck>
                     <a id='logo1' className={`items-center ml-[50px] hidden lg:flex justify-start gap-3`}>
-                        <img src={`/_next/image?url=/favicon.ico&w=300&q=100`} width={41} height={41} alt="Logo" />
-                        <h1 className="text-xl text-white transition flex-col flex">
-                            <span className='font-bold leading-6'>Manga Max</span>
-                            <small className='text-gray-400 leading-6'>free manga online</small>
-                        </h1>
+                        <Navbar.Logo />
                     </a>
                 </LinkCheck>
                 <SideBar
@@ -63,5 +59,16 @@ const Navbar = ({ scroll }: { scroll: boolean }) => {
         </div >
     );
 };
+
+// eslint-disable-next-line react/display-name
+Navbar.Logo = () => (
+    <>
+        <img src={`/_next/image?url=/favicon.ico&w=300&q=100`} width={41} height={41} alt="Logo" />
+        <h1 className="text-xl text-white transition flex-col flex">
+            <span className='text-[1.35rem] font-bold leading-6'>Manga Max</span>
+            <small className='text-gray-400 leading-6'>free manga online</small>
+        </h1>
+    </>
+);
 
 export default Navbar;

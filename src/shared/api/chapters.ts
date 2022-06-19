@@ -19,22 +19,22 @@ export const getChapters = async (sourceObj: any, comicSLug: any, chapterSLug: a
 
   switch (source) {
     case '1':
-      return nettruyen(comicSLug); //nettruyen
+      return nettruyen(comicSLug, source); //nettruyen
     case '2':
-      return nettruyen(comicSLug); //nhattruyen
+      return nettruyen(comicSLug, source); //nhattruyen
     case '3':
-      return lxhentai(comicSLug); //lxhentai
+      return lxhentai(comicSLug, source); //lxhentai
     case '4':
-      return truyen48(comicSLug); //truyen48
+      return truyen48(comicSLug, source); //truyen48
     case '5':
-      return truyentranhlh(comicSLug); //truyenlh
+      return truyentranhlh(comicSLug, source); //truyenlh
     case '7':
-      return cmanga(comicSLug); //cmanga
+      return cmanga(comicSLug, source); //cmanga
     case '8':
-      return comick(comicSLug); //comick
+      return comick(comicSLug, source); //comick
     case '9':
-      return hentaicube(comicSLug); //hentaicube
+      return hentaicube(comicSLug, source); //hentaicube
     case '10':
-      return truyen48(comicSLug); //truyenqq
+      return truyen48(comicSLug, source); //truyenqq
   }
 }

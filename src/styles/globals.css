@@ -106,7 +106,7 @@ input[type="search"] {
   color: white;
 }
 
-#leftNav2{
+#leftNav2 {
   overflow-y: overlay;
 }
 
@@ -116,4 +116,9 @@ input[type="search"] {
 
 #leftNav2:hover::-webkit-scrollbar {
   display: block;
+}
+
+.prevent-page-scrolling {
+  overflow-y: hidden;
+  overscroll-behavior: contain;
 }

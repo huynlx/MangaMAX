@@ -6,7 +6,7 @@ const getHome = async (page: number = 1, type: string, sourceNum: string): Promi
     if (type === 'browse') {
       return `hot?page=${page}`
     } else {
-      return `https://api.mangaii.com/api/v1/comics?page=${page}&limit=70`
+      return `https://api.mangaii.com/api/v1/comics?page=${page}&limit=100`
     }
   }
 

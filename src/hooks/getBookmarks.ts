@@ -1,7 +1,7 @@
 
 import { useAppSelector } from "@/hooks/useRedux";
 
-const getBookmarks = () => {
+const GetBookmarks = () => {
     const { reducer4 } = useAppSelector(state => state);
 
     return {
@@ -13,4 +13,4 @@ const getBookmarks = () => {
     };
 };
 
-export default getBookmarks;
+export default GetBookmarks;

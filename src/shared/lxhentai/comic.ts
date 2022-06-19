@@ -11,7 +11,7 @@ export const getComicInfo = async (comicSLug: string, source: string): Promise<a
 
     return {
         title: decodeHTMLEntity(dom.querySelector('div.truncate > span.font-semibold')?.innerText.trim()!),
-        cover: `https://images.weserv.nl/?url=${encodeURIComponent(cover?.replace('lxhentai.com//', 'lxhentai.com/') as string)}`,
+        cover: `https://apoqrsgtqq.cloudimg.io/${(cover?.replace('lxhentai.com//', 'lxhentai.com/'))}`,
         author: dom.querySelector('.grow .mt-2 span a[href*="tac-gia"]')?.innerText ?? null,
         status: dom.querySelectorAll('.grow .mt-2')[2].querySelector(".text-blue-500")?.innerText,
         genres: dom.querySelectorAll('.grow .mt-2 span:last-child a').map(genre => genre.innerText),

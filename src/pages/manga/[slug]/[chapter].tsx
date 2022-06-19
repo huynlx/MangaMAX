@@ -1,5 +1,5 @@
 import { NextPage } from 'next';
-import ChapterComponent from '@/components/Chapter';
+import ChapterComponent from '@/components/chapter/Chapter';
 import { useRouter } from 'next/router';
 import useFetchChapter from '@/hooks/useFetchChapter';
 import Loader from '@/components/Loader';
@@ -17,9 +17,22 @@ const Chapter: NextPage = () => {
         return <Page404 />
     }
 
-    return (!isLoading && !loadingChapters) ? (
-        <ChapterComponent chapter={{ ...data, ...chapters }} chapterId={id} comicSlug={slug} selectedIndex={selectedIndex} />
-    ) : <div className='relative min-h-[calc(100vh-7rem)]'><Loader /></div>;
+    return (
+        <div className='inset-0 absolute bg-primary z-50'>
+            {
+                // !loadingChapters ? (
+                <ChapterComponent
+                    loadChapter={isLoading}
+                    loadChapters={loadingChapters}
+                    chapter={{ ...data, ...chapters }}
+                    chapterId={id}
+                    comicSlug={slug}
+                    selectedIndex={selectedIndex}
+                />
+                // ) : <div className='relative min-h-[calc(100vh-7rem)]'><Loader /></div>
+            }
+        </div>
+    )
 };
 
 export default Chapter;

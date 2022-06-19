@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import { useAppDispatch, useAppSelector } from '@/hooks/useRedux';
-import { mangaProps } from '@/components/LeftComic';
+import { mangaProps } from '@/components/info/LeftComic';
 import { useBookmarks } from '@/hooks/useBookmarks';
 import { FC, memo, useCallback } from 'react';
-import OverlayImage from '@/components/OverlayImage';
+import OverlayImage from '@/components/shared/OverlayImage';
 import { usePosition } from '@/hooks/usePosition';
 import Meta from '@/components/Meta';
 import { recents } from '@/store/action';
