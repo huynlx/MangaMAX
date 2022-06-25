@@ -15,7 +15,7 @@ const getSearch = async (sourceNum: string, keyword: string, page: number = 1): 
     for (let manga of source) {
       items.push({
         title: manga.title,
-        cover: `https://meo.comick.pictures/${manga.md_covers[0]?.b2key}?width=240`,
+        cover: `https://meo3.comick.pictures/${manga.md_covers[0]?.b2key}?width=240`,
         chapter: null,
         chapSlug: null,
         chapId: null,

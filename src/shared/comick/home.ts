@@ -17,7 +17,7 @@ const getHome = async (page: number = 1, type: string, sourceNum: string): Promi
       for (let manga of source) {
         items.push({
           title: manga.md_comics.title,
-          cover: `https://meo.comick.pictures/${manga.md_comics.md_covers[0]?.b2key}?width=240`,
+          cover: `https://meo3.comick.pictures/${manga.md_comics.md_covers[0]?.b2key}?width=240`,
           chapter: 'Chap ' + manga.md_comics.last_chapter,
           chapSlug: manga.hid + '-chapter-' + manga.chap + '-en',
           chapId: manga.hid,

@@ -14,10 +14,10 @@ const getHome = async (page: number = 1, type: string, sourceNum: string): Promi
     return htmls.map((source, index) => {
       const items = [];
 
-      for (let manga of source.data) {
+      for (const manga of source.data) {
         const title = manga.name;
         const id = 'https://mangaii.com/comic/' + manga.slug;
-        const image = `https://mangaii.com/_next/image?url=https%3A%2F%2Fapi.mangaii.com%2Fmedia%2Fcover_images%2F${manga.cover_image}&w=256&q=100`;
+        const image = `https://api.mangaii.com/media/cover_images/${manga.cover_image}`; 
         const sub = 'Chapter ' + manga.chapter?.number;
         items.push({
           subtitleText: sub,

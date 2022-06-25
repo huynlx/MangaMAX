@@ -3,7 +3,7 @@
   "version": "0.3.0",
   "private": true,
   "author": "huynhzip3",
-  "description": "Website đọc manga hoàn toàn miễn phí, không quảng cáo.",
+  "description": "Website đọc manga hoàn toàn miễn phí, đéo quảng cáo.",
   "scripts": {
     "dev": "next dev -p 8080",
     "build": "next build",

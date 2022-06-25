@@ -11,7 +11,7 @@ export const getChapter = async (source: string, comicSLug: any, chapterSLug: an
     chapterCurrent: html.chapTitle,
     updateAt: null,
     images: html.chapter.md_images.map((img: any) => {
-      return `https://meo.comick.pictures/${img.b2key}`;
+      return `https://meo3.comick.pictures/${img.b2key}`;
     }),
     source
   }
