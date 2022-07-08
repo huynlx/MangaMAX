@@ -18,6 +18,8 @@ import Head from 'src/components/Head';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
 import { wrapper, store, persistor } from 'src/store';
+import Script from 'next/script';
+import { GA_MEASUREMENT_ID } from '../constants/index';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -156,6 +158,21 @@ const MyApp = ({ Component, pageProps }) => {
   return (
     <>
       <Head />
+      <Script
+        strategy="afterInteractive"
+        src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+      />
+
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_MEASUREMENT_ID}', {
+              page_path: window.location.pathname,
+            });
+        `}
+      </Script>
       <Provider store={store}>
         <PersistGate persistor={persistor} loading={null}>
           <QueryClientProvider client={queryClient}>

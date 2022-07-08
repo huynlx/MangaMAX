@@ -112,3 +112,5 @@ export const TITLES = ['latest', 'browse'];
 export const FORYOU = ['recents', 'bookmarks'];
 
 export const WEBSITE_URL = 'https://mangamax-huynh.cf/'
+
+export const GA_MEASUREMENT_ID = "G-MGL73630CW";
