@@ -14,7 +14,8 @@ const SideRight = ({
   selectedIndex,
   width,
   loadChapter,
-  view
+  view,
+  index
 }: any) => {
   const { reducer3: select2 } = useAppSelector(state => state);
 
@@ -50,11 +51,14 @@ const SideRight = ({
             />)
         }
       </div>
-      <div className={`w-full h-60 p-8 mb-20 ${selectedIndex < 1 && 'hidden'}`}>
-        <button onClick={nextChap} className="w-full h-full border-2 border-dashed border-gray-600 text-gray-600 hover:border-white hover:text-white transition duration-300 flex items-center justify-center">
-          <p className="text-2xl flex gap-3 items-center">Next Chapter <FaArrowRight className='mt-[3px]' /></p>
-        </button>
-      </div>
+      {
+        !loadChapter &&
+        <div className={`w-full h-60 p-8 mb-20 ${index < 1 && 'hidden'}`}>
+          <button onClick={nextChap} className="w-full h-full border-2 border-dashed border-gray-600 text-gray-600 hover:border-white hover:text-white transition duration-300 flex items-center justify-center">
+            <p className="text-2xl flex gap-3 items-center">Next Chapter <FaArrowRight className='mt-[3px]' /></p>
+          </button>
+        </div>
+      }
     </div>
   );
 };

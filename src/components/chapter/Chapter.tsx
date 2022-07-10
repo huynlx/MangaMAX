@@ -19,16 +19,18 @@ const ChapterComponent = (props: any) => {
     })
     const [direction, setDirection] = useState();
 
-    const { chapter, comicSlug, selectedIndex } = props;
-    const { reducer: select } = useAppSelector(state => state);
+    const { chapter, comicSlug, selectedIndex, chapterId } = props;
+    const { reducer: select, reducer5: { chapters, id, index } } = useAppSelector(state => state);
+
     const router = useRouter();
+    
     const nextChapter = useCallback(() => { //lưu filterChap ở sideLeft vào store rồi lấy ra, ko dùng cả chapters nữa
         router.push({
-            pathname: `/manga/${comicSlug}/${chapter.chapters[selectedIndex - 1].chap}`,
-            query: { id: chapter.chapters[selectedIndex - 1].id, source: chapter.chapters[0].source }
+            pathname: `/manga/${comicSlug}/${chapters[index - 1].chap}`,
+            query: { id: chapters[index - 1].id, source: chapters[0].source }
         })
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [comicSlug, chapter.chapters, selectedIndex, router, select.source, select.type]);
+    }, [comicSlug, chapters, index, router, select.source, select.type]);
 
     const checkView = () => {
         const keys = Object.keys(view);
@@ -118,6 +120,7 @@ const ChapterComponent = (props: any) => {
 
                 <SideRight
                     {...props}
+                    index={index}
                     nextChap={nextChapter}
                     select={select}
                     width={width}

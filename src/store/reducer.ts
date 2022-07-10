@@ -133,6 +133,20 @@ const reducer4 = (state = defaultState4, action: AnyAction) => {
   }
 }
 
-const rootReducer = combineReducers({ reducer, reducer2, reducer3, reducer4 });
+const defaultState5 = {
+
+}
+
+//reducer 5
+const reducer5 = (state = defaultState5, action: AnyAction) => {
+  switch (action.type) {
+    case handleTypes.FILTER_CHAPTER:
+      return action.payload
+    default:
+      return state
+  }
+}
+
+const rootReducer = combineReducers({ reducer, reducer2, reducer3, reducer4, reducer5 });
 
 export { rootReducer };

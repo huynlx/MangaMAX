@@ -1,3 +1,5 @@
+import { useAppSelector } from '@/hooks/useRedux';
+import { handleTypes } from '@/store/action';
 import { ChaptersProps } from '@/types';
 import Link from 'next/link';
 import Router from 'next/router';
@@ -6,6 +8,7 @@ import { AiOutlineSearch } from 'react-icons/ai';
 import { BsArrowLeftCircle, BsArrowRightCircle } from 'react-icons/bs';
 import { FaChevronLeft, FaHome } from 'react-icons/fa';
 import { ImSpinner8 } from 'react-icons/im';
+import { useDispatch } from 'react-redux';
 import LinkCheck from '../LinkCheck';
 import Button from '../shared/Button';
 
@@ -20,10 +23,13 @@ const SideLeft = ({
   setView,
   loadChapter
 }: any) => {
-  const [title, setTitle] = useState<string>('');
   const [currentChap, setCurrentChap] = useState<string>('');
   const { icon: Icon, mode } = view;
   const [filterChap, setFilterChap] = useState<ChaptersProps[] | null | any>(null);
+  const dispatch = useDispatch();
+
+  const { reducer4: { recents } } = useAppSelector(state => state);
+  const reading = [...recents].reverse()[0];
 
   const clickViewSelect = useCallback(() => {
     if (mode === 'fit') {
@@ -41,7 +47,15 @@ const SideLeft = ({
     if (filterChap && selectedIndex !== -1 && filterChap[selectedIndex]) { //warning thôi đéo phải lỗi đâu
       setCurrentChap(filterChap[selectedIndex].name)
     }
-  }, [filterChap, selectedIndex])
+
+    dispatch({
+      type: handleTypes.FILTER_CHAPTER, payload: {
+        chapters: filterChap,
+        id: chapterId,
+        index: selectedIndex
+      }
+    })
+  }, [filterChap, chapterId, selectedIndex])
 
   const prevChapter = useCallback(() => {
     Router.push({
@@ -79,8 +93,8 @@ const SideLeft = ({
         <LinkCheck>
           <a><Button><FaHome size={25} /></Button></a>
         </LinkCheck>
-        <Link href={`/manga/${comicSlug}?source=${chapter.source}`}>
-          <a className="text-white font-semibold line-clamp-1 w-56 text-center hover:underline">{title}</a>
+        <Link href={`/manga/${comicSlug}?source=${reading.source}`}>
+          <a className="text-white font-semibold line-clamp-1 w-56 text-center hover:underline">{reading.title}</a>
         </Link>
         <Button onClick={() => setWidth(!width)}><FaChevronLeft size={20} /></Button>
         {/* <span className='w-full'> {chapter.chapterCurrent} <small>{chapter.updateAt}</small></span> */}
@@ -88,7 +102,7 @@ const SideLeft = ({
     );
 
     return element;
-  }, [title]);
+  }, [reading]);
 
   const renderViewSelect = () => (
     <>
@@ -97,12 +111,6 @@ const SideLeft = ({
       </Button>
     </>
   )
-
-  useLayoutEffect(() => {
-    if (!loadChapter) {
-      setTitle(chapter.title);
-    }
-  }, [loadChapter]);
 
   useLayoutEffect(() => {
     setFilterChap(chapters);
@@ -146,9 +154,6 @@ const SideLeft = ({
     } else {
       return (
         <>
-          {
-            renderTitle
-          }
           <div className='text-white currentChapter flex justify-between items-center w-full'>
             <Button
               className='disabled:opacity-50'
@@ -192,7 +197,7 @@ const SideLeft = ({
         </>
       )
     }
-  }, [view, title, filterChap, currentChap]);
+  }, [view, filterChap, currentChap]);
 
   const onChangeSearch = useCallback((e) => {
     const { value } = e.currentTarget;
@@ -202,6 +207,9 @@ const SideLeft = ({
 
   return (
     <div className={`h-screen left-0 top-0 bg-primary flex flex-col p-2 gap-2 ${!width ? 'translate-x-[-100%]' : 'translate-x-[0%]'} transition-all duration-[.4s] fixed z-30 w-[24%] prevent-page-scrolling`}>
+      {
+        renderTitle
+      }
       {
         renderContent
       }

@@ -4,8 +4,9 @@ import thunkMiddleware from 'redux-thunk';
 import { rootReducer } from '@/store/reducer';
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
+import { composeWithDevTools } from 'redux-devtools-extension';
 
-const bindMiddleware = (middleware: any) => applyMiddleware(...middleware);
+const bindMiddleware = (middleware: any) => composeWithDevTools(applyMiddleware(...middleware));
 
 const persistConfig = {
     key: 'root',

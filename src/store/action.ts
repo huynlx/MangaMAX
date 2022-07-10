@@ -17,7 +17,8 @@ export const handleTypes = {
     LOADING: "LOADING",
     LAYOUT: "LAYOUT",
     DEL_RECENTS: 'DEL_RECENTS',
-    DEL_BOOKMARKS: 'DEL_BOOKMARKS'
+    DEL_BOOKMARKS: 'DEL_BOOKMARKS',
+    FILTER_CHAPTER: 'FILTER_CHAPTER'
 }
 
 export const handleSource = (source: string | string[] | undefined, type: string | string[] | undefined, store?: any) => (dispatch: AppDispatch) => {

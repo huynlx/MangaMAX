@@ -5,6 +5,7 @@ import useFetchChapter from '@/hooks/useFetchChapter';
 import Loader from '@/components/Loader';
 import Page404 from '@/pages/404';
 import useFetchChapters from '@/hooks/useFetchChapters';
+import { useEffect } from 'react';
 
 const Chapter: NextPage = () => {
     const router = useRouter();
