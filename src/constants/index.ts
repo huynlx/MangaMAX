@@ -3,13 +3,13 @@ import { RootState } from "@/store";
 
 export const regexMatchMultiString = /NhatTruyen|TruyenQQ|NetTruyen|Cmangavip.com|Cmanga/g;
 
-export const API_URL = "http://www.nettruyenn.com/";
+export const API_URL = "http://www.nettruyenme.com/";
 
 export const SOURCES = [
     {
         source: '1',
         name: 'Server 1',
-        url: 'http://www.nettruyenn.com/',
+        url: 'http://www.nettruyenme.com/',
         type: 'latest',
         server: "nettruyen",
         adult: false
