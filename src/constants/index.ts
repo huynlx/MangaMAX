@@ -1,4 +1,4 @@
-import { mangaProps } from "@/components/info/LeftComic";
+import { mangaProps } from "@/components/Info/LeftComic";
 import { RootState } from "@/store";
 
 export const regexMatchMultiString = /NhatTruyen|TruyenQQ|NetTruyen|Cmangavip.com|Cmanga/g;

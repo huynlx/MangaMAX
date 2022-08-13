@@ -1,6 +1,6 @@
 import { NextPage } from 'next';
-import BookmarksComponent from '@/components/Bookmarks';
-import Head from '@/components/Head';
+import BookmarksComponent from '@/components/Bookmarks/Bookmarks';
+import Head from '@/components/Shared/Head';
 
 const Bookmarks: NextPage = () => (
     <>

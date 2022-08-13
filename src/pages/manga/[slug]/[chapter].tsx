@@ -1,8 +1,8 @@
 import { NextPage } from 'next';
-import ChapterComponent from '@/components/chapter/Chapter';
+import ChapterComponent from '@/components/Chapter/Chapter';
 import { useRouter } from 'next/router';
 import useFetchChapter from '@/hooks/useFetchChapter';
-import Loader from '@/components/Loader';
+import Loader from '@/components/Loading/Loader';
 import Page404 from '@/pages/404';
 import useFetchChapters from '@/hooks/useFetchChapters';
 import { useEffect } from 'react';

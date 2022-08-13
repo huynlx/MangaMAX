@@ -1,4 +1,4 @@
-import ComicCard from '@/components/ComicCard';
+import ComicCard from "./ComicCard";
 
 const ColumnRender = ({ colRendered }: any) => (
     <div className='col flex flex-col gap-2'>

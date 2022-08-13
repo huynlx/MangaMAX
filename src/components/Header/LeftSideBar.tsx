@@ -9,7 +9,7 @@ import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { AiOutlineCompass } from 'react-icons/ai';
 import { FiBookOpen, FiUsers } from 'react-icons/fi';
 import { capitalizeFirstLetter } from '@/utils/capitalizeFirstLetter';
-import LinkCheck from '@/components/LinkCheck';
+import LinkCheck from '@/components/Shared/LinkCheck';
 import { FaAngleRight } from 'react-icons/fa';
 import Link from 'next/link';
 import Navbar from './Navbar';

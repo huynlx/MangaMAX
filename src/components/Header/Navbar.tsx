@@ -1,13 +1,13 @@
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import SideBar from '@/components/SideBar';
+import SideBar from '@/components/Home/SideBar';
 import { titleCase } from '@/shared/cmanga/titleCase';
 import { GrClose } from 'react-icons/gr';
-import Dropdown from '@/components/Dropdown';
+import Dropdown from '@/components/Header/Dropdown';
 import { useScroll } from '@/hooks/useScroll';
 import { useAppSelector } from '@/hooks/useRedux';
-import Input from '@/components/Input';
-import LinkCheck from '@/components/LinkCheck';
+import LinkCheck from '@/components/Shared/LinkCheck';
+import Input from '@/components/Shared/Input';
 
 export const checkPathname = (pathname: string): boolean => {
     return ['/', '/search', '/bookmarks', '/recents'].some((item: string) => item === pathname);

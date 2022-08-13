@@ -1,4 +1,4 @@
-import {ImSpinner8} from 'react-icons/im'
+import { ImSpinner8 } from 'react-icons/im'
 
 const LoadMore = () => (
     <div className='hidden w-fit bg-root mx-auto px-20 py-2 border-transparent rounded-md md:block'>

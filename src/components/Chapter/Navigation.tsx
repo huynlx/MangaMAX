@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { useCallback, useEffect } from 'react';
 import Link from 'next/link';
 import { NavigationProps } from '@/types';
-import LinkCheck from '../LinkCheck';
+import LinkCheck from '../Shared/LinkCheck';
 import { FaChevronLeft, FaChevronRight, FaHome, FaList } from 'react-icons/fa';
 import { useScroll } from '@/hooks/useScroll';
 

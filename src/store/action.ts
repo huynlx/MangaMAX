@@ -2,23 +2,10 @@ import { SOURCES } from "@/constants/index";
 import axios from "@/utils/axios";
 import { logout } from "@/utils/firebase";
 import { AppDispatch } from '@/store';
+import { handleTypes } from "./types";
 
 interface LooseObject {
     [key: string]: any
-}
-
-export const handleTypes = {
-    SOURCE: 'SOURCE',
-    WINDOW_RESIZE: 'WINDOW_RESIZE',
-    SCROLL: 'SCROLL_POSITION',
-    RECENTS: 'RECENTS',
-    USER: 'USER',
-    BOOKMARKS: 'BOOKMARKS',
-    LOADING: "LOADING",
-    LAYOUT: "LAYOUT",
-    DEL_RECENTS: 'DEL_RECENTS',
-    DEL_BOOKMARKS: 'DEL_BOOKMARKS',
-    FILTER_CHAPTER: 'FILTER_CHAPTER'
 }
 
 export const handleSource = (source: string | string[] | undefined, type: string | string[] | undefined, store?: any) => (dispatch: AppDispatch) => {

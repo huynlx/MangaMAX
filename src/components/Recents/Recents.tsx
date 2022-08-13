@@ -1,9 +1,9 @@
 import getRecents from '@/hooks/getRecents';
 import { FC, useEffect } from 'react';
 import { handleSource } from '@/store/action';
-import Grid from './Grid';
-import TypeRender from './shared/TypeRender';
+import TypeRender from '../Shared/TypeRender';
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
+import Grid from '../Home/Grid';
 
 const RecentsComponent:FC = () => {
     const dispatch = useAppDispatch();

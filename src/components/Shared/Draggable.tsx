@@ -1,5 +1,5 @@
 import React, { memo, useCallback, useRef, useState } from "react";
-import ToolNav from "@/components/shared/ToolNav";
+import ToolNav from "@/components/Shared/ToolNav";
 
 const Draggable: React.FC = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });

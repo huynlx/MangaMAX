@@ -1,14 +1,14 @@
 import Link from 'next/link';
 import { useAppDispatch, useAppSelector } from '@/hooks/useRedux';
-import { mangaProps } from '@/components/info/LeftComic';
+import { mangaProps } from '@/components/Info/LeftComic';
 import { useBookmarks } from '@/hooks/useBookmarks';
 import { FC, memo, useCallback } from 'react';
-import OverlayImage from '@/components/shared/OverlayImage';
+import OverlayImage from '@/components/Shared/OverlayImage';
 import { usePosition } from '@/hooks/usePosition';
-import Meta from '@/components/Meta';
+import Meta from '@/components/Shared/Meta';
 import { recents } from '@/store/action';
 import { mangaObj } from '@/constants/index';
-import Image from "@/components/Image";
+import Image from "@/components/Shared/Image";
 
 
 const Comic: FC<any> = ({ item }) => {

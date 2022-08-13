@@ -1,8 +1,8 @@
 import { SOURCES, WINDOW_SIZE } from "@/constants";
 import { HYDRATE } from "next-redux-wrapper";
 import { AnyAction } from "redux";
-import { handleTypes } from "@/store/action";
 import { combineReducers } from 'redux';
+import { handleTypes } from "./types";
 
 const defaultState = SOURCES[0];
 

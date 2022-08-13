@@ -1,7 +1,7 @@
 import React, { memo, useCallback, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useAppSelector } from "@/hooks/useRedux";
-import Head from '../Head';
+import Head from '../Shared/Head';
 import SideLeft from './SideLeft';
 import SideRight from './SideRight';
 import { CgArrowsHAlt, CgArrowsShrinkH, CgMaximizeAlt } from 'react-icons/cg';

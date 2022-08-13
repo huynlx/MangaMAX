@@ -1,6 +1,6 @@
 import { NextPage } from 'next';
-import RecentsComponent from '@/components/Recents';
-import Head from '@/components/Head';
+import RecentsComponent from '@/components/Recents/Recents';
+import Head from '@/components/Shared/Head';
 
 const Recents: NextPage = () => (
     <>

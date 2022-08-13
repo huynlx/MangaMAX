@@ -1,14 +1,14 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { setData } from '@/utils/setData';
 import { setCol } from '@/utils/setData';
-import Loader from '@/components/Loader';
-import ColumnRender from '@/components/ColumnRender';
+import Loader from '@/components/Loading/Loader';
+import ColumnRender from '@/components/Home/ColumnRender';
 import dynamic from 'next/dynamic';
-const LoadMore = dynamic(() => import('./LoadMore'));
+const LoadMore = dynamic(() => import('@/components/Loading/LoadMore'));
 import { User } from 'firebase/auth';
 import { useAppSelector } from '@/hooks/useRedux';
 import { usePosition } from '@/hooks/usePosition';
-import ComicCard from '@/components/ComicCard';
+import ComicCard from './ComicCard';
 
 interface GridProps {
     keyword?: string,
@@ -49,7 +49,7 @@ const Grid: React.FC<GridProps> = ({ keyword, fetch, typeRender: TypeRender, use
         const handleScroll = () => {
             if (
                 window.innerHeight + window.scrollY >=
-                document.body.offsetHeight - 500
+                document.body.offsetHeight - 700
             ) {
                 page !== page + 1 && setPage(page + 1);
             }

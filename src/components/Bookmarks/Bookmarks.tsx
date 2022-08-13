@@ -1,10 +1,10 @@
 import { useRouter } from 'next/router';
 import { FC, useEffect } from 'react';
 import { handleSource } from '@/store/action';
-import TypeRender from '@/components/shared/TypeRender';
-import Grid from '@/components/Grid';
+import TypeRender from '@/components/Shared/TypeRender';
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import getBookmarks from '@/hooks/getBookmarks';
+import Grid from '../Home/Grid';
 
 const BookmarksComponent: FC = () => {
     const { reducer4: { user, bookmarks }, reducer: select } = useAppSelector(state => state);

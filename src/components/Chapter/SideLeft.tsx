@@ -1,5 +1,4 @@
 import { useAppSelector } from '@/hooks/useRedux';
-import { handleTypes } from '@/store/action';
 import { ChaptersProps } from '@/types';
 import Link from 'next/link';
 import Router from 'next/router';
@@ -9,8 +8,9 @@ import { BsArrowLeftCircle, BsArrowRightCircle } from 'react-icons/bs';
 import { FaChevronLeft, FaHome } from 'react-icons/fa';
 import { ImSpinner8 } from 'react-icons/im';
 import { useDispatch } from 'react-redux';
-import LinkCheck from '../LinkCheck';
-import Button from '../shared/Button';
+import LinkCheck from '../Shared/LinkCheck';
+import Button from '../Shared/Button';
+import { handleTypes } from '@/store/types';
 
 const SideLeft = ({
   chapter,
@@ -199,7 +199,7 @@ const SideLeft = ({
     }
   }, [view, filterChap, currentChap]);
 
-  const onChangeSearch = useCallback((e) => {
+  const onChangeSearch = useCallback((e: { currentTarget: { value: any; }; }) => {
     const { value } = e.currentTarget;
     const filterData = chapters?.filter((item: ChaptersProps) => item.name.includes(value));
     setFilterChap(filterData);

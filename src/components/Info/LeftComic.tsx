@@ -1,17 +1,17 @@
 import Link from 'next/link';
 import { FC, useState } from 'react';
 import { FaChevronRight } from 'react-icons/fa';
-import ReadImage from '../shared/ReadImage';
+import ReadImage from '../Shared/ReadImage';
 import { FaRegHeart } from 'react-icons/fa';
 import { BsSuitHeartFill } from 'react-icons/bs';
-import FollowIcon from '@/components/shared/Icon';
+import FollowIcon from '@/components/Shared/Icon';
 import { mangaObj, regexMatchMultiString } from '@/constants/index';
 import { useAppSelector } from "@/hooks/useRedux";
 import { useBookmarks } from '@/hooks/useBookmarks';
-import OverlayImage from '@/components/shared/OverlayImage';
-import Modal from '@/components/Modal';
+import OverlayImage from '@/components/Shared/OverlayImage';
+import Modal from '@/components/Shared/Modal';
 import { BsFillImageFill } from 'react-icons/bs';
-import Spinner from '../shared/Spinner';
+import Spinner from '../Loading/Spinner';
 
 export interface mangaProps {
     title: string,

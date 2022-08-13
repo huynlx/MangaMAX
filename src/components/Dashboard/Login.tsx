@@ -3,7 +3,7 @@ import { logInWithEmailAndPassword, signInWithFacebook, signInWithGoogle } from 
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
-import Form from "./Form";
+import Form from "../Shared/Form";
 import { ImSpinner8 } from "react-icons/im";
 
 export const validateEmail = (email: string): boolean => /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email.toLowerCase());

@@ -1,11 +1,11 @@
 import type { NextPage } from 'next'
 import { memo } from 'react';
-import Grid from '@/components/Grid'
 import useFetchHome from '@/hooks/useFetchHome';
 import { handleSource } from '@/store/action';
 import { useAppDispatch, useAppSelector } from '@/hooks/useRedux';
 import { capitalizeFirstLetter } from '@/utils/capitalizeFirstLetter';
-import DisplayOptions from '@/components/DisplayOptions';
+import DisplayOptions from '@/components/Home/DisplayOptions';
+import Grid from '@/components/Home/Grid';
 
 const Home: NextPage = () => {
   const dispatch = useAppDispatch();

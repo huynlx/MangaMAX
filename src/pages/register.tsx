@@ -1,6 +1,6 @@
 import { NextPage } from "next";
-import RegisterComponent from '@/components/Register';
-import Head from '@/components/Head';
+import RegisterComponent from '@/components/Dashboard/Register';
+import Head from '@/components/Shared/Head';
 
 const Register: NextPage = () => (
     <>

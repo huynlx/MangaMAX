@@ -1,6 +1,6 @@
 import { NextPage } from "next";
-import ResetComponent from '@/components/Reset';
-import Head from '@/components/Head';
+import Head from '@/components/Shared/Head';
+import ResetComponent from "@/components/Dashboard/Reset";
 
 const Reset: NextPage = () => (
     <>

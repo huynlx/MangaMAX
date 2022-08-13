@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { ComicProps } from '@/types';
 import { RiSortDesc } from 'react-icons/ri';
-import LeftComic from '@/components/info/LeftComic';
-import RightComic from '@/components/info/RightComic';
+import LeftComic from '@/components/Info/LeftComic';
+import RightComic from '@/components/Info/RightComic';
 import { FaChevronLeft } from 'react-icons/fa';
 import { titleCase } from '@/shared/cmanga/titleCase';
-import LinkCheck from '@/components/LinkCheck';
+import LinkCheck from '@/components/Shared/LinkCheck';
 import { CgDisplayGrid } from 'react-icons/cg';
 import { setScroll } from '@/store/action';
 import { useAppDispatch, useAppSelector } from '@/hooks/useRedux';
-import Head from '../Head';
+import Head from '../Shared/Head';
 
 const Info = ({ info, slug, chapters }: ComicProps) => {
     const { reducer: select, reducer3 } = useAppSelector(state => state);
