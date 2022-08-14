@@ -25,8 +25,8 @@ const Head: React.FC<HeadProps> = (props) => {
       <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests"></meta>
       <link rel="manifest" href="/manifest.json" />
       <link rel="apple-touch-icon" href="/icon.png"></link>
-      
-      <meta name='viewport' content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover' />
+
+      <meta name='viewport' content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover' />
 
       <meta name="title" content={title} />
       <meta name="description" content={description} />

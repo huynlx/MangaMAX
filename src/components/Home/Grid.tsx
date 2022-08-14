@@ -49,7 +49,7 @@ const Grid: React.FC<GridProps> = ({ keyword, fetch, typeRender: TypeRender, use
         const handleScroll = () => {
             if (
                 window.innerHeight + window.scrollY >=
-                document.body.offsetHeight - 700
+                document.body.offsetHeight - 600
             ) {
                 page !== page + 1 && setPage(page + 1);
             }

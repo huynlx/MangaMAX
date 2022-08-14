@@ -1,9 +1,9 @@
 import { NextPage } from 'next';
-import Info from '@/components/Info/Info';
 import { useRouter } from 'next/router';
 import useFetchComic from '@/hooks/useFetchComic';
 import Loader from '@/components/Loading/Loader';
 import useFetchChapters from '@/hooks/useFetchChapters';
+import Info from '@/components/Info/Info';
 
 const Comic: NextPage = () => {
     const router = useRouter();

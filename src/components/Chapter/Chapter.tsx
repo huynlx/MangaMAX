@@ -2,9 +2,9 @@ import React, { memo, useCallback, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useAppSelector } from "@/hooks/useRedux";
 import Head from '../Shared/Head';
+import { CgArrowsHAlt, CgArrowsShrinkH, CgMaximizeAlt } from 'react-icons/cg';
 import SideLeft from './SideLeft';
 import SideRight from './SideRight';
-import { CgArrowsHAlt, CgArrowsShrinkH, CgMaximizeAlt } from 'react-icons/cg';
 
 interface viewProps {
     [key: string]: boolean | undefined
@@ -23,7 +23,7 @@ const ChapterComponent = (props: any) => {
     const { reducer: select, reducer5: { chapters, id, index } } = useAppSelector(state => state);
 
     const router = useRouter();
-    
+
     const nextChapter = useCallback(() => { //lưu filterChap ở sideLeft vào store rồi lấy ra, ko dùng cả chapters nữa
         router.push({
             pathname: `/manga/${comicSlug}/${chapters[index - 1].chap}`,
@@ -62,7 +62,9 @@ const ChapterComponent = (props: any) => {
 
     return (
         <>
-            <Head title={chapter.title + " (" + chapter.chapterCurrent?.replace('- ', '') + ")"} />
+            {
+                chapter.title && <Head title={chapter?.title + " (" + chapter.chapterCurrent?.replace('- ', '') + ")"} />
+            }
             <div className='bg-[#0d0d0d] w-full'>
                 <SideLeft
                     {...props}

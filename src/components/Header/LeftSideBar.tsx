@@ -145,7 +145,7 @@ const LeftSideBar: FC<SidebarProps> = ({ id, closeNav }) => {
         ))}
       </Section>
 
-      <div className="flex text-sm md:col-span-4 pt-4 px-2 text-white font-semibold">
+      <div className="flex text-sm md:col-span-4 pt-4 px-2 text-white font-semibold absolute bottom-[16px]">
         © MangaMax 2022
       </div>
     </div>
