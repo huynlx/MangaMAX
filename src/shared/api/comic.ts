@@ -6,6 +6,7 @@ import { getComicInfo as hentaicube } from "@/shared/hentaicube/comic";
 import { getComicInfo as truyen48 } from "@/shared/truyen48/comic";
 import { getComicInfo as truyentranhlh } from "@/shared/truyentranhlh/comic";
 import { getComicInfo as comick } from "@/shared/comick/comic";
+import { getComicInfo as blogtruyen } from "@/shared/blogtruyen/comic";
 
 export const getComicInfo = async (sourceObj: any, comicSLug: string): Promise<any> => {
     const { url, source } = sourceObj;
@@ -21,6 +22,8 @@ export const getComicInfo = async (sourceObj: any, comicSLug: string): Promise<a
             return truyen48(comicSLug, source);
         case '5':
             return truyentranhlh(comicSLug, source);
+        case '6':
+            return blogtruyen(comicSLug, source);
         case '7':
             return cmanga(comicSLug, url, source);
         case '8':
@@ -30,7 +33,7 @@ export const getComicInfo = async (sourceObj: any, comicSLug: string): Promise<a
         case '10':
             return truyen48(comicSLug, source);
     }
-}
+};
 
 
 

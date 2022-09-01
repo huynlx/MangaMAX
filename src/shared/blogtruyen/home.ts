@@ -6,11 +6,11 @@ const getHome = async (page: number = 1, type: string, sourceNum: string, url: s
 
     const handleSource = () => {
         if (type === 'browse') {
-            return `ajax/Search/AjaxLoadListManga?key=tatca&orderBy=3&p=${page}`
+            return `ajax/Search/AjaxLoadListManga?key=tatca&orderBy=3&p=${page}`;
         } else {
-            return `thumb-${page}`
+            return `thumb-${page}`;
         }
-    }
+    };
 
     const handleData = () => {
         if (type === 'browse') { //browse
@@ -26,7 +26,7 @@ const getHome = async (page: number = 1, type: string, sourceNum: string, url: s
                         chapter: item.querySelector("span:nth-child(2)")?.innerText + ' chương' ?? '',
                         slug: item
                             .querySelector("a")
-                            ?.getAttribute("href")?.substr(1),
+                            ?.getAttribute("href")?.split('/')[1],
                         updateAt: null,
                         source: sourceNum
                     });
@@ -62,9 +62,11 @@ const getHome = async (page: number = 1, type: string, sourceNum: string, url: s
                         chapter: item.querySelector("div:nth-child(2) > div:nth-child(4) > span:nth-child(1)")?.innerText ?? '',
                         slug: item
                             .querySelector("div:nth-child(1) > a")
-                            ?.getAttribute("href")?.substr(1).replace('/', '-'),
+                            ?.getAttribute("href")?.substr(1).split('/')[0],
                         updateAt: item.querySelector(".publishedDate")?.childNodes[2].textContent,
-                        source: sourceNum
+                        source: sourceNum,
+                        // chapSlug: item.querySelector(".chapter a")?.getAttribute('href')?.split("/").slice(-2)[0],
+                        // chapId: item.querySelector(".chapter a")?.getAttribute('href')?.split("/").pop(),
                     });
                 });
 
@@ -86,15 +88,15 @@ const getHome = async (page: number = 1, type: string, sourceNum: string, url: s
                 };
             });
         }
-    }
+    };
 
     const sections = {
         "Truyện": handleSource()
-    }
+    };
 
     const htmls = await Promise.all(
         Object.entries(sections).map(([_, value]) => value).map(async (url) => (await instance.get(url)).data)
-    )
+    );
 
     const data = handleData();
 

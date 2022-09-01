@@ -45,7 +45,7 @@ const SideLeft = ({
 
   useLayoutEffect(() => {
     if (filterChap && selectedIndex !== -1 && filterChap[selectedIndex]) { //warning thôi đéo phải lỗi đâu
-      setCurrentChap(filterChap[selectedIndex].name)
+      setCurrentChap(filterChap[selectedIndex].name);
     }
 
     dispatch({
@@ -54,8 +54,8 @@ const SideLeft = ({
         id: chapterId,
         index: selectedIndex
       }
-    })
-  }, [filterChap, chapterId, selectedIndex])
+    });
+  }, [filterChap, chapterId, selectedIndex]);
 
   const prevChapter = useCallback(() => {
     Router.push({
@@ -64,8 +64,8 @@ const SideLeft = ({
         id: filterChap[selectedIndex + 1].id,
         source: filterChap[0].source
       }
-    })
-  }, [selectedIndex, filterChap])
+    });
+  }, [selectedIndex, filterChap]);
 
   const nextChapter = useCallback(() => {
     Router.push({
@@ -74,8 +74,8 @@ const SideLeft = ({
         id: filterChap[selectedIndex - 1].id,
         source: filterChap[0].source
       }
-    })
-  }, [selectedIndex, filterChap])
+    });
+  }, [selectedIndex, filterChap]);
 
   const selectChapter = useCallback((chapterSlug: string, chapterSource: string) => {
     Router.push({
@@ -85,7 +85,7 @@ const SideLeft = ({
         source: chapterSource
       },
     });
-  }, [filterChap])
+  }, [filterChap]);
 
   const renderTitle = useMemo(() => {
     const element = (
@@ -110,7 +110,7 @@ const SideLeft = ({
         <Icon className='text-white' size={25} />
       </Button>
     </>
-  )
+  );
 
   useLayoutEffect(() => {
     setFilterChap(chapters);
@@ -130,7 +130,7 @@ const SideLeft = ({
   }, [prevChapter, nextChapter]);
 
   const renderListChapters = useMemo(() => (
-    <div className='p-2 bg-[#0d0d0d] overflow-auto overscroll-contain'>
+    <div className='p-2 bg-[#0d0d0d] overflow-auto overscroll-contain h-full'>
       <ul className='list'>
         {filterChap?.map((item: ChaptersProps, i: number) => <li
           onClick={() => selectChapter(item.chap, item.source)}
@@ -142,7 +142,7 @@ const SideLeft = ({
         )}
       </ul>
     </div>
-  ), [filterChap, selectedIndex])
+  ), [filterChap, selectedIndex]);
 
   const renderContent = useMemo(() => {
     if (!filterChap) {
@@ -150,7 +150,7 @@ const SideLeft = ({
         <div className='flex justify-center gap-[7px] pr-2 h-full'>
           <ImSpinner8 className='animate-spin absolute top-[45%]' size={80} />
         </div>
-      )
+      );
     } else {
       return (
         <>
@@ -195,7 +195,7 @@ const SideLeft = ({
             filterChap?.length !== 0 && renderListChapters
           }
         </>
-      )
+      );
     }
   }, [view, filterChap, currentChap]);
 

@@ -27,7 +27,7 @@ export const SOURCES = [
     {
         source: '3',
         name: 'Server 3 (18+)',
-        url: 'https://lxhentai.com/',
+        url: 'https://lxhentai.org/',
         type: 'latest',
         server: 'lxhentai',
         adult: true
@@ -88,7 +88,7 @@ export const SOURCES = [
         server: 'mangaii',
         adult: false
     }
-]
+];
 
 export const WINDOW_SIZE = {
     mobile: 320,
@@ -113,6 +113,6 @@ export const mangaObj = (info: any, slug: string, select: RootState, type: strin
 export const TITLES = ['latest', 'browse'];
 export const FORYOU = ['recents', 'bookmarks'];
 
-export const WEBSITE_URL = 'https://mangamax-huynh.cf/'
+export const WEBSITE_URL = 'https://mangamax-huynh.cf/';
 
 export const GA_MEASUREMENT_ID = "G-MGL73630CW";
