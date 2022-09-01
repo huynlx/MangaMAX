@@ -5,6 +5,7 @@ import { getChapters as hentaicube } from "@/shared/hentaicube/chapters";
 import { getChapters as truyen48 } from "@/shared/truyen48/chapters";
 import { getChapters as truyentranhlh } from "@/shared/truyentranhlh/chapters";
 import { getChapters as comick } from "@/shared/comick/chapters";
+import { getChapters as blogtruyen } from "@/shared/blogtruyen/chapters";
 
 /**
  * 
@@ -28,6 +29,8 @@ export const getChapters = async (sourceObj: any, comicSLug: any, chapterSLug: a
       return truyen48(comicSLug, source); //truyen48
     case '5':
       return truyentranhlh(comicSLug, source); //truyenlh
+    case '6':
+      return blogtruyen(comicSLug, source); //blogtruyen
     case '7':
       return cmanga(comicSLug, source); //cmanga
     case '8':
@@ -37,4 +40,4 @@ export const getChapters = async (sourceObj: any, comicSLug: any, chapterSLug: a
     case '10':
       return truyen48(comicSLug, source); //truyenqq
   }
-}
+};
