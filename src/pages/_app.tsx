@@ -19,6 +19,12 @@ import { Provider } from 'react-redux';
 import { wrapper, store, persistor } from 'src/store';
 import Script from 'next/script';
 import { GA_MEASUREMENT_ID } from '../constants/index';
+import { AppProps } from "next/app";
+import ErrorBoundary from "@/components/Shared/ErrorBoundary";
+
+interface WorkaroundAppProps extends AppProps {
+  err: any;
+}
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -31,7 +37,7 @@ const queryClient = new QueryClient({
   },
 });
 
-const MyApp = ({ Component, pageProps }) => {
+const MyApp = ({ Component, pageProps, err }: WorkaroundAppProps) => {
   const { reducer2: { windowSize }, reducer4: { user: userState, layout } } = useAppSelector((state) => state);
   const [scroll, setScroll] = useState(false);
   const [user] = useAuthState(auth);
@@ -41,43 +47,44 @@ const MyApp = ({ Component, pageProps }) => {
 
   //watch resize
   useEffect(() => {
-    let timeout = null;
+    let timeout: ReturnType<typeof setTimeout>;
+
     const resize = () => {
       const { innerWidth } = window;
       if (
         innerWidth < WINDOW_SIZE.mobile &&
         windowSize !== WINDOW_SIZE.mobile
       ) {
-        dispatch(windowResize(WINDOW_SIZE.mobile))
+        dispatch(windowResize(WINDOW_SIZE.mobile));
       } else if (
         innerWidth >= WINDOW_SIZE.mobile &&
         innerWidth < WINDOW_SIZE.phablet &&
         windowSize !== WINDOW_SIZE.phablet
       ) {
-        dispatch(windowResize(WINDOW_SIZE.phablet))
+        dispatch(windowResize(WINDOW_SIZE.phablet));
       } else if (
         innerWidth >= WINDOW_SIZE.phablet &&
         innerWidth < WINDOW_SIZE.tablet &&
         windowSize !== WINDOW_SIZE.tablet
       ) {
-        dispatch(windowResize(WINDOW_SIZE.tablet))
+        dispatch(windowResize(WINDOW_SIZE.tablet));
       } else if (
         innerWidth >= WINDOW_SIZE.tablet &&
         innerWidth < WINDOW_SIZE.laptop &&
         windowSize !== WINDOW_SIZE.laptop
       ) {
-        dispatch(windowResize(WINDOW_SIZE.laptop))
+        dispatch(windowResize(WINDOW_SIZE.laptop));
       } else if (
         innerWidth >= WINDOW_SIZE.laptop &&
         innerWidth < WINDOW_SIZE.desktop &&
         windowSize !== WINDOW_SIZE.desktop
       ) {
-        dispatch(windowResize(WINDOW_SIZE.desktop))
+        dispatch(windowResize(WINDOW_SIZE.desktop));
       } else if (
         innerWidth >= WINDOW_SIZE.desktop &&
         windowSize !== WINDOW_SIZE.all
       ) {
-        dispatch(windowResize(WINDOW_SIZE.all))
+        dispatch(windowResize(WINDOW_SIZE.all));
       }
     };
     const onWidthResize = () => {
@@ -92,7 +99,7 @@ const MyApp = ({ Component, pageProps }) => {
     return () => {
       window.removeEventListener('resize', onWidthResize);
     };
-  }, [windowSize, dispatch]) //=> add windowSize để cập nhật giá trị của windowSize trong useEffect()
+  }, [windowSize, dispatch]);
 
   //watch scroll
   useEffect(() => {
@@ -107,19 +114,19 @@ const MyApp = ({ Component, pageProps }) => {
           setScroll(false);
         }
       }
-    }
+    };
 
     window.addEventListener('scroll', listenToScroll);
     return () => {
       window.removeEventListener('scroll', listenToScroll);
-    }
-  }, [scroll]) //=> add scroll để chạy lại => cập nhật giá trị của scroll trong useEffect()
+    };
+  }, [scroll]);
 
   //handle router loading
   useEffect(() => {
     callLoadingBar();
     return () => removeLoadingBar();
-  }, [])
+  }, []);
 
   useEffect(() => {
     if (pathname === '/' || pathname === '/search') {
@@ -127,7 +134,7 @@ const MyApp = ({ Component, pageProps }) => {
     } else {
       document.body.style.transition = 'all 325ms cubic-bezier(0, 0, 0.2, 1) 0ms';
     }
-  }, [pathname])
+  }, [pathname]);
 
   useEffect(() => {
     const fetchDocument = async () => {
@@ -137,15 +144,15 @@ const MyApp = ({ Component, pageProps }) => {
       const { id } = docs.docs[0];
 
       dispatch(setUser({
-        uid: user.uid,
-        email: user.email,
-        photoURL: user.photoURL,
+        uid: user?.uid,
+        email: user?.email,
+        photoURL: user?.photoURL,
         displayName: name,
         docid: id
       }));
       dispatch(setBookmarks(bookmarks));
       dispatch({ type: 'LOADING', isLoading: false });
-    }
+    };
 
     if (user) {
       fetchDocument();
@@ -175,14 +182,16 @@ const MyApp = ({ Component, pageProps }) => {
       <Provider store={store}>
         <PersistGate persistor={persistor} loading={null}>
           <QueryClientProvider client={queryClient}>
-            <Navbar scroll={scroll} />
-            <Component {...pageProps} />
-            {/* <Draggable /> */}
+            <ErrorBoundary>
+              <Navbar scroll={scroll} />
+              <Component {...pageProps} err={err} />
+              {/* <Draggable /> */}
+            </ErrorBoundary>
           </QueryClientProvider>
         </PersistGate>
       </Provider>
     </>
-  )
-}
+  );
+};
 
 export default wrapper.withRedux(MyApp);

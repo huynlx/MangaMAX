@@ -1,4 +1,4 @@
-import axios from "@/utils/axios"
+import axios from "@/utils/axios";
 
 export const getChapters = async (comicSLug: string, source: number): Promise<any> => {
   const html = (await axios.get(`https://api.comick.fun/comic/${comicSLug.split('-').pop()}/chapter?lang=en,ja,vi`)).data; //chapters
@@ -11,11 +11,11 @@ export const getChapters = async (comicSLug: string, source: number): Promise<an
     if (index === 0) return;
 
     requests.push(`https://api.comick.fun/comic/${comicSLug.split('-').pop()}/chapter?page=${index + 1}&lang=en,ja,vi`);
-  })
+  });
 
   const fetchs = await Promise.all(
     requests.map(async (url: any) => (await axios.get(url)).data)
-  )
+  );
 
   const loadPages = fetchs.map((list: any) => list.chapters).flat();
 
@@ -37,12 +37,12 @@ export const getChapters = async (comicSLug: string, source: number): Promise<an
         id: chapter.hid,
         chap: 'chap-' + chapter.chap,
         nameIndex: index[i] + 1,
-        source
+        source,
       });
     }),
     total: html.total
-  }
-}
+  };
+};
 
 
 

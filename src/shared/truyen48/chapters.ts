@@ -13,12 +13,13 @@ export const getChapters = async (comicSLug: any, source: number): Promise<any> 
   return {
     chapters: dom.querySelectorAll(".works-chapter-list .works-chapter-item").map((chapter: any, i: number) => ({
       name: chapter.querySelector('.name-chap a').innerText.trim(),
-      updateAt: chapter.querySelector('.time-chap').innerText,
+      updateAt: chapter.querySelector('.time-chap').innerText.replaceAll('/', '-'),
       view: 'N/A',
       id: chapter.querySelector('.name-chap a').getAttribute('href')?.split('/').pop().match(/\d+/g)?.join(''),
       chap: 'chap-' + chapter.querySelector('.name-chap a').innerText.split(' ')[1],
       nameIndex: index[i] + 1,
-      source
+      source,
+      dateTime: true
     })),
-  }
-}
+  };
+};

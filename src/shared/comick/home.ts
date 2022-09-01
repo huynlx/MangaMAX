@@ -1,14 +1,15 @@
 import instance from "@/utils/axios";
+import { relativeTimeFromDates } from "@/utils/dateTime";
 
 const getHome = async (page: number = 1, type: string, sourceNum: string): Promise<any> => {
 
   const handleSource = () => {
     if (type === 'browse') {
-      return `https://api.comick.fun/chapter?lang=en-ja-vi&page=${page}&device-memory=8&order=hot`
+      return `https://api.comick.fun/chapter?lang=en-ja-vi&page=${page}&device-memory=8&order=hot`;
     } else {
-      return `https://api.comick.fun/chapter?lang=en-ja-vi&page=${page}&device-memory=8&order=new`
+      return `https://api.comick.fun/chapter?lang=en-ja-vi&page=${page}&device-memory=8&order=new`;
     }
-  }
+  };
 
   const handleData = () => {
     return htmls.map((source, index) => {
@@ -22,7 +23,7 @@ const getHome = async (page: number = 1, type: string, sourceNum: string): Promi
           chapSlug: manga.hid + '-chapter-' + manga.chap + '-en',
           chapId: manga.hid,
           slug: manga.md_comics.slug + '-' + manga.md_comics.id,
-          updateAt: manga.updated_at,
+          updateAt: relativeTimeFromDates(new Date(manga.updated_at)),
           status: null,
           source: sourceNum
         });
@@ -38,15 +39,15 @@ const getHome = async (page: number = 1, type: string, sourceNum: string): Promi
         currentPage
       };
     });
-  }
+  };
 
   const sections = {
     [type]: handleSource()
-  }
+  };
 
   const htmls = await Promise.all(
     Object.entries(sections).map(([_, value]) => value).map(async (url) => (await instance.get(url)).data)
-  )
+  );
 
   const data = handleData();
 

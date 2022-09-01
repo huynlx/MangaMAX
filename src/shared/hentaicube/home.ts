@@ -1,16 +1,17 @@
 import instance from "@/utils/axios";
 import { parse } from "node-html-parser";
 import decodeHTMLEntity from "@/utils/decodeHTML";
+import { relativeTimeFromDates } from "@/utils/dateTime";
 
 const getHome = async (page: number = 1, type: string, sourceNum: string, url: string): Promise<any> => {
 
     const handleSource = () => {
         if (type === 'browse') {
-            return `page/${page}/?s&post_type=wp-manga&m_orderby=views`
+            return `page/${page}/?s&post_type=wp-manga&m_orderby=views`;
         } else {
-            return `page/${page}/?s&post_type=wp-manga&m_orderby=latest`
+            return `page/${page}/?s&post_type=wp-manga&m_orderby=latest`;
         }
-    }
+    };
 
     const handleData = () => {
         return htmls.map((html, index) => {
@@ -18,6 +19,8 @@ const getHome = async (page: number = 1, type: string, sourceNum: string, url: s
 
             const items = dom.querySelectorAll(".tab-content-wrap .c-tabs-item__content").map((item, index) => {
                 const url = item.querySelector(".c-image-hover > a > img")?.getAttribute("data-src") ?? item.querySelector(".c-image-hover > a > img")?.getAttribute("src");
+                const time = item.querySelector(".post-on")?.innerText.trim();
+
                 return ({
                     title: decodeHTMLEntity(item.querySelector(".post-title > h3 > a")?.innerText!),
                     // cover: `/api/proxy?url=${encodeURIComponent(url as string)}&source=${sourceNum}`,
@@ -28,7 +31,7 @@ const getHome = async (page: number = 1, type: string, sourceNum: string, url: s
                     slug: item
                         .querySelector(".c-image-hover > a")
                         ?.getAttribute("href")?.split('/').slice(4, -1)[0],
-                    updateAt: item.querySelector(".post-on")?.innerText.trim(),
+                    updateAt: relativeTimeFromDates(new Date(time!)),
                     source: sourceNum
                 });
             });
@@ -50,15 +53,15 @@ const getHome = async (page: number = 1, type: string, sourceNum: string, url: s
                 currentPage
             };
         });
-    }
+    };
 
     const sections = {
         "Truyện": handleSource()
-    }
+    };
 
     const htmls = await Promise.all(
         Object.entries(sections).map(([_, value]) => value).map(async (url) => (await instance.get(url)).data)
-    )
+    );
 
     const data = handleData();
 
