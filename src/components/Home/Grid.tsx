@@ -14,7 +14,7 @@ interface GridProps {
     keyword?: string,
     fetch?: (props: any) => any,
     typeRender: React.ComponentType<{}>,
-    user?: User | null
+    user?: User | null;
 }
 
 const Grid: React.FC<GridProps> = ({ keyword, fetch, typeRender: TypeRender, user }) => {
@@ -27,18 +27,18 @@ const Grid: React.FC<GridProps> = ({ keyword, fetch, typeRender: TypeRender, use
         return data?.pages.map((list: any) => list.items).flat();
     }, [data]); //gộp nhiều mảng page thành 1 mảng duy nhất
     const content = useMemo(() => {
-        return setData(cols, list ? list : [])
+        return setData(cols, list ? list : []);
     }, [cols, list]);
 
     useEffect(() => {
         (page > 1) && fetchNextPage();
-    }, [page])
+    }, [page]);
 
     useEffect(() => {
         if (cols !== setCol(windowSize)) {
             setCols(setCol(windowSize));
         }
-    }, [windowSize])
+    }, [windowSize]);
 
     useEffect(() => {
         handleScrollTo('auto', reducer3.scrollPosition);
@@ -53,18 +53,18 @@ const Grid: React.FC<GridProps> = ({ keyword, fetch, typeRender: TypeRender, use
             ) {
                 page !== page + 1 && setPage(page + 1);
             }
-        }
+        };
 
         // Listen for scroll events
-        hasNextPage && window.addEventListener("scroll", handleScroll)
+        hasNextPage && window.addEventListener("scroll", handleScroll);
         return () => {
-            window.removeEventListener("scroll", handleScroll)
-        }
-    }, [data])
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, [data]);
 
     useEffect(() => {
         (page > 1) && setPage(1);
-    }, [select])
+    }, [select]);
 
     return (
         <main className={`main px-[2vw] min-h-[calc(100vh-4rem)] relative lg:px-x ${isLoading ? 'bg-grid bg-no-repeat bg-contain xs:bg-auto bg-center' : 'mb-28'}`}>

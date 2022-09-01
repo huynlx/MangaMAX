@@ -1,5 +1,5 @@
 import { parse } from "node-html-parser";
-import axios from "@/utils/axios"
+import axios from "@/utils/axios";
 
 export const getChapters = async (comicSLug: string, source: number): Promise<any> => {
   const html = (await axios.get(`manga/${comicSLug}/`)).data;
@@ -14,10 +14,11 @@ export const getChapters = async (comicSLug: string, source: number): Promise<an
       id: chapter.querySelectorAll('a')[0].getAttribute('href')?.split('/').slice(5, -1)[0],
       chap: chapter.querySelectorAll('a')[0].getAttribute('href')?.split('/').slice(5, -1)[0],
       nameIndex: index[i] + 1,
-      source
+      source,
+      dateTime: true
     })),
-  }
-}
+  };
+};
 
 
 

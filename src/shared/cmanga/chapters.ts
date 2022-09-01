@@ -13,14 +13,16 @@ export const getChapters = async (comicSLug: any, source: number): Promise<any> 
   const chapters: any = [];
   const index = json.map((item: any, index: any) => index).reverse();
   for (const i in json) {
-    const time = json[i].last_update.split(' ');
+    console.log(json[i].last_update);
+
+    const time = json[i].last_update;
     const d = time[0].split('-');
     const t = time[1].split(':');
     const d2 = d[1] + '/' + d[2] + '/' + d[0];
     const t2 = t[0] + ":" + t[1];
     chapters.push({
       name: titleCase(json[i].chapter_name),
-      updateAt: time[0],
+      updateAt: time,
       view: json[i].total_view,
       id: json[i].id_chapter,
       chap: 'chapter-' + parseFloat(json[i].chapter_num),
@@ -31,5 +33,5 @@ export const getChapters = async (comicSLug: any, source: number): Promise<any> 
 
   return {
     chapters: chapters,
-  }
-}
+  };
+};

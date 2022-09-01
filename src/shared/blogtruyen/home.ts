@@ -1,13 +1,19 @@
-import instance from "@/utils/axios";
 import { parse } from "node-html-parser";
 import decodeHTMLEntity from "@/utils/decodeHTML";
+import axios from "axios";
+import { relativeTimeFromDates } from "@/utils/dateTime";
 
 const getHome = async (page: number = 1, type: string, sourceNum: string, url: string): Promise<any> => {
+    let origin: string;
 
     const handleSource = () => {
         if (type === 'browse') {
+            origin = url;
+
             return `ajax/Search/AjaxLoadListManga?key=tatca&orderBy=3&p=${page}`;
         } else {
+            origin = 'https://m.blogtruyen.vn/';
+
             return `thumb-${page}`;
         }
     };
@@ -53,22 +59,25 @@ const getHome = async (page: number = 1, type: string, sourceNum: string, url: s
             return htmls.map((source, index) => {
                 const dom = parse(source);
 
-                const items = dom.querySelectorAll(".list-mainpage .storyitem .row").map((item) => {
-                    const cover = item.querySelector("div:nth-child(1) > a > img")?.getAttribute("src");
+                const items = dom.querySelectorAll(".gridview .row")[0]
+                    ?.querySelectorAll('.item')
+                    ?.map((item) => {
+                        const cover = item.querySelector(".image img")?.getAttribute("src");
+                        const time = new Date(item.querySelector(".chapter .timesince")?.getAttribute('data-date')!);
 
-                    return ({
-                        title: decodeHTMLEntity(item.querySelector("h3.title > a")?.innerText!),
-                        cover: cover,
-                        chapter: item.querySelector("div:nth-child(2) > div:nth-child(4) > span:nth-child(1)")?.innerText ?? '',
-                        slug: item
-                            .querySelector("div:nth-child(1) > a")
-                            ?.getAttribute("href")?.substr(1).split('/')[0],
-                        updateAt: item.querySelector(".publishedDate")?.childNodes[2].textContent,
-                        source: sourceNum,
-                        // chapSlug: item.querySelector(".chapter a")?.getAttribute('href')?.split("/").slice(-2)[0],
-                        // chapId: item.querySelector(".chapter a")?.getAttribute('href')?.split("/").pop(),
+                        return ({
+                            title: decodeHTMLEntity(item.querySelector("figcaption h3 a")?.innerText.trim()),
+                            cover: cover,
+                            chapter: item.querySelector(".chapter a")?.getAttribute('title') ?? '',
+                            slug: item
+                                .querySelector("figcaption h3 a")
+                                ?.getAttribute("href")?.substr(1).split('/')[0],
+                            updateAt: relativeTimeFromDates(time),
+                            source: sourceNum,
+                            chapSlug: item.querySelector(".chapter a")?.getAttribute('href')?.split("/")[2],
+                            chapId: item.querySelector(".chapter a")?.getAttribute('href')?.split("/")[1],
+                        });
                     });
-                });
 
                 const pages: number[] = [];
                 for (const page of [...dom.querySelectorAll("ul.pagination > li a")]) {
@@ -95,7 +104,10 @@ const getHome = async (page: number = 1, type: string, sourceNum: string, url: s
     };
 
     const htmls = await Promise.all(
-        Object.entries(sections).map(([_, value]) => value).map(async (url) => (await instance.get(url)).data)
+        Object
+            .entries(sections)
+            .map(([_, value]) => value)
+            .map(async (url) => (await axios.get(`${origin}${url}`)).data)
     );
 
     const data = handleData();

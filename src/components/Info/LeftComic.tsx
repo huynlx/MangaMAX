@@ -19,7 +19,7 @@ export interface mangaProps {
     url: string,
     slug: string,
     source: string,
-    type: string
+    type: string;
 }
 
 const LeftComic: FC<any> = ({ info, slug }) => {
@@ -31,11 +31,11 @@ const LeftComic: FC<any> = ({ info, slug }) => {
 
     const handleShow = () => {
         setShowModal(true);
-    }
+    };
 
     const handleHide = () => {
         setShowModal(false);
-    }
+    };
 
     return (
         <div className='lg:w-[59vw] lg:pr-4 max-h-[none] lg:max-h-[100vh] overflow-auto'>

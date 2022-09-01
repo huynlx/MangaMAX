@@ -21,7 +21,7 @@ const Comic: FC<any> = ({ item }) => {
     const handleClick = useCallback(() => {
         handlePosition();
         dispatch(recents(mangaObj(item, item.slug, { source: source }, 'recents')));
-    }, [item])
+    }, [item]);
 
     const detail = () => (
         <Link
@@ -31,7 +31,7 @@ const Comic: FC<any> = ({ item }) => {
         </Link>
     );
 
-    const chapter = () => item.chapter && (
+    const chapter = () => item.chapter && item.chapSlug && (
         <Link
             // as={`/manga/${item.slug}/${item.chapSlug}`}
             href={{
@@ -39,9 +39,9 @@ const Comic: FC<any> = ({ item }) => {
                 query: { id: item.chapId, source: item.source }
             }}
         >
-            <a onClick={handleClick} className="hover:bg-white xl:px-5 hover:text-link duration-300 px-3 py-1 bg-link rounded-full font-semibold text-sm xl:text-base line-clamp-1">{item.chapter.replace('Chapter', 'Chap')}</a>
+            <a onClick={handleClick} className="max-w-[86%] hover:bg-white xl:px-5 hover:text-link duration-300 px-3 py-1 bg-link rounded-full font-semibold text-sm xl:text-base line-clamp-1">{item.chapter.replace('Chapter', 'Chap')}</a>
         </Link>
-    )
+    );
 
     const handleBookmark = () => (
         <button

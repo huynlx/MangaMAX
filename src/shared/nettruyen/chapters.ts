@@ -21,7 +21,8 @@ export const getChapters = async (comicSLug: any, source: number): Promise<any> 
         ?.split("/")
         .slice(-2)[0],
       nameIndex: index[i] + 1,
-      source
+      source,
+      dateTime: true
     })),
-  }
-}
+  };
+};

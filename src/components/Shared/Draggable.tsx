@@ -54,7 +54,7 @@ const Draggable: React.FC = () => {
       }
 
       setPosition(position);
-    }
+    };
     const onTouchEnd = () => {
       if (container) {
         container.style.width = 'auto';
@@ -62,7 +62,7 @@ const Draggable: React.FC = () => {
       }
       document.removeEventListener("touchmove", onTouchMove);
       document.removeEventListener("touchend", onTouchEnd);
-    }
+    };
     document.addEventListener("touchmove", onTouchMove);
     document.addEventListener("touchend", onTouchEnd);
   }, [position, setPosition, draggableRef]);

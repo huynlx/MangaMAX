@@ -1,15 +1,16 @@
 import instance from "@/utils/axios";
 import { parse } from "node-html-parser";
 import decodeHTMLEntity from "@/utils/decodeHTML";
+import { relativeTimeFromDates } from "@/utils/dateTime";
 
 const getHome = async (page: number = 1, type: string, sourceNum: string, url: string): Promise<any> => {
     const handleSource = () => {
         if (type === 'browse') {
-            return `danh-sach?sort=new&page=${page}`
+            return `danh-sach?sort=new&page=${page}`;
         } else {
-            return `danh-sach?sort=update&page=${page}`
+            return `danh-sach?sort=update&page=${page}`;
         }
-    }
+    };
 
     const handleData = () => {
         return htmls.map((source, index) => {
@@ -17,6 +18,7 @@ const getHome = async (page: number = 1, type: string, sourceNum: string, url: s
 
             const items = dom.querySelectorAll(".col-md-8 > .card > .card-body > .row .thumb-item-flow").map((item, index) => {
                 const cover = item.querySelector(".a6-ratio > div.img-in-ratio")?.getAttribute("data-bg");
+                const time = new Date(item.querySelector("time.timeago")?.getAttribute("datetime")!);
 
                 return ({
                     title: decodeHTMLEntity(item.querySelector(".series-title > a")?.innerText),
@@ -30,7 +32,7 @@ const getHome = async (page: number = 1, type: string, sourceNum: string, url: s
                         ?.getAttribute("href")
                         ?.split("/")
                         .slice(-1)[0],
-                    updateAt: item.querySelector("time.timeago")?.getAttribute("datetime"),
+                    updateAt: relativeTimeFromDates(time),
                     source: sourceNum
                 });
             });
@@ -52,15 +54,15 @@ const getHome = async (page: number = 1, type: string, sourceNum: string, url: s
                 currentPage
             };
         });
-    }
+    };
 
     const sections = {
         "Truyện": handleSource()
-    }
+    };
 
     const htmls = await Promise.all(
         Object.entries(sections).map(([_, value]) => value).map(async (url) => (await instance.get(url)).data)
-    )
+    );
 
     const data = handleData();
 
