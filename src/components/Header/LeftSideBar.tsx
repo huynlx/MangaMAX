@@ -15,10 +15,10 @@ import Link from 'next/link';
 import Navbar from './Navbar';
 
 interface SectionProps {
-  icon: React.ComponentType<{ size: number }>,
+  icon: React.ComponentType<{ size: number; }>,
   name: string,
   id: string,
-  size: number
+  size: number;
 }
 
 const Section: FC<PropsWithChildren<SectionProps>> = ({ icon: Icon, name, id, children, size }) => {
@@ -31,7 +31,7 @@ const Section: FC<PropsWithChildren<SectionProps>> = ({ icon: Icon, name, id, ch
       {children}
     </div>
   );
-}
+};
 
 const LeftSideBar: FC<SidebarProps> = ({ id, closeNav }) => {
   const { reducer: select, reducer4: { recents } } = useAppSelector(state => state);
@@ -41,7 +41,7 @@ const LeftSideBar: FC<SidebarProps> = ({ id, closeNav }) => {
   const router = useRouter();
   const reading = [...recents].reverse()[0];
 
-  const p_style = (a: string, b: string) => `!text-white rounded-4 !text-[16px] px-4 py-[6px] ${select[b] === a ? 'bg-logo-darken font-bold' : 'hover:bg-accent-lighten font-semibold'}`;
+  const p_style = (a: string, b: string) => `!text-white rounded-4 !text-[16px] px-4 py-[6px] ${select[b] === a ? 'bg-logo-darken font-bold' : 'hover:bg-accent-lighten'}`;
 
   return (
     <div id={id} className={`sidenav z-20 w-[230px] lg:z-10 -left-[230px] lg:left-0 bg-accent px-4 pb-4`}>  {/* -left-[230px] */}
@@ -145,7 +145,7 @@ const LeftSideBar: FC<SidebarProps> = ({ id, closeNav }) => {
         ))}
       </Section>
 
-      <div className="flex text-sm md:col-span-4 pt-4 px-2 text-white font-semibold absolute bottom-[16px]">
+      <div className="relative top-16 w-full flex text-sm md:col-span-4 px-2 text-white font-semibold bottom-[16px]">
         © MangaMax 2022
       </div>
     </div>
