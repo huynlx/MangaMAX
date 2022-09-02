@@ -13,7 +13,7 @@ export const getChapters = async (comicSLug: any, source: number): Promise<any> 
   return {
     chapters: dom.querySelectorAll(".works-chapter-list .works-chapter-item").map((chapter: any, i: number) => ({
       name: chapter.querySelector('.name-chap a').innerText.trim(),
-      updateAt: chapter.querySelector('.time-chap').innerText.replaceAll('/', '-'),
+      updateAt: chapter.querySelector('.time-chap').innerText,
       view: 'N/A',
       id: chapter.querySelector('.name-chap a').getAttribute('href')?.split('/').pop().match(/\d+/g)?.join(''),
       chap: 'chap-' + chapter.querySelector('.name-chap a').innerText.split(' ')[1],
