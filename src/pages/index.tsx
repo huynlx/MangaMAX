@@ -1,4 +1,4 @@
-import type { NextPage } from 'next'
+import type { NextPage } from 'next';
 import { memo } from 'react';
 import useFetchHome from '@/hooks/useFetchHome';
 import { handleSource } from '@/store/action';
@@ -16,21 +16,21 @@ const Home: NextPage = () => {
       <h1
         className={`text-white sm:text-4xl text-3xl font-bold mr-auto`}
         onClick={() => {
-          dispatch(handleSource(select.source, select.type))
+          dispatch(handleSource(select.source, select.type));
         }}
       >
         {capitalizeFirstLetter(select.type)}
       </h1>
       <DisplayOptions />
     </>
-  )
+  );
 
   return (
     <Grid
       fetch={useFetchHome}
       typeRender={typeRender}
     />
-  )
-}
+  );
+};
 
-export default memo(Home)
+export default memo(Home);

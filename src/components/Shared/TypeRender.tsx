@@ -19,8 +19,8 @@ const TypeRender = (type: string, quantity?: number) => {
                 onClick={() => { dispatch(handleSource(select.source, 'latest')); Router.push(`/`); }}
                 className='float-right flex items-center text-gray-300 hover:text-white transition gap-1 mt-[5px]'
             >
-                <FaChevronLeft className='icon w-[.65rem] sm:w-[.75rem] sm:mt-[2px]' />
-                <span className="text-lg sm:text-xl font-semibold">Back</span>
+                <FaChevronLeft className='icon w-[.65rem]' />
+                <span className="text-lg sm:text-lg font-semibold">Back</span>
             </span>
         </h1 >
     );
