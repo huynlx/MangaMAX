@@ -1,7 +1,6 @@
 import instance from "@/utils/axios";
 import { parse } from "node-html-parser";
 import decodeHTMLEntity from "@/utils/decodeHTML";
-import { relativeTimeFromDates } from "@/utils/dateTime";
 
 const getHome = async (page: number = 1, type: string, sourceNum: string, url: string): Promise<any> => {
 
@@ -31,7 +30,7 @@ const getHome = async (page: number = 1, type: string, sourceNum: string, url: s
                     slug: item
                         .querySelector(".c-image-hover > a")
                         ?.getAttribute("href")?.split('/').slice(4, -1)[0],
-                    updateAt: relativeTimeFromDates(new Date(time!)),
+                    updateAt: time,
                     source: sourceNum
                 });
             });

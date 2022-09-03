@@ -1,5 +1,4 @@
 import instance from "@/utils/axios";
-import { relativeTimeFromDates } from "@/utils/dateTime";
 
 const getHome = async (page: number = 1, type: string, sourceNum: string): Promise<any> => {
 
@@ -23,7 +22,7 @@ const getHome = async (page: number = 1, type: string, sourceNum: string): Promi
           chapSlug: manga.hid + '-chapter-' + manga.chap + '-en',
           chapId: manga.hid,
           slug: manga.md_comics.slug + '-' + manga.md_comics.id,
-          updateAt: relativeTimeFromDates(new Date(manga.updated_at)),
+          updateAt: manga.updated_at,
           status: null,
           source: sourceNum
         });

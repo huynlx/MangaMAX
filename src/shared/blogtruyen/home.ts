@@ -1,7 +1,6 @@
 import { parse } from "node-html-parser";
 import decodeHTMLEntity from "@/utils/decodeHTML";
 import axios from "axios";
-import { relativeTimeFromDates } from "@/utils/dateTime";
 
 const getHome = async (page: number = 1, type: string, sourceNum: string, url: string): Promise<any> => {
     let origin: string;
@@ -63,7 +62,7 @@ const getHome = async (page: number = 1, type: string, sourceNum: string, url: s
                     ?.querySelectorAll('.item')
                     ?.map((item) => {
                         const cover = item.querySelector(".image img")?.getAttribute("src");
-                        const time = new Date(item.querySelector(".chapter .timesince")?.getAttribute('data-date')!);
+                        const time = item.querySelector(".chapter .timesince")?.getAttribute('data-date');
 
                         return ({
                             title: decodeHTMLEntity(item.querySelector("figcaption h3 a")?.innerText.trim()),
@@ -72,7 +71,7 @@ const getHome = async (page: number = 1, type: string, sourceNum: string, url: s
                             slug: item
                                 .querySelector("figcaption h3 a")
                                 ?.getAttribute("href")?.substr(1).split('/')[0],
-                            updateAt: relativeTimeFromDates(time),
+                            updateAt: time,
                             source: sourceNum,
                             chapSlug: item.querySelector(".chapter a")?.getAttribute('href')?.split("/")[2],
                             chapId: item.querySelector(".chapter a")?.getAttribute('href')?.split("/")[1],
