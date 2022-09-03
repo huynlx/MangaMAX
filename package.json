@@ -10,7 +10,7 @@
     "start": "next start -p 8080",
     "lint": "next lint",
     "export": "next export",
-    "commit": "npx git-cz"
+    "commit": "git add . && npx git-cz"
   },
   "dependencies": {
     "@tailwindcss/line-clamp": "^0.4.0",
