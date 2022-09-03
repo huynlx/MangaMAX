@@ -1,5 +1,4 @@
 import instance from "@/utils/axios";
-import { relativeTimeFromDates } from "@/utils/dateTime";
 import { decrypt_data } from "./decrypt";
 import { titleCase } from "./titleCase";
 
@@ -29,7 +28,7 @@ const getHome = async (page: number = 1, type: string, sourceNum: string, url: s
                 chapSlug: 'chapter-' + parseFloat(item.last_chapter),
                 chapId: item.last_chapter_id,
                 slug: item.url + '-' + item.id_book,
-                updateAt: relativeTimeFromDates(new Date(item.last_update)),
+                updateAt: item.last_update,
                 source: sourceNum
             });
         };
