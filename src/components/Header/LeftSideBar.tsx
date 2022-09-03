@@ -19,11 +19,12 @@ interface SectionProps {
   name: string,
   id: string,
   size: number;
+  className?: string;
 }
 
-const Section: FC<PropsWithChildren<SectionProps>> = ({ icon: Icon, name, id, children, size }) => {
+const Section: FC<PropsWithChildren<SectionProps>> = ({ icon: Icon, name, id, children, size, className }) => {
   return (
-    <div className='pb-2 text-white' id={id}>
+    <div className={`pb-2 text-white ${className}`} id={id}>
       <div className='flex justify-start mb-1 px-2'>
         <Icon size={size} /> <span className='!text-[17px] font-bold mx-2'>{name}</span>
       </div>
@@ -44,7 +45,7 @@ const LeftSideBar: FC<SidebarProps> = ({ id, closeNav }) => {
   const p_style = (a: string, b: string) => `!text-white rounded-4 !text-[16px] px-4 py-[6px] ${select[b] === a ? 'bg-logo-darken font-bold' : 'hover:bg-accent-lighten'}`;
 
   return (
-    <div id={id} className={`sidenav z-20 w-[230px] lg:z-10 -left-[230px] lg:left-0 bg-accent px-4 pb-4`}>  {/* -left-[230px] */}
+    <div id={id} className={`flex flex-col sidenav z-20 w-[230px] lg:z-10 -left-[230px] lg:left-0 bg-accent px-4 pb-4`}>  {/* -left-[230px] */}
       <div className='py-4' id='logo2'>
         <LinkCheck>
           <a className={`flex items-center justify-start gap-3`}>
@@ -128,6 +129,7 @@ const LeftSideBar: FC<SidebarProps> = ({ id, closeNav }) => {
         name='SERVERS'
         id='servers'
         size={29}
+        className='flex-grow min-h-[450px]'
       >
         {SOURCES.map((item) => (
           <p
@@ -145,7 +147,7 @@ const LeftSideBar: FC<SidebarProps> = ({ id, closeNav }) => {
         ))}
       </Section>
 
-      <div className="relative top-16 w-full flex text-sm md:col-span-4 px-2 text-white font-semibold bottom-[16px]">
+      <div className="top-16 w-full text-sm md:col-span-4 px-2 text-white font-semibold bottom-[16px]">
         © MangaMax 2022
       </div>
     </div>
