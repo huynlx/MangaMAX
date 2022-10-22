@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@tailwindcss/line-clamp": "^0.4.0",
+    "@vespaiach/axios-fetch-adapter": "^0.3.1",
     "axios": "^0.27.2",
     "crypto-js": "^4.1.1",
     "entities": "^4.3.1",
