@@ -35,5 +35,7 @@ export const getComicInfo = async (sourceObj: any, comicSLug: string): Promise<a
     }
 };
 
+export default getComicInfo;
+
 
 

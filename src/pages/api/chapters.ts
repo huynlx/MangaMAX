@@ -1,15 +1,32 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
-import instance from '@/utils/axios';
-import { SOURCES } from '@/constants/index';
-import { getChapters } from '@/shared/api/chapters';
+/**
+ * Edge Runtime (experimental)
+ */
+import Middleware from '@/core/middleware';
+import { NextMiddleware, NextResponse } from 'next/server';
 
-export default async function handler(
-    req: NextApiRequest,
-    res: NextApiResponse<any>
-) {
-    const source = SOURCES.find(item => item.source == req.query.source)
-    instance.defaults.baseURL = source?.url;
-    const data = await getChapters(source, req.query.slug as string, req.query.chapSlug as string, req.query.id as string)
+const handler: NextMiddleware = async (req, ev) => {
+    // Get the page from the url params
+    const urlParams = new URLSearchParams(req.nextUrl.search);
 
-    return res.send(data)
-}
+    const _source = urlParams.get("source");
+    const _slug = urlParams.get("slug");
+    const _chapSlug = urlParams.get("chapSlug");
+    const _id = urlParams.get("id");
+
+    const routes = new Middleware({
+        _source,
+        _slug,
+        _chapSlug,
+        _id
+    });
+
+    const data = await routes.getChapters();
+
+    return NextResponse.json(data);
+};
+
+export const config = {
+    runtime: 'experimental-edge',
+};
+
+export default handler;

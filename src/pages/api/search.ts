@@ -1,15 +1,30 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
-import getSearch from '@/shared/api/search';
-import instance from '@/utils/axios';
-import { SOURCES } from '@/constants/index';
+/**
+ * Edge Runtime (experimental)
+ */
+import Middleware from '@/core/middleware';
+import { NextMiddleware, NextResponse } from 'next/server';
 
-export default async function handler(
-    req: NextApiRequest,
-    res: NextApiResponse
-) {
-    const source = SOURCES.find(item => item.source == req.query.source)
-    instance.defaults.baseURL = source?.url;
-    const data = await getSearch(Number(req.query.page), req.query.source as string, source?.url as string, req.query.keyword as string)
+const handler: NextMiddleware = async (req, ev) => {
+    // Get the page from the url params
+    const urlParams = new URLSearchParams(req.nextUrl.search);
 
-    return res.send(data)
-}
+    const _source = urlParams.get("source");
+    const _page = urlParams.get("page");
+    const _keyword = urlParams.get('keyword');
+
+    const routes = new Middleware({
+        _page,
+        _source,
+        _keyword
+    });
+
+    const data = await routes.getSearch();
+
+    return NextResponse.json(data);
+};
+
+export const config = {
+    runtime: 'experimental-edge',
+};
+
+export default handler;

@@ -8,7 +8,7 @@ import hentaicube from '@/shared/hentaicube/home';
 import mangaii from '@/shared/mangaii/home';
 import comick from '@/shared/comick/home';
 
-const getHome = async (page: number = 1, source: string, type: string, url: string): Promise<any> => {
+export const getHome = async (page: number = 1, source: string, type: string, url: string): Promise<any> => {
     switch (source) {
         case '1':
             return nettruyen(page, type, source); //nettruyen

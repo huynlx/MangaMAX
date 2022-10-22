@@ -41,3 +41,5 @@ export const getChapters = async (sourceObj: any, comicSLug: any, chapterSLug: a
       return truyen48(comicSLug, source); //truyenqq
   }
 };
+
+export default getChapters;

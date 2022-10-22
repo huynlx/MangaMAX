@@ -1,15 +1,28 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
-import instance from '@/utils/axios';
-import { SOURCES } from '@/constants/index';
-import { getComicInfo } from '@/shared/api/comic';
+/**
+ * Edge Runtime (experimental)
+ */
+import Middleware from '@/core/middleware';
+import { NextMiddleware, NextResponse } from 'next/server';
 
-export default async function handler(
-    req: NextApiRequest,
-    res: NextApiResponse<any>
-) {
-    const source = SOURCES.find(item => item.source == req.query.source)
-    instance.defaults.baseURL = source?.url;
-    const data = await getComicInfo(source, req.query.slug as string)
+const handler: NextMiddleware = async (req, ev) => {
+    // Get the page from the url params
+    const urlParams = new URLSearchParams(req.nextUrl.search);
 
-    return res.send(data)
-}
+    const _source = urlParams.get("source");
+    const _slug = urlParams.get("slug");
+
+    const routes = new Middleware({
+        _source,
+        _slug
+    });
+
+    const data = await routes.getComic();
+
+    return NextResponse.json(data);
+};
+
+export const config = {
+    runtime: 'experimental-edge',
+};
+
+export default handler;
