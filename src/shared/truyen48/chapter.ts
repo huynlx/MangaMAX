@@ -18,8 +18,8 @@ export const getChapter = async (source: string, comicSLug: any, chapterSLug: an
       url = url.startsWith("//")
         ? url.replace("//", "http://")
         : url;
-      return `/api/proxy?url=${encodeURIComponent(url)}&source=${source}`
+      return url;
     }),
     source
-  }
-}
+  };
+};

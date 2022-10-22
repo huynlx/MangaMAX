@@ -9,8 +9,9 @@ export const getChapter = async (source: string, comicSLug: any, chapterSLug: an
     const html = await Promise.all(links.map(async (link) => (await axios.get(link)).data));
     const dom = parse(html[0]);
 
-    const list = [...dom.querySelectorAll('.text-center img')]
-    const image = (img: string | undefined) => img?.includes('https') ? `https://apoqrsgtqq.cloudimg.io/${(img?.replace('lxhentai.com//', 'lxhentai.com/'))}` : img;
+    const list = [...dom.querySelectorAll('.text-center img')];
+    const image = (img: string | undefined) => img;
+    // img?.includes('https') ? `https://apoqrsgtqq.cloudimg.io/${(img?.replace('lxhentai.com//', 'lxhentai.com/'))}` : img;
 
     return {
         title: dom.querySelector('a.text-ellipsis.font-semibold')?.innerText,
@@ -20,5 +21,5 @@ export const getChapter = async (source: string, comicSLug: any, chapterSLug: an
             : image('https:' + img.getAttribute('src')?.trim())
         ),
         source
-    }
-}
+    };
+};
