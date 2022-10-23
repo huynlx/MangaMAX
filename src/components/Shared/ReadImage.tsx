@@ -3,12 +3,12 @@ import React, { useLayoutEffect, useState } from 'react';
 interface ReadImageProps {
     src: string,
     opacity?: number,
-    icon?: React.ComponentType<{ className: string }>
+    icon?: React.ComponentType<{ className: string; }>;
     className?: string,
     className2?: string,
     className3?: string,
     textIcon?: string,
-    alt: string
+    alt: string;
 }
 
 const ReadImage: React.FC<ReadImageProps> = ({ src, opacity, icon: Icon, alt, ...props }) => {
@@ -16,7 +16,7 @@ const ReadImage: React.FC<ReadImageProps> = ({ src, opacity, icon: Icon, alt, ..
 
     useLayoutEffect(() => {
         setLoaded(false);
-    }, [src])
+    }, [src]);
 
     return (
         <>

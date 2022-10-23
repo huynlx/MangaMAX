@@ -12,10 +12,10 @@ const Chapter: NextPage = () => {
     const { slug, chapter, id, source } = router.query;
     const { data, isLoading } = useFetchChapter(slug, source, chapter, id);
     const { data: chapters, isLoading: loadingChapters } = useFetchChapters(slug, source);
-    const selectedIndex = chapters?.chapters.indexOf(chapters?.chapters.find((chap: { id: string }) => chap.id === id));
+    const selectedIndex = chapters?.chapters?.indexOf(chapters?.chapters.find((chap: { id: string; }) => chap.id === id));
 
     if (selectedIndex === -1) {
-        return <Page404 />
+        return <Page404 />;
     }
 
     return (
@@ -33,7 +33,7 @@ const Chapter: NextPage = () => {
                 // ) : <div className='relative min-h-[calc(100vh-7rem)]'><Loader /></div>
             }
         </div>
-    )
+    );
 };
 
 export default Chapter;

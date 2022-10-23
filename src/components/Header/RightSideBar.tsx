@@ -12,7 +12,7 @@ const RightSideBar: FC<SidebarProps> = ({ id, closeNav }) => {
 
   return (
     <div id={id} className='sidenav z-20 w-[270px] p-6 bg-[#191a1c] -right-[270px] pt-[60px]'>
-      <p className="closebtn text-white" onClick={closeNav}>×</p>
+      <p className="closebtn text-white cursor-pointer" onClick={closeNav}>×</p>
 
       {!user ? (
         <>
@@ -80,7 +80,7 @@ const RightSideBar: FC<SidebarProps> = ({ id, closeNav }) => {
 
           <span onClick={() => dispatch(handleLogout())} className='text-start w-full flex space-x-2 text-white text-[17px]'>
             <svg data-v-20f285ec data-v-6bf95648 width={24} height={24} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="mr-1 text-icon-black dark:text-icon-white text-false icon"><path data-v-20f285ec d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" /></svg>
-            <span className='font-semibold'>Sign Out</span>
+            <span className='font-semibold cursor-pointer'>Sign Out</span>
           </span>
         </div>
       )}

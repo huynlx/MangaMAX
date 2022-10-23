@@ -42,7 +42,7 @@ const LeftSideBar: FC<SidebarProps> = ({ id, closeNav }) => {
   const router = useRouter();
   const reading = [...recents].reverse()[0];
 
-  const p_style = (a: string, b: string) => `!text-white rounded-4 !text-[16px] px-4 py-[6px] ${select[b] === a ? 'bg-logo-darken font-bold' : 'hover:bg-accent-lighten'}`;
+  const p_style = (a: string, b: string) => `cursor-pointer !text-white rounded-4 !text-[16px] px-4 py-[6px] ${select[b] === a ? 'bg-logo-darken font-bold' : 'hover:bg-accent-lighten'}`;
 
   return (
     <div id={id} className={`flex flex-col sidenav z-20 w-[230px] lg:z-10 -left-[230px] lg:left-0 bg-accent px-4 pb-4`}>  {/* -left-[230px] */}

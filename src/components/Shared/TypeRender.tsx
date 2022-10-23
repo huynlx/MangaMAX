@@ -20,7 +20,7 @@ const TypeRender = (type: string, quantity?: number) => {
                 className='float-right flex items-center text-gray-300 hover:text-white transition gap-1 mt-[5px]'
             >
                 <FaChevronLeft className='icon w-[.65rem]' />
-                <span className="text-lg sm:text-lg font-semibold">Back</span>
+                <span className="text-lg sm:text-lg font-semibold cursor-pointer">Back</span>
             </span>
         </h1 >
     );

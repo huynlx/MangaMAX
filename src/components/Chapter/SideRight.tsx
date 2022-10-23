@@ -1,8 +1,9 @@
 import React from 'react';
 import { FaArrowRight } from 'react-icons/fa';
-import CustomSquare from '../Loading/CustomSquare';
 import Spinner from '../Loading/Spinner';
 import ReadImage from '../Shared/ReadImage';
+// import { BsFillImageFill } from "react-icons/bs";
+import CustomCircle from '../Loading/CustomCircle';
 
 const SideRight = ({
   chapter,
@@ -28,14 +29,25 @@ const SideRight = ({
           select2={select2}
         /> */}
     <div className={`min-h-[100vh] w-full relative`}>
-      {loadChapter && <CustomSquare />}
-      {!loadChapter && chapter.images?.map((image: string, index: number) => <ReadImage
-        className={`${view.className} mx-auto object-cover h-auto transition-opacity`}
-        key={index}
-        src={image}
-        icon={Spinner}
-        className3='text-logo-darken'
-        alt='Đọc truyện tại Manga Max' />)}
+      {
+        loadChapter &&
+        <div className='absolute animate-pulse left-2/4 transform top-2/4 -translate-x-2/4 -translate-y-2/4 flex flex-col'>
+          {/* <BsFillImageFill size={50} className="self-center" /> */}
+          <CustomCircle />
+          {/* <p className='p-0 m-0 mt-3 text-center'>Loading</p> */}
+        </div>
+      }
+      {
+        !loadChapter && chapter.images?.map((image: string, index: number) =>
+          <ReadImage
+            className={`${view.className} mx-auto object-cover h-auto transition-opacity`}
+            key={index}
+            src={image}
+            icon={Spinner}
+            className3='text-logo-darken'
+            alt='Đọc truyện tại Manga Max'
+          />)
+      }
     </div>
     {!loadChapter &&
       <div className={`w-full h-60 p-8 mb-20 ${index < 1 && 'hidden'}`}>

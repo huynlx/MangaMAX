@@ -106,7 +106,7 @@ export const mangaObj = (info: any, slug: string, select: RootState, type: strin
     cover: info.cover,
     slug: slug,
     url: `/manga/${slug}?source=${info.source ?? select?.source}&type=${type}`,
-    source: info.source ?? select.source,
+    source: info.source ?? select?.source,
     type: type
 });
 
