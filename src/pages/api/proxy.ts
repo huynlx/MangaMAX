@@ -10,7 +10,7 @@ export const config = {
   runtime: 'experimental-edge',
 };
 
-export default async function handler(req: NextRequest) {
+const proxy = async (req: NextRequest) => {
   axios.defaults.adapter = fetchAdapter;
 
   // Get the page from the url params
@@ -49,4 +49,6 @@ export default async function handler(req: NextRequest) {
   });
 
   return new Response(response);
-}
+};
+
+export default proxy;
