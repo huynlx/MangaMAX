@@ -6,14 +6,39 @@ const proxy = async (req: NextApiRequest, res: NextApiResponse) => {
   const url = req.query.url as string;
   const source = SOURCES.find(item => item.source == req.query.source);
 
-  const response = await axios.get(url, {
-    responseType: "stream",
-    headers: {
-      referer: source?.url!,
-    },
-  });
+  // const response = await axios.get(url, {
+  //   responseType: "stream",
+  //   headers: {
+  //     referer: source?.url!,
+  //   },
+  // });
 
-  response.data.pipe(res);
+  // response.data.pipe(res);
+
+
+  return new Promise<void>((resolve, reject) => {
+    axios
+      .get(url, {
+        responseType: "arraybuffer",
+        headers: {
+          referer: source?.url!,
+        },
+      })
+      .then(
+        ({ data, headers: { "content-type": contentType } }) => {
+          res
+            .setHeader("cache-control", "max-age=99999")
+            .setHeader("content-type", contentType)
+            .send(data);
+          resolve();
+        }
+      )
+      .catch(error => {
+        res.json(error);
+        res.status(405).end();
+        reject();
+      });
+  });
 };
 
 export default proxy;
