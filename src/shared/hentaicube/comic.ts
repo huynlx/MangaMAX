@@ -1,6 +1,7 @@
 import { parse } from "node-html-parser";
-import axios from "@/utils/axios"
+import axios from "@/utils/axios";
 import decodeHTMLEntity from "@/utils/decodeHTML";
+import { getCover, getCoverOrigin } from "./utils";
 
 export const getComicInfo = async (comicSLug: string, source: string): Promise<any> => {
     const html = (await axios.get(`manga/${comicSLug}/`)).data;
@@ -12,7 +13,7 @@ export const getComicInfo = async (comicSLug: string, source: string): Promise<a
     let desc = '';
     dom.querySelectorAll('.description-summary > .summary__content ul li').map((item) => {
         desc += '●  ' + item.innerText + '\n';
-    })
+    });
 
     for (const test of dom.querySelectorAll('.post-content .post-content_item')) {
         switch (test.querySelector('.summary-heading > h5')?.innerText.trim()) {
@@ -36,8 +37,8 @@ export const getComicInfo = async (comicSLug: string, source: string): Promise<a
 
     return {
         title: decodeHTMLEntity(dom.querySelector('.post-title > h1')?.innerText.trim()!),
-        // cover: `/api/proxy?url=${url as string}&source=${source}`,
-        cover: `https://apoqrsgtqq.cloudimg.io/${url}`,
+        cover: getCover(url),
+        coverOrigin: getCoverOrigin(url),
         author: author !== '' ? author : 'Updating',
         status: status !== '' ? status : 'Updating',
         genres,
@@ -45,7 +46,7 @@ export const getComicInfo = async (comicSLug: string, source: string): Promise<a
         chapters: [],
         source,
         lastUpdate: dom.querySelector(".col-12 p")?.innerText.match(/Last Updated:(.*)/)?.[1]
-    }
+    };
 }
 
 

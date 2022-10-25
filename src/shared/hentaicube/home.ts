@@ -1,6 +1,7 @@
 import instance from "@/utils/axios";
 import { parse } from "node-html-parser";
 import decodeHTMLEntity from "@/utils/decodeHTML";
+import { getCover } from "./utils";
 
 const getHome = async (page: number = 1, type: string, sourceNum: string, url: string): Promise<any> => {
 
@@ -22,8 +23,7 @@ const getHome = async (page: number = 1, type: string, sourceNum: string, url: s
 
                 return ({
                     title: decodeHTMLEntity(item.querySelector(".post-title > h3 > a")?.innerText!),
-                    // cover: `/api/proxy?url=${encodeURIComponent(url as string)}&source=${sourceNum}`,
-                    cover: `https://apoqrsgtqq.cloudimg.io/${url}`,
+                    cover: getCover(url),
                     chapter: item.querySelector(".chapter > a")?.innerText.trim(),
                     chapSlug: item.querySelector(".chapter a")?.getAttribute('href')?.split('/').slice(5, -1)[0],
                     chapId: item.querySelector(".chapter a")?.getAttribute('href')?.split('/').slice(5, -1)[0],

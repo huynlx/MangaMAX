@@ -1,18 +1,17 @@
 import axios from "@/utils/axios";
-import { parse } from "node-html-parser";
-import getQueryParams from "@/utils/getQueryParams";
 import decodeHTMLEntity from "@/utils/decodeHTML";
-import useSlug from "@/utils/setSlug";
+import { parse } from "node-html-parser";
+import { getCover } from "./utils";
 
 const getSearch = async (sourceNum: string, keyword: string, page: number = 1, url: string): Promise<any> => {
 
     const sections = {
         "Tìm truyện tranh": `tim-kiem?sort=-updated_at&filter%5Bname%5D=${encodeURI(keyword)}&filter%5Bstatus%5D=2%2C1&page=${page ? page : 1}`
-    }
+    };
 
     const htmls = await Promise.all(
         Object.entries(sections).map(([_, value]) => value).map(async (url) => (await axios.get(url)).data)
-    )
+    );
 
     const data = htmls.map((source, index) => {
         const dom = parse(source);
@@ -24,7 +23,7 @@ const getSearch = async (sourceNum: string, keyword: string, page: number = 1, u
 
             return {
                 title: decodeHTMLEntity(item.childNodes[3].innerText),
-                cover: `https://apoqrsgtqq.cloudimg.io/${(image?.replace('lxhentai.com//', 'lxhentai.com/'))}`,
+                cover: getCover(image),
                 chapter: item.querySelector(".latest-chapter a")?.innerText,
                 chapSlug: item.getElementsByTagName('a')[1].getAttribute('href')?.split('/').pop(),
                 chapId: item.getElementsByTagName('a')[1].getAttribute('href')?.split('/').pop(),
@@ -32,7 +31,7 @@ const getSearch = async (sourceNum: string, keyword: string, page: number = 1, u
                 updateAt: null,
                 id: item.getElementsByTagName('a')[1].getAttribute('href')!,
                 source: sourceNum
-            }
+            };
         });
 
         const pages = [];

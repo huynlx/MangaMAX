@@ -1,6 +1,7 @@
 import { parse } from "node-html-parser";
-import axios from "@/utils/axios"
+import axios from "@/utils/axios";
 import decodeHTMLEntity from "@/utils/decodeHTML";
+import { getCover, getCoverOrigin } from "./utils";
 
 export const getComicInfo = async (comicSLug: string, source: string): Promise<any> => {
     const html = (await axios.get(`truyen/${comicSLug}`)).data;
@@ -11,7 +12,8 @@ export const getComicInfo = async (comicSLug: string, source: string): Promise<a
 
     return {
         title: decodeHTMLEntity(dom.querySelector('div.truncate > span.font-semibold')?.innerText.trim()!),
-        cover: `https://apoqrsgtqq.cloudimg.io/${(cover?.replace('lxhentai.com//', 'lxhentai.com/'))}`,
+        cover: getCover(cover),
+        coverOrigin: getCoverOrigin(cover),
         author: dom.querySelector('.grow .mt-2 span a[href*="tac-gia"]')?.innerText ?? null,
         status: dom.querySelectorAll('.grow .mt-2')[2].querySelector(".text-blue-500")?.innerText,
         genres: dom.querySelectorAll('.grow .mt-2 span:last-child a').map(genre => genre.innerText),
@@ -19,7 +21,7 @@ export const getComicInfo = async (comicSLug: string, source: string): Promise<a
         chapters: [],
         source,
         lastUpdate: dom.querySelector(".timeago")?.getAttribute('datetime')
-    }
+    };
 }
 
 

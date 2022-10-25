@@ -107,9 +107,9 @@ const LeftComic: FC<any> = ({ info, slug }) => {
                 </div>
             </div>
             <h1 className='text-xl text-white font-bold border-l-[5px] border-red-400 pl-2 mb-3'>Summary</h1>
-            <p className=' break-words text-justify text-white' dangerouslySetInnerHTML={{ __html: info.desc?.replace(regexMatchMultiString, 'MangaMAX') }}></p>
+            <p className='whitespace-pre-line break-words text-justify text-white' dangerouslySetInnerHTML={{ __html: info.desc?.replace(regexMatchMultiString, 'MangaMAX') }}></p>
             <div className='mt-4'>
-                {info.genres.map((item: any, index: number) => (
+                {info.genres?.map((item: any, index: number) => (
                     <p key={index} className='inline-block bg-gray-700 mr-2 px-4 py-[5px] rounded-full mb-2 text-white'>{item}</p>
                 ))}
             </div>

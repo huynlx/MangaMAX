@@ -1,15 +1,16 @@
 import instance from "@/utils/axios";
 import { parse } from "node-html-parser";
 import decodeHTMLEntity from "@/utils/decodeHTML";
+import { getCover } from "./utils";
 
 const getHome = async (page: number = 1, type: string, sourceNum: string, url: string): Promise<any> => {
     const handleSource = () => {
         if (type === 'browse') {
-            return `danh-sach?sort=-views&page=${page}&filter%5Bstatus%5D=2,1`
+            return `danh-sach?sort=-views&page=${page}&filter%5Bstatus%5D=2,1`;
         } else {
-            return `danh-sach?sort=-updated_at&page=${page}&filter%5Bstatus%5D=2,1`
+            return `danh-sach?sort=-updated_at&page=${page}&filter%5Bstatus%5D=2,1`;
         }
-    }
+    };
 
     const handleData = () => {
         return htmls.map((source, index) => {
@@ -22,7 +23,7 @@ const getHome = async (page: number = 1, type: string, sourceNum: string, url: s
 
                 return {
                     title: decodeHTMLEntity(item.childNodes[3].innerText),
-                    cover: `https://apoqrsgtqq.cloudimg.io/${(image?.replace('lxhentai.com//', 'lxhentai.com/'))}`,
+                    cover: getCover(image),
                     chapter: item.querySelector(".latest-chapter a")?.innerText,
                     chapSlug: item.getElementsByTagName('a')[1].getAttribute('href')?.split('/').pop(),
                     chapId: item.getElementsByTagName('a')[1].getAttribute('href')?.split('/').pop(),
@@ -30,7 +31,7 @@ const getHome = async (page: number = 1, type: string, sourceNum: string, url: s
                     updateAt: null,
                     id: item.getElementsByTagName('a')[1].getAttribute('href')!,
                     source: sourceNum
-                }
+                };
             });
 
             const pages = [];
@@ -50,15 +51,15 @@ const getHome = async (page: number = 1, type: string, sourceNum: string, url: s
                 currentPage
             };
         });
-    }
+    };
 
     const sections = {
         "Truyện": handleSource()
-    }
+    };
 
     const htmls = await Promise.all(
         Object.entries(sections).map(([_, value]) => value).map(async (url) => (await instance.get(url)).data)
-    )
+    );
 
     const data = handleData();
 

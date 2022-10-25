@@ -6,16 +6,6 @@ const proxy = async (req: NextApiRequest, res: NextApiResponse) => {
   const url = req.query.url as string;
   const source = SOURCES.find(item => item.source == req.query.source);
 
-  // const response = await axios.get(url, {
-  //   responseType: "stream",
-  //   headers: {
-  //     referer: source?.url!,
-  //   },
-  // });
-
-  // response.data.pipe(res);
-
-
   return new Promise<void>((resolve, reject) => {
     axios
       .get(url, {
