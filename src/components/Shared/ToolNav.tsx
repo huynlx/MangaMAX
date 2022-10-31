@@ -3,7 +3,7 @@ import { MdHistory } from 'react-icons/md';
 import { BiSearch } from 'react-icons/bi';
 import Router from 'next/router';
 import { FC, useState } from 'react';
-import getRecents from '@/hooks/getRecents';
+import getRecents from '@/hooks/useRecents';
 import { FiArrowUp } from 'react-icons/fi';
 import dynamic from 'next/dynamic';
 const FiTool = dynamic((async () => ((await import("react-icons/fi")).FiTool)));

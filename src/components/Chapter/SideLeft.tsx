@@ -134,7 +134,7 @@ const SideLeft = ({
       <ul className='list'>
         {filterChap?.map((item: ChaptersProps, i: number) => <li
           onClick={() => selectChapter(item.chap, item.source)}
-          className={`hover:bg-main py-1 ${selectedIndex === i && ' bg-main font-semibold'} text-white p-2 rounded-[3px] duration-75`}
+          className={`cursor-pointer hover:bg-main py-1 ${selectedIndex === i && ' bg-main font-semibold'} text-white p-2 rounded-[3px] duration-75`}
           key={i}
         >
           {item.name}

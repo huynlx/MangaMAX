@@ -3,7 +3,7 @@ import { FC, useEffect } from 'react';
 import { handleSource } from '@/store/action';
 import TypeRender from '@/components/Shared/TypeRender';
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
-import getBookmarks from '@/hooks/getBookmarks';
+import getBookmarks from '@/hooks/useGetBookmarks';
 import Grid from '../Home/Grid';
 
 const BookmarksComponent: FC = () => {

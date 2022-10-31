@@ -6,7 +6,7 @@ import OverlayModal from '@/components/Shared/OverlayModal';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { useAppSelector } from '@/hooks/useRedux';
 
-const SideBar: FC<{ className: string, id1: string, id2: string }> = ({ className, id1, id2 }) => {
+const SideBar: FC<{ className: string, id1: string, id2: string; }> = ({ className, id1, id2 }) => {
     const matches = useMediaQuery('(min-width: 1024px)');
 
     const [overlay, setOverlay] = useState<any>({
@@ -31,7 +31,8 @@ const SideBar: FC<{ className: string, id1: string, id2: string }> = ({ classNam
         }
 
         setOverlay({ ...overlay, left: { status: true, onClose: closeLeftNav } });
-    }, [matches, overlay])
+    }, [matches, overlay]);
+
     const closeLeftNav = useCallback(() => {
         document.getElementById(id1)!.style.left = '-230px';
         if (matches) {
@@ -41,17 +42,19 @@ const SideBar: FC<{ className: string, id1: string, id2: string }> = ({ classNam
         }
 
         setOverlay({ ...overlay, left: { status: false, onClose: null } });
-    }, [matches, overlay])
+    }, [matches, overlay]);
+
     const openRightNav = useCallback(() => {
         document.getElementById(id2)!.style.right = "0";
 
         setOverlay({ ...overlay, right: { status: true, onClose: closeRightNav } });
-    }, [overlay])
+    }, [overlay]);
+
     const closeRightNav = useCallback(() => {
         document.getElementById(id2)!.removeAttribute('style');
 
         setOverlay({ ...overlay, right: { status: false, onClose: null } });
-    }, [overlay])
+    }, [overlay]);
 
     useEffect(() => {
         if (matches) {
@@ -61,7 +64,7 @@ const SideBar: FC<{ className: string, id1: string, id2: string }> = ({ classNam
             overlay.left.status && closeLeftNav();
             !mobile && setMobile(true);
         }
-    }, [matches])
+    }, [matches]);
 
     return (
         <div className={'ml-0 lg:ml-auto py-1 rounded-full mr-3 ' + className}>

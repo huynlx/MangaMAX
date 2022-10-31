@@ -13,13 +13,13 @@ class Fetch {
         this.type = select.type;
     }
 
-    getHome = async ({ page }: any): Promise<any> => {
+    home = async ({ page }: any): Promise<any> => {
         const { data } = await axios.get(`/api/home?source=${this.source}&type=${this.type}&page=${page}`);
 
         return data[0];
-    }
+    };
 
-    getSearch = async ({ page, keyword }: any): Promise<any> => {
+    search = async ({ page, keyword }: any): Promise<any> => {
         try {
             const { data } = await axios.get(`/api/search?source=${this.source}&keyword=${keyword}&page=${page}`);
 
@@ -31,27 +31,27 @@ class Fetch {
                 nameAlt: 'Search results',
                 items: [],
                 currentPage: null
-            }
+            };
         }
-    }
+    };
 
-    getComic = async ({ slug }: any): Promise<any> => {
+    comic = async ({ slug }: any): Promise<any> => {
         const { data } = await axios.get(`/api/comic?source=${this.source}&slug=${slug}`);
 
         return data;
-    }
+    };
 
-    getChapter = async ({ slug, chapter, id }: any): Promise<any> => {
+    chapter = async ({ slug, chapter, id }: any): Promise<any> => {
         const { data } = await axios.get(`/api/chapter?source=${this.source}&slug=${slug}&chapSlug=${chapter}&id=${id}`);
 
         return data;
-    }
+    };
 
-    getChapters = async ({ slug, chapter, id }: any): Promise<any> => {
+    chapters = async ({ slug, chapter, id }: any): Promise<any> => {
         const { data } = await axios.get(`/api/chapters?source=${this.source}&slug=${slug}&chapSlug=${chapter}&id=${id}`);
 
         return data;
-    }
+    };
 }
 
 export default Fetch;
