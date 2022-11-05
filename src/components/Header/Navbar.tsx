@@ -11,9 +11,9 @@ import Input from '@/components/Shared/Input';
 
 export const checkPathname = (pathname: string): boolean => {
     return ['/', '/search', '/bookmarks', '/recents'].some((item: string) => item === pathname);
-}
+};
 
-const Navbar = ({ scroll }: { scroll: boolean }) => {
+const Navbar = ({ scroll }: { scroll: boolean; }) => {
     const direction = useScroll();
     const { reducer: select } = useAppSelector((state) => state);
     const [isActive, setIsActive] = useState(false);

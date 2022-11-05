@@ -15,6 +15,10 @@ body {
   @apply lg:ml-[230px];
 }
 
+#__next {
+  padding-top: 5px;
+}
+
 .borderText {
   text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
 }
