@@ -6,7 +6,7 @@ const units: { unit: Intl.RelativeTimeFormatUnit; ms: number; }[] = [
   { unit: "minute", ms: 60000 },
   { unit: "second", ms: 1000 },
 ];
-const rtf = new Intl.RelativeTimeFormat("vi", { numeric: "auto" });
+const rtf = new Intl.RelativeTimeFormat("en", { numeric: "auto" });
 
 /**
 * Get language-sensitive relative time message from Dates.
