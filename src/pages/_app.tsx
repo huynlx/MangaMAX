@@ -140,18 +140,21 @@ const MyApp = ({ Component, pageProps, err }: WorkaroundAppProps) => {
     const fetchDocument = async () => {
       const q = query(collection(db, "users"), where("uid", "==", user?.uid));
       const docs = await getDocs(q);
-      const { bookmarks, name } = docs && docs.docs[0].data();
-      const { id } = docs.docs[0];
 
-      dispatch(setUser({
-        uid: user?.uid,
-        email: user?.email,
-        photoURL: user?.photoURL,
-        displayName: name,
-        docid: id
-      }));
-      dispatch(setBookmarks(bookmarks));
-      dispatch({ type: 'LOADING', isLoading: false });
+      if (docs.docs[0]) {
+        const { bookmarks, name } = docs.docs[0].data();
+        const { id } = docs.docs[0];
+
+        dispatch(setUser({
+          uid: user?.uid,
+          email: user?.email,
+          photoURL: user?.photoURL,
+          displayName: name,
+          docid: id
+        }));
+        dispatch(setBookmarks(bookmarks));
+        dispatch({ type: 'LOADING', isLoading: false });
+      }
     };
 
     if (user) {
