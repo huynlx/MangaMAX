@@ -19,13 +19,13 @@ import {
 } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyC1fT6-nm5S-YZFVpGY_8UQ60DJ3oQiWWs",
-  authDomain: "mangamax-huynh.firebaseapp.com",
-  projectId: "mangamax-huynh",
-  storageBucket: "mangamax-huynh.appspot.com",
-  messagingSenderId: "1066057227226",
-  appId: "1:1066057227226:web:db3321da469dca4e623ee3",
-  measurementId: "G-MGL73630CW"
+  apiKey: process.env.API_KEY,
+  authDomain: process.env.AUTH_DOMAIN,
+  projectId: process.env.PROJECT_ID,
+  storageBucket: process.env.STORAGE_BUCKET,
+  messagingSenderId: process.env.MESSAGE_SENDER_ID,
+  appId: process.env.APP_ID,
+  measurementId: process.env.MEASURE_ID
 };
 
 const app = initializeApp(firebaseConfig);
