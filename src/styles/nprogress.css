@@ -19,7 +19,7 @@
   display: block;
   position: absolute;
   right: 0px;
-  width: 100px;
+  width: 200px;
   height: 100%;
   box-shadow: 0 0 10px var(--color), 0 0 5px var(--color);
   opacity: 1;

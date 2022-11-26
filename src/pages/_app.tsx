@@ -125,6 +125,7 @@ const MyApp = ({ Component, pageProps, err }: WorkaroundAppProps) => {
   //handle router loading
   useEffect(() => {
     callLoadingBar();
+
     return () => removeLoadingBar();
   }, []);
 

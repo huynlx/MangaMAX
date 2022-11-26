@@ -7,7 +7,7 @@ NProgress.configure({
   trickleSpeed: 100, //ms
   minimum: 0.7,
   trickleRate: 0.05,
-  speed: 220
+  speed: 220,
 });
 
 const handleRouteChangeError = (err, url) => {

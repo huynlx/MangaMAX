@@ -57,7 +57,7 @@ export const SOURCES = [
     {
         source: '7',
         name: 'Server 7',
-        url: 'https://cmangab.com/',
+        url: 'https://cmangaz.com/',
         type: 'latest',
         server: 'cmanga',
         adult: false

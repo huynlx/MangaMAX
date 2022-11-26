@@ -79,6 +79,10 @@ const Comic: FC<any> = ({ item }) => {
                         {item.title}
                     </a>
                 </Link>
+
+                {
+                    layout !== 1 && <span className='leading-4 text-sm flex-col flex gap-0 text-gray-300'>{item.chapter}</span>
+                }
             </div>
         </div>
     );
