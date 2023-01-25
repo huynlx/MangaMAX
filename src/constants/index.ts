@@ -3,13 +3,13 @@ import { RootState } from "@/store";
 
 export const regexMatchMultiString = /NhatTruyen|TruyenQQ|NetTruyen|Cmangavip.com|Cmanga/g;
 
-export const API_URL = "https://www.nettruyentv.com";
+export const API_URL = "https://www.nettruyenup.com/";
 
 export const SOURCES = [
     {
         source: '1',
         name: 'Server 1',
-        url: 'https://www.nettruyentv.com',
+        url: 'https://www.nettruyenup.com/',
         type: 'latest',
         server: "nettruyen",
         adult: false
@@ -17,7 +17,7 @@ export const SOURCES = [
     {
         source: '2',
         name: 'Server 2',
-        url: 'https://nhattruyentv.com',
+        url: 'https://nhattruyenmin.com/',
         type: 'latest',
         server: 'netruyen',
         adult: false
@@ -33,7 +33,7 @@ export const SOURCES = [
     {
         source: '4',
         name: 'Server 4',
-        url: 'http://truyen48.com/',
+        url: 'https://truyenqqhot.com/',
         type: 'latest',
         server: 'truyen48',
         adult: false
@@ -57,7 +57,7 @@ export const SOURCES = [
     {
         source: '7',
         name: 'Server 7',
-        url: 'https://cmangaz.com/',
+        url: 'https://cmangaac.com/',
         type: 'latest',
         server: 'cmanga',
         adult: false
