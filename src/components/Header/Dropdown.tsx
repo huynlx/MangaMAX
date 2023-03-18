@@ -1,7 +1,7 @@
 import { useAppSelector } from '@/hooks/useRedux';
 import { memo } from 'react';
 
-const Dropdown: React.FC<{ className: string, dataId: string }> = ({ className }) => {
+const Dropdown: React.FC<{ className: string, dataId: string; }> = ({ className }) => {
   const { reducer4: { user } } = useAppSelector(state => state);
 
   return user ? (
@@ -23,7 +23,7 @@ const Dropdown: React.FC<{ className: string, dataId: string }> = ({ className }
         <path data-v-20f285ec="" d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></path>
       </svg>
     </span>
-  )
+  );
 };
 
 export default memo(Dropdown);
