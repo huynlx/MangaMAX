@@ -22,7 +22,7 @@ const proxy = async (req: NextRequest) => {
 
   const r = await fetch(_url, {
     headers: {
-      referer: source?.url!,
+      referer: _source === '9' ? 'https://hencb.top/' : source?.url!,
     },
   });
 
