@@ -15,10 +15,8 @@ export const getChapter = async (source: string, comicSLug: any, chapterSLug: an
     updateAt: dom.querySelector("time")?.innerText,
     images: dom.querySelectorAll(".chapter_content img").map(img => {
       let url = img.getAttribute("data-original") as string;
-      url = url.startsWith("//")
-        ? url.replace("//", "http://")
-        : url;
-      return url;
+
+      return `/api/proxy?url=${encodeURIComponent(url)}&source=${source}`;
     }),
     source
   };

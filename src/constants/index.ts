@@ -25,7 +25,7 @@ export const SOURCES = [
     {
         source: '3',
         name: 'Server 3 (18+)',
-        url: 'https://lxmanga.com/',
+        url: 'https://lxmanga.net/',
         type: 'latest',
         server: 'lxhentai',
         adult: true
@@ -33,7 +33,7 @@ export const SOURCES = [
     {
         source: '4',
         name: 'Server 4',
-        url: 'https://truyenqqhot.com/',
+        url: 'https://truyenqqq.vn/',
         type: 'latest',
         server: 'truyen48',
         adult: false

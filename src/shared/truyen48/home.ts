@@ -5,11 +5,11 @@ const getHome = async (page: number = 1, type: string, sourceNum: string, url: s
 
     const handleSource = () => {
         if (type === 'browse') {
-            return `truyen-yeu-thich/trang-${page}.html`
+            return `truyen-yeu-thich/trang-${page}.html`;
         } else {
-            return `truyen-moi-cap-nhat/trang-${page}.html`
+            return `truyen-moi-cap-nhat/trang-${page}.html`;
         }
-    }
+    };
 
     const handleData = () => {
         return htmls.map((source, index) => {
@@ -17,7 +17,7 @@ const getHome = async (page: number = 1, type: string, sourceNum: string, url: s
 
             const items = dom.querySelectorAll(".list_grid li").map((item) => ({
                 title: item.querySelector("h3 > a")?.innerText,
-                cover: item.querySelector("a > img")?.getAttribute("data-src"),
+                cover: item.querySelector(".book_avatar > a > img")?.getAttribute("src"),
                 chapter: item.querySelector(".last_chapter a")?.innerText,
                 chapSlug: 'chap-' + item.querySelector(".last_chapter a")?.innerText.split(' ')[1],
                 chapId: item.querySelector(".last_chapter a")?.getAttribute('href')?.split('/').pop()?.match(/\d+/g)?.join(''),
@@ -48,15 +48,15 @@ const getHome = async (page: number = 1, type: string, sourceNum: string, url: s
                 currentPage
             };
         });
-    }
+    };
 
     const sections = {
         "Truyện": handleSource()
-    }
+    };
 
     const htmls = await Promise.all(
         Object.entries(sections).map(([_, value]) => value).map(async (url) => (await instance.get(url)).data)
-    )
+    );
 
     const data = handleData();
 
