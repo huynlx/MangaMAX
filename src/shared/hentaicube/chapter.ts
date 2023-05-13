@@ -10,7 +10,7 @@ export const getChapter = async (source: string, comicSLug: any, chapterSLug: an
 
     const dom = parse(html[0]);
 
-    const list = dom.querySelectorAll('.text-left > div img');
+    const list = dom.querySelectorAll('.text-left > .doc-truyen img');
 
     return {
         title: decodeHTMLEntity(dom.querySelector("#chapter-heading")?.innerText.split('-')[0]),
@@ -18,5 +18,5 @@ export const getChapter = async (source: string, comicSLug: any, chapterSLug: an
         updateAt: '',
         images: list.map(img => `/api/proxy?url=${encodeURIComponent((img.getAttribute('data-src') ?? img.getAttribute('src')) as string)}&source=${source}`),
         source
-    }
-}
+    };
+};
