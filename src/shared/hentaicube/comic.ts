@@ -4,7 +4,7 @@ import decodeHTMLEntity from "@/utils/decodeHTML";
 import { getCover, getCoverOrigin } from "./utils";
 
 export const getComicInfo = async (comicSLug: string, source: string): Promise<any> => {
-    const html = (await axios.get(`manga/${comicSLug}/`)).data;
+    const html = (await axios.get(`read/${comicSLug}/`)).data;
     const dom = parse(html);
     let author = '';
     let genres = [];

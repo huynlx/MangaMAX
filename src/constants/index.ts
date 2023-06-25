@@ -73,7 +73,7 @@ export const SOURCES = [
     {
         source: '9',
         name: 'Server 9 (18+)',
-        url: 'https://cbhentai.one/',
+        url: 'https://cbhentai.xyz/',
         type: 'latest',
         server: 'hentaicube',
         adult: true
