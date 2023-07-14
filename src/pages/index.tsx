@@ -1,11 +1,11 @@
-import type { NextPage } from 'next';
-import { memo } from 'react';
-import useFetchHome from '@/hooks/useFetchHome';
-import { handleSource } from '@/store/action';
-import { useAppDispatch, useAppSelector } from '@/hooks/useRedux';
-import { capitalizeFirstLetter } from '@/utils/capitalizeFirstLetter';
-import DisplayOptions from '@/components/Home/DisplayOptions';
-import Grid from '@/components/Home/Grid';
+import type { NextPage } from "next";
+import { memo } from "react";
+import useFetchHome from "@/hooks/useFetchHome";
+import { handleSource } from "@/store/action";
+import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
+import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
+import DisplayOptions from "@/components/Home/DisplayOptions";
+import Grid from "@/components/Home/Grid";
 
 const Home: NextPage = () => {
   const dispatch = useAppDispatch();
@@ -25,12 +25,7 @@ const Home: NextPage = () => {
     </>
   );
 
-  return (
-    <Grid
-      fetch={useFetchHome}
-      typeRender={typeRender}
-    />
-  );
+  return <Grid fetch={useFetchHome} typeRender={typeRender} />;
 };
 
 export default memo(Home);

@@ -30,6 +30,7 @@
     "react-icons": "^4.4.0",
     "react-query": "^3.39.2",
     "react-redux": "^8.0.2",
+    "react-virtualized": "^9.22.5",
     "redux": "^4.2.0",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.4.1"
@@ -39,6 +40,7 @@
     "@types/nprogress": "^0.2.0",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
+    "@types/react-virtualized": "^9.21.22",
     "@types/styled-jsx": "^3.4.4",
     "autoprefixer": "^10.4.8",
     "eslint": "^8.21.0",
