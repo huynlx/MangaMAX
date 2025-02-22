@@ -9,6 +9,7 @@ import { User } from "firebase/auth";
 import { useAppSelector } from "@/hooks/useRedux";
 import { usePosition } from "@/hooks/usePosition";
 import ComicCard from "./ComicCard";
+import Component404 from "@/components/404/404";
 
 interface GridProps {
   keyword?: string;
@@ -39,9 +40,11 @@ const Grid: React.FC<GridProps> = ({
       keyword: keyword,
       user: user,
     });
+
   const list = useMemo(() => {
     return data?.pages.map((list: any) => list.items).flat();
   }, [data]); //gộp nhiều mảng page thành 1 mảng duy nhất
+
   const content = useMemo(() => {
     return setData(cols, list ? list : []);
   }, [cols, list]);
@@ -111,6 +114,7 @@ const Grid: React.FC<GridProps> = ({
       )}
 
       {hasNextPage && <LoadMore />}
+      {!isLoading && (list?.length === 0 || !list) && <Component404 />}
     </main>
   );
 };

@@ -1,14 +1,17 @@
 import instance from "@/utils/axios";
 
-const getHome = async (page: number = 1, type: string, sourceNum: string): Promise<any> => {
-
+const getHome = async (
+  page: number = 1,
+  type: string,
+  sourceNum: string
+): Promise<any> => {
   const handleSource = () => {
-    if (type === 'browse') {
-      return `hot?page=${page}`
+    if (type === "browse") {
+      return `hot?page=${page}`;
     } else {
-      return `https://api.mangaii.com/api/v1/comics?page=${page}&limit=100`
+      return `https://api.mangaii.com/api/v1/comics?page=${page}&limit=100`;
     }
-  }
+  };
 
   const handleData = () => {
     return htmls.map((source, index) => {
@@ -16,20 +19,20 @@ const getHome = async (page: number = 1, type: string, sourceNum: string): Promi
 
       for (const manga of source.data) {
         const title = manga.name;
-        const id = 'https://mangaii.com/comic/' + manga.slug;
-        const image = `https://api.mangaii.com/media/cover_images/${manga.cover_image}`; 
-        const sub = 'Chapter ' + manga.chapter?.number;
+        const id = "https://mangaii.com/comic/" + manga.slug;
+        const image = `https://api.mangaii.com/media/cover_images/${manga.cover_image}`;
+        const sub = "Chapter " + manga.chapter?.number;
         items.push({
           subtitleText: sub,
           title: title,
           cover: image ?? "",
           chapter: sub,
-          chapSlug: 'test',
+          chapSlug: "test",
           chapId: sub,
-          slug: id.split('/').pop(),
+          slug: id.split("/").pop(),
           updateAt: null,
           status: null,
-          source: sourceNum
+          source: sourceNum,
         });
       }
 
@@ -37,26 +40,27 @@ const getHome = async (page: number = 1, type: string, sourceNum: string): Promi
       const currentPage = page;
 
       return {
-        name: 'Truyện',
+        name: "Truyện",
         items,
         hasNextPage,
-        currentPage
+        currentPage,
       };
     });
-  }
+  };
 
   const sections = {
-    [type]: handleSource()
-  }
+    [type]: handleSource(),
+  };
 
   const htmls = await Promise.all(
-    Object.entries(sections).map(([_, value]) => value).map(async (url) => (await instance.get(url)).data)
-  )
+    Object.entries(sections)
+      .map(([_, value]) => value)
+      .map(async (url) => (await instance.get(url)).data)
+  );
 
   const data = handleData();
 
   return data;
-
 };
 
 export default getHome;

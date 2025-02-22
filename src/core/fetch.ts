@@ -1,57 +1,69 @@
 import axios from "axios";
+import { log } from "console";
 
 type IProps = {
-    source?: string;
-    type?: string;
+  source?: string;
+  type?: string;
 };
 class Fetch {
-    source?: string;
-    type?: string;
+  source?: string;
+  type?: string;
 
-    constructor(select: IProps) {
-        this.source = select.source;
-        this.type = select.type;
+  constructor(select: IProps) {
+    this.source = select.source;
+    this.type = select.type;
+  }
+
+  home = async ({ page }: any): Promise<any> => {
+    const { data } = await axios.get(
+      `/api/home?source=${this.source}&type=${this.type}&page=${page}`
+    );
+    console.log("con ac");
+
+    return data[0];
+  };
+
+  search = async ({ page, keyword }: any): Promise<any> => {
+    try {
+      const { data } = await axios.get(
+        `/api/search?source=${this.source}&keyword=${keyword}&page=${page}`
+      );
+
+      return data[0];
+    } catch (error) {
+      return {
+        hasNextPage: false,
+        name: "Search",
+        nameAlt: "Search results",
+        items: [],
+        currentPage: null,
+      };
     }
+  };
 
-    home = async ({ page }: any): Promise<any> => {
-        const { data } = await axios.get(`/api/home?source=${this.source}&type=${this.type}&page=${page}`);
+  comic = async ({ slug }: any): Promise<any> => {
+    const { data } = await axios.get(
+      `/api/comic?source=${this.source}&slug=${slug}`
+    );
 
-        return data[0];
-    };
+    return data;
+  };
 
-    search = async ({ page, keyword }: any): Promise<any> => {
-        try {
-            const { data } = await axios.get(`/api/search?source=${this.source}&keyword=${keyword}&page=${page}`);
+  chapter = async ({ slug, chapter, id }: any): Promise<any> => {
+    const { data } = await axios.get(
+      `/api/chapter?source=${this.source}&slug=${slug}&chapSlug=${chapter}&id=${id}`
+    );
 
-            return data[0];
-        } catch (error) {
-            return {
-                hasNextPage: false,
-                name: 'Search',
-                nameAlt: 'Search results',
-                items: [],
-                currentPage: null
-            };
-        }
-    };
+    return data;
+  };
 
-    comic = async ({ slug }: any): Promise<any> => {
-        const { data } = await axios.get(`/api/comic?source=${this.source}&slug=${slug}`);
+  chapters = async ({ slug, chapter, id }: any): Promise<any> => {
+    const { data } = await axios.get(
+      `/api/chapters?source=${this.source}&slug=${slug}&chapSlug=${chapter}&id=${id}`
+    );
 
-        return data;
-    };
-
-    chapter = async ({ slug, chapter, id }: any): Promise<any> => {
-        const { data } = await axios.get(`/api/chapter?source=${this.source}&slug=${slug}&chapSlug=${chapter}&id=${id}`);
-
-        return data;
-    };
-
-    chapters = async ({ slug, chapter, id }: any): Promise<any> => {
-        const { data } = await axios.get(`/api/chapters?source=${this.source}&slug=${slug}&chapSlug=${chapter}&id=${id}`);
-
-        return data;
-    };
+    return data;
+  };
 }
 
 export default Fetch;
